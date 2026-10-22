@@ -1,0 +1,16 @@
+export const spacingScale = [
+    { token: "spacing-01", rem: "0.125rem", px: "2px", width: "w-spacing-01", size: "size-spacing-01" },
+    { token: "spacing-02", rem: "0.25rem", px: "4px", width: "w-spacing-02", size: "size-spacing-02" },
+    { token: "spacing-03", rem: "0.5rem", px: "8px", width: "w-spacing-03", size: "size-spacing-03" },
+    { token: "spacing-04", rem: "0.75rem", px: "12px", width: "w-spacing-04", size: "size-spacing-04" },
+    { token: "spacing-05", rem: "1rem", px: "16px", width: "w-spacing-05", size: "size-spacing-05" },
+    { token: "spacing-05.5", rem: "1.25rem", px: "20px", width: "w-spacing-05.5", size: "size-spacing-05.5" },
+    { token: "spacing-06", rem: "1.5rem", px: "24px", width: "w-spacing-06", size: "size-spacing-06" },
+    { token: "spacing-07", rem: "2rem", px: "32px", width: "w-spacing-07", size: "size-spacing-07" },
+    { token: "spacing-08", rem: "2.5rem", px: "40px", width: "w-spacing-08", size: "size-spacing-08" },
+    { token: "spacing-09", rem: "3rem", px: "48px", width: "w-spacing-09", size: "size-spacing-09" },
+    { token: "spacing-10", rem: "4rem", px: "64px", width: "w-spacing-10", size: "size-spacing-10" },
+    { token: "spacing-11", rem: "5rem", px: "80px", width: "w-spacing-11", size: "size-spacing-11" },
+    { token: "spacing-12", rem: "6rem", px: "96px", width: "w-spacing-12", size: "size-spacing-12" },
+    { token: "spacing-13", rem: "10rem", px: "160px", width: "w-spacing-13", size: "size-spacing-13" },
+] as const;

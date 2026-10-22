@@ -1,0 +1,10 @@
+{
+    "name": "ui-starter-tanstack",
+    "private": true,
+    "workspaces": ["packages/*", "apps/*"],
+    "scripts": {
+        "dev": "bun --cwd apps/web dev",
+        "storybook": "bun --cwd packages/ui storybook",
+        "typecheck": "bun --cwd packages/ui typecheck && bun --cwd apps/web typecheck"
+    }
+}

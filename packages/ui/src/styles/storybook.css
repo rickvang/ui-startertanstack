@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+@source "../**/*.{ts,tsx}";
+
+body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+}
+
+.sb-show-main {
+    padding: 1.5rem;
+}
