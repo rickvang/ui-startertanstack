@@ -7,7 +7,7 @@ import { DetailGroup } from "../base/detail-group";
 import { Anchor } from "../navigation/anchor";
 import { Steps } from "../navigation/steps";
 import { Tabs } from "../navigation/tabs";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 import { DetailCard as DetailCardModule } from "./detail-card";
 
 const meta = {
@@ -40,6 +40,7 @@ export const Detail: Story = {
                 />
             </DocSection>
             <DocSection title="Record">
+                <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DetailGroup title="Profile">
                         <DescriptionList items={facts} layout="horizontal" align="start" />
@@ -51,23 +52,31 @@ export const Detail: Story = {
                         <p className="text-sm text-muted">Nothing has happened yet.</p>
                     </DetailGroup>
                 </DetailCardModule>
+                </DocDemo>
             </DocSection>
             <DocSection title="Stacked">
+                <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DescriptionList items={facts} />
                 </DetailCardModule>
+                </DocDemo>
             </DocSection>
             <DocSection title="Horizontal, left">
+                <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DescriptionList items={facts} layout="horizontal" align="start" />
                 </DetailCardModule>
+                </DocDemo>
             </DocSection>
             <DocSection title="Horizontal, right">
+                <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DescriptionList items={facts} layout="horizontal" align="end" />
                 </DetailCardModule>
+                </DocDemo>
             </DocSection>
             <DocSection title="Picture, badge, and link">
+                <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DetailGroup title="Profile">
                         <Avatar name="Alex Kim" />
@@ -81,8 +90,10 @@ export const Detail: Story = {
                         <Anchor items={[{ href: "#profile", label: "Profile" }, { href: "#access", label: "Access" }]} />
                     </DetailGroup>
                 </DetailCardModule>
+                </DocDemo>
             </DocSection>
             <DocSection title="Large object">
+                <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <Tabs
                         defaultValue="profile"
@@ -103,8 +114,10 @@ export const Detail: Story = {
                         ]}
                     />
                 </DetailCardModule>
+                </DocDemo>
             </DocSection>
             <DocSection title="Review">
+                <DocDemo className="max-w-3xl">
                 <DetailCardModule
                     title="North workspace"
                     status="In review"
@@ -130,6 +143,7 @@ export const Detail: Story = {
                         />
                     </DetailGroup>
                 </DetailCardModule>
+                </DocDemo>
             </DocSection>
         </DocPage>
     ),

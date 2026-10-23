@@ -4,7 +4,7 @@ import { Button } from "../base/button";
 import { Select } from "../base/select";
 import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
-import { DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocPage, DocSection } from "../templates/doc";
 
 const steps = ["Name", "Access", "Review"] as const;
 
@@ -41,7 +41,8 @@ export const Wizard: Story = {
         return (
             <DocPage title="Wizard" intro="A wizard is a create-record flow where a later answer depends on an earlier one. Each step stays short.">
                 <DocSection title="Project access">
-                    <div className="flex max-w-md flex-col gap-spacing-05">
+                    <DocDemo className="max-w-md">
+                    <div className="flex flex-col gap-spacing-05">
                         <Steps items={steps} current={step} />
                         {stepBody(step)}
                         <div className="flex gap-spacing-03">
@@ -53,6 +54,7 @@ export const Wizard: Story = {
                             </Button>
                         </div>
                     </div>
+                    </DocDemo>
                 </DocSection>
             </DocPage>
         );

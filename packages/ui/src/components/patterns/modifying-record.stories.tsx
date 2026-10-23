@@ -7,7 +7,7 @@ import { Fieldset } from "../base/fieldset";
 import { Form, FormSubmit } from "../base/form";
 import { TextField } from "../base/text-field";
 import { DetailCard } from "../modules/detail-card";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Patterns/Modifying a record",
@@ -37,6 +37,7 @@ export const ModifyingRecord: Story = {
                     />
                 </DocSection>
                 <DocSection title="Member">
+                    <DocDemo className="max-w-xl">
                     {editing ? (
                         <Form
                             label="Member"
@@ -78,6 +79,7 @@ export const ModifyingRecord: Story = {
                             </DetailGroup>
                         </DetailCard>
                     )}
+                    </DocDemo>
                 </DocSection>
             </DocPage>
         );

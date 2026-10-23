@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Avatar } from "../base/avatar";
 import { Button } from "../base/button";
 import { Menu } from "../navigation/menu";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 import { Shell as ShellModule } from "./shell";
 
 const domains = [
@@ -46,6 +46,7 @@ export const Shell: Story = {
                     />
                 </DocSection>
                 <DocSection title="Shell">
+                    <DocDemo bleed>
                     <ShellModule
                         product={<span className="px-spacing-04 font-semibold text-ink">North</span>}
                         navigation={
@@ -75,6 +76,7 @@ export const Shell: Story = {
                     >
                         <p className="text-sm text-ink">{current} is the current domain.</p>
                     </ShellModule>
+                    </DocDemo>
                 </DocSection>
             </DocPage>
         );

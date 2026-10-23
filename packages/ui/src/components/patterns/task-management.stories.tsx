@@ -6,7 +6,7 @@ import { Layout } from "../layout/layout";
 import { DetailCard } from "../modules/detail-card";
 import { Table, type TableItem } from "../modules/table";
 import { Menu } from "../navigation/menu";
-import { DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocPage, DocSection } from "../templates/doc";
 
 const tasks: readonly TableItem[] = [
     { id: "alex", name: "Alex Kim needs a review", status: "Review", statusVariant: "warning" },
@@ -31,6 +31,7 @@ export const TaskManagement: Story = {
         return (
             <DocPage title="Task management" intro="Task management is a queue. Status comes first. Opening an item shows the record, or why the task cannot continue.">
                 <DocSection title="Studio">
+                    <DocDemo bleed>
                     <Layout
                         header={<span className="font-semibold text-ink">Studio</span>}
                         sider={<Menu className="w-full" items={[{ value: "projects", label: "Projects" }, { value: "members", label: "Members" }, { value: "settings", label: "Settings" }]} defaultValue="projects" />}
@@ -57,6 +58,7 @@ export const TaskManagement: Story = {
                             )}
                         </div>
                     </Layout>
+                    </DocDemo>
                 </DocSection>
             </DocPage>
         );

@@ -4,7 +4,7 @@ import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { TextField } from "../base/text-field";
 import { FormGroup } from "../modules/form-group";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Patterns/Create a record",
@@ -32,6 +32,7 @@ export const CreateRecord: Story = {
                     />
                 </DocSection>
                 <DocSection title="Project">
+                    <DocDemo className="max-w-xl">
                     {saved ? (
                         <div className="flex max-w-sm flex-col items-start gap-spacing-04">
                             <Badge variant="success">Saved</Badge>
@@ -48,6 +49,7 @@ export const CreateRecord: Story = {
                             </div>
                         </FormGroup>
                     )}
+                    </DocDemo>
                 </DocSection>
             </DocPage>
         );

@@ -2,8 +2,35 @@
 
 The same starter as `ui-starter`, with TanStack Start instead of the Vite client app.
 
-- `packages/ui` holds tokens, `Button`, `TextField`, and Storybook.
+- `packages/ui` holds design tokens, reusable controls, layout components, composed modules, and Storybook examples.
 - `apps/web` is a TanStack Start app. Routes live in `apps/web/src/routes`.
+
+## Building with this starter
+
+### Find what exists
+
+- [Public exports](packages/ui/src/index.ts) list reusable components and types.
+- In Storybook, browse Foundations → Layout → Components → Modules → Patterns.
+- Read the relevant component's `.stories.tsx` examples beside its source. Larger modules may have a `stories/` folder with an Overview.
+
+### Choose and reuse
+
+- Start with the relevant module or pattern's usage guidance.
+- Import reusable components from `@ui-starter/ui`.
+- Patterns demonstrate compositions; check the public exports before assuming a pattern is an importable component.
+- For tables, start with [Modules → Table → Overview](packages/ui/src/components/modules/table/stories/overview.stories.tsx), then choose the smallest example matching the task.
+
+### Put changes in the right place
+
+- Prototype pages and feature-specific behavior belong in `apps/web/src`.
+- Reusable controls and modules belong in `packages/ui/src/components`.
+- Shared visual tokens live in `packages/ui/src/styles/theme.css`.
+- Use existing semantic tokens and spacing utilities; consult Foundations for their intended use.
+
+### Check the result
+
+- Run `bun run typecheck`.
+- Review the affected screen or story at desktop and mobile sizes.
 
 ## Scripts
 

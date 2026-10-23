@@ -1,44 +1,4 @@
-export type StatusVariant = "neutral" | "success" | "warning" | "danger";
-
-export type TableColumnKind = "name" | "text" | "status" | "number" | "date" | "link" | "actions" | "custom";
-
-export type TableColumn = {
-    id: string;
-    header: string;
-    kind: TableColumnKind;
-};
-
-export type TableAction = {
-    id: string;
-    label: string;
-};
-
-export type TableItem = {
-    id: string;
-    name: string;
-    status: string;
-    statusVariant: StatusVariant;
-    values?: Readonly<Record<string, string>>;
-    hrefs?: Readonly<Record<string, string>>;
-    disabled?: boolean;
-    group?: string;
-    children?: readonly TableItem[];
-};
-
-export type SortState = {
-    columnId: string;
-    direction: "asc" | "desc";
-};
-
-export type FlatRow = {
-    item: TableItem;
-    depth: number;
-};
-
-export type TableBlock =
-    | { kind: "group"; key: string; label: string; height: number }
-    | { kind: "row"; key: string; row: FlatRow; height: number }
-    | { kind: "detail"; key: string; row: FlatRow; height: number };
+import type { FlatRow, SortState, TableBlock, TableColumn, TableColumnKind, TableItem } from "./types";
 
 export function columnText(column: TableColumn, item: TableItem): string {
     switch (column.kind) {

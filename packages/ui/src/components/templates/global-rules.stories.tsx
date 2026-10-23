@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { cx } from "../../utils/cx";
-import { DocList, DocPage, DocSection } from "./doc";
+import { DocDemo, DocList, DocPage, DocSection } from "./doc";
 
 function Bone({ className }: { className: string }) {
     return <span className={cx("block rounded-sm bg-line", className)} />;
@@ -32,7 +32,8 @@ export const MessageAndFeedback: Story = {
                         { title: "Do not cover the work", body: "A message that can live in the page does not need to cover the page." },
                     ]}
                 />
-                <div className="flex max-w-md flex-col gap-spacing-04 rounded-md border border-line bg-surface p-spacing-05">
+                <DocDemo className="max-w-md">
+                <div className="flex flex-col gap-spacing-04">
                     <div className="flex flex-col gap-spacing-02">
                         <Bone className="h-spacing-03 w-spacing-09" />
                         <Bone className="h-spacing-08 w-full rounded-md border border-danger" />
@@ -47,6 +48,7 @@ export const MessageAndFeedback: Story = {
                         <Bone className="h-spacing-03 w-full" />
                     </div>
                 </div>
+                </DocDemo>
             </DocSection>
         </DocPage>
     ),
@@ -64,12 +66,14 @@ export const EmptyStatus: Story = {
                         { title: "Not an exception", body: "Empty means the page loaded and there is no data. Exception means the page cannot do the task." },
                     ]}
                 />
-                <div className="flex max-w-sm flex-col items-start gap-spacing-04 rounded-md border border-line bg-surface p-spacing-05">
-                    <Bone className="h-spacing-05 w-spacing-11" />
-                    <Bone className="h-spacing-03 w-full" />
-                    <Bone className="h-spacing-03 w-4/5" />
-                    <Bone className="h-spacing-07 w-spacing-09 rounded-md bg-neutral-500" />
-                </div>
+                <DocDemo className="max-w-sm">
+                    <div className="flex flex-col items-start gap-spacing-04">
+                        <Bone className="h-spacing-05 w-spacing-11" />
+                        <Bone className="h-spacing-03 w-full" />
+                        <Bone className="h-spacing-03 w-4/5" />
+                        <Bone className="h-spacing-07 w-spacing-09 rounded-md bg-neutral-500" />
+                    </div>
+                </DocDemo>
             </DocSection>
         </DocPage>
     ),

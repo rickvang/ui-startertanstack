@@ -10,7 +10,7 @@ import { Switch } from "../base/switch";
 import { TextArea } from "../base/text-area";
 import { TextField } from "../base/text-field";
 import { Flex } from "../layout/flex";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Modules/Forms",
@@ -193,10 +193,14 @@ export const Forms: Story = {
     render: () => (
         <DocPage title="Forms" intro="A form collects the fields for one record. Related fields sit in a group. Labels can sit beside the value or above it. Save checks the record, lists the errors together when more than one field fails, and keeps Save unavailable while the save is in progress.">
             <DocSection title="Horizontal">
-                <ProjectForm layout="horizontal" />
+                <DocDemo className="max-w-3xl">
+                    <ProjectForm layout="horizontal" />
+                </DocDemo>
             </DocSection>
             <DocSection title="Vertical">
-                <ProjectForm layout="stacked" />
+                <DocDemo className="max-w-3xl">
+                    <ProjectForm layout="stacked" />
+                </DocDemo>
             </DocSection>
             <DocSection title="Long labels">
                 <DocList
@@ -207,7 +211,9 @@ export const Forms: Story = {
                         { title: "Break a long word", body: "A label with no place to break still breaks inside the column, so it does not cover the value." },
                     ]}
                 />
-                <LongLabels />
+                <DocDemo className="max-w-3xl">
+                    <LongLabels />
+                </DocDemo>
             </DocSection>
         </DocPage>
     ),
