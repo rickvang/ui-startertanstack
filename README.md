@@ -1,6 +1,6 @@
 # ui-starter-tanstack
 
-The same catalog as `ui-starter`, with TanStack Start for the app. `packages/ui` holds tokens, components, and Storybook. `apps/web` routes live in `apps/web/src/routes`. `/` renders the demo page.
+The same catalog as `ui-starter`, with TanStack Start for the app. `packages/ui` holds tokens, components, and Storybook. `apps/web` routes live in `apps/web/src/routes`. `/` renders the demo page from `routes/_areas/index.tsx`.
 
 ## Commands
 
@@ -20,13 +20,15 @@ bun run typecheck
 | Build a table | `Modules/Table` Overview | The smallest table story that matches the task |
 | Add a control that does not exist | The matching story under Components, Layout, or Modules | `packages/ui/src/components`, export it from `packages/ui/src/index.ts`, and add a story next to the file. A module that already has a `stories/` folder gets the story there |
 | Change color, type, or space | Foundations stories | Semantic tokens in `packages/ui/src/styles/theme.css`. Leave the primitive ramps fixed |
-| Add a page | `apps/web/src/routes/index.tsx` | `apps/web/src/routes/<name>.tsx` with `createFileRoute`. Keep `__root.tsx` as the document shell |
+| Add a page | `apps/web/src/routes/_areas/index.tsx` | `apps/web/src/routes/<name>.tsx` with `createFileRoute`. Keep `__root.tsx` as the document shell |
+| Hold a workspace, client, or project | `apps/web/src/areas.ts` | Add one entry to `areas`. Add its page only when asked |
+| Show one of those areas | `apps/web/src/routes/_areas/route.tsx` | Add `routes/_areas/$kind.$areaId.tsx` when a page is requested. `_areas` adds no URL. The home page stays `routes/_areas/index.tsx` |
 
 `Patterns/Overview` chooses the workflow: navigating domains, create a record, modifying a record, wizard, onboarding, task management, or the visualization page.
 
 ## How to change
 
-Import reusable components from `@ui-starter/ui`. The public list is `packages/ui/src/index.ts`. A pattern story shows a composition, so check that list before importing the pattern as a component. Run `bun run typecheck`, then review the screen or story at desktop (1440px) and mobile (375px).
+`AGENTS.md` is the procedure for this space. Try a screen in the catalog first. Hold each workspace, client, or project as its own entry in `apps/web/src/areas.ts`, and add its page only when asked. Keep `Shell` as the frame. The home page stays `routes/_areas/index.tsx`. Import reusable components from `@ui-starter/ui`. The public list is `packages/ui/src/index.ts`. A pattern story shows a composition, so check that list before importing the pattern as a component. Run `bun run typecheck`, then review the screen or story at desktop (1440px) and mobile (375px).
 
 ## Catalog
 
