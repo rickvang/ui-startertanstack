@@ -9,50 +9,75 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AreasRouteRouteImport } from './routes/_areas/route'
+import { Route as AreasIndexRouteImport } from './routes/_areas/index'
 
-const IndexRoute = IndexRouteImport.update({
+const AreasRouteRoute = AreasRouteRouteImport.update({
+  id: '/_areas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasIndexRoute = AreasIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AreasRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AreasIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof AreasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_areas': typeof AreasRouteRouteWithChildren
+  '/_areas/': typeof AreasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
   to: '/'
-  id: '__root__' | '/'
+  id: '__root__' | '/_areas' | '/_areas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AreasRouteRoute: typeof AreasRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_areas': {
+      id: '/_areas'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AreasRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_areas/': {
+      id: '/_areas/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AreasIndexRouteImport
+      parentRoute: typeof AreasRouteRoute
     }
   }
 }
 
+interface AreasRouteRouteChildren {
+  AreasIndexRoute: typeof AreasIndexRoute
+}
+
+const AreasRouteRouteChildren: AreasRouteRouteChildren = {
+  AreasIndexRoute: AreasIndexRoute,
+}
+
+const AreasRouteRouteWithChildren = AreasRouteRoute._addFileChildren(
+  AreasRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AreasRouteRoute: AreasRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
