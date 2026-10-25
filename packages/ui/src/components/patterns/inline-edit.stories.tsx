@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DescriptionList } from "../base/description-list";
 import { TextField } from "../base/text-field";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Patterns/Inline edit",
@@ -26,10 +26,12 @@ export const InlineEdit: Story = {
                 />
             </DocSection>
             <DocSection title="Role">
-                <div className="flex max-w-xl flex-col gap-spacing-05">
+                <DocDemo className="max-w-xl">
+                <div className="flex flex-col gap-spacing-05">
                     <DescriptionList items={[{ label: "Role", value: "Owner" }]} layout="horizontal" align="start" />
                     <TextField label="Role" layout="horizontal" defaultValue="Owner" />
                 </div>
+                </DocDemo>
             </DocSection>
         </DocPage>
     ),

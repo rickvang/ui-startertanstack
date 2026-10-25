@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Select } from "../base/select";
 import { Layout } from "../layout/layout";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 
 const week = [
     { label: "Mon", height: "h-spacing-07" },
@@ -42,6 +42,7 @@ export const VisualizationPage: Story = {
                         { title: "Match the reader", body: "A decision maker sees the result. Someone doing the work also gets the filters and the breakdown." },
                     ]}
                 />
+                <DocDemo bleed>
                 <Layout header={<span className="font-semibold text-ink">Members</span>}>
                     <div className="flex flex-col gap-spacing-04">
                         <div className="grid grid-cols-3 gap-spacing-03">
@@ -71,6 +72,7 @@ export const VisualizationPage: Story = {
                         </div>
                     </div>
                 </Layout>
+                </DocDemo>
             </DocSection>
             <DocSection title="Best practice">
                 <DocList

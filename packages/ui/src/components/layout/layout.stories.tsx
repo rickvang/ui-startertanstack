@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { cx } from "../../utils/cx";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocNote, DocPage, DocSection, DocWhenAvoid } from "../templates/doc";
 import { Layout, type LayoutProps } from "./layout";
 
 function Bone({ className }: { className: string }) {
@@ -149,19 +149,14 @@ type Story = StoryObj<typeof meta>;
 
 function Frame({ name, when, avoid, ...props }: LayoutProps & { name: string; when: string; avoid: string }) {
     return (
-        <div className="flex flex-col gap-spacing-04">
-            <Layout {...props} />
-            <div className="flex flex-col gap-spacing-02">
-                <h3 className="text-sm font-medium">{name}</h3>
-                <p className="text-sm text-muted">{when}</p>
-                <p className="text-sm text-muted">{avoid}</p>
-            </div>
+        <div className="flex flex-col gap-spacing-05">
+            <DocWhenAvoid when={when} avoid={avoid} />
+            <DocDemo bleed>
+                <Layout {...props} />
+            </DocDemo>
+            <h3 className="text-sm font-medium text-ink">{name}</h3>
         </div>
     );
-}
-
-function FrameNote({ children }: { children: ReactNode }) {
-    return <p className="text-sm text-muted">{children}</p>;
 }
 
 export const Standard: Story = {
@@ -191,25 +186,25 @@ export const Standard: Story = {
                 </Frame>
             </DocSection>
             <DocSection title="Header, content, footer">
-                <FrameNote>Use this when the page is read from top to bottom and the first-level links fit in one bar. A marketing page, a simple home, or a document with a stable width.</FrameNote>
+                <DocNote>Use this when the page is read from top to bottom and the first-level links fit in one bar. A marketing page, a simple home, or a document with a stable width.</DocNote>
                 <Frame name="Header, content, footer" when="The top bar carries the product name and a short set of links. The footer holds secondary links, such as legal or help. It does not hold the main task." avoid="Skip this frame when the section menu is long, or when people switch areas all day. A top bar runs out of room, and a footer steals space from the work." header={<PublicHeader />} footer={<PublicFooter />}>
                     <PublicContent />
                 </Frame>
             </DocSection>
             <DocSection title="Header, then side">
-                <FrameNote>Use this for docs, settings, and help. People arrive from the product, then move within one section.</FrameNote>
+                <DocNote>Use this for docs, settings, and help. People arrive from the product, then move within one section.</DocNote>
                 <Frame name="Header, then side" when="The top bar spans the page and stays global: product name, account, and the few areas that are not this section. The side is the menu of the current section." avoid="Do not put the product menu in the side and again in the header. Do not use this for an app where switching areas is the main job. That side should run the full height." header={<DocsHeader />} sider={<NavBones current={0} />}>
                     <Article />
                 </Frame>
             </DocSection>
             <DocSection title="Side, then header">
-                <FrameNote>Use this for an application people return to. The side is stable. The header changes with the area.</FrameNote>
+                <DocNote>Use this for an application people return to. The side is stable. The header changes with the area.</DocNote>
                 <Frame name="Side, then header" when="The side is the product menu and stays on screen. The header names the current area and holds that area's actions, such as a breadcrumb or Invite. Content is the work." avoid="Do not repeat the product menu in the header. Do not use a full-height side for a public page with a handful of links. That page wants a top bar." header={<AppHeader />} sider={<AppSider />} siderPlacement="full-height">
                     <AppContent />
                 </Frame>
             </DocSection>
             <DocSection title="Side and content">
-                <FrameNote>Use this for a focused tool: a canvas, an editor, or a list that is the whole job.</FrameNote>
+                <DocNote>Use this for a focused tool: a canvas, an editor, or a list that is the whole job.</DocNote>
                 <Frame name="Side and content" when="The side is the structure of the work, such as files, layers, or sections of the tool. There is no second navigation and no footer." avoid="Do not add a header only to repeat the page title. Do not use this frame for a public site that needs a brand bar and legal links." sider={<ToolSider />}>
                     <ToolCanvas />
                 </Frame>

@@ -5,7 +5,7 @@ import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Shell } from "../modules/shell";
 import { Menu } from "../navigation/menu";
-import { DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 
 const domains = [
     { value: "projects", label: "Projects" },
@@ -75,6 +75,7 @@ export const NavigatingDomains: Story = {
                     />
                 </DocSection>
                 <DocSection title="Domains">
+                    <DocDemo bleed>
                     <Shell
                         product={<span className="px-spacing-04 font-semibold text-ink">North</span>}
                         navigation={
@@ -104,6 +105,7 @@ export const NavigatingDomains: Story = {
                     >
                         {domainPage(domain)}
                     </Shell>
+                    </DocDemo>
                 </DocSection>
             </DocPage>
         );

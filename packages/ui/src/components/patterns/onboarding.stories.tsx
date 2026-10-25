@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button } from "../base/button";
 import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
-import { DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocPage, DocSection } from "../templates/doc";
 
 const steps = ["Workspace", "Invite", "Done"] as const;
 
@@ -40,7 +40,8 @@ export const Onboarding: Story = {
         return (
             <DocPage title="Onboarding" intro="Onboarding is the first run. It names the workspace, offers one invite, and lands the person in the product.">
                 <DocSection title="First run">
-                    <div className="flex max-w-md flex-col gap-spacing-05">
+                    <DocDemo className="max-w-md">
+                    <div className="flex flex-col gap-spacing-05">
                         <Steps items={steps} current={step} />
                         {stepBody(step)}
                         <div className="flex gap-spacing-03">
@@ -56,6 +57,7 @@ export const Onboarding: Story = {
                             )}
                         </div>
                     </div>
+                    </DocDemo>
                 </DocSection>
             </DocPage>
         );

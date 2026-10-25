@@ -13,25 +13,20 @@ bun run typecheck
 
 ## Where to go
 
-| Job | Open first | Put the work |
+| Job | Open first | Change |
 | --- | --- | --- |
 | Mock up a screen | `Patterns/Overview`, then the closest pattern story | A story beside that pattern |
 | Pick a workflow | `Patterns/Overview`, "How to choose a workflow" | Copy that pattern. Keep `Shell` as the frame |
-| Add a control that does not exist | The matching story under Components, Layout, or Modules | `packages/ui/src/components`, export it from `packages/ui/src/index.ts`, add a story next to the file |
+| Build a table | `Modules/Table` Overview | The smallest table story that matches the task |
+| Add a control that does not exist | The matching story under Components, Layout, or Modules | `packages/ui/src/components`, export it from `packages/ui/src/index.ts`, and add a story next to the file. A module that already has a `stories/` folder gets the story there |
 | Change color, type, or space | Foundations stories | Semantic tokens in `packages/ui/src/styles/theme.css`. Leave the primitive ramps fixed |
 | Add a page | `apps/web/src/routes/index.tsx` | `apps/web/src/routes/<name>.tsx` with `createFileRoute`. Keep `__root.tsx` as the document shell |
 
 `Patterns/Overview` chooses the workflow: navigating domains, create a record, modifying a record, wizard, onboarding, task management, or the visualization page.
 
-## How to add
+## How to change
 
-**A screen.** Copy the closest story under `packages/ui/src/components/patterns`. Compose `Shell` and the modules that story already uses.
-
-**A control.** Add it under `packages/ui/src/components` in `base`, `layout`, `navigation`, or `modules`. Export it from `packages/ui/src/index.ts`. Add a story beside the file.
-
-**A page.** Add `apps/web/src/routes/<name>.tsx`. Compose the page from `@ui-starter/ui`.
-
-**Color, type, or space.** Edit semantic tokens in `packages/ui/src/styles/theme.css`. Primitive ramps stay fixed. Foundations stories are the token reference.
+Import reusable components from `@ui-starter/ui`. The public list is `packages/ui/src/index.ts`. A pattern story shows a composition, so check that list before importing the pattern as a component. Run `bun run typecheck`, then review the screen or story at desktop (1440px) and mobile (375px).
 
 ## Catalog
 
