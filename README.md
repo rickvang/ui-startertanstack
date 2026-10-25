@@ -1,38 +1,8 @@
 # ui-starter-tanstack
 
-The same starter as `ui-starter`, with TanStack Start instead of the Vite client app.
+The same catalog as `ui-starter`, with TanStack Start for the app. `packages/ui` holds tokens, components, and Storybook. `apps/web` routes live in `apps/web/src/routes`. `/` renders the demo page from `routes/_areas/index.tsx`.
 
-- `packages/ui` holds design tokens, reusable controls, layout components, composed modules, and Storybook examples.
-- `apps/web` is a TanStack Start app. Routes live in `apps/web/src/routes`.
-
-## Building with this starter
-
-### Find what exists
-
-- [Public exports](packages/ui/src/index.ts) list reusable components and types.
-- In Storybook, browse Foundations → Layout → Components → Modules → Patterns.
-- Read the relevant component's `.stories.tsx` examples beside its source. Larger modules may have a `stories/` folder with an Overview.
-
-### Choose and reuse
-
-- Start with the relevant module or pattern's usage guidance.
-- Import reusable components from `@ui-starter/ui`.
-- Patterns demonstrate compositions; check the public exports before assuming a pattern is an importable component.
-- For tables, start with [Modules → Table → Overview](packages/ui/src/components/modules/table/stories/overview.stories.tsx), then choose the smallest example matching the task.
-
-### Put changes in the right place
-
-- Prototype pages and feature-specific behavior belong in `apps/web/src`.
-- Reusable controls and modules belong in `packages/ui/src/components`.
-- Shared visual tokens live in `packages/ui/src/styles/theme.css`.
-- Use existing semantic tokens and spacing utilities; consult Foundations for their intended use.
-
-### Check the result
-
-- Run `bun run typecheck`.
-- Review the affected screen or story at desktop and mobile sizes.
-
-## Scripts
+## Commands
 
 ```bash
 bun install
@@ -40,6 +10,29 @@ bun run dev         # http://localhost:3000
 bun run storybook   # http://localhost:6006
 bun run typecheck
 ```
+
+## Where to go
+
+| Job | Open first | Change |
+| --- | --- | --- |
+| Mock up a screen | `Patterns/Overview`, then the closest pattern story | A story beside that pattern |
+| Pick a workflow | `Patterns/Overview`, "How to choose a workflow" | Copy that pattern. Keep `Shell` as the frame |
+| Build a table | `Modules/Table` Overview | The smallest table story that matches the task |
+| Add a control that does not exist | The matching story under Components, Layout, or Modules | `packages/ui/src/components`, export it from `packages/ui/src/index.ts`, and add a story next to the file. A module that already has a `stories/` folder gets the story there |
+| Change color, type, or space | Foundations stories | Semantic tokens in `packages/ui/src/styles/theme.css`. Leave the primitive ramps fixed |
+| Add a page | `apps/web/src/routes/_areas/index.tsx` | `apps/web/src/routes/<name>.tsx` with `createFileRoute`. Keep `__root.tsx` as the document shell |
+| Hold a workspace, client, or project | `apps/web/src/areas.ts` | Add one entry to `areas`. Add its page only when asked |
+| Show one of those areas | `apps/web/src/routes/_areas/route.tsx` | Add `routes/_areas/$kind.$areaId.tsx` when a page is requested. `_areas` adds no URL. The home page stays `routes/_areas/index.tsx` |
+
+`Patterns/Overview` chooses the workflow: navigating domains, create a record, modifying a record, wizard, onboarding, task management, or the visualization page.
+
+## How to change
+
+`AGENTS.md` is the procedure for this space. Try a screen in the catalog first. Hold each workspace, client, or project as its own entry in `apps/web/src/areas.ts`, and add its page only when asked. Keep `Shell` as the frame. The home page stays `routes/_areas/index.tsx`. Import reusable components from `@ui-starter/ui`. The public list is `packages/ui/src/index.ts`. A pattern story shows a composition, so check that list before importing the pattern as a component. Run `bun run typecheck`, then review the screen or story at desktop (1440px) and mobile (375px).
+
+## Catalog
+
+Storybook groups the catalog into Foundations, Layout, Components, Modules, and Patterns. Navigation controls sit with Components. Foundations covers color, type, spacing, sizing, radius, shadow, and motion. Layout holds frames, overlays, rules, and arrangement. Modules are the shell, forms, detail, and table. Patterns are the workflows that use those modules. The toolbar switches light and dark. The viewport can be Mobile (375px) or Desktop (1440px).
 
 ## Public demo
 
@@ -64,7 +57,3 @@ Remove-Item $dst -Recurse -Force -ErrorAction SilentlyContinue
 robocopy storybook-static $dst /E /XD .vercel /XF vercel.json
 npx vercel deploy --prod --yes --force --scope team_aDqth5R7Xpr6XKtxgfpfvTZt --project ui-starter $dst
 ```
-
-Add a page by creating a file in `apps/web/src/routes`. Change colors in `packages/ui/src/styles/theme.css`. Primitive ramps stay fixed. Semantic tokens (`canvas`, `ink`, `accent`, `danger`, and the rest) swap under the `dark` class.
-
-Storybook groups the catalog into Foundations, Layout, Components, Modules, and Patterns. Navigation controls sit with Components. Layout frames, overlays, and rules are skeletons. Modules are the shell, forms, detail, and table. Patterns holds navigating domains and the workflows that use those modules. Foundations covers color primitives, semantic color, type, spacing, sizing, radius, shadow, and motion. Motion durations are feedback (150ms), enter (200ms), leave (100ms), and travel (300ms). Type, color, sizing, radius, and shadow examples compare dense product UI, web pages, and graphic assets. Spacing and sizing share one scale, `spacing-01` (2px) through `spacing-13` (160px), with `spacing-05.5` (20px) between 16px and 24px. Utilities are `gap-spacing-05`, `p-spacing-05`, `w-spacing-05`, and `h-spacing-05`. Foundations/Spacing also documents usage and examples for stack, actions, fields, forms, and pages. Patterns stays the group for composed components. The toolbar switches light and dark, and the viewport can be Mobile (375px) or Desktop (1440px).
