@@ -57,7 +57,7 @@ const preview: Preview = {
                         ["Overview", "Members", "Find", "Select and act", "Expand", "States", "Wide and sticky", "Long list"],
                     ],
                     "Patterns",
-                    ["Overview", "Navigating domains", "Create a record", "Modifying a record", "Inline edit", "Wizard", "Onboarding", "Task management", "Visualization page"],
+                    ["Overview", "Navigating domains", "Switching organizations", "Create a record", "Modifying a record", "Inline edit", "Wizard", "Onboarding", "Task management", "Visualization page"],
                 ],
             },
         },

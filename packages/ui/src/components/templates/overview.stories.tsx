@@ -22,7 +22,7 @@ export const Overview: Story = {
                         },
                         {
                             title: "Workflows",
-                            body: "Navigating domains, create a record, modifying a record, wizard, onboarding, and task management. Inline edit is a later way to change one fact. A workflow ends in a result, or explains why it cannot continue.",
+                            body: "Navigating domains, switching organizations, create a record, modifying a record, wizard, onboarding, and task management. Inline edit is a later way to change one fact. A workflow ends in a result, or explains why it cannot continue.",
                         },
                         {
                             title: "Navigating domains",
@@ -35,6 +35,7 @@ export const Overview: Story = {
                 <DocList
                     items={[
                         { title: "Another part of the product", body: "Use navigating domains. The shell stays, and the page inside changes." },
+                        { title: "Another organization", body: "Use switching organizations. Pick it in the product slot. The domain menu stays, and the page shows that organization." },
                         { title: "One object", body: "Use create a record to make it. Use modifying a record to change it. Use a wizard when a later answer depends on an earlier one." },
                         { title: "First run", body: "Use onboarding to name the workspace and offer one invite." },
                         { title: "A queue", body: "Use task management to see status, open one item, and return." },
