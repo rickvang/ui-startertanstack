@@ -58,19 +58,24 @@ export function TableHeaderRow({
                 if (!sortable || column.kind === "actions") {
                     return <span key={column.id} role="columnheader" className={headerClass}>{column.header}</span>;
                 }
+                const direction = active ? sort?.direction : undefined;
                 return (
                     <button
                         key={column.id}
                         type="button"
                         role="columnheader"
-                        aria-sort={active ? (sort?.direction === "asc" ? "ascending" : "descending") : "none"}
-                        className={cx(headerClass, "text-left")}
+                        aria-sort={direction === "asc" ? "ascending" : direction === "desc" ? "descending" : "none"}
+                        className={cx(headerClass, "rounded-sm focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus")}
                         onClick={() => {
                             onSortChange(nextSort(sort, column.id));
                             onPageReset();
                         }}
                     >
-                        {column.header}{active ? (sort?.direction === "asc" ? " ↑" : " ↓") : ""}
+                        {column.header}
+                        {direction === "asc" ? <span aria-hidden="true"> ↑</span> : null}
+                        {direction === "desc" ? <span aria-hidden="true"> ↓</span> : null}
+                        {direction === "asc" ? <span className="sr-only">, sorted ascending</span> : null}
+                        {direction === "desc" ? <span className="sr-only">, sorted descending</span> : null}
                     </button>
                 );
             })}

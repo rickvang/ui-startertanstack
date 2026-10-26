@@ -21,7 +21,7 @@ const inputClass: Record<Density, string> = {
     wide: "h-spacing-08 w-full min-w-0 rounded-md bg-surface px-spacing-04 text-sm text-ink outline-none placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus",
 };
 
-export function TextField({ label, hint, error, required, layout = "stacked", density, id, className, ...props }: TextFieldProps) {
+export function TextField({ label, hint, error, required, layout = "stacked", density, id, className, type, ...props }: TextFieldProps) {
     const resolved = useDensity(density);
     const generatedId = useId();
     const fieldId = id ?? generatedId;
@@ -29,8 +29,13 @@ export function TextField({ label, hint, error, required, layout = "stacked", de
     return (
         <Field label={label} hint={hint} error={error} required={required} htmlFor={fieldId} layout={layout} density={resolved} className={className}>
             <input
-                className={cx(inputClass[resolved], error ? "border border-danger" : "border border-line")}
+                className={cx(
+                    inputClass[resolved],
+                    error ? "border border-danger" : "border border-line",
+                    type === "search" ? "[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none" : undefined,
+                )}
                 {...props}
+                type={type}
                 id={fieldId}
                 aria-describedby={fieldDescribedBy(fieldId, hint, error)}
                 aria-invalid={error ? true : undefined}

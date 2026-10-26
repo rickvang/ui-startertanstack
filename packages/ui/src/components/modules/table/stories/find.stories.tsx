@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
+import { DocDemo, DocList, DocNote, DocPage, DocSection } from "../../../templates/doc";
 import { Table } from "../table";
 import { directory, directoryColumns } from "./fixtures";
 import { tableStoryMeta } from "./meta";
@@ -13,12 +13,36 @@ type Story = StoryObj<typeof meta>;
 export const Find: Story = {
     name: "Find",
     render: () => (
-        <DocPage title="Find" intro="searchable, filterable, and sortable help people narrow a directory they already understand.">
-            <DocSection title="Example">
-                <DocWhenAvoid
-                    when="searchable matches visible text (including nested children). filterable adds status chips from the items you pass. sortable cycles none, ascending, and descending on one column at a time."
-                    avoid="The table does not fetch. Replace items when the server responds, or pre-process items yourself for remote search."
+        <DocPage title="Find" intro="Search, status filters, and column sort narrow a directory. Each one stays off until the workflow needs it.">
+            <DocSection title="Search">
+                <DocList
+                    items={[
+                        { title: "One field", body: "Label it Search. The list updates as the person types. There is no separate Search button." },
+                        { title: "Visible text", body: "Search matches the text on the row, including nested rows." },
+                        { title: "Clear search", body: "Clear search empties the field. It leaves the status filters as they are." },
+                    ]}
                 />
+            </DocSection>
+            <DocSection title="Filter">
+                <DocList
+                    items={[
+                        { title: "Status", body: "The choices are the statuses on the items. Press one to keep it. Press it again to drop it." },
+                        { title: "Any of the chosen", body: "Several pressed statuses match any of them. Search still has to match." },
+                        { title: "Clear filters", body: "Clear filters drops every status. It leaves the search text alone." },
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="Sort">
+                <DocList
+                    items={[
+                        { title: "One column", body: "The column header is the control. The first click sorts ascending, the next descending, then the original order." },
+                        { title: "Value", body: "Numbers and dates sort by value. Nested rows stay with their parent. Actions is not a sort column." },
+                        { title: "The first page", body: "A new sort returns to the first page." },
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="Directory">
+                <DocNote>The count reads 2 of 4 records while a search or filter is on. No records match when nothing is left. The table does not fetch. Replace items when the server responds.</DocNote>
                 <DocDemo>
                     <Table label="Directory" items={directory} columns={directoryColumns} searchable filterable sortable defaultValue="alex" />
                 </DocDemo>

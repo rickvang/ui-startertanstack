@@ -133,6 +133,7 @@ export function Table(props: TableProps) {
                 onClearStatuses={() => { setStatuses([]); setPage(1); }}
                 loading={loading}
                 recordCount={sorted.length}
+                totalCount={props.items.length}
                 notice={notice}
                 multiple={multiple}
                 checkedCount={checked.length}

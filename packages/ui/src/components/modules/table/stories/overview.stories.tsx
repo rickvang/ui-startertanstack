@@ -39,7 +39,7 @@ export const Overview: Story = {
                 <DocList
                     items={[
                         { title: "Selection", body: "Row click selects the record (value, defaultValue, onValueChange). selectable=\"multiple\" adds checkboxes and a bulk bar." },
-                        { title: "Finding", body: "searchable, filterable, and sortable are opt-in. Turn them on when the workflow needs them, not by default." },
+                        { title: "Finding", body: "searchable, filterable, and sortable are opt-in. Find shows one search field, one set of status choices, and sort on the column header." },
                         { title: "Detail", body: "expandable opens a panel under the row via renderDetail. Use it for extra fields, not new columns." },
                         { title: "Scale", body: "pageSize, stickyHeader, stickyColumn, and virtualize address long or wide lists. Prefer pagination or virtualization for large sets, not both with every other flag." },
                         { title: "States", body: "loading, error, and empty are explicit. Filtered empty uses built-in no matches copy. disabled keeps a row visible but not selectable." },
@@ -50,7 +50,7 @@ export const Overview: Story = {
                 <DocList
                     items={[
                         { title: "Members", body: "Baseline grid: label, items, columns, and row selection only." },
-                        { title: "Find", body: "Search, status filters, and column sort on a wide directory." },
+                        { title: "Find", body: "Search, status filters, and column sort, with the practice for each control." },
                         { title: "Select and act", body: "Multi-select, pagination, row actions, and bulk actions." },
                         { title: "Expand", body: "Row detail panels and custom column rendering." },
                         { title: "States", body: "Loading, error, empty, and density." },

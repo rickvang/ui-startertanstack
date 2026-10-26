@@ -192,6 +192,15 @@ export function matchingIds(items: readonly TableItem[]): string[] {
     return ids;
 }
 
+export function recordSummary(shown: number, total: number, narrowed: boolean): string {
+    if (narrowed) {
+        const noun = total === 1 ? "record" : "records";
+        return `${shown} of ${total} ${noun}`;
+    }
+    const noun = shown === 1 ? "record" : "records";
+    return `${shown} ${noun}`;
+}
+
 export function nextSort(current: SortState | null, columnId: string): SortState | null {
     if (!current || current.columnId !== columnId) {
         return { columnId, direction: "asc" };
