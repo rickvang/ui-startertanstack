@@ -3,6 +3,8 @@ import { Badge } from "../../../base/badge";
 import { DocDemo, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
 import { Table } from "../table";
 import { columns, directory } from "./fixtures";
+
+const detailColumns = [...columns, { id: "note", header: "Note", kind: "custom" as const }];
 import { tableStoryMeta } from "./meta";
 
 const meta = { ...tableStoryMeta, title: "Modules/Table" } satisfies Meta;
@@ -24,7 +26,7 @@ export const Expand: Story = {
                     <Table
                         label="Directory detail"
                         items={directory}
-                        columns={columns}
+                        columns={detailColumns}
                         expandable
                         expansion="multiple"
                         renderDetail={(item) => <p>{item.values?.note ?? item.name}</p>}

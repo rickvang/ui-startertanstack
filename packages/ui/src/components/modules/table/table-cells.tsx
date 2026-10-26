@@ -41,7 +41,8 @@ export function renderTableCell(options: {
                     actions={rowActions}
                     onSelect={(actionId) => {
                         onRowAction?.(actionId, item);
-                        onActionNotice(`${actionId} ${item.name}`);
+                        const label = rowActions.find((entry) => entry.id === actionId)?.label ?? actionId;
+                        onActionNotice(`${label} ${item.name}`);
                     }}
                 />
             ) : null;

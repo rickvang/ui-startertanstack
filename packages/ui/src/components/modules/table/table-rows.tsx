@@ -43,6 +43,8 @@ export function renderTableBlock(block: TableBlock, ctx: TableRowsContext): Reac
                     className={cx("col-span-full grid items-center bg-canvas text-xs font-medium text-muted", stickyColumn && "isolate")}
                     style={{ gridTemplateColumns: "subgrid" }}
                 >
+                    {ctx.multiple ? <span aria-hidden className="min-h-full bg-canvas py-spacing-02" /> : null}
+                    {ctx.expandable ? <span aria-hidden className="min-h-full bg-canvas py-spacing-02" /> : null}
                     {withActions.map((column) => {
                         if (column.kind === "name") {
                             return (

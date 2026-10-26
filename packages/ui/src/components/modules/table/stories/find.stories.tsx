@@ -28,7 +28,7 @@ export const Find: Story = {
                     items={[
                         { title: "An icon in the header", body: "The Status header keeps the column name. A filter icon opens the choices. The column stays the width of the status." },
                         { title: "The menu", body: "Check the statuses to keep. Several checks match any of them. OK applies them. Reset clears the checks. Search still has to match." },
-                        { title: "The icon", body: "The icon fills when a filter is on. Closing the menu without OK leaves the table as it was." },
+                        { title: "The icon", body: "The icon fills when a filter is on. Closing the menu without OK leaves the table as it was. The filter stays on the Status column when the grid scrolls sideways." },
                     ]}
                 />
             </DocSection>

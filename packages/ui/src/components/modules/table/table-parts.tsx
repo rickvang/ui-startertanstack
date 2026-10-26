@@ -1,5 +1,6 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../../base/button";
+import { AnchoredPanel } from "./table-menu";
 import type { TableAction } from "./types";
 
 export function TableCheck({ label, checked, indeterminate, disabled, onChange }: { label: string; checked: boolean; indeterminate?: boolean; disabled?: boolean; onChange: () => void }) {
@@ -25,16 +26,16 @@ export function TableCheck({ label, checked, indeterminate, disabled, onChange }
 }
 
 export function TableRowMenu({ label, actions, onSelect }: { label: string; actions: readonly TableAction[]; onSelect: (id: string) => void }) {
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const [open, setOpen] = useState(false);
-    const menuId = useId();
 
     return (
-        <div className="relative justify-self-end">
-            <Button variant="ghost" size="dense" aria-expanded={open} aria-controls={menuId} onClick={(event) => { event.stopPropagation(); setOpen((value) => !value); }}>
+        <div className="justify-self-end">
+            <Button ref={buttonRef} variant="ghost" size="dense" aria-expanded={open} aria-haspopup="menu" onClick={(event) => { event.stopPropagation(); setOpen((value) => !value); }}>
                 {label}
             </Button>
-            {open ? (
-                <div id={menuId} role="menu" className="absolute right-0 z-20 mt-spacing-02 flex min-w-spacing-12 flex-col rounded-md border border-line bg-surface p-spacing-02">
+            {open && buttonRef.current ? (
+                <AnchoredPanel anchor={buttonRef.current} label={label} role="menu" align="end" className="flex min-w-spacing-12 flex-col p-spacing-02" onClose={() => setOpen(false)}>
                     {actions.map((action) => (
                         <button
                             key={action.id}
@@ -50,7 +51,7 @@ export function TableRowMenu({ label, actions, onSelect }: { label: string; acti
                             {action.label}
                         </button>
                     ))}
-                </div>
+                </AnchoredPanel>
             ) : null}
         </div>
     );

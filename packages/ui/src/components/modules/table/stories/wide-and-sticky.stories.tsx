@@ -17,7 +17,7 @@ export const WideAndSticky: Story = {
             <DocSection title="Example">
                 <DocWhenAvoid
                     when="stickyHeader keeps the header in the scroll frame. stickyColumn pins the name column when many columns scroll sideways. Use both together on wide grids."
-                    avoid="stickyColumn applies to the name column in a column grid. A list without columns stays a list of buttons. Column resize, reorder, hide, and pinned ranges are out of scope."
+                    avoid="stickyColumn applies to the name column in a column grid. A list without columns stays a list of buttons. Column resize, reorder, and extra pinned columns wait. Choose visible fields with the Columns control."
                 />
                 <DocDemo className="overflow-x-auto">
                     <Table label="Wide directory" items={directory} columns={directoryColumns} stickyHeader stickyColumn sortable defaultValue="alex" />

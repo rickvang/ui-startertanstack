@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import type { Density } from "../../base/density";
 import { cx } from "../../../utils/cx";
-import { CheckboxMenu } from "./table-filter-menu";
+import { CheckboxMenu } from "./table-menu";
 import { nextSort } from "./query";
 import { TableCheck } from "./table-parts";
 import { alignClass, cellText, pinnedNameClass, rowY } from "./table-layout";

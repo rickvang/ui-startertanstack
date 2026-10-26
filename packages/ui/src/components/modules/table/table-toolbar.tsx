@@ -4,7 +4,7 @@ import type { Density } from "../../base/density";
 import { Select } from "../../base/select";
 import { TextField } from "../../base/text-field";
 import { cx } from "../../../utils/cx";
-import { CheckboxMenu } from "./table-filter-menu";
+import { CheckboxMenu } from "./table-menu";
 import { recordSummary } from "./query";
 import type { TableAction, TableColumn } from "./types";
 
@@ -147,8 +147,8 @@ export function TableToolbar({
                         onClose={() => setColumnsOpen(false)}
                     />
                 ) : null}
-                {notice ? <p className="text-sm text-ink">{notice}</p> : null}
             </div>
+            {notice ? <p className="text-sm text-ink">{notice}</p> : null}
             {multiple && checkedCount > 0 ? (
                 <div className="flex flex-wrap items-center gap-spacing-03 rounded-md bg-canvas px-spacing-04 py-spacing-03">
                     <p className="text-sm text-ink">{checkedCount} selected</p>
