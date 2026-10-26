@@ -31,6 +31,7 @@ const preview: Preview = {
         layout: "centered",
         options: {
             storySort: {
+                includeNames: true,
                 order: [
                     "Foundations",
                     ["Color", "Type", "Spacing", "Sizing", "Radius", "Shadow", "Motion"],
@@ -52,7 +53,7 @@ const preview: Preview = {
                         "Settings",
                         "Account",
                         "Forms",
-                        ["Forms", "Fieldset", "Form"],
+                        ["Forms", "Fieldset", "Fieldset, densities", "Fieldset, error", "Form, ready", "Form, summary", "Form, pending"],
                         "Detail",
                         ["Detail", "Detail group"],
                         "Table",
