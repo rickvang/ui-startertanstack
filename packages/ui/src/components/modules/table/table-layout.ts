@@ -46,12 +46,15 @@ const columnTrack: Record<TableColumn["kind"], string> = {
     actions: "var(--spacing-spacing-12)",
 };
 
-export function templateFor(columns: readonly TableColumn[], multiple: boolean, expandable: boolean): string {
-    const tracks = columns.map((column) => columnTrack[column.kind]);
+export function templateFor(columns: readonly TableColumn[], multiple: boolean, expandable: boolean, filterStatus = false): string {
+    const tracks = columns.map((column) => (filterStatus && column.kind === "status" ? "max-content" : columnTrack[column.kind]));
     return [multiple ? "var(--spacing-spacing-07)" : null, expandable ? "var(--spacing-spacing-10)" : null, ...tracks].filter((track) => track !== null).join(" ");
 }
 
-export function alignClass(column: TableColumn): string | undefined {
+export function alignClass(column: TableColumn, filterStatus = false): string | undefined {
+    if (filterStatus && column.kind === "status") {
+        return "justify-self-start text-left";
+    }
     switch (column.kind) {
         case "number":
         case "status":

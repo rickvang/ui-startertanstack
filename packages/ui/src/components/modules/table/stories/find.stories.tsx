@@ -17,8 +17,8 @@ export const Find: Story = {
             <DocSection title="Search">
                 <DocList
                     items={[
-                        { title: "One field", body: "Label it Search. The list updates as the person types. There is no separate Search button." },
-                        { title: "Visible text", body: "Search matches the text on the row, including nested rows." },
+                        { title: "One field", body: "Label it Search. It sits on the same line as the count. The list updates as the person types." },
+                        { title: "Every column", body: "Search matches the text on the row, including nested rows. It stays above the columns because it is not tied to one of them." },
                         { title: "Clear search", body: "Clear search empties the field. It leaves the status filters as they are." },
                     ]}
                 />
@@ -26,18 +26,18 @@ export const Find: Story = {
             <DocSection title="Filter">
                 <DocList
                     items={[
-                        { title: "Status", body: "The choices are the statuses on the items. Press one to keep it. Press it again to drop it." },
-                        { title: "Any of the chosen", body: "Several pressed statuses match any of them. Search still has to match." },
-                        { title: "Clear filters", body: "Clear filters drops every status. It leaves the search text alone." },
+                        { title: "In the Status header", body: "The choices sit in the Status column header, on the same line as the column name." },
+                        { title: "Any of the chosen", body: "Press a status to keep it. Press it again to drop it. Several pressed statuses match any of them. Search still has to match." },
+                        { title: "Clear filters", body: "Clear filters sits in that header. It drops every status and leaves the search text alone." },
                     ]}
                 />
             </DocSection>
             <DocSection title="Sort">
                 <DocList
                     items={[
-                        { title: "One column", body: "The column header is the control. The first click sorts ascending, the next descending, then the original order." },
-                        { title: "Value", body: "Numbers and dates sort by value. Nested rows stay with their parent. Actions is not a sort column." },
-                        { title: "The first page", body: "A new sort returns to the first page." },
+                        { title: "On the name", body: "The column header is the control. The name and the arrow stay on one line." },
+                        { title: "One column", body: "The first click sorts ascending, the next descending, then the original order." },
+                        { title: "Value", body: "Numbers and dates sort by value. Nested rows stay with their parent. Actions is not a sort column. A new sort returns to the first page." },
                     ]}
                 />
             </DocSection>

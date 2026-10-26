@@ -83,6 +83,7 @@ export function Table(props: TableProps) {
         openIds,
         multiple,
         expandable,
+        filterable,
         stickyColumn,
         rowActions,
         onRowAction,
@@ -121,16 +122,12 @@ export function Table(props: TableProps) {
             <TableToolbar
                 resolved={resolved}
                 searchable={searchable}
-                filterable={filterable}
                 query={query}
                 onQueryChange={(value) => { setQuery(value); setPage(1); }}
                 size={size}
                 pageSizeOptions={pageSizeOptions}
                 onSizeChange={(next) => { setSize(next); setPage(1); }}
-                statusOptions={statusOptions}
                 statuses={statuses}
-                onToggleStatus={toggleStatus}
-                onClearStatuses={() => { setStatuses([]); setPage(1); }}
                 loading={loading}
                 recordCount={sorted.length}
                 totalCount={props.items.length}
@@ -165,6 +162,7 @@ export function Table(props: TableProps) {
                             multiple={multiple}
                             expandable={expandable}
                             sortable={sortable}
+                            filterable={filterable}
                             sort={sort}
                             onSortChange={setSort}
                             onPageReset={() => setPage(1)}
@@ -173,6 +171,10 @@ export function Table(props: TableProps) {
                             allPageChecked={allPageChecked}
                             somePageChecked={somePageChecked}
                             onTogglePage={togglePage}
+                            statusOptions={statusOptions}
+                            statuses={statuses}
+                            onToggleStatus={toggleStatus}
+                            onClearStatuses={() => { setStatuses([]); setPage(1); }}
                         />
                     ) : null}
                     {body}

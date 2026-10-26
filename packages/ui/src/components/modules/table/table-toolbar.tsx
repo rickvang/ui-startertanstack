@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { Button } from "../../base/button";
 import type { Density } from "../../base/density";
 import { Select } from "../../base/select";
@@ -9,16 +8,12 @@ import type { TableAction } from "./types";
 type TableToolbarProps = {
     resolved: Density;
     searchable: boolean;
-    filterable: boolean;
     query: string;
     onQueryChange: (value: string) => void;
     size: number | undefined;
     pageSizeOptions?: readonly number[];
     onSizeChange: (size: number) => void;
-    statusOptions: string[];
     statuses: readonly string[];
-    onToggleStatus: (status: string) => void;
-    onClearStatuses: () => void;
     loading: boolean;
     recordCount: number;
     totalCount: number;
@@ -38,16 +33,12 @@ type TableToolbarProps = {
 export function TableToolbar({
     resolved,
     searchable,
-    filterable,
     query,
     onQueryChange,
     size,
     pageSizeOptions,
     onSizeChange,
-    statusOptions,
     statuses,
-    onToggleStatus,
-    onClearStatuses,
     loading,
     recordCount,
     totalCount,
@@ -63,17 +54,16 @@ export function TableToolbar({
     checked,
     onBulkNotice,
 }: TableToolbarProps) {
-    const showSearchRow = searchable || filterable || size;
-    const statusLabelId = useId();
+    const showTools = searchable || Boolean(size);
     const narrowed = query.trim().length > 0 || statuses.length > 0;
 
     return (
         <>
-            {showSearchRow ? (
-                <div className="flex flex-wrap items-end gap-spacing-04">
-                    {searchable ? (
-                        <div className="flex w-full max-w-md items-end gap-spacing-03">
-                            <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-end justify-between gap-x-spacing-04 gap-y-spacing-03">
+                {showTools ? (
+                    <div className="flex min-w-0 flex-1 flex-wrap items-end gap-spacing-03">
+                        {searchable ? (
+                            <div className="min-w-0 max-w-sm flex-1 basis-48">
                                 <TextField
                                     label="Search"
                                     type="search"
@@ -82,50 +72,26 @@ export function TableToolbar({
                                     onChange={(event) => onQueryChange(event.target.value)}
                                 />
                             </div>
-                            {query.length > 0 ? (
-                                <Button variant="secondary" size={resolved} onClick={() => onQueryChange("")}>
-                                    Clear search
-                                </Button>
-                            ) : null}
-                        </div>
-                    ) : null}
-                    {size && pageSizeOptions ? (
-                        <div className="w-spacing-13">
-                            <Select
-                                label="Rows"
-                                density={resolved}
-                                value={String(size)}
-                                options={pageSizeOptions.map((option) => ({ value: String(option), label: String(option) }))}
-                                onChange={(event) => onSizeChange(Number(event.target.value))}
-                            />
-                        </div>
-                    ) : null}
-                </div>
-            ) : null}
-            {filterable && statusOptions.length > 0 ? (
-                <div className="flex flex-wrap items-center gap-spacing-03">
-                    <span id={statusLabelId} className="text-sm font-medium text-ink">
-                        Status
-                    </span>
-                    <div role="group" aria-labelledby={statusLabelId} className="flex flex-wrap items-center gap-spacing-02">
-                        {statusOptions.map((status) => {
-                            const pressed = statuses.includes(status);
-                            return (
-                                <Button key={status} variant="secondary" size={resolved} aria-pressed={pressed} className={pressed ? "bg-selected" : undefined} onClick={() => onToggleStatus(status)}>
-                                    {status}
-                                </Button>
-                            );
-                        })}
+                        ) : null}
+                        {query.length > 0 ? (
+                            <Button variant="secondary" size={resolved} onClick={() => onQueryChange("")}>
+                                Clear search
+                            </Button>
+                        ) : null}
+                        {size && pageSizeOptions ? (
+                            <div className="w-spacing-13">
+                                <Select
+                                    label="Rows"
+                                    density={resolved}
+                                    value={String(size)}
+                                    options={pageSizeOptions.map((option) => ({ value: String(option), label: String(option) }))}
+                                    onChange={(event) => onSizeChange(Number(event.target.value))}
+                                />
+                            </div>
+                        ) : null}
                     </div>
-                    {statuses.length > 0 ? (
-                        <Button variant="secondary" size={resolved} onClick={onClearStatuses}>
-                            Clear filters
-                        </Button>
-                    ) : null}
-                </div>
-            ) : null}
-            <div className="flex items-center justify-between gap-spacing-03">
-                <p className="text-sm text-muted" aria-live="polite">
+                ) : null}
+                <p className="pb-spacing-02 text-sm text-muted" aria-live="polite">
                     {loading ? "Loading" : recordSummary(recordCount, totalCount, narrowed)}
                 </p>
                 {notice ? <p className="text-sm text-ink">{notice}</p> : null}

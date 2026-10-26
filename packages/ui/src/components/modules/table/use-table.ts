@@ -23,6 +23,7 @@ export function useTable(props: TableProps) {
         defaultValue,
         onValueChange,
         sortable = false,
+        filterable = false,
         selectable = "single",
         expandable = false,
         expansion = "single",
@@ -48,7 +49,7 @@ export function useTable(props: TableProps) {
     const moveFocus = useRef(false);
     const multiple = selectable === "multiple";
 
-    const resolvedColumns = columns ?? (sortable ? [{ id: "name", header: "Name", kind: "name" as const }, { id: "status", header: "Status", kind: "status" as const }] : undefined);
+    const resolvedColumns = columns ?? (sortable || filterable ? [{ id: "name", header: "Name", kind: "name" as const }, { id: "status", header: "Status", kind: "status" as const }] : undefined);
     const withActions: readonly TableColumn[] | undefined =
         rowActions && rowActions.length > 0 && resolvedColumns && !resolvedColumns.some((column) => column.kind === "actions")
             ? [...resolvedColumns, { id: "actions", header: "Actions", kind: "actions" as const }]
@@ -67,7 +68,7 @@ export function useTable(props: TableProps) {
     const pageIds = matchingIds(visibleItems);
     const allPageChecked = pageIds.length > 0 && pageIds.every((id) => checked.includes(id));
     const somePageChecked = pageIds.some((id) => checked.includes(id));
-    const template = withActions ? templateFor(withActions, multiple, expandable) : undefined;
+    const template = withActions ? templateFor(withActions, multiple, expandable, filterable) : undefined;
 
     useEffect(() => {
         if (!moveFocus.current || !activeId) {

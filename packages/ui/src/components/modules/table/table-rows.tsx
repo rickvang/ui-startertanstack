@@ -17,6 +17,7 @@ export type TableRowsContext = {
     openIds: readonly string[];
     multiple: boolean;
     expandable: boolean;
+    filterable: boolean;
     stickyColumn: boolean;
     rowActions?: readonly TableAction[];
     onRowAction?: (actionId: string, item: TableItem) => void;
@@ -122,7 +123,7 @@ export function renderTableBlock(block: TableBlock, ctx: TableRowsContext): Reac
                     role="gridcell"
                     className={cx(
                         "min-w-0",
-                        alignClass(column),
+                        alignClass(column, ctx.filterable),
                         column.kind === "name" ? pinnedNameClass({ stickyColumn, depth, isSelected }) : undefined,
                     )}
                 >
