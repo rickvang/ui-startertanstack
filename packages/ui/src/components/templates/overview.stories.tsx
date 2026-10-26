@@ -36,8 +36,8 @@ export const Overview: Story = {
                     items={[
                         { title: "Another part of the product", body: "Use navigating domains. The shell stays, and the page inside changes." },
                         { title: "Another organization", body: "Use switching organizations. Pick it in the product slot. The domain menu stays, and the page shows that organization." },
-                        { title: "The product's settings", body: "Use product settings. Settings in the sider opens the product screen. The domain menu stays." },
-                        { title: "The person's account", body: "Use account information. The picture opens the person's screen. The domain and the organization stay." },
+                        { title: "The product's settings", body: "Use product settings. The screen holds the product, who can invite, and removing the product. The domain menu stays." },
+                        { title: "The person's account", body: "Use account information. The screen holds the profile, the password, notices, and removing the account. The domain and the organization stay." },
                         { title: "One object", body: "Use create a record to make it. Use modifying a record to change it. Use a wizard when a later answer depends on an earlier one." },
                         { title: "First run", body: "Use onboarding to name the workspace and offer one invite." },
                         { title: "A queue", body: "Use task management to see status, open one item, and return." },

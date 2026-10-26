@@ -38,14 +38,14 @@ const preview: Preview = {
                     [
                         "Frames",
                         "Overlays",
-                        ["Modal", "Drawer", "Slide-in"],
+                        ["Modal", "Drawer", "Slide-in", "Dialog"],
                         "Rules",
                         ["Message and feedback", "Empty status"],
                         "Arrange",
                         ["Flow", ["Flex", "Space", "Stack"], "Split", ["Grid", "Splitter", "Masonry"], "Divider"],
                     ],
                     "Components",
-                    ["Button", "Text field", "Text area", "Select", "Checkbox", "Radio", "Switch", "Field", "Description list", "Badge", "Loader", "Avatar", "Anchor", "Breadcrumb", "Dropdown", "Menu", "Pagination", "Steps", "Tabs"],
+                    ["Button", "Text field", "Text area", "Select", "Checkbox", "Radio", "Switch", "Field", "Description list", "Badge", "Loader", "Message", "Avatar", "Anchor", "Breadcrumb", "Dropdown", "Menu", "Pagination", "Steps", "Tabs"],
                     "Modules",
                     [
                         "Shell",

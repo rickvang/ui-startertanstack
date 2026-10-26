@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
-import { SettingsScreen } from "../modules/settings-screen";
+import { SettingsScreen, type SettingsFacts } from "../modules/settings-screen";
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
@@ -80,14 +80,20 @@ type Story = StoryObj<typeof meta>;
 export const ProductSettings: Story = {
     name: "Product settings",
     render: () => {
-        const [productName, setProductName] = useState("North");
+        const [facts, setFacts] = useState<SettingsFacts>({
+            name: "North",
+            description: "The open work for this product.",
+            invite: "owners",
+            membersCanCreate: false,
+        });
+        const [removed, setRemoved] = useState(false);
         const [domain, setDomain] = useState<Domain>("projects");
         const [place, setPlace] = useState<Place>("domain");
         const title = place === "settings" ? "Settings" : (domains.find((item) => item.value === domain)?.label ?? "Projects");
         const help = placeHelp(place, domain);
 
         return (
-            <DocPage title="Product settings" intro="Settings in the sider opens the product screen. The domain menu stays. A domain takes you back to that page. The account stays the person's.">
+            <DocPage title="Product settings" intro="Settings in the sider opens the product screen. Product, access, and remove stay on that screen. The domain menu stays. A domain takes you back to that page.">
                 <DocSection title="When to use">
                     <DocList
                         items={[
@@ -100,7 +106,7 @@ export const ProductSettings: Story = {
                 <DocSection title="Settings">
                     <DocDemo bleed>
                         <Shell
-                            product={<span className="px-spacing-04 font-semibold text-ink">{productName}</span>}
+                            product={<span className="px-spacing-04 font-semibold text-ink">{removed ? "Removed" : facts.name}</span>}
                             navigation={
                                 <Menu
                                     items={domains}
@@ -127,7 +133,7 @@ export const ProductSettings: Story = {
                             help={null}
                             user={null}
                         >
-                            {place === "settings" ? <SettingsScreen name={productName} onNameChange={setProductName} /> : domainPage(domain)}
+                            {place === "settings" ? <SettingsScreen facts={facts} removed={removed} onChange={setFacts} onRemove={() => setRemoved(true)} /> : domainPage(domain)}
                         </Shell>
                     </DocDemo>
                 </DocSection>

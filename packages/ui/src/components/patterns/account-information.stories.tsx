@@ -80,14 +80,20 @@ type Story = StoryObj<typeof meta>;
 export const AccountInformation: Story = {
     name: "Account information",
     render: () => {
-        const [facts, setFacts] = useState<AccountFacts>({ name: "Alex Kim", email: "alex@north.example" });
+        const [facts, setFacts] = useState<AccountFacts>({
+            name: "Alex Kim",
+            email: "alex@north.example",
+            emailNotices: true,
+            language: "english",
+        });
+        const [removed, setRemoved] = useState(false);
         const [domain, setDomain] = useState<Domain>("projects");
         const [place, setPlace] = useState<Place>("domain");
         const title = place === "account" ? "Account" : (domains.find((item) => item.value === domain)?.label ?? "Projects");
         const help = placeHelp(place, domain);
 
         return (
-            <DocPage title="Account information" intro="The picture opens the person's account. The domain menu stays. A domain takes you back to that page. The organization's plan stays on Billing.">
+            <DocPage title="Account information" intro="The picture opens the person's account. Profile, sign-in, notices, and remove stay on that screen. The domain menu stays. A domain takes you back to that page.">
                 <DocSection title="When to use">
                     <DocList
                         items={[
@@ -131,7 +137,7 @@ export const AccountInformation: Story = {
                             help={null}
                             user={null}
                         >
-                            {place === "account" ? <AccountScreen name={facts.name} email={facts.email} onSave={setFacts} /> : domainPage(domain)}
+                            {place === "account" ? <AccountScreen facts={facts} removed={removed} onChange={setFacts} onRemove={() => setRemoved(true)} /> : domainPage(domain)}
                         </Shell>
                     </DocDemo>
                 </DocSection>

@@ -40,8 +40,8 @@ export const Shell: Story = {
                     <DocList
                         items={[
                             { title: "Navigation", body: "The menu of domains. It is the way into Projects, Members, and Billing." },
-                            { title: "Settings", body: "Product settings stay out of the domain menu. The settings screen holds the product's facts." },
-                            { title: "User", body: "The picture opens the person's account. The account screen holds the person's name and email, and it stays with the person." },
+                            { title: "Settings", body: "Product settings stay out of the domain menu. The settings screen holds the product, access, and removing the product." },
+                            { title: "User", body: "The picture opens the person's account. The account screen holds the profile, sign-in, notices, and removing the account." },
                             { title: "Help", body: "Help explains the current domain and stays on the page. It is not another domain." },
                         ]}
                     />

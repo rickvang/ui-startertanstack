@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils/cx";
 import { type Density, useDensity } from "./density";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: ButtonVariant;
@@ -15,6 +15,7 @@ const variantClass: Record<ButtonVariant, string> = {
     primary: "bg-accent text-accent-fg hover:bg-accent-hover",
     secondary: "border border-line bg-surface text-ink hover:bg-canvas",
     ghost: "text-ink hover:bg-surface",
+    danger: "bg-danger text-accent-fg hover:bg-danger-700",
 };
 
 const sizeClass: Record<Density, string> = {

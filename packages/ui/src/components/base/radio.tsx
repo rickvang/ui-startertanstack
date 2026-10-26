@@ -14,6 +14,8 @@ export type RadioGroupProps = {
     name?: string;
     options: readonly RadioOption[];
     defaultValue?: string;
+    value?: string;
+    onValueChange?: (value: string) => void;
     className?: string;
     hint?: ReactNode;
     error?: ReactNode;
@@ -82,7 +84,7 @@ const horizontalOptions: Record<Density, string> = {
     wide: "mt-spacing-03",
 };
 
-export function RadioGroup({ label, name, options, defaultValue, className, hint, error, required, density, layout = "stacked" }: RadioGroupProps) {
+export function RadioGroup({ label, name, options, defaultValue, value, onValueChange, className, hint, error, required, density, layout = "stacked" }: RadioGroupProps) {
     const resolved = useDensity(density);
     const generatedId = useId();
     const groupName = name ?? generatedId;
@@ -118,7 +120,16 @@ export function RadioGroup({ label, name, options, defaultValue, className, hint
             {options.map((option) => (
                 <label key={option.value} className={optionClass[resolved]}>
                     <span className={cx("relative inline-flex shrink-0", controlSize[resolved])}>
-                        <input type="radio" name={groupName} value={option.value} defaultChecked={option.value === defaultValue} required={required || undefined} className="peer absolute inset-0 z-10 cursor-pointer opacity-0" />
+                        <input
+                            type="radio"
+                            name={groupName}
+                            value={option.value}
+                            checked={value === undefined ? undefined : option.value === value}
+                            defaultChecked={value === undefined && option.value === defaultValue ? true : undefined}
+                            required={required || undefined}
+                            onChange={() => onValueChange?.(option.value)}
+                            className="peer absolute inset-0 z-10 cursor-pointer opacity-0"
+                        />
                         <span aria-hidden="true" className={cx("pointer-events-none absolute inset-0 rounded-full border bg-surface peer-checked:border-accent peer-focus-visible:outline-2 peer-focus-visible:outline-offset-spacing-01 peer-focus-visible:outline-focus peer-disabled:opacity-50", error ? "border-danger" : "border-line")} />
                         <span aria-hidden="true" className={dotClass[resolved]} />
                     </span>

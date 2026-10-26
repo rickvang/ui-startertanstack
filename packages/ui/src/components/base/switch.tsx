@@ -7,6 +7,8 @@ import { Field, fieldDescribedBy } from "./field";
 export type SwitchProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "role" | "onClick"> & {
     label: string;
     defaultChecked?: boolean;
+    checked?: boolean;
+    onCheckedChange?: (checked: boolean) => void;
     hint?: ReactNode;
     error?: ReactNode;
     required?: boolean;
@@ -39,11 +41,20 @@ const horizontalControl: Record<Density, string> = {
     wide: "mt-spacing-03 flex h-spacing-05.5 items-center",
 };
 
-export function Switch({ label, defaultChecked = false, hint, error, required, density, layout = "inline", id, className, ref, ...props }: SwitchProps) {
+export function Switch({ label, defaultChecked = false, checked: checkedProp, onCheckedChange, hint, error, required, density, layout = "inline", id, className, ref, ...props }: SwitchProps) {
     const resolved = useDensity(density);
     const generatedId = useId();
     const fieldId = id ?? generatedId;
-    const [checked, setChecked] = useState(defaultChecked);
+    const [uncontrolled, setUncontrolled] = useState(defaultChecked);
+    const checked = checkedProp ?? uncontrolled;
+
+    function toggle() {
+        const next = !checked;
+        if (checkedProp === undefined) {
+            setUncontrolled(next);
+        }
+        onCheckedChange?.(next);
+    }
 
     const control = (
         <button
@@ -56,7 +67,7 @@ export function Switch({ label, defaultChecked = false, hint, error, required, d
             id={fieldId}
             aria-describedby={fieldDescribedBy(fieldId, hint, error)}
             aria-invalid={error ? true : undefined}
-            onClick={() => setChecked((value) => !value)}
+            onClick={toggle}
         >
             <span className={cx(thumbClass[resolved], checked ? thumbTravel[resolved] : undefined)} />
         </button>
