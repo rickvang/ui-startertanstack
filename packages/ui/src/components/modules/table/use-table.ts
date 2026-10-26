@@ -108,11 +108,6 @@ export function useTable(props: TableProps) {
         });
     }
 
-    function toggleStatus(status: string) {
-        setPage(1);
-        setStatuses((current) => (current.includes(status) ? current.filter((item) => item !== status) : [...current, status]));
-    }
-
     function onRowKey(event: KeyboardEvent<HTMLElement>, row: FlatRow) {
         const enabled = flat.filter((item) => !item.item.disabled);
         const index = enabled.findIndex((item) => item.item.id === row.item.id);
@@ -174,7 +169,6 @@ export function useTable(props: TableProps) {
         toggleChecked,
         togglePage,
         toggleOpen,
-        toggleStatus,
         onRowKey,
     };
 }

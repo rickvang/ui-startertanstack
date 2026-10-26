@@ -1,6 +1,7 @@
-import { Button } from "../../base/button";
+import { useRef, useState } from "react";
 import type { Density } from "../../base/density";
 import { cx } from "../../../utils/cx";
+import { StatusFilterMenu } from "./table-filter-menu";
 import { nextSort } from "./query";
 import { TableCheck } from "./table-parts";
 import { alignClass, cellText, pinnedNameClass, rowY } from "./table-layout";
@@ -24,8 +25,7 @@ type TableHeaderRowProps = {
     onTogglePage: () => void;
     statusOptions: readonly string[];
     statuses: readonly string[];
-    onToggleStatus: (status: string) => void;
-    onClearStatuses: () => void;
+    onApplyStatuses: (statuses: readonly string[]) => void;
 };
 
 export function TableHeaderRow({
@@ -46,8 +46,7 @@ export function TableHeaderRow({
     onTogglePage,
     statusOptions,
     statuses,
-    onToggleStatus,
-    onClearStatuses,
+    onApplyStatuses,
 }: TableHeaderRowProps) {
     return (
         <div
@@ -71,8 +70,7 @@ export function TableHeaderRow({
                     stickyColumn={stickyColumn}
                     statusOptions={statusOptions}
                     statuses={statuses}
-                    onToggleStatus={onToggleStatus}
-                    onClearStatuses={onClearStatuses}
+                    onApplyStatuses={onApplyStatuses}
                 />
             ))}
         </div>
@@ -91,9 +89,24 @@ type TableColumnHeaderProps = {
     stickyColumn: boolean;
     statusOptions: readonly string[];
     statuses: readonly string[];
-    onToggleStatus: (status: string) => void;
-    onClearStatuses: () => void;
+    onApplyStatuses: (statuses: readonly string[]) => void;
 };
+
+function SortMark({ direction }: { direction: "asc" | "desc" }) {
+    return (
+        <svg viewBox="0 0 16 16" aria-hidden="true" className="size-spacing-04 shrink-0">
+            {direction === "asc" ? <path d="M8 3.5 12.5 10H3.5L8 3.5Z" fill="currentColor" /> : <path d="M8 12.5 3.5 6h9L8 12.5Z" fill="currentColor" />}
+        </svg>
+    );
+}
+
+function FilterMark({ active }: { active: boolean }) {
+    return (
+        <svg viewBox="0 0 16 16" aria-hidden="true" className="size-spacing-04">
+            <path d="M2 3.5h12L9.5 8.5V12.5L6.5 11V8.5L2 3.5Z" fill={active ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.25" />
+        </svg>
+    );
+}
 
 function TableColumnHeader({
     column,
@@ -107,17 +120,19 @@ function TableColumnHeader({
     stickyColumn,
     statusOptions,
     statuses,
-    onToggleStatus,
-    onClearStatuses,
+    onApplyStatuses,
 }: TableColumnHeaderProps) {
+    const filterRef = useRef<HTMLButtonElement>(null);
+    const [filterOpen, setFilterOpen] = useState(false);
     const active = sort?.columnId === column.id;
     const direction = active ? sort?.direction : undefined;
     const pinned = stickyColumn && column.kind === "name";
     const showStatusFilter = filterable && column.kind === "status" && statusOptions.length > 0;
+    const filtered = statuses.length > 0;
     const headerClass = cx(
         "flex min-w-0 items-center gap-spacing-02",
         cellText[resolved],
-        alignClass(column, showStatusFilter),
+        showStatusFilter ? "w-full justify-self-stretch" : alignClass(column),
         pinned ? pinnedNameClass({ stickyColumn: true, depth: 0, isSelected: false, stickyHeaderCorner: stickyHeader }) : undefined,
     );
 
@@ -126,37 +141,45 @@ function TableColumnHeader({
             {sortable && column.kind !== "actions" ? (
                 <button
                     type="button"
-                    className="inline-flex shrink-0 items-center whitespace-nowrap rounded-sm text-muted focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus"
+                    className="inline-flex min-w-0 items-center gap-spacing-01 rounded-sm text-muted focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus"
                     onClick={() => {
                         onSortChange(nextSort(sort, column.id));
                         onPageReset();
                     }}
                 >
-                    {column.header}
-                    {direction === "asc" ? <span aria-hidden="true"> ↑</span> : null}
-                    {direction === "desc" ? <span aria-hidden="true"> ↓</span> : null}
+                    <span className="truncate">{column.header}</span>
+                    {direction === "asc" || direction === "desc" ? <SortMark direction={direction} /> : null}
                     {direction === "asc" ? <span className="sr-only">, sorted ascending</span> : null}
                     {direction === "desc" ? <span className="sr-only">, sorted descending</span> : null}
                 </button>
             ) : (
-                <span className="whitespace-nowrap text-muted">{column.header}</span>
+                <span className="truncate text-muted">{column.header}</span>
             )}
             {showStatusFilter ? (
-                <div role="group" aria-label="Filter by status" className="flex shrink-0 items-center gap-spacing-02">
-                    {statusOptions.map((status) => {
-                        const pressed = statuses.includes(status);
-                        return (
-                            <Button key={status} variant="secondary" size={resolved} aria-pressed={pressed} className={pressed ? "bg-selected" : undefined} onClick={() => onToggleStatus(status)}>
-                                {status}
-                            </Button>
-                        );
-                    })}
-                    {statuses.length > 0 ? (
-                        <Button variant="secondary" size={resolved} onClick={onClearStatuses}>
-                            Clear filters
-                        </Button>
-                    ) : null}
-                </div>
+                <button
+                    ref={filterRef}
+                    type="button"
+                    aria-label={filtered ? "Filter by status, filters on" : "Filter by status"}
+                    aria-haspopup="dialog"
+                    aria-expanded={filterOpen}
+                    className={cx(
+                        "ml-auto inline-flex size-spacing-06 shrink-0 items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus",
+                        filtered ? "text-accent" : "text-muted",
+                    )}
+                    onClick={() => setFilterOpen((open) => !open)}
+                >
+                    <FilterMark active={filtered} />
+                </button>
+            ) : null}
+            {showStatusFilter && filterOpen && filterRef.current ? (
+                <StatusFilterMenu
+                    anchor={filterRef.current}
+                    options={statusOptions}
+                    selected={statuses}
+                    density={resolved}
+                    onApply={onApplyStatuses}
+                    onClose={() => setFilterOpen(false)}
+                />
             ) : null}
         </div>
     );

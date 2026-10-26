@@ -26,16 +26,16 @@ export const Find: Story = {
             <DocSection title="Filter">
                 <DocList
                     items={[
-                        { title: "In the Status header", body: "The choices sit in the Status column header, on the same line as the column name." },
-                        { title: "Any of the chosen", body: "Press a status to keep it. Press it again to drop it. Several pressed statuses match any of them. Search still has to match." },
-                        { title: "Clear filters", body: "Clear filters sits in that header. It drops every status and leaves the search text alone." },
+                        { title: "An icon in the header", body: "The Status header keeps the column name. A filter icon opens the choices. The column stays the width of the status." },
+                        { title: "The menu", body: "Check the statuses to keep. Several checks match any of them. OK applies them. Reset clears the checks. Search still has to match." },
+                        { title: "The icon", body: "The icon fills when a filter is on. Closing the menu without OK leaves the table as it was." },
                     ]}
                 />
             </DocSection>
             <DocSection title="Sort">
                 <DocList
                     items={[
-                        { title: "On the name", body: "The column header is the control. The name and the arrow stay on one line." },
+                        { title: "Beside the name", body: "The column name is the control. A mark sits beside the name only while that column is sorted." },
                         { title: "One column", body: "The first click sorts ascending, the next descending, then the original order." },
                         { title: "Value", body: "Numbers and dates sort by value. Nested rows stay with their parent. Actions is not a sort column. A new sort returns to the first page." },
                     ]}

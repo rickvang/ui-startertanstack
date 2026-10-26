@@ -47,7 +47,7 @@ const columnTrack: Record<TableColumn["kind"], string> = {
 };
 
 export function templateFor(columns: readonly TableColumn[], multiple: boolean, expandable: boolean, filterStatus = false): string {
-    const tracks = columns.map((column) => (filterStatus && column.kind === "status" ? "max-content" : columnTrack[column.kind]));
+    const tracks = columns.map((column) => (filterStatus && column.kind === "status" ? "var(--spacing-spacing-12)" : columnTrack[column.kind]));
     return [multiple ? "var(--spacing-spacing-07)" : null, expandable ? "var(--spacing-spacing-10)" : null, ...tracks].filter((track) => track !== null).join(" ");
 }
 

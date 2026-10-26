@@ -69,7 +69,6 @@ export function Table(props: TableProps) {
         toggleChecked,
         togglePage,
         toggleOpen,
-        toggleStatus,
         onRowKey,
     } = table;
 
@@ -173,8 +172,7 @@ export function Table(props: TableProps) {
                             onTogglePage={togglePage}
                             statusOptions={statusOptions}
                             statuses={statuses}
-                            onToggleStatus={toggleStatus}
-                            onClearStatuses={() => { setStatuses([]); setPage(1); }}
+                            onApplyStatuses={(next) => { setStatuses(next); setPage(1); }}
                         />
                     ) : null}
                     {body}
