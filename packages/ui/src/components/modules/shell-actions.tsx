@@ -44,7 +44,21 @@ function Note({ kicker, title, body }: { kicker: string; title: string; body: st
     );
 }
 
-export function ShellBar({ title, helpTitle, helpBody, name }: { title: ReactNode; helpTitle: string; helpBody: string; name: string }) {
+export function ShellBar({
+    title,
+    helpTitle,
+    helpBody,
+    name,
+    onAccount,
+    accountCurrent = false,
+}: {
+    title: ReactNode;
+    helpTitle: string;
+    helpBody: string;
+    name: string;
+    onAccount?: () => void;
+    accountCurrent?: boolean;
+}) {
     const [open, setOpen] = useState<OpenPanel | null>(null);
     const helpRef = useRef<HTMLButtonElement>(null);
     const accountRef = useRef<HTMLButtonElement>(null);
@@ -64,6 +78,15 @@ export function ShellBar({ title, helpTitle, helpBody, name }: { title: ReactNod
         target?.focus();
     }
 
+    function openAccount() {
+        if (onAccount) {
+            setOpen((current) => (current === "help" ? null : current));
+            onAccount();
+            return;
+        }
+        toggle("account");
+    }
+
     return (
         <div className="flex w-full min-w-0 flex-col gap-spacing-03" onKeyDown={close}>
             <div className="flex items-center gap-spacing-03">
@@ -76,16 +99,17 @@ export function ShellBar({ title, helpTitle, helpBody, name }: { title: ReactNod
                         ref={accountRef}
                         type="button"
                         className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus"
-                        aria-expanded={open === "account"}
+                        aria-expanded={onAccount ? undefined : open === "account"}
+                        aria-current={accountCurrent ? "page" : undefined}
                         aria-label={`${name}, account`}
-                        onClick={() => toggle("account")}
+                        onClick={openAccount}
                     >
                         <Avatar name={name} />
                     </button>
                 </div>
             </div>
             {open === "help" ? <Note kicker="Help" title={helpTitle} body={helpBody} /> : null}
-            {open === "account" ? <Note kicker="Account" title={name} body={accountBody} /> : null}
+            {open === "account" && !onAccount ? <Note kicker="Account" title={name} body={accountBody} /> : null}
         </div>
     );
 }

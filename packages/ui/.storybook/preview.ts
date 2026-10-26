@@ -49,6 +49,8 @@ const preview: Preview = {
                     "Modules",
                     [
                         "Shell",
+                        "Settings",
+                        "Account",
                         "Forms",
                         ["Forms", "Fieldset", "Form"],
                         "Detail",
@@ -57,7 +59,7 @@ const preview: Preview = {
                         ["Overview", "Members", "Find", "Select and act", "Expand", "States", "Wide and sticky", "Long list"],
                     ],
                     "Patterns",
-                    ["Overview", "Navigating domains", "Switching organizations", "Create a record", "Modifying a record", "Inline edit", "Wizard", "Onboarding", "Task management", "Visualization page"],
+                    ["Overview", "Navigating domains", "Switching organizations", "Product settings", "Account information", "Create a record", "Modifying a record", "Inline edit", "Wizard", "Onboarding", "Task management", "Visualization page"],
                 ],
             },
         },
