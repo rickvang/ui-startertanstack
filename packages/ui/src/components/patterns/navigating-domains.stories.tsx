@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar } from "../base/avatar";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Shell } from "../modules/shell";
+import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
 import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 
@@ -63,6 +63,7 @@ export const NavigatingDomains: Story = {
     render: () => {
         const [domain, setDomain] = useState<Domain>("projects");
         const current = domains.find((item) => item.value === domain)?.label ?? "Projects";
+        const help = shellDomainHelp(domain);
 
         return (
             <DocPage title="Navigating domains" intro="Choosing a domain changes the page. The shell stays: navigation, settings, help, and the account are still there.">
@@ -94,14 +95,9 @@ export const NavigatingDomains: Story = {
                                 Settings
                             </Button>
                         }
-                        header={<span className="font-medium text-ink">{current}</span>}
-                        help={<Button variant="ghost">Help</Button>}
-                        user={
-                            <>
-                                <Avatar name="Alex Kim" />
-                                <Button variant="secondary">Account</Button>
-                            </>
-                        }
+                        header={<ShellBar title={current} helpTitle={help.title} helpBody={help.body} name="Alex Kim" />}
+                        help={null}
+                        user={null}
                     >
                         {domainPage(domain)}
                     </Shell>

@@ -1,9 +1,9 @@
 import { useId, useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar } from "../base/avatar";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Shell } from "../modules/shell";
+import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
 import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
 import { cx } from "../../utils/cx";
@@ -124,6 +124,7 @@ export const SwitchingOrganizations: Story = {
         const [organization, setOrganization] = useState<Organization>("north");
         const [domain, setDomain] = useState<Domain>("projects");
         const current = domains.find((item) => item.value === domain)?.label ?? "Projects";
+        const help = shellDomainHelp(domain);
 
         return (
             <DocPage title="Switching organizations" intro="Choosing an organization changes which organization the domains belong to. The shell stays: the domain menu, settings, help, and the account are still there.">
@@ -156,14 +157,9 @@ export const SwitchingOrganizations: Story = {
                                 Settings
                             </Button>
                         }
-                        header={<span className="font-medium text-ink">{current}</span>}
-                        help={<Button variant="ghost">Help</Button>}
-                        user={
-                            <>
-                                <Avatar name="Alex Kim" />
-                                <Button variant="secondary">Account</Button>
-                            </>
-                        }
+                        header={<ShellBar title={current} helpTitle={help.title} helpBody={help.body} name="Alex Kim" />}
+                        help={null}
+                        user={null}
                     >
                         {organizationPage(organization, domain)}
                     </Shell>

@@ -27,12 +27,14 @@ export function Shell({ product, navigation, settings, header, help, user, child
                 </div>
             }
             header={
-                <div className="flex items-center gap-spacing-03">
-                    <div className="min-w-0">{header}</div>
-                    <div className="ml-auto flex items-center gap-spacing-03">
-                        {help}
-                        {user}
-                    </div>
+                <div className="flex w-full items-start gap-spacing-03">
+                    <div className="min-w-0 flex-1">{header}</div>
+                    {help || user ? (
+                        <div className="ml-auto flex items-center gap-spacing-03">
+                            {help}
+                            {user}
+                        </div>
+                    ) : null}
                 </div>
             }
         >

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar } from "../base/avatar";
 import { Button } from "../base/button";
 import { Menu } from "../navigation/menu";
 import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { ShellBar, shellDomainHelp } from "./shell-actions";
 import { Shell as ShellModule } from "./shell";
 
 const domains = [
@@ -32,6 +32,7 @@ export const Shell: Story = {
     render: () => {
         const [domain, setDomain] = useState<Domain>("members");
         const current = domains.find((item) => item.value === domain)?.label ?? "Members";
+        const help = shellDomainHelp(domain);
 
         return (
             <DocPage title="Shell" intro="The shell stays while the person moves. It holds the product navigation, settings, the user, and help. Layout chooses where those areas sit. Navigating domains is the pattern that changes the page inside.">
@@ -40,8 +41,8 @@ export const Shell: Story = {
                         items={[
                             { title: "Navigation", body: "The menu of domains. It is the way into Projects, Members, and Billing." },
                             { title: "Settings", body: "Product settings stay out of the domain menu. They remain available on every page." },
-                            { title: "User", body: "The picture and the account action belong to the person, not to the current domain." },
-                            { title: "Help", body: "Help stays in the header so it is available on every domain." },
+                            { title: "User", body: "The picture opens the person's account. The account stays with the person, not with the domain or the organization." },
+                            { title: "Help", body: "Help explains the current domain and stays on the page. It is not another domain." },
                         ]}
                     />
                 </DocSection>
@@ -65,14 +66,9 @@ export const Shell: Story = {
                                 Settings
                             </Button>
                         }
-                        header={<span className="font-medium text-ink">{current}</span>}
-                        help={<Button variant="ghost">Help</Button>}
-                        user={
-                            <>
-                                <Avatar name="Alex Kim" />
-                                <Button variant="secondary">Account</Button>
-                            </>
-                        }
+                        header={<ShellBar title={current} helpTitle={help.title} helpBody={help.body} name="Alex Kim" />}
+                        help={null}
+                        user={null}
                     >
                         <p className="text-sm text-ink">{current} is the current domain.</p>
                     </ShellModule>
