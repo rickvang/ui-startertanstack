@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import type { Density } from "../../base/density";
 import { cx } from "../../../utils/cx";
-import { StatusFilterMenu } from "./table-filter-menu";
+import { CheckboxMenu } from "./table-filter-menu";
 import { nextSort } from "./query";
 import { TableCheck } from "./table-parts";
 import { alignClass, cellText, pinnedNameClass, rowY } from "./table-layout";
@@ -172,10 +172,12 @@ function TableColumnHeader({
                 </button>
             ) : null}
             {showStatusFilter && filterOpen && filterRef.current ? (
-                <StatusFilterMenu
+                <CheckboxMenu
                     anchor={filterRef.current}
-                    options={statusOptions}
+                    label="Filter by status"
+                    options={statusOptions.map((status) => ({ value: status, label: status }))}
                     selected={statuses}
+                    resetTo={[]}
                     density={resolved}
                     onApply={onApplyStatuses}
                     onClose={() => setFilterOpen(false)}

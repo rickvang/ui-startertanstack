@@ -15,6 +15,7 @@ export function Table(props: TableProps) {
         searchable = false,
         filterable = false,
         sortable = false,
+        columnSettings = false,
         expandable = false,
         renderDetail,
         renderCell,
@@ -54,6 +55,8 @@ export function Table(props: TableProps) {
         rowRefs,
         multiple,
         withActions,
+        columnChoices,
+        applyColumns,
         sorted,
         count,
         currentPage,
@@ -130,6 +133,10 @@ export function Table(props: TableProps) {
                 loading={loading}
                 recordCount={sorted.length}
                 totalCount={props.items.length}
+                columnSettings={columnSettings}
+                columns={columnChoices}
+                visibleIds={withActions?.map((column) => column.id) ?? []}
+                onApplyColumns={applyColumns}
                 notice={notice}
                 multiple={multiple}
                 checkedCount={checked.length}

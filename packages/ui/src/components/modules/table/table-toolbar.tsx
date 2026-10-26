@@ -1,9 +1,12 @@
+import { useRef, useState } from "react";
 import { Button } from "../../base/button";
 import type { Density } from "../../base/density";
 import { Select } from "../../base/select";
 import { TextField } from "../../base/text-field";
+import { cx } from "../../../utils/cx";
+import { CheckboxMenu } from "./table-filter-menu";
 import { recordSummary } from "./query";
-import type { TableAction } from "./types";
+import type { TableAction, TableColumn } from "./types";
 
 type TableToolbarProps = {
     resolved: Density;
@@ -17,6 +20,10 @@ type TableToolbarProps = {
     loading: boolean;
     recordCount: number;
     totalCount: number;
+    columnSettings: boolean;
+    columns: readonly TableColumn[] | undefined;
+    visibleIds: readonly string[];
+    onApplyColumns: (visibleIds: readonly string[]) => void;
     notice: string | null;
     multiple: boolean;
     checkedCount: number;
@@ -42,6 +49,10 @@ export function TableToolbar({
     loading,
     recordCount,
     totalCount,
+    columnSettings,
+    columns,
+    visibleIds,
+    onApplyColumns,
     notice,
     multiple,
     checkedCount,
@@ -54,7 +65,12 @@ export function TableToolbar({
     checked,
     onBulkNotice,
 }: TableToolbarProps) {
-    const showTools = searchable || Boolean(size);
+    const columnsRef = useRef<HTMLButtonElement>(null);
+    const [columnsOpen, setColumnsOpen] = useState(false);
+    const optionalColumns = columns?.filter((column) => column.kind !== "name" && column.kind !== "actions") ?? [];
+    const showColumns = columnSettings && optionalColumns.length > 0;
+    const columnsHidden = optionalColumns.some((column) => !visibleIds.includes(column.id));
+    const showTools = searchable || Boolean(size) || showColumns;
     const narrowed = query.trim().length > 0 || statuses.length > 0;
 
     return (
@@ -91,9 +107,46 @@ export function TableToolbar({
                         ) : null}
                     </div>
                 ) : null}
-                <p className="pb-spacing-02 text-sm text-muted" aria-live="polite">
-                    {loading ? "Loading" : recordSummary(recordCount, totalCount, narrowed)}
-                </p>
+                <div className="flex items-center gap-spacing-03 pb-spacing-02">
+                    {showColumns ? (
+                        <button
+                            ref={columnsRef}
+                            type="button"
+                            aria-label={columnsHidden ? "Columns, some hidden" : "Columns"}
+                            aria-haspopup="dialog"
+                            aria-expanded={columnsOpen}
+                            className={cx(
+                                "inline-flex size-spacing-07 items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus",
+                                columnsHidden ? "text-accent" : "text-muted",
+                            )}
+                            onClick={() => setColumnsOpen((open) => !open)}
+                        >
+                            <svg viewBox="0 0 16 16" aria-hidden="true" className="size-spacing-05">
+                                <path d="M2.5 3.5h3v9h-3v-9Zm4 0h3v9h-3v-9Zm4 0h3v9h-3v-9Z" fill="none" stroke="currentColor" strokeWidth="1.25" />
+                            </svg>
+                        </button>
+                    ) : null}
+                    <p className="text-sm text-muted" aria-live="polite">
+                        {loading ? "Loading" : recordSummary(recordCount, totalCount, narrowed)}
+                    </p>
+                </div>
+                {showColumns && columnsOpen && columnsRef.current && columns ? (
+                    <CheckboxMenu
+                        anchor={columnsRef.current}
+                        label="Columns"
+                        align="end"
+                        options={columns.map((column) => ({
+                            value: column.id,
+                            label: column.header,
+                            disabled: column.kind === "name" || column.kind === "actions",
+                        }))}
+                        selected={visibleIds}
+                        resetTo={columns.map((column) => column.id)}
+                        density={resolved}
+                        onApply={onApplyColumns}
+                        onClose={() => setColumnsOpen(false)}
+                    />
+                ) : null}
                 {notice ? <p className="text-sm text-ink">{notice}</p> : null}
             </div>
             {multiple && checkedCount > 0 ? (

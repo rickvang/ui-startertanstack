@@ -13,12 +13,12 @@ type Story = StoryObj<typeof meta>;
 export const Find: Story = {
     name: "Find",
     render: () => (
-        <DocPage title="Find" intro="Search, status filters, and column sort narrow a directory. Each one stays off until the workflow needs it.">
+        <DocPage title="Find" intro="Search, status filters, and column sort narrow a directory. Columns chooses the fields in view. Each control stays off until the workflow needs it.">
             <DocSection title="Search">
                 <DocList
                     items={[
                         { title: "One field", body: "Label it Search. It sits on the same line as the count. The list updates as the person types." },
-                        { title: "Every column", body: "Search matches the text on the row, including nested rows. It stays above the columns because it is not tied to one of them." },
+                        { title: "Columns in view", body: "Search matches the text in the columns that are in view, including nested rows. It stays in the toolbar because it is not tied to one header." },
                         { title: "Clear search", body: "Clear search empties the field. It leaves the status filters as they are." },
                     ]}
                 />
@@ -41,10 +41,19 @@ export const Find: Story = {
                     ]}
                 />
             </DocSection>
+            <DocSection title="Columns">
+                <DocList
+                    items={[
+                        { title: "A toolbar control", body: "Columns sits with the count. It is the table setting for which fields are in view." },
+                        { title: "The menu", body: "Check a column to show it. OK applies the view. Reset shows every column. Closing the menu without OK leaves the view as it was." },
+                        { title: "Name stays", body: "Name stays checked. Actions stays when the table has row actions. Hiding a sorted column clears that sort. Hiding Status clears a status filter." },
+                    ]}
+                />
+            </DocSection>
             <DocSection title="Directory">
                 <DocNote>The count reads 2 of 4 records while a search or filter is on. No records match when nothing is left. The table does not fetch. Replace items when the server responds.</DocNote>
                 <DocDemo>
-                    <Table label="Directory" items={directory} columns={directoryColumns} searchable filterable sortable defaultValue="alex" />
+                    <Table label="Directory" items={directory} columns={directoryColumns} searchable filterable sortable columnSettings defaultValue="alex" />
                 </DocDemo>
             </DocSection>
         </DocPage>

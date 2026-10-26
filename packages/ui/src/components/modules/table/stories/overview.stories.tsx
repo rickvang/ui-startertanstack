@@ -21,7 +21,7 @@ export const Overview: Story = {
                         { title: "Table", body: "Each entry shows many fields, and the person already knows what they are looking for." },
                         { title: "Standard list", body: "A row is a summary. A click selects the entry. A count can sit above the list." },
                         { title: "Cards", body: "Order does not matter, and each entry should be seen as its own object. Cards stay a separate module." },
-                        { title: "Outside this table", body: "Editing a record stays the modifying-record pattern. Column resize, reorder, hide, pinned ranges, and spreadsheet editing wait until a workflow needs them." },
+                        { title: "Outside this table", body: "Editing a record stays the modifying-record pattern. Column resize, reorder, pinned ranges, and spreadsheet editing wait until a workflow needs them." },
                     ]}
                 />
             </DocSection>
@@ -39,7 +39,7 @@ export const Overview: Story = {
                 <DocList
                     items={[
                         { title: "Selection", body: "Row click selects the record (value, defaultValue, onValueChange). selectable=\"multiple\" adds checkboxes and a bulk bar." },
-                        { title: "Finding", body: "searchable, filterable, and sortable are opt-in. Search sits with the count. Status opens from an icon in that header. Sort is a mark beside the column name." },
+                        { title: "Finding", body: "searchable, filterable, sortable, and columnSettings are opt-in. Search sits with the count. Status opens from an icon in that header. Sort is a mark beside the column name. Columns chooses which fields are in view." },
                         { title: "Detail", body: "expandable opens a panel under the row via renderDetail. Use it for extra fields, not new columns." },
                         { title: "Scale", body: "pageSize, stickyHeader, stickyColumn, and virtualize address long or wide lists. Prefer pagination or virtualization for large sets, not both with every other flag." },
                         { title: "States", body: "loading, error, and empty are explicit. Filtered empty uses built-in no matches copy. disabled keeps a row visible but not selectable." },
@@ -50,7 +50,7 @@ export const Overview: Story = {
                 <DocList
                     items={[
                         { title: "Members", body: "Baseline grid: label, items, columns, and row selection only." },
-                        { title: "Find", body: "Search in the toolbar. A status menu and a sort mark in the column header." },
+                        { title: "Find", body: "Search in the toolbar, a status menu, a sort mark, and a Columns control for the view." },
                         { title: "Select and act", body: "Multi-select, pagination, row actions, and bulk actions." },
                         { title: "Expand", body: "Row detail panels and custom column rendering." },
                         { title: "States", body: "Loading, error, empty, and density." },
