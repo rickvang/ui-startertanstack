@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
 import { cx } from "../../utils/cx";
 import { type Density, useDensity } from "./density";
 
@@ -8,6 +8,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: ButtonVariant;
     size?: Density;
     children: ReactNode;
+    ref?: Ref<HTMLButtonElement>;
 };
 
 const variantClass: Record<ButtonVariant, string> = {
@@ -22,11 +23,12 @@ const sizeClass: Record<Density, string> = {
     wide: "h-spacing-08 px-spacing-05 text-sm",
 };
 
-export function Button({ variant = "primary", size, type = "button", className, children, ...props }: ButtonProps) {
+export function Button({ variant = "primary", size, type = "button", className, children, ref, ...props }: ButtonProps) {
     const density = useDensity(size);
 
     return (
         <button
+            ref={ref}
             type={type}
             className={cx(
                 "inline-flex items-center justify-center gap-spacing-03 rounded-md font-medium transition duration-150 motion-reduce:transition-none disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus",

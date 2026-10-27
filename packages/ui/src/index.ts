@@ -66,5 +66,7 @@ export { DetailCard } from "./components/modules/detail-card";
 export type { DetailCardProps } from "./components/modules/detail-card";
 export { Shell } from "./components/modules/shell";
 export type { ShellProps } from "./components/modules/shell";
+export { ShellBar, shellDomainHelp } from "./components/modules/shell-actions";
+export type { ShellDomain } from "./components/modules/shell-actions";
 export { Table } from "./components/modules/table";
 export type { TableColumn, TableItem, TableProps } from "./components/modules/table";
