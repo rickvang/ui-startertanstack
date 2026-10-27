@@ -35,6 +35,18 @@ export const Overview: Story = {
                     ]}
                 />
             </DocSection>
+            <DocSection title="Layout">
+                <DocList
+                    columns={1}
+                    items={[
+                        { title: "One grid", body: "Column width comes from kind in the layout module. Name, text, date, link, and custom start at the left. Number, status, and actions sit at the end. Padding on one cell does not move a column." },
+                        { title: "Name edge", body: "The Name header, a group label, and a record share one left edge. A nested row is the only indent in that column. A pinned name column keeps that same edge." },
+                        { title: "Leading tracks", body: "Checkboxes and expand sit before the columns. A group row includes those tracks, so the label stays in Name." },
+                        { title: "Menus", body: "Status, Columns, and row actions open from the anchored menu. The grid scrolls sideways, so a menu placed inside a cell is clipped." },
+                        { title: "Tokens", body: "Space, type, and color use the semantic tokens. The table has no stylesheet of its own." },
+                    ]}
+                />
+            </DocSection>
             <DocSection title="Flags and behavior">
                 <DocList
                     items={[
@@ -51,7 +63,7 @@ export const Overview: Story = {
                     items={[
                         { title: "Members", body: "Baseline grid: label, items, columns, and row selection only." },
                         { title: "Find", body: "Search in the toolbar, a status menu, a sort mark, and a Columns control for the view." },
-                        { title: "Select and act", body: "Multi-select, pagination, row actions, and bulk actions." },
+                        { title: "Select and act", body: "Multi-select, pagination, row actions, bulk actions, and the Columns menu." },
                         { title: "Expand", body: "Row detail panels and custom column rendering." },
                         { title: "States", body: "Loading, error, empty, and density." },
                         { title: "Wide and sticky", body: "Horizontal scroll with sticky header and name column." },
