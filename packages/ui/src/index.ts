@@ -71,7 +71,7 @@ export type { DetailCardProps } from "./components/modules/detail-card";
 export { Shell } from "./components/modules/shell";
 export type { ShellFrame, ShellProps } from "./components/modules/shell";
 export { SettingsScreen } from "./components/modules/settings-screen";
-export type { InviteRule, SettingsFacts, SettingsScreenProps } from "./components/modules/settings-screen";
+export type { InviteRule, SettingsFacts, SettingsScreenProps, SettingsSection } from "./components/modules/settings-screen";
 export { AccountScreen } from "./components/modules/account-screen";
 export type { AccountFacts, AccountLanguage, AccountScreenProps } from "./components/modules/account-screen";
 export { ShellBar, shellDomainHelp } from "./components/modules/shell-actions";

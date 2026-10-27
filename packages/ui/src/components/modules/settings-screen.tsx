@@ -22,11 +22,20 @@ export type SettingsFacts = {
     membersCanCreate: boolean;
 };
 
+export const settingsSections = [
+    { value: "product", label: "Product" },
+    { value: "access", label: "Access" },
+    { value: "remove", label: "Remove" },
+] as const;
+
+export type SettingsSection = (typeof settingsSections)[number]["value"];
+
 export type SettingsScreenProps = {
     facts: SettingsFacts;
     removed: boolean;
     onChange: (facts: SettingsFacts) => void;
     onRemove: () => void;
+    section?: SettingsSection;
 };
 
 function isInviteRule(value: string): value is InviteRule {
@@ -230,8 +239,35 @@ function RemoveSection({ name, onRemove }: { name: string; onRemove: () => void 
     );
 }
 
-export function SettingsScreen({ facts, removed, onChange, onRemove }: SettingsScreenProps) {
+function Removed({ name }: { name: string }) {
+    return <Message tone="danger" title="Product removed">{name} was removed.</Message>;
+}
+
+function SettingsPart({ section, facts, onChange, onRemove }: { section: SettingsSection; facts: SettingsFacts; onChange: (facts: SettingsFacts) => void; onRemove: () => void }) {
+    switch (section) {
+        case "product":
+            return <ProductSection facts={facts} onChange={onChange} />;
+        case "access":
+            return <AccessSection facts={facts} onChange={onChange} />;
+        case "remove":
+            return <RemoveSection name={facts.name} onRemove={onRemove} />;
+        default: {
+            const exhaustive: never = section;
+            return exhaustive;
+        }
+    }
+}
+
+export function SettingsScreen({ facts, removed, onChange, onRemove, section }: SettingsScreenProps) {
     const titleId = useId();
+
+    if (section) {
+        return (
+            <div className="flex w-full min-w-0 max-w-xl flex-col gap-spacing-05">
+                {removed ? <Removed name={facts.name} /> : <SettingsPart section={section} facts={facts} onChange={onChange} onRemove={onRemove} />}
+            </div>
+        );
+    }
 
     return (
         <section aria-labelledby={titleId} className="flex w-full min-w-0 max-w-xl flex-col gap-spacing-05">
@@ -242,9 +278,7 @@ export function SettingsScreen({ facts, removed, onChange, onRemove }: SettingsS
                 <p className="text-sm text-ink">Product settings stay out of the domain menu. They remain available on every page.</p>
             </header>
             {removed ? (
-                <Message tone="danger" title="Product removed">
-                    {facts.name} was removed.
-                </Message>
+                <Removed name={facts.name} />
             ) : (
                 <Tabs
                     items={[
