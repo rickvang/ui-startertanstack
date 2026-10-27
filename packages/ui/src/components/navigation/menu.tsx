@@ -11,15 +11,29 @@ export type MenuProps = {
     defaultValue?: string;
     value?: string;
     onValueChange?: (value: string) => void;
+    orientation?: "vertical" | "horizontal";
     className?: string;
 };
 
-export function Menu({ items, defaultValue, value, onValueChange, className }: MenuProps) {
+function menuOrientationClass(orientation: "vertical" | "horizontal"): string {
+    switch (orientation) {
+        case "vertical":
+            return "w-full flex-col";
+        case "horizontal":
+            return "flex-row flex-wrap items-center";
+        default: {
+            const exhaustive: never = orientation;
+            return exhaustive;
+        }
+    }
+}
+
+export function Menu({ items, defaultValue, value, onValueChange, orientation = "vertical", className }: MenuProps) {
     const [uncontrolled, setUncontrolled] = useState(defaultValue ?? items[0]?.value);
     const selected = value ?? uncontrolled;
 
     return (
-        <nav className={cx("flex w-full flex-col gap-spacing-02", className)}>
+        <nav className={cx("flex gap-spacing-02", menuOrientationClass(orientation), className)}>
             {items.map((item) => {
                 const current = item.value === selected;
                 return (

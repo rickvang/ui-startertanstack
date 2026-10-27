@@ -69,7 +69,7 @@ export type { FormGroupProps } from "./components/modules/form-group";
 export { DetailCard } from "./components/modules/detail-card";
 export type { DetailCardProps } from "./components/modules/detail-card";
 export { Shell } from "./components/modules/shell";
-export type { ShellProps } from "./components/modules/shell";
+export type { ShellFrame, ShellProps } from "./components/modules/shell";
 export { SettingsScreen } from "./components/modules/settings-screen";
 export type { InviteRule, SettingsFacts, SettingsScreenProps } from "./components/modules/settings-screen";
 export { AccountScreen } from "./components/modules/account-screen";
