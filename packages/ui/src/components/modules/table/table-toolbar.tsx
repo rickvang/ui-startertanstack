@@ -1,25 +1,29 @@
+import { useRef, useState } from "react";
 import { Button } from "../../base/button";
 import type { Density } from "../../base/density";
 import { Select } from "../../base/select";
 import { TextField } from "../../base/text-field";
 import { cx } from "../../../utils/cx";
-import type { TableAction } from "./types";
+import { CheckboxMenu } from "./table-menu";
+import { recordSummary } from "./query";
+import type { TableAction, TableColumn } from "./types";
 
 type TableToolbarProps = {
     resolved: Density;
     searchable: boolean;
-    filterable: boolean;
     query: string;
     onQueryChange: (value: string) => void;
     size: number | undefined;
     pageSizeOptions?: readonly number[];
     onSizeChange: (size: number) => void;
-    statusOptions: string[];
     statuses: readonly string[];
-    onToggleStatus: (status: string) => void;
-    onClearStatuses: () => void;
     loading: boolean;
     recordCount: number;
+    totalCount: number;
+    columnSettings: boolean;
+    columns: readonly TableColumn[] | undefined;
+    visibleIds: readonly string[];
+    onApplyColumns: (visibleIds: readonly string[]) => void;
     notice: string | null;
     multiple: boolean;
     checkedCount: number;
@@ -36,18 +40,19 @@ type TableToolbarProps = {
 export function TableToolbar({
     resolved,
     searchable,
-    filterable,
     query,
     onQueryChange,
     size,
     pageSizeOptions,
     onSizeChange,
-    statusOptions,
     statuses,
-    onToggleStatus,
-    onClearStatuses,
     loading,
     recordCount,
+    totalCount,
+    columnSettings,
+    columns,
+    visibleIds,
+    onApplyColumns,
     notice,
     multiple,
     checkedCount,
@@ -60,65 +65,90 @@ export function TableToolbar({
     checked,
     onBulkNotice,
 }: TableToolbarProps) {
-    const showSearchRow = searchable || filterable || size;
+    const columnsRef = useRef<HTMLButtonElement>(null);
+    const [columnsOpen, setColumnsOpen] = useState(false);
+    const optionalColumns = columns?.filter((column) => column.kind !== "name" && column.kind !== "actions") ?? [];
+    const showColumns = columnSettings && optionalColumns.length > 0;
+    const columnsHidden = optionalColumns.some((column) => !visibleIds.includes(column.id));
+    const showTools = searchable || Boolean(size) || showColumns;
+    const narrowed = query.trim().length > 0 || statuses.length > 0;
 
     return (
         <>
-            {showSearchRow ? (
-                <div className="flex flex-wrap items-end gap-spacing-04">
-                    {searchable ? (
-                        <div className="w-full max-w-sm">
-                            <TextField
-                                label="Search"
-                                type="search"
-                                value={query}
-                                density={resolved}
-                                onChange={(event) => onQueryChange(event.target.value)}
-                            />
-                        </div>
-                    ) : null}
-                    {size && pageSizeOptions ? (
-                        <div className="w-spacing-13">
-                            <Select
-                                label="Rows"
-                                density={resolved}
-                                value={String(size)}
-                                options={pageSizeOptions.map((option) => ({ value: String(option), label: String(option) }))}
-                                onChange={(event) => onSizeChange(Number(event.target.value))}
-                            />
-                        </div>
-                    ) : null}
-                </div>
-            ) : null}
-            {filterable ? (
-                <div className="flex flex-wrap items-center gap-spacing-02">
-                    {statusOptions.map((status) => (
+            <div className="flex flex-wrap items-end justify-between gap-x-spacing-04 gap-y-spacing-03">
+                {showTools ? (
+                    <div className="flex min-w-0 flex-1 flex-wrap items-end gap-spacing-03">
+                        {searchable ? (
+                            <div className="min-w-0 max-w-sm flex-1 basis-48">
+                                <TextField
+                                    label="Search"
+                                    type="search"
+                                    value={query}
+                                    density={resolved}
+                                    onChange={(event) => onQueryChange(event.target.value)}
+                                />
+                            </div>
+                        ) : null}
+                        {query.length > 0 ? (
+                            <Button variant="secondary" size={resolved} onClick={() => onQueryChange("")}>
+                                Clear search
+                            </Button>
+                        ) : null}
+                        {size && pageSizeOptions ? (
+                            <div className="w-spacing-13">
+                                <Select
+                                    label="Rows"
+                                    density={resolved}
+                                    value={String(size)}
+                                    options={pageSizeOptions.map((option) => ({ value: String(option), label: String(option) }))}
+                                    onChange={(event) => onSizeChange(Number(event.target.value))}
+                                />
+                            </div>
+                        ) : null}
+                    </div>
+                ) : null}
+                <div className="flex items-center gap-spacing-03 pb-spacing-02">
+                    {showColumns ? (
                         <button
-                            key={status}
+                            ref={columnsRef}
                             type="button"
-                            aria-pressed={statuses.includes(status)}
-                            onClick={() => onToggleStatus(status)}
-                            className={cx("rounded-md px-spacing-03 py-spacing-02 text-sm", statuses.includes(status) ? "bg-selected text-ink" : "text-muted")}
+                            aria-label={columnsHidden ? "Columns, some hidden" : "Columns"}
+                            aria-haspopup="dialog"
+                            aria-expanded={columnsOpen}
+                            className={cx(
+                                "inline-flex size-spacing-07 items-center justify-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus",
+                                columnsHidden ? "text-accent" : "text-muted",
+                            )}
+                            onClick={() => setColumnsOpen((open) => !open)}
                         >
-                            {status}
-                        </button>
-                    ))}
-                    {statuses.map((status) => (
-                        <button key={`chip-${status}`} type="button" className="rounded-sm bg-canvas px-spacing-02 py-spacing-01 text-xs text-ink" onClick={() => onToggleStatus(status)}>
-                            Remove {status}
-                        </button>
-                    ))}
-                    {statuses.length > 0 ? (
-                        <button type="button" className="text-sm text-muted" onClick={onClearStatuses}>
-                            Clear filters
+                            <svg viewBox="0 0 16 16" aria-hidden="true" className="size-spacing-05">
+                                <path d="M2.5 3.5h3v9h-3v-9Zm4 0h3v9h-3v-9Zm4 0h3v9h-3v-9Z" fill="none" stroke="currentColor" strokeWidth="1.25" />
+                            </svg>
                         </button>
                     ) : null}
+                    <p className="text-sm text-muted" aria-live="polite">
+                        {loading ? "Loading" : recordSummary(recordCount, totalCount, narrowed)}
+                    </p>
                 </div>
-            ) : null}
-            <div className="flex items-center justify-between gap-spacing-03">
-                <p className="text-sm text-muted">{loading ? "Loading" : `${recordCount} ${recordCount === 1 ? "record" : "records"}`}</p>
-                {notice ? <p className="text-sm text-ink">{notice}</p> : null}
+                {showColumns && columnsOpen && columnsRef.current && columns ? (
+                    <CheckboxMenu
+                        anchor={columnsRef.current}
+                        label="Columns"
+                        align="end"
+                        options={columns.map((column) => ({
+                            value: column.id,
+                            label: column.header,
+                            disabled: column.kind === "name" || column.kind === "actions",
+                        }))}
+                        selected={visibleIds}
+                        resetTo={columns.map((column) => column.id)}
+                        density={resolved}
+                        onApply={onApplyColumns}
+                        onClose={() => setColumnsOpen(false)}
+                    />
+                ) : null}
             </div>
+            {notice ? <p className="text-sm text-ink">{notice}</p> : null}
             {multiple && checkedCount > 0 ? (
                 <div className="flex flex-wrap items-center gap-spacing-03 rounded-md bg-canvas px-spacing-04 py-spacing-03">
                     <p className="text-sm text-ink">{checkedCount} selected</p>

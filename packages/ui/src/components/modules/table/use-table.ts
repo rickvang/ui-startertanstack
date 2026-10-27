@@ -14,6 +14,10 @@ import {
 import { rowHeight, templateFor } from "./table-layout";
 import type { FlatRow, SortState, TableColumn, TableProps } from "./types";
 
+function columnStays(column: TableColumn): boolean {
+    return column.kind === "name" || column.kind === "actions";
+}
+
 export function useTable(props: TableProps) {
     const {
         items,
@@ -23,6 +27,8 @@ export function useTable(props: TableProps) {
         defaultValue,
         onValueChange,
         sortable = false,
+        filterable = false,
+        columnSettings = false,
         selectable = "single",
         expandable = false,
         expansion = "single",
@@ -36,6 +42,7 @@ export function useTable(props: TableProps) {
     const selected = value ?? uncontrolled;
     const [query, setQuery] = useState("");
     const [statuses, setStatuses] = useState<readonly string[]>([]);
+    const [hiddenColumns, setHiddenColumns] = useState<readonly string[]>([]);
     const [sort, setSort] = useState<SortState | null>(null);
     const [checked, setChecked] = useState<readonly string[]>([]);
     const [openIds, setOpenIds] = useState<readonly string[]>([]);
@@ -48,14 +55,16 @@ export function useTable(props: TableProps) {
     const moveFocus = useRef(false);
     const multiple = selectable === "multiple";
 
-    const resolvedColumns = columns ?? (sortable ? [{ id: "name", header: "Name", kind: "name" as const }, { id: "status", header: "Status", kind: "status" as const }] : undefined);
+    const resolvedColumns = columns ?? (sortable || filterable ? [{ id: "name", header: "Name", kind: "name" as const }, { id: "status", header: "Status", kind: "status" as const }] : undefined);
     const withActions: readonly TableColumn[] | undefined =
         rowActions && rowActions.length > 0 && resolvedColumns && !resolvedColumns.some((column) => column.kind === "actions")
             ? [...resolvedColumns, { id: "actions", header: "Actions", kind: "actions" as const }]
             : resolvedColumns;
 
-    const filtered = useMemo(() => filterItems(items, withActions, query, statuses), [items, withActions, query, statuses]);
-    const sorted = useMemo(() => sortItems(filtered, withActions, sortable ? sort : null), [filtered, withActions, sortable, sort]);
+    const columnChoices = withActions;
+    const viewColumns = columnChoices?.filter((column) => columnStays(column) || !hiddenColumns.includes(column.id));
+    const filtered = useMemo(() => filterItems(items, viewColumns, query, statuses), [items, viewColumns, query, statuses]);
+    const sorted = useMemo(() => sortItems(filtered, viewColumns, sortable ? sort : null), [filtered, viewColumns, sortable, sort]);
     const count = pageCount(sorted.length, size);
     const currentPage = Math.min(page, count);
     const visibleItems = pageItems(sorted, currentPage, size);
@@ -67,7 +76,8 @@ export function useTable(props: TableProps) {
     const pageIds = matchingIds(visibleItems);
     const allPageChecked = pageIds.length > 0 && pageIds.every((id) => checked.includes(id));
     const somePageChecked = pageIds.some((id) => checked.includes(id));
-    const template = withActions ? templateFor(withActions, multiple, expandable) : undefined;
+    const statusInView = viewColumns?.some((column) => column.kind === "status") ?? false;
+    const template = viewColumns ? templateFor(viewColumns, multiple, expandable, filterable && statusInView) : undefined;
 
     useEffect(() => {
         if (!moveFocus.current || !activeId) {
@@ -107,9 +117,17 @@ export function useTable(props: TableProps) {
         });
     }
 
-    function toggleStatus(status: string) {
+    function applyColumns(visibleIds: readonly string[]) {
+        if (!columnChoices) {
+            return;
+        }
+        const nextHidden = columnChoices.filter((column) => !columnStays(column) && !visibleIds.includes(column.id)).map((column) => column.id);
+        setHiddenColumns(nextHidden);
         setPage(1);
-        setStatuses((current) => (current.includes(status) ? current.filter((item) => item !== status) : [...current, status]));
+        setSort((current) => (current && nextHidden.includes(current.columnId) ? null : current));
+        if (columnChoices.some((column) => column.kind === "status" && nextHidden.includes(column.id))) {
+            setStatuses([]);
+        }
     }
 
     function onRowKey(event: KeyboardEvent<HTMLElement>, row: FlatRow) {
@@ -157,7 +175,10 @@ export function useTable(props: TableProps) {
         setNotice,
         rowRefs,
         multiple,
-        withActions,
+        withActions: viewColumns,
+        columnChoices,
+        columnSettings,
+        applyColumns,
         sorted,
         count,
         currentPage,
@@ -173,7 +194,6 @@ export function useTable(props: TableProps) {
         toggleChecked,
         togglePage,
         toggleOpen,
-        toggleStatus,
         onRowKey,
     };
 }

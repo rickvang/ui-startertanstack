@@ -18,7 +18,8 @@ export const SelectAndAct: Story = {
                 <DocList
                     items={[
                         { title: "Selection", body: "selectable=\"multiple\" adds checkboxes. The header checkbox selects the visible page; the bulk bar can select every match." },
-                        { title: "Actions", body: "rowActions and bulkActions use the table’s small menu. Checkboxes and menus stop propagation so row click stays predictable." },
+                        { title: "Actions", body: "Each row opens one actions menu. It closes on a choice, Escape, or an outside click. Checkboxes and menus do not change the selected row." },
+{ title: "Columns", body: "columnSettings adds the Columns menu beside the count. Name stays. Actions stays. The other fields can leave the view." },
                     ]}
                 />
                 <DocWhenAvoid avoid="Do not stack expand, virtualization, and every toolbar flag on one screen unless the task truly needs it." />
@@ -28,6 +29,7 @@ export const SelectAndAct: Story = {
                         items={directory}
                         columns={directoryColumns}
                         selectable="multiple"
+                        columnSettings
                         pageSize={2}
                         pageSizeOptions={[2, 4]}
                         rowActions={[{ id: "open", label: "Open" }, { id: "copy", label: "Copy link" }]}

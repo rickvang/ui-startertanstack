@@ -54,6 +54,7 @@ export type TableProps = {
     searchable?: boolean;
     filterable?: boolean;
     sortable?: boolean;
+    columnSettings?: boolean;
     selectable?: "single" | "multiple";
     expandable?: boolean;
     expansion?: "single" | "multiple";

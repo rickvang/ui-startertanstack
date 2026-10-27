@@ -46,12 +46,15 @@ const columnTrack: Record<TableColumn["kind"], string> = {
     actions: "var(--spacing-spacing-12)",
 };
 
-export function templateFor(columns: readonly TableColumn[], multiple: boolean, expandable: boolean): string {
-    const tracks = columns.map((column) => columnTrack[column.kind]);
+export function templateFor(columns: readonly TableColumn[], multiple: boolean, expandable: boolean, filterStatus = false): string {
+    const tracks = columns.map((column) => (filterStatus && column.kind === "status" ? "var(--spacing-spacing-12)" : columnTrack[column.kind]));
     return [multiple ? "var(--spacing-spacing-07)" : null, expandable ? "var(--spacing-spacing-10)" : null, ...tracks].filter((track) => track !== null).join(" ");
 }
 
-export function alignClass(column: TableColumn): string | undefined {
+export function alignClass(column: TableColumn, filterStatus = false): string | undefined {
+    if (filterStatus && column.kind === "status") {
+        return "justify-self-start text-left";
+    }
     switch (column.kind) {
         case "number":
         case "status":
@@ -97,7 +100,7 @@ export function pinnedNameClass({
 
 export function pinnedGroupNameClass(stickyColumn: boolean): string {
     if (!stickyColumn) {
-        return "px-spacing-04 py-spacing-02";
+        return "py-spacing-02";
     }
     return cx(
         "sticky left-0 z-[1] min-w-0 w-full self-stretch border-r border-line bg-canvas py-spacing-02 pl-spacing-04 shadow-[0.5rem_0_0_var(--color-canvas)]",

@@ -21,11 +21,10 @@ export function columnText(column: TableColumn, item: TableItem): string {
 }
 
 export function itemSearchText(item: TableItem, columns: readonly TableColumn[] | undefined): string {
-    const parts = [item.name, item.status, ...Object.values(item.values ?? {})];
     if (columns) {
-        parts.push(...columns.map((column) => columnText(column, item)));
+        return columns.map((column) => columnText(column, item)).join(" ").toLowerCase();
     }
-    return parts.join(" ").toLowerCase();
+    return [item.name, item.status, ...Object.values(item.values ?? {})].join(" ").toLowerCase();
 }
 
 function matchesQuery(item: TableItem, columns: readonly TableColumn[] | undefined, query: string): boolean {
@@ -190,6 +189,15 @@ export function matchingIds(items: readonly TableItem[]): string[] {
         }
     }
     return ids;
+}
+
+export function recordSummary(shown: number, total: number, narrowed: boolean): string {
+    if (narrowed) {
+        const noun = total === 1 ? "record" : "records";
+        return `${shown} of ${total} ${noun}`;
+    }
+    const noun = shown === 1 ? "record" : "records";
+    return `${shown} ${noun}`;
 }
 
 export function nextSort(current: SortState | null, columnId: string): SortState | null {

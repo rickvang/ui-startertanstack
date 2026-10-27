@@ -20,7 +20,7 @@ export function Tabs({ items, defaultValue, className }: TabsProps) {
 
     return (
         <div className={cx("flex flex-col gap-spacing-04", className)}>
-            <div role="tablist" className="flex gap-spacing-03 border-b border-line">
+            <div role="tablist" className="flex flex-wrap gap-spacing-03 border-b border-line">
                 {items.map((item) => {
                     const active = item.value === selected?.value;
                     return (

@@ -69,3 +69,52 @@ export function DocDemo({ children, className, bleed }: { children: ReactNode; c
 export function DocNote({ children }: { children: ReactNode }) {
     return <p className="max-w-3xl text-sm text-muted">{children}</p>;
 }
+
+export function DocParagraph({ children }: { children: ReactNode }) {
+    return <p className="max-w-3xl text-sm text-ink">{children}</p>;
+}
+
+export function DocBullets({ items }: { items: readonly string[] }) {
+    return (
+        <ul className="flex max-w-3xl list-disc flex-col gap-spacing-02 pl-spacing-05 text-sm text-ink">
+            {items.map((item) => (
+                <li key={item}>{item}</li>
+            ))}
+        </ul>
+    );
+}
+
+export function DocRows({
+    headers,
+    rows,
+}: {
+    headers: readonly [string, string];
+    rows: readonly { label: string; detail: string }[];
+}) {
+    return (
+        <div className="max-w-3xl overflow-x-auto">
+            <table className="w-full border-collapse text-left text-sm">
+                <thead>
+                    <tr className="border-b border-line text-ink">
+                        <th scope="col" className="py-spacing-03 pr-spacing-05 font-medium whitespace-nowrap">
+                            {headers[0]}
+                        </th>
+                        <th scope="col" className="py-spacing-03 font-medium">
+                            {headers[1]}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows.map((row) => (
+                        <tr key={row.label} className="border-b border-line">
+                            <th scope="row" className="py-spacing-03 pr-spacing-05 align-top font-medium whitespace-nowrap text-ink">
+                                {row.label}
+                            </th>
+                            <td className="py-spacing-03 align-top text-muted">{row.detail}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+}

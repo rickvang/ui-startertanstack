@@ -24,7 +24,7 @@ bun run typecheck
 | Hold a workspace, client, or project | `apps/web/src/areas.ts` | Add one entry to `areas`. Add its page only when asked |
 | Show one of those areas | `apps/web/src/routes/_areas/route.tsx` | Add `routes/_areas/$kind.$areaId.tsx` when a page is requested. `_areas` adds no URL. The home page stays `routes/_areas/index.tsx` |
 
-`Patterns/Overview` chooses the workflow: navigating domains, switching organizations, create a record, modifying a record, wizard, onboarding, task management, or the visualization page.
+`Patterns/Overview` chooses the workflow: navigating domains, switching organizations, product settings, account information, create a record, modifying a record, wizard, onboarding, task management, or the visualization page.
 
 ## How to change
 
@@ -32,7 +32,7 @@ bun run typecheck
 
 ## Catalog
 
-Storybook groups the catalog into Foundations, Layout, Components, Modules, and Patterns. Navigation controls sit with Components. Foundations covers color, type, spacing, sizing, radius, shadow, and motion. Layout holds frames, overlays, rules, and arrangement. Modules are the shell, forms, detail, and table. Patterns are the workflows that use those modules. The toolbar switches light and dark. The viewport can be Mobile (375px) or Desktop (1440px).
+Storybook groups the catalog into Foundations, Layout, Components, Modules, and Patterns. Navigation controls sit with Components. Foundations covers color, type, spacing, sizing, radius, shadow, and motion. Layout holds frames, overlays, rules, and arrangement. Modules are the shell, settings, account, forms, detail, and table. Patterns are the workflows that use those modules. The toolbar switches light and dark. The viewport can be Mobile (375px) or Desktop (1440px).
 
 ## Public demo
 

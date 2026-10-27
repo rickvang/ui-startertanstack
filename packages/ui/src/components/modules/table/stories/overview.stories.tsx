@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocList, DocPage, DocSection } from "../../../templates/doc";
+import { DocBullets, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../../../templates/doc";
+import { Table } from "../table";
+import { columns, members } from "./fixtures";
 import { tableStoryMeta } from "./meta";
 
 const meta = { ...tableStoryMeta, title: "Modules/Table" } satisfies Meta;
@@ -11,63 +13,58 @@ type Story = StoryObj<typeof meta>;
 export const Overview: Story = {
     name: "Overview",
     render: () => (
-        <DocPage
-            title="Table"
-            intro="A table is many entries of the same kind. Search, sort, and filters run on those entries. Selecting a row marks the record. Extra fields open in the row, and they do not become new columns."
-        >
+        <DocPage title="Table" intro="A table shows many records of the same kind, one row each.">
+            <DocSection title="Example">
+                <DocParagraph>The name identifies the record. The other columns are its fields. Status is its state. A click selects the row.</DocParagraph>
+                <DocDemo>
+                    <Table label="Members" items={members} columns={columns} defaultValue="alex" />
+                </DocDemo>
+                <DocParagraph>
+                    Each record has a name and a status. Put other fields on the columns, and links on those fields. A group names a set of rows. A nested row belongs to its parent. Replace the records when the server responds.
+                </DocParagraph>
+            </DocSection>
             <DocSection title="When to use">
-                <DocList
+                <DocBullets
                     items={[
-                        { title: "Table", body: "Each entry shows many fields, and the person already knows what they are looking for." },
-                        { title: "Standard list", body: "A row is a summary. A click selects the entry. A count can sit above the list." },
-                        { title: "Cards", body: "Order does not matter, and each entry should be seen as its own object. Cards stay a separate module." },
-                        { title: "Outside this table", body: "Editing a record stays the modifying-record pattern. Column resize, reorder, hide, pinned ranges, and spreadsheet editing wait until a workflow needs them." },
+                        "The records share the same fields, and the person is looking for one of them.",
+                        "The person compares a value down a column, such as a status or a date.",
                     ]}
                 />
             </DocSection>
-            <DocSection title="Data and columns">
-                <DocList
-                    columns={1}
+            <DocSection title="When not to use">
+                <DocBullets
                     items={[
-                        { title: "Items", body: "Pass id, name, status, and statusVariant on each item. Put other fields in values. Links go in hrefs. Nest related rows in children. Use group for a spanning section label." },
-                        { title: "Columns", body: "Omit columns for a simple list (name and status only). With columns, set kind to name, text, status, number, date, link, custom, or actions. Map values[column.id] for text-like kinds." },
-                        { title: "Remote data", body: "The table does not fetch. Replace items when the server responds. Search, sort, filter, and page run on whatever items you pass unless you pre-process them yourself." },
+                        "The row is a summary. Use a list.",
+                        "Each record stands on its own, and order does not matter. Use cards.",
+                        "The person is changing the record. Use modifying a record. The cells stay read-only.",
+                        "Column resize, reorder, extra pinned columns, and spreadsheet editing wait until a workflow needs them.",
                     ]}
                 />
             </DocSection>
-            <DocSection title="Flags and behavior">
-                <DocList
-                    items={[
-                        { title: "Selection", body: "Row click selects the record (value, defaultValue, onValueChange). selectable=\"multiple\" adds checkboxes and a bulk bar." },
-                        { title: "Finding", body: "searchable, filterable, and sortable are opt-in. Turn them on when the workflow needs them, not by default." },
-                        { title: "Detail", body: "expandable opens a panel under the row via renderDetail. Use it for extra fields, not new columns." },
-                        { title: "Scale", body: "pageSize, stickyHeader, stickyColumn, and virtualize address long or wide lists. Prefer pagination or virtualization for large sets, not both with every other flag." },
-                        { title: "States", body: "loading, error, and empty are explicit. Filtered empty uses built-in no matches copy. disabled keeps a row visible but not selectable." },
+            <DocSection title="Stories">
+                <DocParagraph>Start with Members. Open another story when the task needs that behavior.</DocParagraph>
+                <DocRows
+                    headers={["Story", "Use it when"]}
+                    rows={[
+                        { label: "Members", detail: "You need the records only: name, fields, status, and selecting a row." },
+                        { label: "Find", detail: "You need search, a status filter, sort, or a choice of which columns stay in view." },
+                        { label: "Select and act", detail: "You need to choose several records and run an action." },
+                        { label: "Expand", detail: "You need more about one record, under its row." },
+                        { label: "States", detail: "You need loading, a failed load, an empty list, or a change in row density." },
+                        { label: "Wide and sticky", detail: "You have many columns, and the header and the name should stay put." },
+                        { label: "Long list", detail: "You have too many rows to show at once." },
                     ]}
                 />
             </DocSection>
-            <DocSection title="Examples in this module">
-                <DocList
+            <DocSection title="Columns">
+                <DocParagraph>Every row uses the same columns, so the values line up.</DocParagraph>
+                <DocBullets
                     items={[
-                        { title: "Members", body: "Baseline grid: label, items, columns, and row selection only." },
-                        { title: "Find", body: "Search, status filters, and column sort on a wide directory." },
-                        { title: "Select and act", body: "Multi-select, pagination, row actions, and bulk actions." },
-                        { title: "Expand", body: "Row detail panels and custom column rendering." },
-                        { title: "States", body: "Loading, error, empty, and density." },
-                        { title: "Wide and sticky", body: "Horizontal scroll with sticky header and name column." },
-                        { title: "Long list", body: "Virtualized scroll with search and sort." },
-                    ]}
-                />
-            </DocSection>
-            <DocSection title="Do and avoid">
-                <DocList
-                    columns={1}
-                    items={[
-                        { title: "Keep the simple case simple", body: "Start with Members. Add flags when the task needs them." },
-                        { title: "Stop propagation on controls", body: "Checkboxes, expand, links, and row actions already stop propagation so row click stays predictable." },
-                        { title: "Do not edit cells inline", body: "Changing a record belongs in modifying a record or a detail view." },
-                        { title: "Do not use the table as cards", body: "When each object should stand alone and order is weak, use cards instead." },
-                        { title: "Do not virtualize small lists", body: "virtualize assumes steady row height. Skip it for short lists or heavy expand panels." },
+                        "The column kind sets the width. Name, text, date, link, and custom start at the left. Number, status, and actions sit at the end.",
+                        "The name header, a group label, and a record share one left edge. A nested row is the only indent. A pinned name column keeps that edge.",
+                        "Checkboxes and expand sit before the columns. A group row includes that room, so the label stays in the name column.",
+                        "Status, Columns, and row actions open beside the control. The grid scrolls sideways, so the menu stays outside the cell.",
+                        "Space, type, and color use the catalog tokens.",
                     ]}
                 />
             </DocSection>
