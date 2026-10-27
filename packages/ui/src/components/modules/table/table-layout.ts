@@ -100,7 +100,7 @@ export function pinnedNameClass({
 
 export function pinnedGroupNameClass(stickyColumn: boolean): string {
     if (!stickyColumn) {
-        return "px-spacing-04 py-spacing-02";
+        return "py-spacing-02";
     }
     return cx(
         "sticky left-0 z-[1] min-w-0 w-full self-stretch border-r border-line bg-canvas py-spacing-02 pl-spacing-04 shadow-[0.5rem_0_0_var(--color-canvas)]",
