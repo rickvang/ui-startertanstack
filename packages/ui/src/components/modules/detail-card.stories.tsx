@@ -7,7 +7,7 @@ import { DetailGroup } from "../base/detail-group";
 import { Anchor } from "../navigation/anchor";
 import { Steps } from "../navigation/steps";
 import { Tabs } from "../navigation/tabs";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { DetailCard as DetailCardModule } from "./detail-card";
 
 const meta = {
@@ -29,17 +29,9 @@ export const Detail: Story = {
     name: "Detail",
     args: { title: "Alex Kim", status: "Active", children: null },
     render: () => (
-        <DocPage title="Detail" intro="A detail is one object: its name, its status, the action that belongs to it, and its groups. A group holds facts, and it can also hold a picture, a badge, or a link. A large object uses tabs. A process uses steps. A fact can put its label above the value, or beside it with the value on the left or the right.">
-            <DocSection title="When to use">
-                <DocList
-                    items={[
-                        { title: "A simple record", body: "Little content, one level. One card, split into groups with lines." },
-                        { title: "A review", body: "The object has a process. Show the decision and the actions, such as approve or reject, with the record." },
-                        { title: "A large object", body: "Weakly related parts get tabs, such as profile, access, and activity. Steps are for a process the person moves through." },
-                    ]}
-                />
-            </DocSection>
-            <DocSection title="Record">
+        <DocPage title="Detail" intro="A detail is one record: its name, its status, and the action that belongs to it.">
+            <DocSection title="Example">
+                <DocParagraph>Groups hold the facts. The first group has no line above it. A later group sets the divider.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DetailGroup title="Profile">
@@ -54,21 +46,41 @@ export const Detail: Story = {
                 </DetailCardModule>
                 </DocDemo>
             </DocSection>
-            <DocSection title="Stacked">
+            <DocSection title="When to use">
+                <DocBullets
+                    items={[
+                        "The person is reading one record, and the content is one level. Groups split the facts.",
+                        "The parts are weakly related, such as profile, access, and activity. Use tabs.",
+                        "The record has a process. Use steps, and put the decision with the record.",
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "Many records of the same kind. Use a table.",
+                        "The person is changing the record. Use a form.",
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="Label above the value">
+                <DocParagraph>Use this when the fact is short and the label can sit on its own line.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DescriptionList items={facts} />
                 </DetailCardModule>
                 </DocDemo>
             </DocSection>
-            <DocSection title="Horizontal, left">
+            <DocSection title="Label beside the value">
+                <DocParagraph>The label and the value share a row. The value starts at the left.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DescriptionList items={facts} layout="horizontal" align="start" />
                 </DetailCardModule>
                 </DocDemo>
             </DocSection>
-            <DocSection title="Horizontal, right">
+            <DocSection title="Value at the end of the row">
+                <DocParagraph>The label and the value share a row. The value sits at the right.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DescriptionList items={facts} layout="horizontal" align="end" />
@@ -76,6 +88,7 @@ export const Detail: Story = {
                 </DocDemo>
             </DocSection>
             <DocSection title="Picture, badge, and link">
+                <DocParagraph>A group can hold a picture, a badge, or a link with the facts.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <DetailGroup title="Profile">
@@ -92,7 +105,8 @@ export const Detail: Story = {
                 </DetailCardModule>
                 </DocDemo>
             </DocSection>
-            <DocSection title="Large object">
+            <DocSection title="Tabs">
+                <DocParagraph>Use tabs when the parts are weakly related. Each tab is one part, such as profile, access, or activity.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                 <DetailCardModule title="Alex Kim" status="Active" statusVariant="success" action={<Button variant="secondary">Edit</Button>}>
                     <Tabs
@@ -116,7 +130,8 @@ export const Detail: Story = {
                 </DetailCardModule>
                 </DocDemo>
             </DocSection>
-            <DocSection title="Review">
+            <DocSection title="Steps">
+                <DocParagraph>Use steps for a process. The actions, such as approve and reject, sit with the record.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                 <DetailCardModule
                     title="North workspace"

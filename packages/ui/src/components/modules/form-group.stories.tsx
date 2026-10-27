@@ -10,7 +10,7 @@ import { Switch } from "../base/switch";
 import { TextArea } from "../base/text-area";
 import { TextField } from "../base/text-field";
 import { Flex } from "../layout/flex";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Modules/Forms",
@@ -191,24 +191,51 @@ function LongLabels() {
 export const Forms: Story = {
     name: "Forms",
     render: () => (
-        <DocPage title="Forms" intro="A form collects the fields for one record. Related fields sit in a group. Labels can sit beside the value or above it. Save checks the record, lists the errors together when more than one field fails, and keeps Save unavailable while the save is in progress.">
-            <DocSection title="Horizontal">
+        <DocPage title="Forms" intro="A form collects the fields for one record.">
+            <DocSection title="Example">
+                <DocParagraph>Related fields sit in a group. The label sits beside the value when the name is short.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                     <ProjectForm layout="horizontal" />
                 </DocDemo>
+                <DocParagraph>Save checks the record. When more than one field fails, the errors are listed together. Save stays unavailable while the save is in progress.</DocParagraph>
             </DocSection>
-            <DocSection title="Vertical">
+            <DocSection title="When to use">
+                <DocBullets
+                    items={[
+                        "The person is creating a record, or changing one.",
+                        "The fields belong to that one record.",
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "The person is reading the record. Use a detail.",
+                        "Many records of the same kind. Use a table.",
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="Labels">
+                <DocParagraph>Use one label position for the form.</DocParagraph>
+                <DocRows
+                    headers={["Position", "Use it when"]}
+                    rows={[
+                        { label: "Beside the value", detail: "The labels are short enough for one line." },
+                        { label: "Above the value", detail: "The labels are long, or the form is narrow." },
+                    ]}
+                />
+                <DocParagraph>Above the value.</DocParagraph>
                 <DocDemo className="max-w-3xl">
                     <ProjectForm layout="stacked" />
                 </DocDemo>
             </DocSection>
             <DocSection title="Long labels">
-                <DocList
+                <DocBullets
                     items={[
-                        { title: "Wrap in the column", body: "The label column stays one width. A long label wraps inside it. The value stays on the same left edge, level with the first line." },
-                        { title: "Keep the name short", body: "Write the label as a short name. Put the longer explanation in the hint under the value." },
-                        { title: "Use vertical", body: "When the labels in a form are usually too long for one line, use the vertical set." },
-                        { title: "Break a long word", body: "A label with no place to break still breaks inside the column, so it does not cover the value." },
+                        "The label column stays one width. A long label wraps inside it. The value stays on the same left edge, level with the first line.",
+                        "Write the label as a short name. Put the longer explanation in the hint under the value.",
+                        "When the labels are usually too long for one line, put the label above the value.",
+                        "A label with no place to break still breaks inside the column, and the value stays visible.",
                     ]}
                 />
                 <DocDemo className="max-w-3xl">
