@@ -46,14 +46,14 @@ function rolePose(role: MotionRole, on: boolean): string {
 }
 
 function RoleSample({ role }: { role: MotionRole }) {
-    const [on, setOn] = useState(false);
+    const [on, setOn] = useState(true);
     const feedback = role === "motion-feedback";
     const travel = role === "motion-travel" || role === "motion-reveal";
 
     return (
         <button
             type="button"
-            className={cx("flex h-spacing-08 items-center rounded-md bg-canvas px-spacing-03", travel ? "w-spacing-12" : undefined)}
+            className={cx("flex h-spacing-08 items-center rounded-md border border-line bg-canvas px-spacing-03", travel ? "w-spacing-12" : undefined)}
             onClick={() => setOn((current) => !current)}
         >
             <span
