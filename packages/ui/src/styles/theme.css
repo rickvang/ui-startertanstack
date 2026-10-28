@@ -326,22 +326,30 @@
     }
 }
 
-@utility duration-feedback {
+@utility motion-feedback {
     --tw-duration: var(--motion-feedback-duration);
+    --tw-ease: var(--motion-feedback-ease);
     transition-duration: var(--motion-feedback-duration);
+    transition-timing-function: var(--motion-feedback-ease);
 }
 
-@utility duration-enter {
+@utility motion-enter {
     --tw-duration: var(--motion-enter-duration);
+    --tw-ease: var(--motion-enter-ease);
     transition-duration: var(--motion-enter-duration);
+    transition-timing-function: var(--motion-enter-ease);
 }
 
-@utility duration-leave {
+@utility motion-leave {
     --tw-duration: var(--motion-leave-duration);
+    --tw-ease: var(--motion-leave-ease);
     transition-duration: var(--motion-leave-duration);
+    transition-timing-function: var(--motion-leave-ease);
 }
 
-@utility duration-travel {
+@utility motion-travel {
     --tw-duration: var(--motion-travel-duration);
+    --tw-ease: var(--motion-travel-ease);
     transition-duration: var(--motion-travel-duration);
+    transition-timing-function: var(--motion-travel-ease);
 }

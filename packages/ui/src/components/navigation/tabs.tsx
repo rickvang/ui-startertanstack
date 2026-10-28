@@ -75,7 +75,7 @@ export function Tabs({ items, defaultValue, className, reduceMotion = false }: T
                     aria-hidden
                     className={cx(
                         "pointer-events-none absolute bottom-0 h-px bg-ink",
-                        travel && !reduceMotion ? "transition-[transform,width] duration-travel ease-spring motion-reduce:transition-none group-data-[reduce=true]:transition-none" : "transition-none",
+                        travel && !reduceMotion ? "transition-[transform,width] motion-travel motion-reduce:transition-none group-data-[reduce=true]:transition-none" : "transition-none",
                     )}
                     style={{ width: indicator.width, transform: `translateX(${indicator.x}px)` }}
                 />
@@ -90,7 +90,7 @@ export function Tabs({ items, defaultValue, className, reduceMotion = false }: T
                             aria-selected={active}
                             onClick={() => setValue(item.value)}
                             className={cx(
-                                "px-spacing-03 py-spacing-02 text-sm transition-colors duration-feedback ease-standard motion-reduce:transition-none group-data-[reduce=true]:transition-none",
+                                "px-spacing-03 py-spacing-02 text-sm transition-colors motion-feedback motion-reduce:transition-none group-data-[reduce=true]:transition-none",
                                 active ? "font-medium text-ink" : "text-muted",
                             )}
                         >

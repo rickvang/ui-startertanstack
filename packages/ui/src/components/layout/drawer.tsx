@@ -91,8 +91,8 @@ function DrawerFrame({
         };
     }, []);
 
-    const motion = reduce ? "transition-none" : "transition-[transform,opacity,filter] duration-travel ease-spring motion-reduce:transition-none";
-    const scrim = reduce ? "transition-none" : shown ? "transition-opacity duration-enter ease-enter motion-reduce:transition-none" : "transition-opacity duration-leave ease-leave motion-reduce:transition-none";
+    const motion = reduce ? "transition-none" : "transition-[transform,opacity,filter] motion-travel motion-reduce:transition-none";
+    const scrim = reduce ? "transition-none" : shown ? "transition-opacity motion-enter motion-reduce:transition-none" : "transition-opacity motion-leave motion-reduce:transition-none";
 
     return createPortal(
         <div className="fixed inset-0 z-50">

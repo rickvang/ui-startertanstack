@@ -32,7 +32,7 @@ export function Button({ variant = "primary", size, type = "button", className, 
             ref={ref}
             type={type}
             className={cx(
-                "inline-flex items-center justify-center gap-spacing-03 rounded-md font-medium transition-[color,background-color,border-color,box-shadow,transform,opacity] duration-feedback ease-standard motion-reduce:transition-none active:enabled:scale-[var(--motion-scale-press)] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus",
+                "inline-flex items-center justify-center gap-spacing-03 rounded-md font-medium transition-[color,background-color,border-color,box-shadow,transform,opacity] motion-feedback motion-reduce:transition-none active:enabled:scale-[var(--motion-scale-press)] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-spacing-01 focus-visible:outline-focus",
                 variantClass[variant],
                 sizeClass[density],
                 className,

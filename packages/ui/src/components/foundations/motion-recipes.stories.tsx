@@ -10,29 +10,29 @@ import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocRows, Do
 
 const recipeNote = "**Catalog recipe** — classes on the semantic roles. Not a package export, and not a transitions.dev snippet.";
 
-const drawerCode = `overlay, opening: transition-opacity duration-enter ease-enter
-overlay, closing: transition-opacity duration-leave ease-leave
-panel: transition-[transform,opacity,filter] duration-travel ease-spring
+const drawerCode = `overlay, opening: transition-opacity motion-enter
+overlay, closing: transition-opacity motion-leave
+panel: transition-[transform,opacity,filter] motion-travel
 panel open: translate-x-0 scale-100 opacity-100 blur-none
 panel closed: translate-x-full scale-[var(--motion-scale-enter)] opacity-0 blur-soft
 reduced: transition-none`;
 
-const tabCode = `mark: transition-[transform,width] duration-travel ease-spring
-label: transition-colors duration-feedback ease-standard
+const tabCode = `mark: transition-[transform,width] motion-travel
+label: transition-colors motion-feedback
 panel: animate-motion-enter
 first paint and resize: transition-none, then travel
 reduced: transition-none and animate-none`;
 
-const cardCode = `shell: transition-[grid-template-rows] duration-travel ease-spring
+const cardCode = `shell: transition-[grid-template-rows] motion-travel
 open: grid-rows-[1fr]
 closed: grid-rows-[0fr]
-contents open: duration-enter ease-spring, nudge and blur clear, scale 1
-contents close: duration-leave ease-leave, nudge, blur-soft, scale enter`;
+contents open: motion-enter, nudge and blur clear, scale 1
+contents close: motion-leave, nudge, blur-soft, scale enter`;
 
 const loadingCode = `same slot, two layers
 bones keep the loader pulse
-skeleton leave: duration-leave ease-leave, blur-soft
-content enter: duration-enter ease-spring, nudge, blur clear, scale 1
+skeleton leave: motion-leave, blur-soft
+content enter: motion-enter, nudge, blur clear, scale 1
 replay: transition-none back to the skeleton, then enter again`;
 
 function Reduce({ on, onChange }: { on: boolean; onChange: (next: boolean) => void }) {
@@ -100,8 +100,8 @@ export const DrawerReveal: Story = {
                         rows={[
                             { label: "Trigger", detail: "Open, Close, the overlay, or Escape." },
                             { label: "States", detail: "Closed, traveling, open. Unmount waits for travel." },
-                            { label: "Panel", detail: "duration-travel, ease-spring, translate-x-full, blur-soft, scale enter." },
-                            { label: "Overlay", detail: "duration-enter on the way in, duration-leave on the way out." },
+                            { label: "Panel", detail: "motion-travel. translate-x-full, blur-soft, scale enter." },
+                            { label: "Overlay", detail: "motion-enter on the way in, motion-leave on the way out." },
                             { label: "Reduced motion", detail: "Instant. Focus still moves to Close and back." },
                         ]}
                     />
@@ -144,8 +144,8 @@ export const TabChange: Story = {
                         headers={["Fact", "Value"]}
                         rows={[
                             { label: "Trigger", detail: "Click a tab. Resize snaps, then travel is allowed again." },
-                            { label: "Mark", detail: "offsetLeft and offsetWidth. duration-travel, ease-spring." },
-                            { label: "Label", detail: "duration-feedback, ease-standard." },
+                            { label: "Mark", detail: "offsetLeft and offsetWidth. motion-travel." },
+                            { label: "Label", detail: "motion-feedback." },
                             { label: "Panel", detail: "animate-motion-enter: nudge, blur-soft, scale enter." },
                             { label: "Reduced motion", detail: "The mark jumps. The panel does not play the enter animation." },
                         ]}
@@ -162,12 +162,12 @@ export const CardExpansion: Story = {
     render: () => {
         const [open, setOpen] = useState(false);
         const [reduce, setReduce] = useState(false);
-        const shell = reduce ? "transition-none" : "transition-[grid-template-rows] duration-travel ease-spring motion-reduce:transition-none";
+        const shell = reduce ? "transition-none" : "transition-[grid-template-rows] motion-travel motion-reduce:transition-none";
         const contents = reduce
             ? "transition-none"
             : open
-              ? "transition-[opacity,transform,filter] duration-enter ease-spring motion-reduce:transition-none"
-              : "transition-[opacity,transform,filter] duration-leave ease-leave motion-reduce:transition-none";
+              ? "transition-[opacity,transform,filter] motion-enter motion-reduce:transition-none"
+              : "transition-[opacity,transform,filter] motion-leave motion-reduce:transition-none";
         const pose = open ? "translate-y-0 scale-100 opacity-100 blur-none" : "translate-y-spacing-02 scale-[var(--motion-scale-enter)] opacity-0 blur-soft";
 
         return (
@@ -198,8 +198,8 @@ export const CardExpansion: Story = {
                         headers={["Fact", "Value"]}
                         rows={[
                             { label: "Trigger", detail: "More or Less." },
-                            { label: "Shell", detail: "grid-rows 0fr to 1fr, duration-travel, ease-spring." },
-                            { label: "Contents", detail: "Enter and leave, with nudge, blur-soft, and scale enter." },
+                            { label: "Shell", detail: "grid-rows 0fr to 1fr, motion-travel." },
+                            { label: "Contents", detail: "motion-enter and motion-leave, with nudge, blur-soft, and scale enter." },
                             { label: "Reduced motion", detail: "The extra fields appear and disappear at once." },
                         ]}
                     />
@@ -217,8 +217,8 @@ export const LoadingToContent: Story = {
         const [instant, setInstant] = useState(false);
         const [reduce, setReduce] = useState(false);
         const still = instant || reduce;
-        const leave = still ? "transition-none" : "transition-[opacity,filter] duration-leave ease-leave motion-reduce:transition-none";
-        const enter = still ? "transition-none" : "transition-[opacity,transform,filter] duration-enter ease-spring motion-reduce:transition-none";
+        const leave = still ? "transition-none" : "transition-[opacity,filter] motion-leave motion-reduce:transition-none";
+        const enter = still ? "transition-none" : "transition-[opacity,transform,filter] motion-enter motion-reduce:transition-none";
 
         function replay() {
             setInstant(true);
@@ -263,8 +263,8 @@ export const LoadingToContent: Story = {
                         headers={["Fact", "Value"]}
                         rows={[
                             { label: "Trigger", detail: "Data arrives. Replay snaps back, then enters again." },
-                            { label: "Skeleton", detail: "Loader pulse on the bones. Leave is duration-leave and blur-soft." },
-                            { label: "Content", detail: "duration-enter, ease-spring, nudge, blur clear, scale enter." },
+                            { label: "Skeleton", detail: "Loader pulse on the bones. Leave is motion-leave and blur-soft." },
+                            { label: "Content", detail: "motion-enter, nudge, blur clear, scale enter." },
                             { label: "Reduced motion", detail: "The skeleton swaps for the content with no blur and no travel." },
                         ]}
                     />

@@ -25,10 +25,10 @@ const distances = [
 ] as const;
 
 const roles = [
-    ["Feedback", "duration-feedback", "ease-standard", "150ms", "None", "None", "Press 0.98", "Color, shadow, or a press on a control that stays put."],
-    ["Enter", "duration-enter", "ease-spring", "200ms", "Nudge", "Soft, then clear", "0.96 to 1", "Something arriving."],
-    ["Leave", "duration-leave", "ease-leave", "100ms", "Nudge", "Clear, then soft", "1 to 0.96", "Something leaving. Shorter, so it does not hold attention."],
-    ["Travel", "duration-travel", "ease-spring", "300ms", "Measured, or the panel width", "None", "None", "A region moving: a tab mark, a switch thumb, a drawer."],
+    ["Feedback", "motion-feedback", "150ms · standard", "None", "None", "Press 0.98", "Color, shadow, or a press on a control that stays put."],
+    ["Enter", "motion-enter", "200ms · spring", "Nudge", "Soft, then clear", "0.96 to 1", "Something arriving."],
+    ["Leave", "motion-leave", "100ms · leave", "Nudge", "Clear, then soft", "1 to 0.96", "Something leaving. Shorter, so it does not hold attention."],
+    ["Travel", "motion-travel", "300ms · spring", "Measured, or the panel width", "None", "None", "A region moving: a tab mark, a switch thumb, a drawer."],
 ] as const;
 
 function EaseSample({ ease }: { ease: (typeof easings)[number][2] }) {
@@ -36,15 +36,15 @@ function EaseSample({ ease }: { ease: (typeof easings)[number][2] }) {
 
     return (
         <button type="button" className="flex h-spacing-08 items-center rounded-md bg-canvas px-spacing-03" onClick={() => setOn((current) => !current)}>
-            <span className={`size-spacing-04 rounded-full bg-accent motion-reduce:transition-none ${on ? "translate-x-spacing-10" : "translate-x-0"} transition-transform duration-travel ${ease}`} />
+            <span className={`size-spacing-04 rounded-full bg-accent motion-reduce:transition-none ${on ? "translate-x-spacing-10" : "translate-x-0"} transition-transform duration-300 ${ease}`} />
         </button>
     );
 }
 
 function Notice({ shown }: { shown: boolean }) {
     const motion = shown
-        ? "translate-y-0 scale-100 opacity-100 blur-none duration-enter ease-spring"
-        : "pointer-events-none translate-y-spacing-02 scale-[var(--motion-scale-enter)] opacity-0 blur-soft duration-leave ease-leave";
+        ? "translate-y-0 scale-100 opacity-100 blur-none motion-enter"
+        : "pointer-events-none translate-y-spacing-02 scale-[var(--motion-scale-enter)] opacity-0 blur-soft motion-leave";
 
     return (
         <div className="flex h-spacing-11 items-center overflow-hidden">
@@ -127,7 +127,7 @@ export const Primitives: Story = {
 
 export const Semantic: Story = {
     render: () => (
-        <FoundationPage title="Semantic motion" intro="One set of roles. Each role points at the primitives. A large move keeps travel on the way out, because leave is too short for a panel width.">
+        <FoundationPage title="Semantic motion" intro="Each role is one class. It sets the duration and the easing together. A large move keeps travel on the way out, because leave is too short for a panel width.">
             <FoundationSection title="Principles">
                 <div className="grid gap-spacing-04 md:grid-cols-3">
                     {[
@@ -143,10 +143,10 @@ export const Semantic: Story = {
                 </div>
             </FoundationSection>
             <div className="overflow-x-auto rounded-lg border border-line bg-surface">
-                <table className="w-full min-w-[48rem] border-collapse text-left text-sm">
+                <table className="w-full min-w-[52rem] border-collapse text-left text-sm">
                     <thead>
                         <tr className="border-b border-line text-ink">
-                            {["Role", "Duration", "Ease", "Time", "Distance", "Blur", "Scale", "Use"].map((header) => (
+                            {["Role", "Class", "Pair", "Distance", "Blur", "Scale", "Use"].map((header) => (
                                 <th key={header} scope="col" className="px-spacing-04 py-spacing-03 font-medium">
                                     {header}
                                 </th>
@@ -157,7 +157,7 @@ export const Semantic: Story = {
                         {roles.map((row) => (
                             <tr key={row[0]} className="border-b border-line last:border-b-0">
                                 {row.map((cell, index) => (
-                                    <td key={`${row[0]}-${index}`} className="px-spacing-04 py-spacing-03 align-top text-muted">
+                                    <td key={`${row[0]}-${index}`} className={`px-spacing-04 py-spacing-03 align-top text-muted ${index === 1 ? "whitespace-nowrap font-mono text-xs" : ""}`}>
                                         {cell}
                                     </td>
                                 ))}
@@ -179,7 +179,7 @@ export const Examples: Story = {
                 <FoundationSection title="Feedback">
                     <div className="flex items-center gap-spacing-04 rounded-lg border border-line bg-surface p-spacing-05">
                         <Button>Save</Button>
-                        <p className="text-sm text-muted">Color and a 0.98 press. duration-feedback, ease-standard.</p>
+                        <p className="text-sm text-muted">Color and a 0.98 press. motion-feedback is 150ms and the standard curve.</p>
                     </div>
                 </FoundationSection>
                 <FoundationSection title="Enter and leave">
@@ -193,7 +193,7 @@ export const Examples: Story = {
                 <FoundationSection title="Travel">
                     <div className="flex items-center gap-spacing-04 rounded-lg border border-line bg-surface p-spacing-05">
                         <Switch label="Annual billing" />
-                        <p className="text-sm text-muted">The thumb uses duration-travel and ease-spring. The color uses feedback.</p>
+                        <p className="text-sm text-muted">The thumb uses motion-travel. The color uses motion-feedback.</p>
                     </div>
                 </FoundationSection>
                 <FoundationSection title="Reduced motion">
