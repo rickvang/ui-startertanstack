@@ -1,12 +1,89 @@
+import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar } from "../base/avatar";
-import { Badge } from "../base/badge";
-import { Button } from "../base/button";
-import { DocDemo, DocPage, DocSection } from "../templates/doc";
-import { Card } from "./card";
+import { cx } from "../../utils/cx";
+import { DocDemo, DocList, DocNote, DocPage, DocSection, DocWhenAvoid } from "../templates/doc";
+import { Card, type CardProps } from "./card";
 
-const activeTrend = ["h-spacing-02", "h-spacing-03", "h-spacing-02", "h-spacing-04", "h-spacing-03", "h-spacing-05", "h-spacing-04"] as const;
-const overdueTrend = ["h-spacing-02", "h-spacing-02", "h-spacing-03", "h-spacing-03", "h-spacing-04", "h-spacing-04", "h-spacing-05"] as const;
+function Bone({ className }: { className: string }) {
+    return <span className={cx("block rounded-sm bg-line", className)} />;
+}
+
+function CardLayout({ name, when, avoid, wide = false, children }: { name: string; when: string; avoid: string; wide?: boolean; children: ReactNode }) {
+    return (
+        <div className="flex flex-col gap-spacing-05">
+            <DocWhenAvoid when={when} avoid={avoid} />
+            <DocDemo bleed className={wide ? "max-w-3xl" : "max-w-xl"}>
+                <div className="bg-canvas p-spacing-05">{children}</div>
+            </DocDemo>
+            <h3 className="text-sm font-medium text-ink">{name}</h3>
+        </div>
+    );
+}
+
+function Trend({ heights }: { heights: readonly string[] }) {
+    return (
+        <div className="flex h-spacing-05 items-end gap-px" aria-hidden="true">
+            {heights.map((height, index) => (
+                <Bone key={index} className={cx("w-spacing-02", height)} />
+            ))}
+        </div>
+    );
+}
+
+function MetricCard({ valueWidth, trend }: { valueWidth: string; trend: readonly string[] }) {
+    return (
+        <Card className="w-full max-w-64 flex-1 gap-spacing-03 p-spacing-04">
+            <Bone className="h-spacing-03 w-spacing-07" />
+            <div className="flex items-end gap-spacing-04">
+                <Bone className={cx("h-spacing-07", valueWidth)} />
+                <Trend heights={trend} />
+            </div>
+            <Bone className="h-spacing-04 w-spacing-09" />
+        </Card>
+    );
+}
+
+function ArticleCard() {
+    return (
+        <Card className="overflow-hidden p-0">
+            <Bone className="h-spacing-11 w-full rounded-none" />
+            <div className="flex flex-col gap-spacing-03 p-spacing-05">
+                <Bone className="h-spacing-04 w-spacing-06" />
+                <Bone className="h-spacing-04 w-spacing-12" />
+                <Bone className="h-spacing-03 w-full" />
+                <Bone className="h-spacing-03 w-spacing-09" />
+            </div>
+        </Card>
+    );
+}
+
+function PersonCard() {
+    return (
+        <Card>
+            <div className="flex items-center gap-spacing-03">
+                <Bone className="size-spacing-07 rounded-full" />
+                <div className="flex min-w-0 flex-col gap-spacing-02">
+                    <Bone className="h-spacing-04 w-spacing-09" />
+                    <Bone className="h-spacing-03 w-spacing-07" />
+                </div>
+                <Bone className="ml-auto h-spacing-04 w-spacing-07" />
+            </div>
+        </Card>
+    );
+}
+
+function NextStepCard({ variant = "quiet" }: { variant?: CardProps["variant"] }) {
+    return (
+        <Card variant={variant}>
+            <Bone className="h-spacing-04 w-spacing-11" />
+            <Bone className="h-spacing-03 w-4/5" />
+            <Bone className="h-spacing-07 w-spacing-09 rounded-md bg-neutral-500" />
+        </Card>
+    );
+}
+
+const rising = ["h-spacing-02", "h-spacing-03", "h-spacing-02", "h-spacing-04", "h-spacing-03", "h-spacing-05", "h-spacing-04"] as const;
+const falling = ["h-spacing-05", "h-spacing-04", "h-spacing-04", "h-spacing-03", "h-spacing-03", "h-spacing-02", "h-spacing-02"] as const;
 
 const meta = {
     title: "Layout/Card",
@@ -20,90 +97,43 @@ type Story = StoryObj<typeof meta>;
 export const CardLayouts: Story = {
     name: "Card",
     render: () => (
-        <DocPage title="Card layouts" intro="Ways to fill a card. The surface itself, and its outlined, raised, and quiet treatments, live under Components.">
-            <DocSection title="Examples">
-                <DocDemo>
-                    <div className="grid gap-spacing-05 bg-canvas p-spacing-05 lg:grid-cols-2">
-                        <div className="flex flex-col gap-spacing-03">
-                            <div className="grid grid-cols-2 gap-spacing-03">
-                                <Card className="gap-spacing-02 p-spacing-04">
-                                    <p className="text-xs text-muted">Active</p>
-                                    <div className="flex items-end justify-between gap-spacing-03">
-                                        <p className="text-lg font-semibold text-ink tabular-nums">24</p>
-                                        <div className="flex h-spacing-05 items-end gap-px" aria-hidden="true">
-                                            {activeTrend.map((height, index) => (
-                                                <span key={index} className={`w-spacing-02 bg-accent ${height}`} />
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <Badge className="self-start" variant="success">
-                                        +3 this week
-                                    </Badge>
-                                </Card>
-                                <Card className="gap-spacing-02 p-spacing-04">
-                                    <p className="text-xs text-muted">Overdue</p>
-                                    <div className="flex items-end justify-between gap-spacing-03">
-                                        <p className="text-lg font-semibold text-ink tabular-nums">4</p>
-                                        <div className="flex h-spacing-05 items-end gap-px" aria-hidden="true">
-                                            {overdueTrend.map((height, index) => (
-                                                <span key={index} className={`w-spacing-02 bg-danger ${height}`} />
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <Badge className="self-start" variant="danger">
-                                        +1 this week
-                                    </Badge>
-                                </Card>
-                            </div>
-                            <p className="text-sm text-muted">
-                                <span className="font-medium text-ink">Metric.</span> One number, what it is compared with, and whether that change is good. More overdue is worse, so the rise is danger.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-spacing-03">
-                            <Card className="overflow-hidden p-0">
-                                <div className="h-spacing-11 bg-accent-subtle" />
-                                <div className="flex flex-col gap-spacing-03 p-spacing-05">
-                                    <Badge className="self-start">Note</Badge>
-                                    <h2 className="text-sm font-semibold text-ink">How the North team reviews work</h2>
-                                    <p className="text-sm text-muted">Who signs off before a visit is marked done.</p>
-                                    <p className="text-xs text-muted">Ada North · Today</p>
-                                </div>
-                            </Card>
-                            <p className="text-sm text-muted">
-                                <span className="font-medium text-ink">Article.</span> A picture band, a title, a short line, and who wrote it.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-spacing-03">
-                            <Card>
-                                <div className="flex items-center gap-spacing-03">
-                                    <Avatar name="Ada North" />
-                                    <div className="min-w-0">
-                                        <p className="text-sm font-semibold text-ink">Ada North</p>
-                                        <p className="text-sm text-muted">Reviewer</p>
-                                    </div>
-                                    <Badge className="ml-auto" variant="success">
-                                        Active
-                                    </Badge>
-                                </div>
-                            </Card>
-                            <p className="text-sm text-muted">
-                                <span className="font-medium text-ink">Person.</span> A face, a name, a role, and a status.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-spacing-03">
-                            <Card variant="quiet">
-                                <h2 className="text-sm font-semibold text-ink">Invite the rest of the team</h2>
-                                <p className="text-sm text-muted">Three seats are still open.</p>
-                                <Button variant="secondary" size="dense" className="self-start">
-                                    Invite
-                                </Button>
-                            </Card>
-                            <p className="text-sm text-muted">
-                                <span className="font-medium text-ink">Next step.</span> One action, on the quieter surface so it does not compete with the numbers.
-                            </p>
-                        </div>
+        <DocPage title="Card layouts" intro="A card layout decides what sits inside the surface. Pick it from the job. The surface, and its outlined, raised, and quiet treatments, are in Components / Card.">
+            <DocSection title="How to choose">
+                <DocList
+                    items={[
+                        { title: "One measure", body: "Metric. A label, a number, a short trend, and a comparison. Several measures sit in a row." },
+                        { title: "One piece of writing", body: "Article. A picture band, a title, a short line, and who wrote it." },
+                        { title: "One person", body: "Person. A face, a name, a role, and a status." },
+                        { title: "One action", body: "Next step. A title, one line, and a single action. The quieter surface keeps it from competing." },
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="Metric">
+                <DocNote>Use this when the page opens with a few numbers. Each card is one measure. The comparison says whether the change is good.</DocNote>
+                <CardLayout wide name="Metric" when="A label, a number, a short trend, and the period it is compared with. Show the measures in a row so they can be scanned together." avoid="Do not put a chart, a list, and a number in the same card. A record with a name and a status is a detail, not a metric.">
+                    <div className="flex flex-wrap gap-spacing-03">
+                        <MetricCard valueWidth="w-spacing-08" trend={rising} />
+                        <MetricCard valueWidth="w-spacing-06" trend={falling} />
                     </div>
-                </DocDemo>
+                </CardLayout>
+            </DocSection>
+            <DocSection title="Article">
+                <DocNote>Use this for a note, an update, or a short post. The picture band is the first thing. The writing stays short.</DocNote>
+                <CardLayout name="Article" when="A picture band, a title, one or two lines, and who wrote it. The band runs to the edges of the card." avoid="Do not use this for a number or a person. A long document is a page.">
+                    <ArticleCard />
+                </CardLayout>
+            </DocSection>
+            <DocSection title="Person">
+                <DocNote>Use this for one person in a grid of people. The status sits at the end of the row.</DocNote>
+                <CardLayout name="Person" when="A face, a name, a role, and a status. The face is a circle. The status is the quiet mark at the end." avoid="Many people of the same kind, with columns to compare, belong in a table.">
+                    <PersonCard />
+                </CardLayout>
+            </DocSection>
+            <DocSection title="Next step">
+                <DocNote>Use this for one thing the person can do from here. It stays quieter than the numbers beside it.</DocNote>
+                <CardLayout name="Next step" when="A title, one line, and one action. The quieter fill keeps the action from competing with the measures." avoid="Do not stack several actions on the card. A question the person must answer before they continue is a modal.">
+                    <NextStepCard />
+                </CardLayout>
             </DocSection>
         </DocPage>
     ),
