@@ -207,6 +207,45 @@ export function MemberDrawer() {
   );
 }`;
 
+export const expandableSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, DetailCard, Expandable } from "@ui-starter/ui";
+
+export function MemberMore() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DetailCard
+      title="Alex Kim"
+      status="Active"
+      statusVariant="success"
+      action={<Button variant="secondary" onClick={() => setOpen((current) => !current)}>{open ? "Less" : "More"}</Button>}
+    >
+      <p>Owner</p>
+      <Expandable open={open}>
+        <p className="pt-spacing-03">Last visit was today. Can invite members. North team.</p>
+      </Expandable>
+    </DetailCard>
+  );
+}`;
+
+export const placeholderSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Loader, Placeholder } from "@ui-starter/ui";
+
+export function MemberResult() {
+  const [ready, setReady] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setReady(true)} disabled={ready}>Show content</Button>
+      <Placeholder ready={ready} placeholder={<Loader label="Loading member" />}>
+        <p>Alex Kim, owner. Last visit today.</p>
+      </Placeholder>
+    </>
+  );
+}`;
+
 export const dialogSnippet = `${catalogSetupSnippet}
 import { useState } from "react";
 import { Button, Dialog } from "@ui-starter/ui";

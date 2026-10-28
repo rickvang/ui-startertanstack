@@ -41,7 +41,7 @@ const preview: Preview = {
                     "Getting started",
                     ["This catalog", "This starter"],
                     "Foundations",
-                    ["Color", "Type", "Spacing", "Sizing", "Radius", "Shadow", "Motion", ["Primitives", "Semantic", "Examples", "Recipes", "Drawer reveal", "Tab change", "Card expansion", "Loading to content"]],
+                    ["Color", "Type", "Spacing", "Sizing", "Radius", "Shadow", "Motion", ["Primitives", "Semantic", "Examples", "Recipes"]],
                     "Layout",
                     [
                         "Frames",
@@ -53,7 +53,7 @@ const preview: Preview = {
                         ["Flow", ["Flex", "Space", "Stack"], "Split", ["Grid", "Splitter", "Masonry"], "Divider"],
                     ],
                     "Components",
-                    ["Button", "Text field", "Text area", "Select", "Checkbox", "Radio", "Switch", "Field", "Description list", "Badge", "Loader", "Message", "Avatar", "Anchor", "Breadcrumb", "Dropdown", "Menu", "Pagination", "Steps", "Tabs"],
+                    ["Button", "Text field", "Text area", "Select", "Checkbox", "Radio", "Switch", "Field", "Description list", "Badge", "Loader", "Placeholder", "Message", "Avatar", "Anchor", "Breadcrumb", "Dropdown", "Menu", "Pagination", "Steps", "Tabs"],
                     "Modules",
                     [
                         "Shell",
@@ -62,7 +62,7 @@ const preview: Preview = {
                         "Forms",
                         ["Forms", "Fieldset", "Fieldset, densities", "Fieldset, error", "Form, ready", "Form, summary", "Form, pending"],
                         "Detail",
-                        ["Detail", "Detail group"],
+                        ["Detail", "Expandable", "Detail group"],
                         "Table",
                         ["Overview", "Members", "Find", "Select and act", "Expand", "States", "Wide and sticky", "Long list"],
                     ],

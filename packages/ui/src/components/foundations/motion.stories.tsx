@@ -234,7 +234,7 @@ export const Examples: Story = {
         const [shown, setShown] = useState(true);
 
         return (
-            <FoundationPage title="Motion examples" intro="Feedback is a button. Enter and leave are one notice. Travel is the switch thumb. The jobs — drawer, tabs, a card, loading — are the recipes.">
+            <FoundationPage title="Motion examples" intro="Feedback is a button. Enter and leave are one notice. Travel is the switch thumb. Drawer, Dialog, Tabs, Expandable, and Placeholder play the larger jobs.">
                 <FoundationSection title="Feedback">
                     <div className="flex items-center gap-spacing-04 rounded-lg border border-line bg-surface p-spacing-05">
                         <Button>Save</Button>
