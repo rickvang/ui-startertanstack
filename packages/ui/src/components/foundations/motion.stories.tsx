@@ -5,18 +5,19 @@ import { Button } from "../base/button";
 import { Switch } from "../base/switch";
 import { FoundationPage, FoundationSection } from "./catalog";
 
-type MotionRole = "motion-feedback" | "motion-enter" | "motion-leave" | "motion-travel";
+type MotionRole = "motion-feedback" | "motion-enter" | "motion-leave" | "motion-travel" | "motion-reveal";
 
 const durations = [
     ["100", "--motion-duration-100", "100ms", "Leave.", "motion-leave"],
     ["150", "--motion-duration-150", "150ms", "Feedback.", "motion-feedback"],
     ["200", "--motion-duration-200", "200ms", "Enter.", "motion-enter"],
     ["300", "--motion-duration-300", "300ms", "Travel.", "motion-travel"],
+    ["500", "--motion-duration-500", "500ms", "Reveal.", "motion-reveal"],
 ] as const;
 
 const easings = [
     ["Standard", "--motion-ease-standard", "ease-standard", "motion-feedback uses this curve at 150ms.", "motion-feedback"],
-    ["Enter", "--motion-ease-enter", "ease-enter", "Arrival without overshoot. motion-enter uses spring instead.", "motion-enter"],
+    ["Enter", "--motion-ease-enter", "ease-enter", "Arrival without overshoot. motion-reveal uses this curve at 500ms.", "motion-reveal"],
     ["Leave", "--motion-ease-leave", "ease-leave", "motion-leave uses this curve at 100ms.", "motion-leave"],
     ["Spring", "--motion-ease-spring", "ease-spring", "motion-enter and motion-travel use this curve.", "motion-travel"],
 ] as const;
@@ -33,6 +34,8 @@ function rolePose(role: MotionRole, on: boolean): string {
             return on ? "translate-y-0 opacity-100 blur-none motion-leave" : "translate-y-spacing-02 opacity-0 blur-soft motion-leave";
         case "motion-travel":
             return on ? "translate-x-spacing-10 motion-travel" : "translate-x-0 motion-travel";
+        case "motion-reveal":
+            return on ? "translate-x-spacing-10 motion-reveal" : "translate-x-0 motion-reveal";
         default: {
             const exhaustive: never = role;
             return exhaustive;
@@ -40,19 +43,10 @@ function rolePose(role: MotionRole, on: boolean): string {
     }
 }
 
-function CurveSample({ ease }: { ease: "ease-enter" }) {
-    const [on, setOn] = useState(false);
-
-    return (
-        <button type="button" className="flex h-spacing-08 w-spacing-12 items-center rounded-md bg-canvas px-spacing-03" onClick={() => setOn((current) => !current)}>
-            <span className={cx("size-spacing-04 rounded-full bg-accent transition-transform duration-200 motion-reduce:transition-none", ease, on ? "translate-x-spacing-10" : "translate-x-0")} />
-        </button>
-    );
-}
 function RoleSample({ role }: { role: MotionRole }) {
     const [on, setOn] = useState(false);
     const feedback = role === "motion-feedback";
-    const travel = role === "motion-travel";
+    const travel = role === "motion-travel" || role === "motion-reveal";
 
     return (
         <button
@@ -85,7 +79,8 @@ const roles = [
     ["Feedback", "motion-feedback", "150ms · standard", "None", "None", "Press 0.98", "Color, shadow, or a press on a control that stays put."],
     ["Enter", "motion-enter", "200ms · spring", "Nudge", "Soft, then clear", "0.96 to 1", "Something arriving."],
     ["Leave", "motion-leave", "100ms · leave", "Nudge", "Clear, then soft", "1 to 0.96", "Something leaving. Shorter, so it does not hold attention."],
-    ["Travel", "motion-travel", "300ms · spring", "Measured, or the panel width", "None", "None", "A region moving: a tab mark, a switch thumb, a drawer."],
+    ["Travel", "motion-travel", "300ms · spring", "Measured", "None", "None", "A short region moving: a tab mark or a switch thumb."],
+    ["Reveal", "motion-reveal", "500ms · enter", "The panel width", "None", "None", "A panel from the edge. It decelerates into place."],
 ] as const;
 
 function Notice({ shown }: { shown: boolean }) {
@@ -136,7 +131,7 @@ export const Primitives: Story = {
                                 {variable} · {utility}
                             </span>
                             <p className="text-sm text-muted">{role}</p>
-                            {motion === "motion-enter" ? <CurveSample ease="ease-enter" /> : <RoleSample role={motion} />}
+                            <RoleSample role={motion} />
                         </article>
                     ))}
                 </div>
@@ -175,12 +170,12 @@ export const Primitives: Story = {
 
 export const Semantic: Story = {
     render: () => (
-        <FoundationPage title="Semantic motion" intro="Each role is one class. It sets the duration and the easing together. A large move keeps travel on the way out, because leave is too short for a panel width.">
+        <FoundationPage title="Semantic motion" intro="Each role is one class. It sets the duration and the easing together. A panel uses reveal both ways. Leave is too short for that distance, and travel's spring overshoots.">
             <FoundationSection title="Principles">
                 <div className="grid gap-spacing-04 md:grid-cols-3">
                     {[
                         ["Justified", "If the motion does not show where something went, or that a control responded, leave it still."],
-                        ["Short", "A leave is shorter than an enter. A drawer still uses travel for the slide, because the distance is the panel."],
+                        ["Short", "A leave is shorter than an enter. A drawer uses reveal, because a spring is for a short distance."],
                         ["Named properties", "Move opacity, transform, and a soft blur. Do not use transition-all. Spring is the overshoot curve, not a solver."],
                     ].map(([title, body]) => (
                         <article key={title} className="flex flex-col gap-spacing-02 rounded-lg border border-line bg-surface p-spacing-05">

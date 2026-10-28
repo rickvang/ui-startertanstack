@@ -12,9 +12,9 @@ const recipeNote = "**Catalog recipe** — classes on the semantic roles. Not a 
 
 const drawerCode = `overlay, opening: transition-opacity motion-enter
 overlay, closing: transition-opacity motion-leave
-panel: transition-[transform,opacity,filter] motion-travel
-panel open: translate-x-0 scale-100 opacity-100 blur-none
-panel closed: translate-x-full scale-[var(--motion-scale-enter)] opacity-0 blur-soft
+panel: transition-[translate] motion-reveal
+panel open: translate-x-0
+panel closed: translate-x-full
 reduced: transition-none`;
 
 const tabCode = `mark: transition-[transform,width] motion-travel
@@ -75,7 +75,7 @@ export const DrawerReveal: Story = {
         const [reduce, setReduce] = useState(false);
 
         return (
-            <DocPage title="Drawer reveal" intro="The panel travels its own width. Opacity, a soft blur, and a small scale come with it. The overlay fades.">
+            <DocPage title="Drawer reveal" intro="The panel travels its own width and decelerates into place. The overlay fades. The panel does not scale, blur, or spring past the edge.">
                 <DocSection title="Example">
                     <DocDemo className="flex flex-col items-start gap-spacing-04">
                         <Reduce on={reduce} onChange={setReduce} />
@@ -99,8 +99,8 @@ export const DrawerReveal: Story = {
                         headers={["Fact", "Value"]}
                         rows={[
                             { label: "Trigger", detail: "Open, Close, the overlay, or Escape." },
-                            { label: "States", detail: "Closed, traveling, open. Unmount waits for travel." },
-                            { label: "Panel", detail: "motion-travel. translate-x-full, blur-soft, scale enter." },
+                            { label: "States", detail: "Closed, revealing, open. Unmount waits for reveal." },
+                            { label: "Panel", detail: "motion-reveal. translate-x-full to translate-x-0." },
                             { label: "Overlay", detail: "motion-enter on the way in, motion-leave on the way out." },
                             { label: "Reduced motion", detail: "Instant. Focus still moves to Close and back." },
                         ]}

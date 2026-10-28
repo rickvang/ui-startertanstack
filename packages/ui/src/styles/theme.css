@@ -89,6 +89,7 @@
     --motion-duration-150: 150ms;
     --motion-duration-200: 200ms;
     --motion-duration-300: 300ms;
+    --motion-duration-500: 500ms;
     --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
     --motion-ease-enter: cubic-bezier(0, 0, 0.2, 1);
     --motion-ease-leave: cubic-bezier(0.4, 0, 1, 1);
@@ -107,6 +108,8 @@
     --motion-leave-ease: var(--motion-ease-leave);
     --motion-travel-duration: var(--motion-duration-300);
     --motion-travel-ease: var(--motion-ease-spring);
+    --motion-reveal-duration: var(--motion-duration-500);
+    --motion-reveal-ease: var(--motion-ease-enter);
 }
 
 .dark {
@@ -352,4 +355,11 @@
     --tw-ease: var(--motion-travel-ease);
     transition-duration: var(--motion-travel-duration);
     transition-timing-function: var(--motion-travel-ease);
+}
+
+@utility motion-reveal {
+    --tw-duration: var(--motion-reveal-duration);
+    --tw-ease: var(--motion-reveal-ease);
+    transition-duration: var(--motion-reveal-duration);
+    transition-timing-function: var(--motion-reveal-ease);
 }
