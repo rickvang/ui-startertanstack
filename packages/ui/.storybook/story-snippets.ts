@@ -190,6 +190,62 @@ export const tabsSnippet = librarySnippet(
     "ProjectTabs",
 );
 
+export const drawerSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Drawer } from "@ui-starter/ui";
+
+export function MemberDrawer() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Open</Button>
+      <Drawer open={open} title="Alex Kim" onClose={() => setOpen(false)}>
+        <p className="text-sm text-ink">Role, access, and the last visit.</p>
+      </Drawer>
+    </>
+  );
+}`;
+
+export const expandableSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, DetailCard, Expandable } from "@ui-starter/ui";
+
+export function MemberMore() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DetailCard
+      title="Alex Kim"
+      status="Active"
+      statusVariant="success"
+      action={<Button variant="secondary" onClick={() => setOpen((current) => !current)}>{open ? "Less" : "More"}</Button>}
+    >
+      <p>Owner</p>
+      <Expandable open={open}>
+        <p className="pt-spacing-03">Last visit was today. Can invite members. North team.</p>
+      </Expandable>
+    </DetailCard>
+  );
+}`;
+
+export const placeholderSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Loader, Placeholder } from "@ui-starter/ui";
+
+export function MemberResult() {
+  const [ready, setReady] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setReady(true)} disabled={ready}>Show content</Button>
+      <Placeholder ready={ready} placeholder={<Loader label="Loading member" />}>
+        <p>Alex Kim, owner. Last visit today.</p>
+      </Placeholder>
+    </>
+  );
+}`;
+
 export const dialogSnippet = `${catalogSetupSnippet}
 import { useState } from "react";
 import { Button, Dialog } from "@ui-starter/ui";
@@ -200,16 +256,15 @@ export function RemoveProductDialog() {
   return (
     <>
       <Button variant="danger" onClick={() => setOpen(true)}>Remove</Button>
-      {open ? (
-        <Dialog
-          title="Remove North"
-          confirmLabel="Remove"
-          onCancel={() => setOpen(false)}
-          onConfirm={() => setOpen(false)}
-        >
-          Removing the product deletes its projects. This cannot be undone.
-        </Dialog>
-      ) : null}
+      <Dialog
+        open={open}
+        title="Remove North"
+        confirmLabel="Remove"
+        onCancel={() => setOpen(false)}
+        onConfirm={() => setOpen(false)}
+      >
+        Removing the product deletes its projects. This cannot be undone.
+      </Dialog>
     </>
   );
 }`;
@@ -257,6 +312,15 @@ export const splitterSnippet = librarySnippet(
     "Splitter",
     `<Splitter start="Members" end="Details" />`,
     "MembersSplitter",
+);
+
+export const cardSnippet = librarySnippet(
+    "Card",
+    `<Card>
+    <h2 className="text-sm font-semibold">North team</h2>
+    <p className="text-sm text-muted">Three members. Last visit today.</p>
+</Card>`,
+    "TeamCard",
 );
 
 export const stackSnippet = librarySnippet(

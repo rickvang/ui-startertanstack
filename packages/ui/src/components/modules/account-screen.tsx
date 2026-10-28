@@ -277,21 +277,20 @@ function RemoveSection({ name, onRemove }: { name: string; onRemove: () => void 
             >
                 Remove
             </Button>
-            {open ? (
-                <Dialog
-                    title={`Remove ${name}`}
-                    confirmLabel="Remove"
-                    confirmDisabled={typed.trim() !== name}
-                    onCancel={() => setOpen(false)}
-                    onConfirm={() => {
-                        setOpen(false);
-                        onRemove();
-                    }}
-                >
-                    <p>Type {name} to remove the account.</p>
-                    <TextField label="Name" value={typed} onChange={(event) => setTyped(event.target.value)} />
-                </Dialog>
-            ) : null}
+            <Dialog
+                open={open}
+                title={`Remove ${name}`}
+                confirmLabel="Remove"
+                confirmDisabled={typed.trim() !== name}
+                onCancel={() => setOpen(false)}
+                onConfirm={() => {
+                    setOpen(false);
+                    onRemove();
+                }}
+            >
+                <p>Type {name} to remove the account.</p>
+                <TextField label="Name" value={typed} onChange={(event) => setTyped(event.target.value)} />
+            </Dialog>
         </div>
     );
 }
