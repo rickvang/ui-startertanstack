@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { compositionNote, drawerCompositionSnippet, modalCompositionSnippet, slideInCompositionSnippet } from "../../../.storybook/story-snippets";
+import { compositionNote, drawerSnippet, libraryExportNote, modalCompositionSnippet, slideInCompositionSnippet } from "../../../.storybook/story-snippets";
 import { cx } from "../../utils/cx";
 import { DocCodeSection, DocList, DocPage, DocSection } from "./doc";
 
@@ -122,11 +122,10 @@ export const Modal: Story = {
     ),
 };
 
-export const Drawer: Story = {
-    name: "Drawer",
+export const DrawerWhen: Story = {
+    name: "Drawer, when",
     render: () => (
-        <DocPage title="Drawer" intro="A drawer is a full-height panel from the edge. The page stays visible, so the person keeps their place.">
-            <DocCodeSection note={compositionNote} code={drawerCompositionSnippet} />
+        <DocPage title="Drawer, when" intro="A drawer is a full-height panel from the edge. The page stays visible, so the person keeps their place. The moving panel is the Drawer component.">
             <DocSection title="Detail from a list">
                 <p className="text-sm text-muted">Open one entry beside the list. Closing the drawer returns to the same scroll position.</p>
                 <Stage>
@@ -175,6 +174,7 @@ export const Drawer: Story = {
                     ]}
                 />
             </DocSection>
+            <DocCodeSection note={libraryExportNote} code={drawerSnippet} />
         </DocPage>
     ),
 };

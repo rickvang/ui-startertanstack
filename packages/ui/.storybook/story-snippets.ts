@@ -190,6 +190,23 @@ export const tabsSnippet = librarySnippet(
     "ProjectTabs",
 );
 
+export const drawerSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Drawer } from "@ui-starter/ui";
+
+export function MemberDrawer() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Open</Button>
+      <Drawer open={open} title="Alex Kim" onClose={() => setOpen(false)}>
+        <p className="text-sm text-ink">Role, access, and the last visit.</p>
+      </Drawer>
+    </>
+  );
+}`;
+
 export const dialogSnippet = `${catalogSetupSnippet}
 import { useState } from "react";
 import { Button, Dialog } from "@ui-starter/ui";

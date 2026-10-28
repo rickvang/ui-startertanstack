@@ -83,6 +83,30 @@
     --success-subtle: var(--success-100);
     --focus: var(--brand-500);
     --overlay: oklch(0.17 0.012 80 / 0.72);
+
+    /* Motion primitives. Fixed in light and dark. Semantic roles point here. */
+    --motion-duration-100: 100ms;
+    --motion-duration-150: 150ms;
+    --motion-duration-200: 200ms;
+    --motion-duration-300: 300ms;
+    --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --motion-ease-enter: cubic-bezier(0, 0, 0.2, 1);
+    --motion-ease-leave: cubic-bezier(0.4, 0, 1, 1);
+    --motion-ease-spring: cubic-bezier(0.22, 1.4, 0.36, 1);
+    --motion-distance-nudge: 0.25rem;
+    --motion-distance-shift: 0.5rem;
+    --motion-blur-soft: 2px;
+    --motion-scale-press: 0.98;
+    --motion-scale-enter: 0.96;
+
+    --motion-feedback-duration: var(--motion-duration-150);
+    --motion-feedback-ease: var(--motion-ease-standard);
+    --motion-enter-duration: var(--motion-duration-200);
+    --motion-enter-ease: var(--motion-ease-spring);
+    --motion-leave-duration: var(--motion-duration-100);
+    --motion-leave-ease: var(--motion-ease-leave);
+    --motion-travel-duration: var(--motion-duration-300);
+    --motion-travel-ease: var(--motion-ease-spring);
 }
 
 .dark {
@@ -254,8 +278,15 @@
     --shadow-lg: 0 12px 24px oklch(0.2 0.02 80 / 0.1), 0 4px 8px oklch(0.2 0.02 80 / 0.06);
     --shadow-xl: 0 24px 48px oklch(0.2 0.02 80 / 0.16);
 
-    --animate-loader: loader 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    --animate-eight: eight 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    --ease-standard: var(--motion-ease-standard);
+    --ease-enter: var(--motion-ease-enter);
+    --ease-leave: var(--motion-ease-leave);
+    --ease-spring: var(--motion-ease-spring);
+    --blur-soft: var(--motion-blur-soft);
+
+    --animate-loader: loader 1.4s var(--motion-ease-standard) infinite;
+    --animate-eight: eight 1.8s var(--motion-ease-standard) infinite;
+    --animate-motion-enter: motion-enter var(--motion-enter-duration) var(--motion-enter-ease) both;
 
     @keyframes loader {
         0%,
@@ -265,6 +296,19 @@
         50% {
             opacity: 1;
         }
+    }
+}
+
+@keyframes motion-enter {
+    from {
+        opacity: 0;
+        filter: blur(var(--motion-blur-soft));
+        transform: translateY(var(--motion-distance-nudge)) scale(var(--motion-scale-enter));
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: none;
     }
 }
 
@@ -280,4 +324,24 @@
     100% {
         offset-distance: 100%;
     }
+}
+
+@utility duration-feedback {
+    --tw-duration: var(--motion-feedback-duration);
+    transition-duration: var(--motion-feedback-duration);
+}
+
+@utility duration-enter {
+    --tw-duration: var(--motion-enter-duration);
+    transition-duration: var(--motion-enter-duration);
+}
+
+@utility duration-leave {
+    --tw-duration: var(--motion-leave-duration);
+    transition-duration: var(--motion-leave-duration);
+}
+
+@utility duration-travel {
+    --tw-duration: var(--motion-travel-duration);
+    transition-duration: var(--motion-travel-duration);
 }

@@ -24,9 +24,9 @@ const trackClass: Record<Density, string> = {
 };
 
 const thumbClass: Record<Density, string> = {
-    dense: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-03 rounded-full bg-surface transition-transform duration-300 ease-in-out motion-reduce:transition-none",
-    standard: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-04 rounded-full bg-surface transition-transform duration-300 ease-in-out motion-reduce:transition-none",
-    wide: "pointer-events-none absolute top-spacing-02 left-spacing-02 size-spacing-05 rounded-full bg-surface transition-transform duration-300 ease-in-out motion-reduce:transition-none",
+    dense: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-03 rounded-full bg-surface transition-transform duration-travel ease-spring motion-reduce:transition-none",
+    standard: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-04 rounded-full bg-surface transition-transform duration-travel ease-spring motion-reduce:transition-none",
+    wide: "pointer-events-none absolute top-spacing-02 left-spacing-02 size-spacing-05 rounded-full bg-surface transition-transform duration-travel ease-spring motion-reduce:transition-none",
 };
 
 const thumbTravel: Record<Density, string> = {
@@ -61,7 +61,7 @@ export function Switch({ label, defaultChecked = false, checked: checkedProp, on
             type="button"
             role="switch"
             aria-checked={checked}
-            className={cx(trackClass[resolved], "transition-colors duration-150 ease-in-out motion-reduce:transition-none", checked ? "bg-accent" : "bg-line")}
+            className={cx(trackClass[resolved], "transition-colors duration-feedback ease-standard motion-reduce:transition-none", checked ? "bg-accent" : "bg-line")}
             {...props}
             ref={ref}
             id={fieldId}

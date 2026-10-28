@@ -34,6 +34,8 @@ export { DescriptionList } from "./components/base/description-list";
 export type { DescriptionAlign, DescriptionItem, DescriptionLayout, DescriptionListProps } from "./components/base/description-list";
 export { Dialog } from "./components/layout/dialog";
 export type { DialogProps } from "./components/layout/dialog";
+export { Drawer } from "./components/layout/drawer";
+export type { DrawerProps } from "./components/layout/drawer";
 export { Divider } from "./components/layout/divider";
 export type { DividerProps } from "./components/layout/divider";
 export { Flex } from "./components/layout/flex";
