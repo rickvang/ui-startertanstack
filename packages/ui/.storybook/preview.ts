@@ -38,6 +38,8 @@ const preview: Preview = {
             storySort: {
                 includeNames: true,
                 order: [
+                    "Getting started",
+                    ["This catalog", "This starter"],
                     "Foundations",
                     ["Color", "Type", "Spacing", "Sizing", "Radius", "Shadow", "Motion"],
                     "Layout",
