@@ -323,6 +323,21 @@ export const cardSnippet = librarySnippet(
     "TeamCard",
 );
 
+export const contentContainerSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <Card variant="quiet">
+        <p className="text-xs text-muted">Active</p>
+        <p className="text-lg font-semibold">24</p>
+    </Card>
+    <Card variant="quiet">
+        <p className="text-xs text-muted">Overdue</p>
+        <p className="text-lg font-semibold">4</p>
+    </Card>
+</Card>`,
+    "VisitsPanel",
+);
+
 export const stackSnippet = librarySnippet(
     "Stack, TextField",
     `<Stack gap="md">
