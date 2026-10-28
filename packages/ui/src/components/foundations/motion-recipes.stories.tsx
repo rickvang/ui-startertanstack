@@ -27,6 +27,15 @@ export const Recipes: Story = {
                     ]}
                 />
             </DocSection>
+            <DocSection title="Source">
+                <DocParagraph>
+                    Tokens, roles, and code are this catalog. The idea of a live preview, a when-to-use line, and an example together follows{" "}
+                    <a className="text-ink" href="https://transitions.dev/">
+                        transitions.dev
+                    </a>
+                    . Nothing from that site is imported.
+                </DocParagraph>
+            </DocSection>
         </DocPage>
     ),
 };
