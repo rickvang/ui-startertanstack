@@ -27,19 +27,18 @@ export const DialogStory: Story = {
                     Remove
                 </Button>
                 <p className="text-sm text-ink">{result}</p>
-                {open ? (
-                    <Dialog
-                        title="Remove North"
-                        confirmLabel="Remove"
-                        onCancel={() => setOpen(false)}
-                        onConfirm={() => {
-                            setResult("North was removed.");
-                            setOpen(false);
-                        }}
-                    >
-                        Removing the product deletes its projects. This cannot be undone.
-                    </Dialog>
-                ) : null}
+                <Dialog
+                    open={open}
+                    title="Remove North"
+                    confirmLabel="Remove"
+                    onCancel={() => setOpen(false)}
+                    onConfirm={() => {
+                        setResult("North was removed.");
+                        setOpen(false);
+                    }}
+                >
+                    Removing the product deletes its projects. This cannot be undone.
+                </Dialog>
             </div>
         );
     },

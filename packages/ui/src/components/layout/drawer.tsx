@@ -98,7 +98,7 @@ function DrawerFrame({
     }, []);
 
     const motion = reduce ? "transition-none" : "transition-[translate] motion-reveal motion-reduce:transition-none";
-    const scrim = reduce ? "transition-none" : shown ? "transition-opacity motion-enter motion-reduce:transition-none" : "transition-opacity motion-leave motion-reduce:transition-none";
+    const scrim = reduce ? "transition-none" : "transition-opacity motion-reveal motion-reduce:transition-none";
 
     return createPortal(
         <div className="fixed inset-0 z-50">

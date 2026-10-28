@@ -10,8 +10,7 @@ import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocRows, Do
 
 const recipeNote = "**Catalog recipe** — classes on the semantic roles. Not a package export, and not a transitions.dev snippet.";
 
-const drawerCode = `overlay, opening: transition-opacity motion-enter
-overlay, closing: transition-opacity motion-leave
+const drawerCode = `overlay: transition-opacity motion-reveal
 panel: transition-[translate] motion-reveal
 panel open: translate-x-0
 panel closed: translate-x-full
@@ -19,15 +18,15 @@ reduced: transition-none`;
 
 const tabCode = `mark: transition-[transform,width] motion-travel
 label: transition-colors motion-feedback
-panel: animate-motion-enter
+panel: animate-motion-fade
 first paint and resize: transition-none, then travel
 reduced: transition-none and animate-none`;
 
-const cardCode = `shell: transition-[grid-template-rows] motion-travel
+const cardCode = `shell: transition-[grid-template-rows] motion-fade
 open: grid-rows-[1fr]
 closed: grid-rows-[0fr]
-contents open: motion-enter, nudge and blur clear, scale 1
-contents close: motion-leave, nudge, blur-soft, scale enter`;
+contents open: transition-opacity motion-fade
+contents close: transition-opacity motion-leave`;
 
 const loadingCode = `same slot, two layers
 bones keep the loader pulse
@@ -101,7 +100,7 @@ export const DrawerReveal: Story = {
                             { label: "Trigger", detail: "Open, Close, the overlay, or Escape." },
                             { label: "States", detail: "Closed, revealing, open. Unmount waits for reveal." },
                             { label: "Panel", detail: "motion-reveal. translate-x-full to translate-x-0." },
-                            { label: "Overlay", detail: "motion-enter on the way in, motion-leave on the way out." },
+                            { label: "Overlay", detail: "motion-reveal. Opacity only, with the panel." },
                             { label: "Reduced motion", detail: "Instant. Focus still moves to Close and back." },
                         ]}
                     />
@@ -118,7 +117,7 @@ export const TabChange: Story = {
         const [reduce, setReduce] = useState(false);
 
         return (
-            <DocPage title="Tab change" intro="The underline measures the active tab and travels. The label uses feedback. The panel enters. The first paint snaps, so the mark does not slide in from zero.">
+            <DocPage title="Tab change" intro="The underline measures the active tab and travels. The label uses feedback. The panel fades. The first paint snaps, so the mark does not slide in from zero.">
                 <DocSection title="Example">
                     <DocDemo>
                         <Reduce on={reduce} onChange={setReduce} />
@@ -146,8 +145,8 @@ export const TabChange: Story = {
                             { label: "Trigger", detail: "Click a tab. Resize snaps, then travel is allowed again." },
                             { label: "Mark", detail: "offsetLeft and offsetWidth. motion-travel." },
                             { label: "Label", detail: "motion-feedback." },
-                            { label: "Panel", detail: "animate-motion-enter: nudge, blur-soft, scale enter." },
-                            { label: "Reduced motion", detail: "The mark jumps. The panel does not play the enter animation." },
+                            { label: "Panel", detail: "animate-motion-fade. Opacity only." },
+                            { label: "Reduced motion", detail: "The mark jumps. The panel does not fade." },
                         ]}
                     />
                 </DocSection>
@@ -162,16 +161,12 @@ export const CardExpansion: Story = {
     render: () => {
         const [open, setOpen] = useState(false);
         const [reduce, setReduce] = useState(false);
-        const shell = reduce ? "transition-none" : "transition-[grid-template-rows] motion-travel motion-reduce:transition-none";
-        const contents = reduce
-            ? "transition-none"
-            : open
-              ? "transition-[opacity,transform,filter] motion-enter motion-reduce:transition-none"
-              : "transition-[opacity,transform,filter] motion-leave motion-reduce:transition-none";
-        const pose = open ? "translate-y-0 scale-100 opacity-100 blur-none" : "translate-y-spacing-02 scale-[var(--motion-scale-enter)] opacity-0 blur-soft";
+        const shell = reduce ? "transition-none" : "transition-[grid-template-rows] motion-fade motion-reduce:transition-none";
+        const contents = reduce ? "transition-none" : open ? "transition-opacity motion-fade motion-reduce:transition-none" : "transition-opacity motion-leave motion-reduce:transition-none";
+        const pose = open ? "opacity-100" : "opacity-0";
 
         return (
-            <DocPage title="Card expansion" intro="The title stays. Extra fields open in place. Height uses grid rows, not a width and height tween.">
+            <DocPage title="Card expansion" intro="The title stays. The extra fields ease open, and the words fade. Height uses grid rows, not a width and height tween.">
                 <DocSection title="Example">
                     <DocDemo>
                         <Reduce on={reduce} onChange={setReduce} />
@@ -198,8 +193,8 @@ export const CardExpansion: Story = {
                         headers={["Fact", "Value"]}
                         rows={[
                             { label: "Trigger", detail: "More or Less." },
-                            { label: "Shell", detail: "grid-rows 0fr to 1fr, motion-travel." },
-                            { label: "Contents", detail: "motion-enter and motion-leave, with nudge, blur-soft, and scale enter." },
+                            { label: "Shell", detail: "grid-rows 0fr to 1fr, motion-fade. The height decelerates." },
+                            { label: "Contents", detail: "Opacity only. motion-fade on the way in, motion-leave on the way out." },
                             { label: "Reduced motion", detail: "The extra fields appear and disappear at once." },
                         ]}
                     />

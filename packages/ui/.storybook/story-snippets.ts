@@ -217,16 +217,15 @@ export function RemoveProductDialog() {
   return (
     <>
       <Button variant="danger" onClick={() => setOpen(true)}>Remove</Button>
-      {open ? (
-        <Dialog
-          title="Remove North"
-          confirmLabel="Remove"
-          onCancel={() => setOpen(false)}
-          onConfirm={() => setOpen(false)}
-        >
-          Removing the product deletes its projects. This cannot be undone.
-        </Dialog>
-      ) : null}
+      <Dialog
+        open={open}
+        title="Remove North"
+        confirmLabel="Remove"
+        onCancel={() => setOpen(false)}
+        onConfirm={() => setOpen(false)}
+      >
+        Removing the product deletes its projects. This cannot be undone.
+      </Dialog>
     </>
   );
 }`;

@@ -99,7 +99,7 @@ export function Tabs({ items, defaultValue, className, reduceMotion = false }: T
                     );
                 })}
             </div>
-            <div key={selected?.value} className="animate-motion-enter text-sm text-ink motion-reduce:animate-none group-data-[reduce=true]:animate-none">
+            <div key={selected?.value} className="animate-motion-fade text-sm text-ink motion-reduce:animate-none group-data-[reduce=true]:animate-none">
                 {selected?.content}
             </div>
         </div>

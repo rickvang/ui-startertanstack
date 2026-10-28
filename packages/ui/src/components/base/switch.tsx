@@ -24,9 +24,9 @@ const trackClass: Record<Density, string> = {
 };
 
 const thumbClass: Record<Density, string> = {
-    dense: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-03 rounded-full bg-surface transition-transform motion-travel motion-reduce:transition-none",
-    standard: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-04 rounded-full bg-surface transition-transform motion-travel motion-reduce:transition-none",
-    wide: "pointer-events-none absolute top-spacing-02 left-spacing-02 size-spacing-05 rounded-full bg-surface transition-transform motion-travel motion-reduce:transition-none",
+    dense: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-03 rounded-full bg-surface transition-[translate] motion-travel motion-reduce:transition-none",
+    standard: "pointer-events-none absolute top-spacing-01 left-spacing-01 size-spacing-04 rounded-full bg-surface transition-[translate] motion-travel motion-reduce:transition-none",
+    wide: "pointer-events-none absolute top-spacing-02 left-spacing-02 size-spacing-05 rounded-full bg-surface transition-[translate] motion-travel motion-reduce:transition-none",
 };
 
 const thumbTravel: Record<Density, string> = {

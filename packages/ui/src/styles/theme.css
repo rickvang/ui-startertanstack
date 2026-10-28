@@ -110,6 +110,8 @@
     --motion-travel-ease: var(--motion-ease-spring);
     --motion-reveal-duration: var(--motion-duration-500);
     --motion-reveal-ease: var(--motion-ease-enter);
+    --motion-fade-duration: var(--motion-duration-200);
+    --motion-fade-ease: var(--motion-ease-enter);
 }
 
 .dark {
@@ -290,6 +292,7 @@
     --animate-loader: loader 1.4s var(--motion-ease-standard) infinite;
     --animate-eight: eight 1.8s var(--motion-ease-standard) infinite;
     --animate-motion-enter: motion-enter var(--motion-enter-duration) var(--motion-enter-ease) both;
+    --animate-motion-fade: motion-fade var(--motion-fade-duration) var(--motion-fade-ease) both;
 
     @keyframes loader {
         0%,
@@ -299,6 +302,15 @@
         50% {
             opacity: 1;
         }
+    }
+}
+
+@keyframes motion-fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
@@ -362,4 +374,11 @@
     --tw-ease: var(--motion-reveal-ease);
     transition-duration: var(--motion-reveal-duration);
     transition-timing-function: var(--motion-reveal-ease);
+}
+
+@utility motion-fade {
+    --tw-duration: var(--motion-fade-duration);
+    --tw-ease: var(--motion-fade-ease);
+    transition-duration: var(--motion-fade-duration);
+    transition-timing-function: var(--motion-fade-ease);
 }

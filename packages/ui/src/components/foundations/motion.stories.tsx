@@ -5,19 +5,19 @@ import { Button } from "../base/button";
 import { Switch } from "../base/switch";
 import { FoundationPage, FoundationSection } from "./catalog";
 
-type MotionRole = "motion-feedback" | "motion-enter" | "motion-leave" | "motion-travel" | "motion-reveal";
+type MotionRole = "motion-feedback" | "motion-enter" | "motion-leave" | "motion-travel" | "motion-reveal" | "motion-fade";
 
 const durations = [
     ["100", "--motion-duration-100", "100ms", "Leave.", "motion-leave"],
     ["150", "--motion-duration-150", "150ms", "Feedback.", "motion-feedback"],
-    ["200", "--motion-duration-200", "200ms", "Enter.", "motion-enter"],
+    ["200", "--motion-duration-200", "200ms", "Enter and fade.", "motion-enter"],
     ["300", "--motion-duration-300", "300ms", "Travel.", "motion-travel"],
     ["500", "--motion-duration-500", "500ms", "Reveal.", "motion-reveal"],
 ] as const;
 
 const easings = [
     ["Standard", "--motion-ease-standard", "ease-standard", "motion-feedback uses this curve at 150ms.", "motion-feedback"],
-    ["Enter", "--motion-ease-enter", "ease-enter", "Arrival without overshoot. motion-reveal uses this curve at 500ms.", "motion-reveal"],
+    ["Enter", "--motion-ease-enter", "ease-enter", "Arrival without overshoot. motion-fade uses this at 200ms. motion-reveal uses it at 500ms.", "motion-fade"],
     ["Leave", "--motion-ease-leave", "ease-leave", "motion-leave uses this curve at 100ms.", "motion-leave"],
     ["Spring", "--motion-ease-spring", "ease-spring", "motion-enter and motion-travel use this curve.", "motion-travel"],
 ] as const;
@@ -36,6 +36,8 @@ function rolePose(role: MotionRole, on: boolean): string {
             return on ? "translate-x-spacing-10 motion-travel" : "translate-x-0 motion-travel";
         case "motion-reveal":
             return on ? "translate-x-spacing-10 motion-reveal" : "translate-x-0 motion-reveal";
+        case "motion-fade":
+            return on ? "opacity-100 motion-fade" : "opacity-0 motion-fade";
         default: {
             const exhaustive: never = role;
             return exhaustive;
@@ -81,6 +83,7 @@ const roles = [
     ["Leave", "motion-leave", "100ms · leave", "Nudge", "Clear, then soft", "1 to 0.96", "Something leaving. Shorter, so it does not hold attention."],
     ["Travel", "motion-travel", "300ms · spring", "Measured", "None", "None", "A short region moving: a tab mark or a switch thumb."],
     ["Reveal", "motion-reveal", "500ms · enter", "The panel width", "None", "None", "A panel from the edge. It decelerates into place."],
+    ["Fade", "motion-fade", "200ms · enter", "None", "None", "None", "Something appearing in place. Opacity only."],
 ] as const;
 
 function Notice({ shown }: { shown: boolean }) {
@@ -170,13 +173,13 @@ export const Primitives: Story = {
 
 export const Semantic: Story = {
     render: () => (
-        <FoundationPage title="Semantic motion" intro="Each role is one class. It sets the duration and the easing together. A panel uses reveal both ways. Leave is too short for that distance, and travel's spring overshoots.">
+        <FoundationPage title="Semantic motion" intro="Each role is one class. It sets the duration and the easing together. A fade in place uses motion-fade. A panel uses reveal. Leave is too short for a panel, and travel's spring overshoots.">
             <FoundationSection title="Principles">
                 <div className="grid gap-spacing-04 md:grid-cols-3">
                     {[
                         ["Justified", "If the motion does not show where something went, or that a control responded, leave it still."],
-                        ["Short", "A leave is shorter than an enter. A drawer uses reveal, because a spring is for a short distance."],
-                        ["Named properties", "Move opacity, transform, and a soft blur. Do not use transition-all. Spring is the overshoot curve, not a solver."],
+                        ["Short", "A leave is shorter than a fade. A short move can spring. A panel uses reveal, because a spring overshoots on that distance."],
+                        ["Named properties", "Name the property that changes. A slide uses translate. A large surface changes one property. Spring is the overshoot curve, not a solver."],
                     ].map(([title, body]) => (
                         <article key={title} className="flex flex-col gap-spacing-02 rounded-lg border border-line bg-surface p-spacing-05">
                             <h3 className="text-sm font-medium">{title}</h3>
