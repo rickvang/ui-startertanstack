@@ -45,6 +45,7 @@ const preview: Preview = {
                     "Layout",
                     [
                         "Frames",
+                        "Card",
                         "Overlays",
                         ["Modal", "Drawer", "Drawer, when", "Slide-in", "Dialog"],
                         "Rules",

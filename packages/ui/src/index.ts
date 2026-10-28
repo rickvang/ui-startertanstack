@@ -54,6 +54,8 @@ export { Space } from "./components/layout/space";
 export type { SpaceProps } from "./components/layout/space";
 export { Stack } from "./components/layout/stack";
 export type { StackProps } from "./components/layout/stack";
+export { Card } from "./components/layout/card";
+export type { CardProps } from "./components/layout/card";
 export { Splitter } from "./components/layout/splitter";
 export type { SplitterProps } from "./components/layout/splitter";
 export { Anchor } from "./components/navigation/anchor";
