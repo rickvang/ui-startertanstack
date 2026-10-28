@@ -1,22 +1,79 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { cx } from "../../utils/cx";
 import { Button } from "../base/button";
 import { Switch } from "../base/switch";
 import { FoundationPage, FoundationSection } from "./catalog";
 
+type MotionRole = "motion-feedback" | "motion-enter" | "motion-leave" | "motion-travel";
+
 const durations = [
-    ["100", "--motion-duration-100", "100ms", "Leave."],
-    ["150", "--motion-duration-150", "150ms", "Feedback."],
-    ["200", "--motion-duration-200", "200ms", "Enter."],
-    ["300", "--motion-duration-300", "300ms", "Travel."],
+    ["100", "--motion-duration-100", "100ms", "Leave.", "motion-leave"],
+    ["150", "--motion-duration-150", "150ms", "Feedback.", "motion-feedback"],
+    ["200", "--motion-duration-200", "200ms", "Enter.", "motion-enter"],
+    ["300", "--motion-duration-300", "300ms", "Travel.", "motion-travel"],
 ] as const;
 
 const easings = [
-    ["Standard", "--motion-ease-standard", "ease-standard", "In and out. A control that stays on screen."],
-    ["Enter", "--motion-ease-enter", "ease-enter", "Ease out. Arrival without overshoot."],
-    ["Leave", "--motion-ease-leave", "ease-leave", "Ease in. Exit, shorter than the arrival."],
-    ["Spring", "--motion-ease-spring", "ease-spring", "A curve with overshoot. Not a physics solver."],
+    ["Standard", "--motion-ease-standard", "ease-standard", "motion-feedback uses this curve at 150ms.", "motion-feedback"],
+    ["Enter", "--motion-ease-enter", "ease-enter", "Arrival without overshoot. motion-enter uses spring instead.", "motion-enter"],
+    ["Leave", "--motion-ease-leave", "ease-leave", "motion-leave uses this curve at 100ms.", "motion-leave"],
+    ["Spring", "--motion-ease-spring", "ease-spring", "motion-enter and motion-travel use this curve.", "motion-travel"],
 ] as const;
+
+function rolePose(role: MotionRole, on: boolean): string {
+    switch (role) {
+        case "motion-feedback":
+            return on ? "border-accent bg-accent text-accent-fg motion-feedback" : "border-line bg-surface text-ink motion-feedback";
+        case "motion-enter":
+            return on
+                ? "translate-y-0 scale-100 opacity-100 blur-none motion-enter"
+                : "translate-y-spacing-02 scale-[var(--motion-scale-enter)] opacity-0 blur-soft motion-enter";
+        case "motion-leave":
+            return on ? "translate-y-0 opacity-100 blur-none motion-leave" : "translate-y-spacing-02 opacity-0 blur-soft motion-leave";
+        case "motion-travel":
+            return on ? "translate-x-spacing-10 motion-travel" : "translate-x-0 motion-travel";
+        default: {
+            const exhaustive: never = role;
+            return exhaustive;
+        }
+    }
+}
+
+function CurveSample({ ease }: { ease: "ease-enter" }) {
+    const [on, setOn] = useState(false);
+
+    return (
+        <button type="button" className="flex h-spacing-08 w-spacing-12 items-center rounded-md bg-canvas px-spacing-03" onClick={() => setOn((current) => !current)}>
+            <span className={cx("size-spacing-04 rounded-full bg-accent transition-transform duration-200 motion-reduce:transition-none", ease, on ? "translate-x-spacing-10" : "translate-x-0")} />
+        </button>
+    );
+}
+function RoleSample({ role }: { role: MotionRole }) {
+    const [on, setOn] = useState(false);
+    const feedback = role === "motion-feedback";
+    const travel = role === "motion-travel";
+
+    return (
+        <button
+            type="button"
+            className={cx("flex h-spacing-08 items-center rounded-md bg-canvas px-spacing-03", travel ? "w-spacing-12" : undefined)}
+            onClick={() => setOn((current) => !current)}
+        >
+            <span
+                className={cx(
+                    "border motion-reduce:transition-none motion-reduce:blur-none",
+                    feedback
+                        ? "rounded-md px-spacing-03 py-spacing-01 text-xs font-medium transition-[color,background-color,border-color,box-shadow,transform,opacity]"
+                        : "size-spacing-04 rounded-full border-transparent bg-accent transition-[opacity,transform,filter]",
+                    rolePose(role, on),
+                )}
+            >
+                {feedback ? "Save" : null}
+            </span>
+        </button>
+    );
+}
 
 const distances = [
     ["Nudge", "--motion-distance-nudge", "0.25rem", "A notice or a line of content."],
@@ -30,16 +87,6 @@ const roles = [
     ["Leave", "motion-leave", "100ms · leave", "Nudge", "Clear, then soft", "1 to 0.96", "Something leaving. Shorter, so it does not hold attention."],
     ["Travel", "motion-travel", "300ms · spring", "Measured, or the panel width", "None", "None", "A region moving: a tab mark, a switch thumb, a drawer."],
 ] as const;
-
-function EaseSample({ ease }: { ease: (typeof easings)[number][2] }) {
-    const [on, setOn] = useState(false);
-
-    return (
-        <button type="button" className="flex h-spacing-08 items-center rounded-md bg-canvas px-spacing-03" onClick={() => setOn((current) => !current)}>
-            <span className={`size-spacing-04 rounded-full bg-accent motion-reduce:transition-none ${on ? "translate-x-spacing-10" : "translate-x-0"} transition-transform duration-300 ${ease}`} />
-        </button>
-    );
-}
 
 function Notice({ shown }: { shown: boolean }) {
     const motion = shown
@@ -69,26 +116,27 @@ export const Primitives: Story = {
         <FoundationPage title="Motion primitives" intro="Durations, easings, distance, blur, and scale stay fixed in light and dark. Product UI uses the semantic roles.">
             <FoundationSection title="Duration">
                 <div className="overflow-hidden rounded-lg border border-line bg-surface">
-                    {durations.map(([name, variable, time, role]) => (
-                        <div key={name} className="grid gap-spacing-02 border-b border-line px-spacing-05 py-spacing-04 last:border-b-0 md:grid-cols-[8rem_1fr]">
+                    {durations.map(([name, variable, time, role, motion]) => (
+                        <div key={name} className="grid items-center gap-spacing-04 border-b border-line px-spacing-05 py-spacing-04 last:border-b-0 md:grid-cols-[8rem_1fr_auto]">
                             <span className="text-sm font-medium">{name}</span>
                             <span className="font-mono text-xs text-muted">
-                                {variable} · {time} · {role}
+                                {variable} · {time} · {role} · {motion}
                             </span>
+                            <RoleSample role={motion} />
                         </div>
                     ))}
                 </div>
             </FoundationSection>
             <FoundationSection title="Easing">
                 <div className="grid gap-spacing-04 md:grid-cols-2">
-                    {easings.map(([name, variable, utility, role]) => (
+                    {easings.map(([name, variable, utility, role, motion]) => (
                         <article key={name} className="flex flex-col gap-spacing-03 rounded-lg border border-line bg-surface p-spacing-05">
                             <span className="text-sm font-medium">{name}</span>
                             <span className="font-mono text-xs text-muted">
                                 {variable} · {utility}
                             </span>
                             <p className="text-sm text-muted">{role}</p>
-                            <EaseSample ease={utility} />
+                            {motion === "motion-enter" ? <CurveSample ease="ease-enter" /> : <RoleSample role={motion} />}
                         </article>
                     ))}
                 </div>
@@ -166,6 +214,19 @@ export const Semantic: Story = {
                     </tbody>
                 </table>
             </div>
+            <FoundationSection title="Try the class">
+                <div className="grid gap-spacing-04 md:grid-cols-2">
+                    {roles.map(([name, motion]) => (
+                        <article key={name} className="flex items-center justify-between gap-spacing-04 rounded-lg border border-line bg-surface p-spacing-05">
+                            <div className="flex flex-col gap-spacing-01">
+                                <span className="text-sm font-medium">{name}</span>
+                                <span className="font-mono text-xs text-muted">{motion}</span>
+                            </div>
+                            <RoleSample role={motion} />
+                        </article>
+                    ))}
+                </div>
+            </FoundationSection>
         </FoundationPage>
     ),
 };
