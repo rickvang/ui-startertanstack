@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, switchSnippet } from "../../../.storybook/story-snippets";
 import { Switch } from "./switch";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Components/Switch",
     component: Switch,
     args: {
@@ -14,7 +18,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+    ...docsFromSnippet(switchSnippet),
+};
 
 export const Stacked: Story = {
     name: "Stacked",

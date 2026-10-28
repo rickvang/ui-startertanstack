@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocList, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
+import { libraryExportNote, tableSelectActSnippet } from "../../../../../.storybook/story-snippets";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
 import { Table } from "../table";
 import { directory, directoryColumns } from "./fixtures";
 import { tableStoryMeta } from "./meta";
@@ -14,6 +15,7 @@ export const SelectAndAct: Story = {
     name: "Select and act",
     render: () => (
         <DocPage title="Select and act" intro="Multi-select, pagination, row actions, and bulk actions for working through a directory in batches.">
+            <DocCodeSection note={libraryExportNote} code={tableSelectActSnippet} />
             <DocSection title="Example">
                 <DocList
                     items={[

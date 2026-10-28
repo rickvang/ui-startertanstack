@@ -1,11 +1,12 @@
 import { useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, navigatingDomainsSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const domains = [
     { value: "projects", label: "Projects" },
@@ -67,6 +68,7 @@ export const NavigatingDomains: Story = {
 
         return (
             <DocPage title="Navigating domains" intro="Choosing a domain changes the page. The shell stays: navigation, settings, help, and the account are still there.">
+            <DocCodeSection note={compositionNote} code={navigatingDomainsSnippet} />
                 <DocSection title="When to use">
                     <DocList
                         items={[

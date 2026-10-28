@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, flexSnippet } from "../../../.storybook/story-snippets";
 import { Flex } from "./flex";
 import { LayoutPurpose } from "./layout-purpose";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Layout/Arrange/Flow/Flex",
     component: Flex,
     args: {
@@ -17,6 +21,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Row: Story = {
+    ...docsFromSnippet(flexSnippet),
     render: () => (
         <div>
             <LayoutPurpose>Use Flex when items stay on one line. A row is a toolbar. A column is a short list that should not wrap.</LayoutPurpose>

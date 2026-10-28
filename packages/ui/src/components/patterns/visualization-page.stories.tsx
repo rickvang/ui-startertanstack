@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, visualizationPageSnippet } from "../../../.storybook/story-snippets";
 import { Select } from "../base/select";
 import { Layout } from "../layout/layout";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const week = [
     { label: "Mon", height: "h-spacing-07" },
@@ -24,6 +25,7 @@ export const VisualizationPage: Story = {
     name: "Visualization page",
     render: () => (
         <DocPage title="Visualization page" intro="A visualization page helps someone read a set of numbers, see the trend, and decide. The summary comes first. The detail opens only when they ask. It stays its own page until there is a chart module.">
+            <DocCodeSection note={compositionNote} code={visualizationPageSnippet} />
             <DocSection title="When to use">
                 <DocList
                     items={[

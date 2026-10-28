@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, productSettingsSnippet } from "../../../.storybook/story-snippets";
 import { Avatar } from "../base/avatar";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
@@ -7,7 +8,7 @@ import { SettingsScreen, settingsSections, type SettingsFacts, type SettingsSect
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocList, DocPage, DocParagraph, DocSection } from "../templates/doc";
+import { DocDemo, DocCodeSection, DocList, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
 const domains = [
     { value: "projects", label: "Projects" },
@@ -161,6 +162,7 @@ export const ProductSettings: Story = {
 
         return (
             <DocPage title="Product settings" intro="Settings in the sider opens the product screen. Product, access, and remove stay on that screen. The domain menu stays. A domain takes you back to that page.">
+            <DocCodeSection note={compositionNote} code={productSettingsSnippet} />
                 <DocSection title="When to use">
                     <DocList
                         items={[

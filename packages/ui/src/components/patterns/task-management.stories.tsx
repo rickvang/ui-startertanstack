@@ -1,12 +1,13 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, taskManagementSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Layout } from "../layout/layout";
 import { DetailCard } from "../modules/detail-card";
 import { Table, type TableItem } from "../modules/table";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const tasks: readonly TableItem[] = [
     { id: "alex", name: "Alex Kim needs a review", status: "Review", statusVariant: "warning" },
@@ -30,6 +31,7 @@ export const TaskManagement: Story = {
 
         return (
             <DocPage title="Task management" intro="Task management is a queue. Status comes first. Opening an item shows the record, or why the task cannot continue.">
+            <DocCodeSection note={compositionNote} code={taskManagementSnippet} />
                 <DocSection title="Studio">
                     <DocDemo bleed>
                     <Layout

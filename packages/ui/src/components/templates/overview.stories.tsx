@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocList, DocPage, DocSection } from "./doc";
+import { libraryExportNote, templatesOverviewSnippet } from "../../../.storybook/story-snippets";
+import { DocCodeSection, DocList, DocPage, DocSection } from "./doc";
 
 const meta = {
     title: "Patterns/Overview",
@@ -13,6 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Overview: Story = {
     render: () => (
         <DocPage title="Overview" intro="A module is a group of components that behaves as one unit. A pattern is a workflow that uses those units to finish a job. The shell is the module that stays put. Navigating domains changes the page inside it.">
+            <DocCodeSection note={libraryExportNote} code={templatesOverviewSnippet} />
             <DocSection title="What to read">
                 <DocList
                     items={[

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { detailCardSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
 import { Avatar } from "../base/avatar";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
@@ -7,7 +8,7 @@ import { DetailGroup } from "../base/detail-group";
 import { Anchor } from "../navigation/anchor";
 import { Steps } from "../navigation/steps";
 import { Tabs } from "../navigation/tabs";
-import { DocBullets, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { DetailCard as DetailCardModule } from "./detail-card";
 
 const meta = {
@@ -30,6 +31,7 @@ export const Detail: Story = {
     args: { title: "Alex Kim", status: "Active", children: null },
     render: () => (
         <DocPage title="Detail" intro="A detail is one record: its name, its status, and the action that belongs to it.">
+            <DocCodeSection note={libraryExportNote} code={detailCardSnippet} />
             <DocSection title="Example">
                 <DocParagraph>Groups hold the facts. The first group has no line above it. A later group sets the divider.</DocParagraph>
                 <DocDemo className="max-w-3xl">

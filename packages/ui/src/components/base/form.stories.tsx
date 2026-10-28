@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { copyableDocs, libraryExportNote, projectFormSnippet } from "../../../.storybook/copyable-snippets";
+import { formPendingSnippet, formSummarySnippet } from "../../../.storybook/story-snippets";
+import { DocCodeExample, DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 import { Button } from "./button";
 import { Fieldset } from "./fieldset";
 import { Form, FormSubmit } from "./form";
@@ -35,8 +37,20 @@ function ProjectFields() {
 
 export const FormReady: Story = {
     name: "Form, ready",
+    parameters: {
+        docs: copyableDocs(
+            projectFormSnippet,
+            `${libraryExportNote} \`Form\`, \`FormSubmit\`, \`Fieldset\`, \`TextField\`, and \`Button\` are exported. Cancel uses \`type="button"\` so it does not submit.`,
+        ),
+    },
     render: () => (
         <DocPage title="Form, ready" intro="The form owns the record. Save submits it. Cancel does not.">
+            <DocSection title="Code example">
+                <DocCodeExample
+                    note={`${libraryExportNote} \`Form\`, \`FormSubmit\`, \`Fieldset\`, \`TextField\`, and \`Button\` are exported. Cancel uses \`type="button"\` so it does not submit.`}
+                    code={projectFormSnippet}
+                />
+            </DocSection>
             <DocSection title="Common practice">
                 <DocList
                     items={[
@@ -61,6 +75,7 @@ export const FormSummary: Story = {
     name: "Form, summary",
     render: () => (
         <DocPage title="Form, summary" intro="When more than one field fails, the summary sits at the top of the form. Each field keeps its own error.">
+            <DocCodeSection note={libraryExportNote} code={formSummarySnippet} />
             <DocSection title="Common practice">
                 <DocList
                     items={[
@@ -93,6 +108,7 @@ export const FormPending: Story = {
     name: "Form, pending",
     render: () => (
         <DocPage title="Form, pending" intro="While the save is in progress, Save is unavailable and the form is marked busy.">
+            <DocCodeSection note={libraryExportNote} code={formPendingSnippet} />
             <DocSection title="Common practice">
                 <DocList
                     items={[

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { dialogSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
+import { DocCodeSection } from "../templates/doc";
 import { Button } from "../base/button";
 import { Dialog } from "./dialog";
 
@@ -20,6 +22,7 @@ export const DialogStory: Story = {
 
         return (
             <div className="flex flex-col items-start gap-spacing-04 p-spacing-05">
+                <DocCodeSection note={libraryExportNote} code={dialogSnippet} />
                 <Button variant="danger" onClick={() => setOpen(true)}>
                     Remove
                 </Button>

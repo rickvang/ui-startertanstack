@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, selectSnippet } from "../../../.storybook/story-snippets";
 import { Select } from "./select";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Components/Select",
     component: Select,
     args: {
@@ -20,6 +24,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Stacked: Story = {
+    ...docsFromSnippet(selectSnippet),
     name: "Stacked",
 };
 

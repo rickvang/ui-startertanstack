@@ -1,10 +1,11 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, wizardSnippet } from "../../../.storybook/story-snippets";
 import { Button } from "../base/button";
 import { Select } from "../base/select";
 import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
-import { DocDemo, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const steps = ["Name", "Access", "Review"] as const;
 
@@ -40,6 +41,7 @@ export const Wizard: Story = {
 
         return (
             <DocPage title="Wizard" intro="A wizard is a create-record flow where a later answer depends on an earlier one. Each step stays short.">
+            <DocCodeSection note={compositionNote} code={wizardSnippet} />
                 <DocSection title="Project access">
                     <DocDemo className="max-w-md">
                     <div className="flex flex-col gap-spacing-05">

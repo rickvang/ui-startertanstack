@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { FoundationPage, FoundationSection } from "../foundations/catalog";
 import { cx } from "../../utils/cx";
 
@@ -116,5 +116,69 @@ export function DocRows({
                 </tbody>
             </table>
         </div>
+    );
+}
+
+function DocCodeNote({ children }: { children: string }) {
+    const parts = children.split(/(\*\*[^*]+\*\*)/g);
+
+    return (
+        <p className="max-w-3xl text-sm text-muted">
+            {parts.map((part, index) =>
+                part.startsWith("**") && part.endsWith("**") ? (
+                    <strong key={index} className="font-medium text-ink">
+                        {part.slice(2, -2)}
+                    </strong>
+                ) : (
+                    <span key={index}>{part}</span>
+                ),
+            )}
+        </p>
+    );
+}
+
+export function DocCodeExample({ note, code }: { note: string; code: string }) {
+    const [copied, setCopied] = useState(false);
+
+    async function onCopy() {
+        try {
+            await navigator.clipboard.writeText(code);
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 2000);
+        } catch {
+            setCopied(false);
+        }
+    }
+
+    return (
+        <div className="flex max-w-3xl flex-col gap-spacing-03">
+            <DocCodeNote>{note}</DocCodeNote>
+            <details className="overflow-hidden rounded-lg border border-line bg-canvas" open>
+                <summary className="cursor-pointer list-none px-spacing-04 py-spacing-03 text-sm font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden">
+                    Example code
+                </summary>
+                <div className="relative border-t border-line">
+                    <button
+                        type="button"
+                        className="absolute top-spacing-03 right-spacing-03 rounded-md border border-line bg-surface px-spacing-03 py-spacing-02 text-xs font-medium text-ink hover:bg-canvas focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                        onClick={onCopy}
+                        aria-label={copied ? "Copied" : "Copy code"}
+                    >
+                        {copied ? "Copied" : "Copy"}
+                    </button>
+                    <pre className="max-h-[28rem] overflow-auto p-spacing-04 pr-spacing-12 text-xs leading-relaxed text-ink">
+                        <code>{code}</code>
+                    </pre>
+                </div>
+            </details>
+        </div>
+    );
+}
+
+export function DocCodeSection({ note, code }: { note: string; code: string }) {
+    return (
+        <DocSection title="Code example">
+            <DocCodeExample note={note} code={code} />
+        </DocSection>
     );
 }

@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, gridSnippet } from "../../../.storybook/story-snippets";
 import { Grid } from "./grid";
 import { LayoutPurpose } from "./layout-purpose";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Layout/Arrange/Split/Grid",
     component: Grid,
     args: {
@@ -16,6 +20,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const ThreeColumns: Story = {
+    ...docsFromSnippet(gridSnippet),
     render: () => (
         <div className="max-w-xl">
             <LayoutPurpose>Use Grid when a region splits into equal columns.</LayoutPurpose>

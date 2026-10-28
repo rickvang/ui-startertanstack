@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
+import { libraryExportNote, tableLongListSnippet } from "../../../../../.storybook/story-snippets";
+import { DocDemo, DocCodeSection, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
 import { Table } from "../table";
 import { columns, roster } from "./fixtures";
 import { tableStoryMeta } from "./meta";
@@ -14,6 +15,7 @@ export const LongList: Story = {
     name: "Long list",
     render: () => (
         <DocPage title="Long list" intro="Virtualize long lists with steady row height, or paginate when you prefer pages over scrolling.">
+            <DocCodeSection note={libraryExportNote} code={tableLongListSnippet} />
             <DocSection title="Example">
                 <DocWhenAvoid
                     when="virtualize is for long lists with steady row height. pageSize and pageSizeOptions slice parents and compose Pagination when you prefer pages over scrolling."

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, inlineEditSnippet } from "../../../.storybook/story-snippets";
 import { DescriptionList } from "../base/description-list";
 import { TextField } from "../base/text-field";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Patterns/Inline edit",
@@ -16,6 +17,7 @@ export const InlineEdit: Story = {
     name: "Inline edit",
     render: () => (
         <DocPage title="Inline edit" intro="A later way to modify a record. One fact becomes a field where it sits. The detail does not gain a Save action.">
+            <DocCodeSection note={compositionNote} code={inlineEditSnippet} />
             <DocSection title="When to use">
                 <DocList
                     items={[

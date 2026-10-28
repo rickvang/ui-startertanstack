@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, radioSnippet } from "../../../.storybook/story-snippets";
 import { RadioGroup } from "./radio";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Components/Radio",
     component: RadioGroup,
     args: {
@@ -20,6 +24,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Stacked: Story = {
+    ...docsFromSnippet(radioSnippet),
     name: "Stacked",
 };
 

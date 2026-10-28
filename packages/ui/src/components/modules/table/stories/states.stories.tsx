@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
+import { libraryExportNote, tableStatesSnippet } from "../../../../../.storybook/story-snippets";
+import { DocDemo, DocCodeSection, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
 import { Table } from "../table";
 import { columns, members } from "./fixtures";
 import { tableStoryMeta } from "./meta";
@@ -14,6 +15,7 @@ export const States: Story = {
     name: "States",
     render: () => (
         <DocPage title="States" intro="Loading, error, empty, and density are explicit states. Match empty copy to meaning.">
+            <DocCodeSection note={libraryExportNote} code={tableStatesSnippet} />
             <DocSection title="Example">
                 <DocWhenAvoid
                     when="loading shows Loader rows. error keeps the header and shows a message. empty is copy when there are no items. A search or filter with no hits uses built-in no matches copy. density changes row padding."

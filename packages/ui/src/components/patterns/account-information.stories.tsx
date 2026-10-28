@@ -1,12 +1,13 @@
 import { useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { accountInformationSnippet, compositionNote } from "../../../.storybook/story-snippets";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { AccountScreen, type AccountFacts } from "../modules/account-screen";
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const domains = [
     { value: "projects", label: "Projects" },
@@ -94,6 +95,7 @@ export const AccountInformation: Story = {
 
         return (
             <DocPage title="Account information" intro="The picture opens the person's account. Profile, sign-in, notices, and remove stay on that screen. The domain menu stays. A domain takes you back to that page.">
+            <DocCodeSection note={compositionNote} code={accountInformationSnippet} />
                 <DocSection title="When to use">
                     <DocList
                         items={[

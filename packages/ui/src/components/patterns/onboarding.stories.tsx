@@ -1,9 +1,10 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, onboardingSnippet } from "../../../.storybook/story-snippets";
 import { Button } from "../base/button";
 import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
-import { DocDemo, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const steps = ["Workspace", "Invite", "Done"] as const;
 
@@ -39,6 +40,7 @@ export const Onboarding: Story = {
 
         return (
             <DocPage title="Onboarding" intro="Onboarding is the first run. It names the workspace, offers one invite, and lands the person in the product.">
+            <DocCodeSection note={compositionNote} code={onboardingSnippet} />
                 <DocSection title="First run">
                     <DocDemo className="max-w-md">
                     <div className="flex flex-col gap-spacing-05">

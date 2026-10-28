@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, modifyingRecordSnippet } from "../../../.storybook/story-snippets";
 import { Button } from "../base/button";
 import { DescriptionList } from "../base/description-list";
 import { DetailGroup } from "../base/detail-group";
@@ -7,7 +8,7 @@ import { Fieldset } from "../base/fieldset";
 import { Form, FormSubmit } from "../base/form";
 import { TextField } from "../base/text-field";
 import { DetailCard } from "../modules/detail-card";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Patterns/Modifying a record",
@@ -27,6 +28,7 @@ export const ModifyingRecord: Story = {
 
         return (
             <DocPage title="Modifying a record" intro="Changing a record starts on its detail. Edit opens the form with the current facts. Save returns to the detail. Cancel returns without a change.">
+            <DocCodeSection note={compositionNote} code={modifyingRecordSnippet} />
                 <DocSection title="When to use">
                     <DocList
                         items={[

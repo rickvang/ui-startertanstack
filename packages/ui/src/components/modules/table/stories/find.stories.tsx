@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocList, DocNote, DocPage, DocSection } from "../../../templates/doc";
+import { libraryExportNote, tableFindSnippet } from "../../../../../.storybook/story-snippets";
+import { DocDemo, DocList, DocNote, DocCodeSection, DocPage, DocSection } from "../../../templates/doc";
 import { Table } from "../table";
 import { directory, directoryColumns } from "./fixtures";
 import { tableStoryMeta } from "./meta";
@@ -14,6 +15,7 @@ export const Find: Story = {
     name: "Find",
     render: () => (
         <DocPage title="Find" intro="Search, status filters, and column sort narrow a directory. Columns chooses the fields in view. Each control stays off until the workflow needs it.">
+            <DocCodeSection note={libraryExportNote} code={tableFindSnippet} />
             <DocSection title="Search">
                 <DocList
                     items={[

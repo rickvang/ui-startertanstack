@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, fieldSnippet } from "../../../.storybook/story-snippets";
 import { Field } from "./field";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Components/Field",
     component: Field,
     args: {
@@ -20,6 +24,7 @@ function Control({ id }: { id: string }) {
 }
 
 export const Hint: Story = {
+    ...docsFromSnippet(fieldSnippet),
     name: "Hint",
     render: () => (
         <Field label="Project name" hint="Shown on the project home." htmlFor="project-name">

@@ -29,6 +29,11 @@ const preview: Preview = {
     ],
     parameters: {
         layout: "centered",
+        docs: {
+            source: {
+                state: "open",
+            },
+        },
         options: {
             storySort: {
                 includeNames: true,

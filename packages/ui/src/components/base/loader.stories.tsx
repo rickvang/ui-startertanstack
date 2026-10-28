@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, loaderSnippet } from "../../../.storybook/story-snippets";
 import { FoundationPage } from "../foundations/catalog";
 import { Loader, type LoaderVariant } from "./loader";
 
@@ -10,9 +12,10 @@ const variations = [
 ] as const satisfies ReadonlyArray<readonly [string, LoaderVariant, string]>;
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: { ...autodocsComponentParameters, layout: "fullscreen" },
     title: "Components/Loader",
     component: Loader,
-    parameters: { layout: "fullscreen" },
     args: {
         label: "Loading",
         children: null,
@@ -24,6 +27,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Loading: Story = {
+    ...docsFromSnippet(loaderSnippet),
     render: () => (
         <FoundationPage title="Loader" intro="A skeleton stands in for content that has not arrived. Use the shape of what is coming, and let the whole shape breathe brighter, then quieter. The circle sends a dot around a figure 8, easing through the crossing.">
             <div className="grid gap-spacing-04 sm:grid-cols-2">

@@ -1,11 +1,12 @@
 import { useId, useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, switchingOrganizationsSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 import { cx } from "../../utils/cx";
 
 const organizations = [
@@ -128,6 +129,7 @@ export const SwitchingOrganizations: Story = {
 
         return (
             <DocPage title="Switching organizations" intro="Choosing an organization changes which organization the domains belong to. The shell stays: the domain menu, settings, help, and the account are still there.">
+            <DocCodeSection note={compositionNote} code={switchingOrganizationsSnippet} />
                 <DocSection title="When to use">
                     <DocList
                         items={[

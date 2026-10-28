@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, stackSnippet } from "../../../.storybook/story-snippets";
 import { LayoutPurpose } from "./layout-purpose";
 import { Stack } from "./stack";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Layout/Arrange/Flow/Stack",
     component: Stack,
 } satisfies Meta<typeof Stack>;
@@ -12,6 +16,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Vertical: Story = {
+    ...docsFromSnippet(stackSnippet),
     args: { children: "Blocks" },
     render: () => (
         <div>

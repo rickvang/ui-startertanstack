@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, tabsSnippet } from "../../../.storybook/story-snippets";
 import { Tabs } from "./tabs";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Components/Tabs",
     component: Tabs,
     args: {
@@ -17,4 +21,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+    ...docsFromSnippet(tabsSnippet),
+};

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { detailGroupSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 import { DescriptionList } from "./description-list";
 import { DetailGroup } from "./detail-group";
 
@@ -26,6 +27,7 @@ export const DetailGroupStory: Story = {
     name: "Detail group",
     render: () => (
         <DocPage title="Detail group" intro="A detail group is one set of facts inside a detail. The title is a noun, such as Profile or Activity.">
+            <DocCodeSection note={libraryExportNote} code={detailGroupSnippet} />
             <DocSection title="Common practice">
                 <DocList
                     items={[
