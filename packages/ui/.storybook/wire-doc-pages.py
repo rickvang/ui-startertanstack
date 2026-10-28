@@ -32,8 +32,6 @@ DOC_PAGES = [
     ("components/templates/overlay.stories.tsx", "SlideIn", "slideInCompositionSnippet", "compositionNote"),
     ("components/layout/layout.stories.tsx", "Standard", "layoutSnippet", "libraryExportNote"),
     ("components/templates/overview.stories.tsx", "Overview", "templatesOverviewSnippet", "libraryExportNote"),
-    ("components/templates/global-rules.stories.tsx", "MessageAndFeedback", "globalRulesMessageSnippet", "libraryExportNote"),
-    ("components/templates/global-rules.stories.tsx", "EmptyStatus", "globalRulesEmptySnippet", "libraryExportNote"),
     ("components/patterns/account-information.stories.tsx", "AccountInformation", "accountInformationSnippet", "compositionNote"),
     ("components/patterns/inline-edit.stories.tsx", "InlineEdit", "inlineEditSnippet", "compositionNote"),
     ("components/patterns/modifying-record.stories.tsx", "ModifyingRecord", "modifyingRecordSnippet", "compositionNote"),

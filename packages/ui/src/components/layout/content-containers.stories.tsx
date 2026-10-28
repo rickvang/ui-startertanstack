@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { compositionNote, contentContainerSnippet } from "../../../.storybook/story-snippets";
 import { cx } from "../../utils/cx";
+import { Button } from "../base/button";
+import { EmptyState } from "../base/empty-state";
 import { DocCodeSection, DocDemo, DocList, DocNote, DocPage, DocSection, DocWhenAvoid } from "../templates/doc";
 import { Card } from "./card";
 
@@ -82,13 +84,14 @@ type Story = StoryObj<typeof meta>;
 export const Standard: Story = {
     args: { children: "Content" },
     render: () => (
-        <DocPage title="Content containers" intro="A content container holds a group. It can be a panel that houses cards, or a card that is the group. Pick it from how the content is scanned. The surface, and its outlined, raised, and quiet treatments, are in Components / Card.">
+        <DocPage title="Content containers" intro="A content container holds a group. It can be a panel that houses cards, or a card that is the group. Pick it from how the content is scanned. The surface, and its outlined, raised, and quiet treatments, are in Components / Card. An empty group is a real state. Use Empty state inside the container.">
             <DocCodeSection note={compositionNote} code={contentContainerSnippet} />
             <DocSection title="How to choose">
                 <DocList
                     items={[
                         { title: "Several related items, read as one group", body: "Panel. The surface holds the group. Cards, metrics, or pairs sit inside it." },
                         { title: "One item that stands on its own", body: "Card. The surface is the item. Kinds that fill a card are in Components / Card." },
+                        { title: "Nothing in the group yet", body: "Empty. Say what is missing. Offer the same action the full page uses." },
                         { title: "A few numbers", body: "Metrics. One panel holds the measures so they can be scanned together." },
                         { title: "Facts about one object", body: "Key-value. Labels and values in one panel. Not a table." },
                         { title: "A few pieces of writing", body: "Article row. Cards sit in a line inside the panel." },
@@ -114,6 +117,17 @@ export const Standard: Story = {
                 <ContainerFrame name="Card" when="One measure, one piece of writing, one person, or one next step. The card is the thing." avoid="Do not stretch one card across a whole group of unrelated items. That group is a panel. Many people of the same kind, with columns to compare, belong in a table.">
                     <Card className="max-w-64 gap-spacing-03">
                         <MetricBones valueWidth="w-spacing-08" trend={rising} />
+                    </Card>
+                </ContainerFrame>
+            </DocSection>
+            <DocSection title="Empty">
+                <DocNote>Use this when the group loaded and there is nothing in it yet. Empty state is the control. It sits inside the container.</DocNote>
+                <ContainerFrame name="Empty" when="The page loaded and the group has no items. Say what is missing. Offer the same action the full page uses." avoid="Do not use Message for an empty container. Do not show an empty table with no sentence. Empty is not an exception. A table empty is copy in the table, in Modules / Table.">
+                    <Card>
+                        <Bone className="h-spacing-04 w-spacing-11" />
+                        <EmptyState title="No members yet" action={<Button>Invite</Button>}>
+                            Invite someone to get started.
+                        </EmptyState>
                     </Card>
                 </ContainerFrame>
             </DocSection>

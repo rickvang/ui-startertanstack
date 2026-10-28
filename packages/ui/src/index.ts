@@ -30,6 +30,8 @@ export { Form, FormSubmit, useFormPending } from "./components/base/form";
 export type { FormProps } from "./components/base/form";
 export { DetailGroup } from "./components/base/detail-group";
 export type { DetailGroupProps } from "./components/base/detail-group";
+export { EmptyState } from "./components/base/empty-state";
+export type { EmptyStateProps } from "./components/base/empty-state";
 export { Message } from "./components/base/message";
 export type { MessageProps, MessageTone } from "./components/base/message";
 export { DescriptionList } from "./components/base/description-list";

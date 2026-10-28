@@ -192,7 +192,7 @@ function LongLabels() {
 export const Forms: Story = {
     name: "Forms",
     render: () => (
-        <DocPage title="Forms" intro="A form collects the fields for one record.">
+        <DocPage title="Forms" intro="A form collects the fields for one record. A field error sits with the field. A saved result uses Message.">
             <DocCodeSection note={libraryExportNote} code={formGroupModuleSnippet} />
             <DocSection title="Example">
                 <DocParagraph>Related fields sit in a group. The label sits beside the value when the name is short.</DocParagraph>

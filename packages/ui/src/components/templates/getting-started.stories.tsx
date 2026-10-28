@@ -21,7 +21,7 @@ export const ThisCatalog: Story = {
                     headers={["Open", "For"]}
                     rows={[
                         { label: "Foundations", detail: "Color, type, space, radius, shadow, and motion. Motion is primitives, then semantic roles. The component plays the role." },
-                        { label: "Layout", detail: "Frames, content containers, overlays, rules, and arrangement." },
+                        { label: "Layout", detail: "Frames, content containers, overlays, and arrangement." },
                         { label: "Components", detail: "One control. Navigation sits here." },
                         { label: "Modules", detail: "Shell, settings, account, forms, detail, and table." },
                         { label: "Patterns", detail: "A workflow. Copy the closest story. Keep Shell as the frame." },
