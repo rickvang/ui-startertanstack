@@ -5,7 +5,7 @@ import { Button } from "../base/button";
 import { Select } from "../base/select";
 import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
-import { DocDemo, DocCodeSection, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
 const steps = ["Name", "Access", "Review"] as const;
 
@@ -40,24 +40,31 @@ export const Wizard: Story = {
         const [step, setStep] = useState<StepIndex>(0);
 
         return (
-            <DocPage title="Wizard" intro="A wizard is a create-record flow where a later answer depends on an earlier one. Each step stays short.">
-            <DocCodeSection note={compositionNote} code={wizardSnippet} />
-                <DocSection title="Project access">
+            <DocPage title="Wizard" intro="A create flow where a later answer depends on an earlier one.">
+                <DocSection title="Example">
+                    <DocParagraph>Each step stays short. Review is the last step before save.</DocParagraph>
                     <DocDemo className="max-w-md">
-                    <div className="flex flex-col gap-spacing-05">
-                        <Steps items={steps} current={step} />
-                        {stepBody(step)}
-                        <div className="flex gap-spacing-03">
-                            <Button variant="secondary" disabled={step === 0} onClick={() => setStep((current) => (current === 0 ? 0 : ((current - 1) as StepIndex)))}>
-                                Back
-                            </Button>
-                            <Button disabled={step === 2} onClick={() => setStep((current) => (current === 2 ? 2 : ((current + 1) as StepIndex)))}>
-                                Next
-                            </Button>
+                        <div className="flex flex-col gap-spacing-05">
+                            <Steps items={steps} current={step} />
+                            {stepBody(step)}
+                            <div className="flex gap-spacing-03">
+                                <Button variant="secondary" disabled={step === 0} onClick={() => setStep((current) => (current === 0 ? 0 : ((current - 1) as StepIndex)))}>
+                                    Back
+                                </Button>
+                                <Button disabled={step === 2} onClick={() => setStep((current) => (current === 2 ? 2 : ((current + 1) as StepIndex)))}>
+                                    Next
+                                </Button>
+                            </div>
                         </div>
-                    </div>
                     </DocDemo>
                 </DocSection>
+                <DocSection title="When to use">
+                    <DocBullets items={["A later field only makes sense after an earlier choice.", "The person should not see the whole form at once."]} />
+                </DocSection>
+                <DocSection title="When not to use">
+                    <DocBullets items={["Every field can sit on one page. Use create a record.", "This is the first run of the product. Use onboarding."]} />
+                </DocSection>
+                <DocCodeSection note={compositionNote} code={wizardSnippet} />
             </DocPage>
         );
     },

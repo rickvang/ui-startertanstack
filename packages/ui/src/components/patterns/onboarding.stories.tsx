@@ -4,7 +4,7 @@ import { compositionNote, onboardingSnippet } from "../../../.storybook/story-sn
 import { Button } from "../base/button";
 import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
-import { DocDemo, DocCodeSection, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
 const steps = ["Workspace", "Invite", "Done"] as const;
 
@@ -39,28 +39,35 @@ export const Onboarding: Story = {
         const [step, setStep] = useState<StepIndex>(0);
 
         return (
-            <DocPage title="Onboarding" intro="Onboarding is the first run. It names the workspace, offers one invite, and lands the person in the product.">
-            <DocCodeSection note={compositionNote} code={onboardingSnippet} />
-                <DocSection title="First run">
+            <DocPage title="Onboarding" intro="The first run. Name the workspace, offer one invite, and land in the product.">
+                <DocSection title="Example">
+                    <DocParagraph>Invite can wait. Done lands the person in the workspace.</DocParagraph>
                     <DocDemo className="max-w-md">
-                    <div className="flex flex-col gap-spacing-05">
-                        <Steps items={steps} current={step} />
-                        {stepBody(step)}
-                        <div className="flex gap-spacing-03">
-                            {step === 0 ? null : (
-                                <Button variant="secondary" onClick={() => setStep((current) => (current === 0 ? 0 : ((current - 1) as StepIndex)))}>
-                                    Back
-                                </Button>
-                            )}
-                            {step === 2 ? (
-                                <Button onClick={() => setStep(0)}>Start again</Button>
-                            ) : (
-                                <Button onClick={() => setStep((current) => (current === 2 ? 2 : ((current + 1) as StepIndex)))}>{step === 1 ? "Finish" : "Next"}</Button>
-                            )}
+                        <div className="flex flex-col gap-spacing-05">
+                            <Steps items={steps} current={step} />
+                            {stepBody(step)}
+                            <div className="flex gap-spacing-03">
+                                {step === 0 ? null : (
+                                    <Button variant="secondary" onClick={() => setStep((current) => (current === 0 ? 0 : ((current - 1) as StepIndex)))}>
+                                        Back
+                                    </Button>
+                                )}
+                                {step === 2 ? (
+                                    <Button onClick={() => setStep(0)}>Start again</Button>
+                                ) : (
+                                    <Button onClick={() => setStep((current) => (current === 2 ? 2 : ((current + 1) as StepIndex)))}>{step === 1 ? "Finish" : "Next"}</Button>
+                                )}
+                            </div>
                         </div>
-                    </div>
                     </DocDemo>
                 </DocSection>
+                <DocSection title="When to use">
+                    <DocBullets items={["The person has not used the product yet.", "The workspace needs a name before any other work."]} />
+                </DocSection>
+                <DocSection title="When not to use">
+                    <DocBullets items={["The workspace already exists. Use create a record or a wizard for later objects."]} />
+                </DocSection>
+                <DocCodeSection note={compositionNote} code={onboardingSnippet} />
             </DocPage>
         );
     },

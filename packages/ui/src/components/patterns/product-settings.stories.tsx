@@ -8,7 +8,7 @@ import { SettingsScreen, settingsSections, type SettingsFacts, type SettingsSect
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocCodeSection, DocList, DocPage, DocParagraph, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
 const domains = [
     { value: "projects", label: "Projects" },
@@ -161,18 +161,9 @@ export const ProductSettings: Story = {
         const help = placeHelp(place, domain);
 
         return (
-            <DocPage title="Product settings" intro="Settings in the sider opens the product screen. Product, access, and remove stay on that screen. The domain menu stays. A domain takes you back to that page.">
-            <DocCodeSection note={compositionNote} code={productSettingsSnippet} />
-                <DocSection title="When to use">
-                    <DocList
-                        items={[
-                            { title: "The product", body: "Change a fact that belongs to the product, such as its name." },
-                            { title: "From any page", body: "Settings stays under the domain menu. It is not a domain." },
-                            { title: "Back to the work", body: "Choosing a domain leaves settings and opens that page." },
-                        ]}
-                    />
-                </DocSection>
-                <DocSection title="Settings">
+            <DocPage title="Product settings" intro="Settings in the sider opens the product screen. Product, access, and remove stay on that screen. The domain menu stays.">
+                <DocSection title="Example">
+                    <DocParagraph>Settings sits under the domain menu. Choosing a domain leaves settings and opens that page.</DocParagraph>
                     <DocDemo bleed>
                         <Shell
                             product={<span className="px-spacing-04 font-semibold text-ink">{removed ? "Removed" : facts.name}</span>}
@@ -206,12 +197,24 @@ export const ProductSettings: Story = {
                         </Shell>
                     </DocDemo>
                 </DocSection>
+                <DocSection title="When to use">
+                    <DocBullets
+                        items={[
+                            "Change a fact that belongs to the product, such as its name.",
+                            "Open settings from any page. It is not a domain.",
+                        ]}
+                    />
+                </DocSection>
+                <DocSection title="When not to use">
+                    <DocBullets items={["The facts belong to the person. Use account information."]} />
+                </DocSection>
                 <DocSection title="Header, then side">
                     <DocParagraph>The top bar stays the product and the account. The side is Product, Access, and Remove. Remove opens a dialog over that page.</DocParagraph>
                     <DocDemo bleed>
                         <SectionSettings />
                     </DocDemo>
                 </DocSection>
+                <DocCodeSection note={compositionNote} code={productSettingsSnippet} />
             </DocPage>
         );
     },

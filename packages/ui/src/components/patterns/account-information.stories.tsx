@@ -7,7 +7,7 @@ import { AccountScreen, type AccountFacts } from "../modules/account-screen";
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
 const domains = [
     { value: "projects", label: "Projects" },
@@ -94,18 +94,9 @@ export const AccountInformation: Story = {
         const help = placeHelp(place, domain);
 
         return (
-            <DocPage title="Account information" intro="The picture opens the person's account. Profile, sign-in, notices, and remove stay on that screen. The domain menu stays. A domain takes you back to that page.">
-            <DocCodeSection note={compositionNote} code={accountInformationSnippet} />
-                <DocSection title="When to use">
-                    <DocList
-                        items={[
-                            { title: "The person", body: "Change the name or email that belongs to the person." },
-                            { title: "From any page", body: "The picture opens the account. It is not a domain and not the product settings." },
-                            { title: "It stays", body: "Saving the account does not change the domain or the organization." },
-                        ]}
-                    />
-                </DocSection>
-                <DocSection title="Account">
+            <DocPage title="Account information" intro="The picture opens the person's account. Profile, sign-in, notices, and remove stay on that screen. The domain menu stays.">
+                <DocSection title="Example">
+                    <DocParagraph>The picture opens the account. A domain takes you back to that page. Saving does not change the domain or the organization.</DocParagraph>
                     <DocDemo bleed>
                         <Shell
                             product={<span className="px-spacing-04 font-semibold text-ink">North</span>}
@@ -143,6 +134,18 @@ export const AccountInformation: Story = {
                         </Shell>
                     </DocDemo>
                 </DocSection>
+                <DocSection title="When to use">
+                    <DocBullets
+                        items={[
+                            "Change the name or email that belongs to the person.",
+                            "Open it from any page. It is not a domain and not the product settings.",
+                        ]}
+                    />
+                </DocSection>
+                <DocSection title="When not to use">
+                    <DocBullets items={["The facts belong to the product. Use product settings."]} />
+                </DocSection>
+                <DocCodeSection note={compositionNote} code={accountInformationSnippet} />
             </DocPage>
         );
     },

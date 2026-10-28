@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { compositionNote, inlineEditSnippet } from "../../../.storybook/story-snippets";
 import { DescriptionList } from "../base/description-list";
 import { TextField } from "../base/text-field";
-import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Patterns/Inline edit",
@@ -16,25 +16,32 @@ type Story = StoryObj<typeof meta>;
 export const InlineEdit: Story = {
     name: "Inline edit",
     render: () => (
-        <DocPage title="Inline edit" intro="A later way to modify a record. One fact becomes a field where it sits. The detail does not gain a Save action.">
-            <DocCodeSection note={compositionNote} code={inlineEditSnippet} />
+        <DocPage title="Inline edit" intro="One fact becomes a field where it sits.">
+            <DocSection title="Example">
+                <DocParagraph>The field replaces that fact. The rest of the detail stays. There is no page Save.</DocParagraph>
+                <DocDemo className="max-w-xl">
+                    <div className="flex flex-col gap-spacing-05">
+                        <DescriptionList items={[{ label: "Role", value: "Owner" }]} layout="horizontal" align="start" />
+                        <TextField label="Role" layout="horizontal" defaultValue="Owner" />
+                    </div>
+                </DocDemo>
+            </DocSection>
             <DocSection title="When to use">
-                <DocList
+                <DocBullets
                     items={[
-                        { title: "One fact", body: "The person is changing a single value, not the whole record." },
-                        { title: "In place", body: "The field replaces that fact. The rest of the detail stays as it was." },
-                        { title: "No page save", body: "The change commits from the field. Save and Cancel stay on the form when the whole record is open." },
+                        "The person is changing a single value, not the whole record.",
+                        "The change commits from the field.",
                     ]}
                 />
             </DocSection>
-            <DocSection title="Role">
-                <DocDemo className="max-w-xl">
-                <div className="flex flex-col gap-spacing-05">
-                    <DescriptionList items={[{ label: "Role", value: "Owner" }]} layout="horizontal" align="start" />
-                    <TextField label="Role" layout="horizontal" defaultValue="Owner" />
-                </div>
-                </DocDemo>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "Several facts need to change together. Use modifying a record. Save and Cancel belong to that form.",
+                    ]}
+                />
             </DocSection>
+            <DocCodeSection note={compositionNote} code={inlineEditSnippet} />
         </DocPage>
     ),
 };
