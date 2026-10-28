@@ -316,7 +316,7 @@ export const splitterSnippet = librarySnippet(
 
 export const cardSnippet = librarySnippet(
     "Card",
-    `<Card variant="raised">
+    `<Card>
     <h2 className="text-sm font-semibold">North team</h2>
     <p className="text-sm text-muted">Three members. Last visit today.</p>
 </Card>`,
