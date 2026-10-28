@@ -507,6 +507,17 @@ export const taskManagementSnippet = patternSnippet(
     "TaskBoardTable",
 );
 
+export const planningSnippet = patternSnippet(
+    "TextArea",
+    `<TextArea
+    label="Source"
+    hint="JSON. Illustration and assumption stay in the file."
+    value={sourceText}
+    onChange={(event) => setSourceText(event.target.value)}
+/>`,
+    "PlanningSource",
+);
+
 export const visualizationPageSnippet = patternSnippet(
     "Shell",
     `<Shell

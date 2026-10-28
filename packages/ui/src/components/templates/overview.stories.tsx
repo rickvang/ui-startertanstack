@@ -27,6 +27,7 @@ export const Overview: Story = {
                         { label: "First run", detail: "Onboarding. Name the workspace and offer one invite." },
                         { label: "A queue", detail: "Task management. Status first, then the record or why it cannot continue." },
                         { label: "A set of numbers", detail: "Visualization page. Summary first. It stays its own page until there is a chart module." },
+                        { label: "A path and the work it implies", detail: "Planning. A journey names friction. A story map slices the first release." },
                     ]}
                 />
             </DocSection>
