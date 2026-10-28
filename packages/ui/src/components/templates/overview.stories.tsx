@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocList, DocPage, DocSection } from "./doc";
+import { DocPage, DocParagraph, DocRows, DocSection } from "./doc";
 
 const meta = {
     title: "Patterns/Overview",
@@ -12,36 +12,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Overview: Story = {
     render: () => (
-        <DocPage title="Overview" intro="A module is a group of components that behaves as one unit. A pattern is a workflow that uses those units to finish a job. The shell is the module that stays put. Navigating domains changes the page inside it.">
-            <DocSection title="What to read">
-                <DocList
-                    items={[
-                        {
-                            title: "Modules",
-                            body: "Shell, settings, account, forms, detail, and table. Each one has its own interaction.",
-                        },
-                        {
-                            title: "Workflows",
-                            body: "Navigating domains, switching organizations, product settings, account information, create a record, modifying a record, wizard, onboarding, and task management. Inline edit is a later way to change one fact. A workflow ends in a result, or explains why it cannot continue.",
-                        },
-                        {
-                            title: "Navigating domains",
-                            body: "Choosing a domain in the shell changes the page. Settings, help, and the account stay.",
-                        },
-                    ]}
-                />
-            </DocSection>
+        <DocPage title="Overview" intro="A pattern is a workflow. Copy the closest story. Keep Shell as the frame: navigation, settings, help, and the account stay.">
             <DocSection title="How to choose a workflow">
-                <DocList
-                    items={[
-                        { title: "Another part of the product", body: "Use navigating domains. The shell stays, and the page inside changes." },
-                        { title: "Another organization", body: "Use switching organizations. Pick it in the product slot. The domain menu stays, and the page shows that organization." },
-                        { title: "The product's settings", body: "Use product settings. The screen holds the product, who can invite, and removing the product. The domain menu stays." },
-                        { title: "The person's account", body: "Use account information. The screen holds the profile, the password, notices, and removing the account. The domain and the organization stay." },
-                        { title: "One object", body: "Use create a record to make it. Use modifying a record to change it. Use a wizard when a later answer depends on an earlier one." },
-                        { title: "First run", body: "Use onboarding to name the workspace and offer one invite." },
-                        { title: "A queue", body: "Use task management to see status, open one item, and return." },
-                        { title: "A set of numbers", body: "Use the visualization page. It stays its own page until there is a chart module." },
+                <DocParagraph>Pick the job, then open that story. Patterns are compositions, not exports from the package.</DocParagraph>
+                <DocRows
+                    headers={["Job", "Use"]}
+                    rows={[
+                        { label: "Another part of the product", detail: "Navigating domains. The shell stays, and the page inside changes." },
+                        { label: "Another organization", detail: "Switching organizations. Pick it in the product slot. The domain menu stays." },
+                        { label: "The product's settings", detail: "Product settings. Name, who can invite, and removing the product. The domain menu stays." },
+                        { label: "The person's account", detail: "Account information. Profile, password, notices, and removing the account." },
+                        { label: "Make one object", detail: "Create a record. Use a wizard when a later answer depends on an earlier one." },
+                        { label: "Change one object", detail: "Modifying a record. Inline edit is for one fact where it sits." },
+                        { label: "First run", detail: "Onboarding. Name the workspace and offer one invite." },
+                        { label: "A queue", detail: "Task management. Status first, then the record or why it cannot continue." },
+                        { label: "A set of numbers", detail: "Visualization page. Summary first. It stays its own page until there is a chart module." },
                     ]}
                 />
             </DocSection>

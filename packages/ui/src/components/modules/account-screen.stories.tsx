@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { accountScreenSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 import { AccountScreen, type AccountFacts } from "./account-screen";
 
 const initialFacts: AccountFacts = {
@@ -27,6 +28,7 @@ export const Account: Story = {
 
         return (
             <DocPage title="Account" intro="The account is the person. Profile holds the name and email. Sign-in changes the password. Notices holds email notices and language. Remove asks for the person's name before the account is deleted.">
+            <DocCodeSection note={libraryExportNote} code={accountScreenSnippet} />
                 <DocSection title="What it holds">
                     <DocList
                         items={[

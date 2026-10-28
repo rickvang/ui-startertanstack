@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { layoutSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
 import { cx } from "../../utils/cx";
-import { DocDemo, DocList, DocNote, DocPage, DocSection, DocWhenAvoid } from "../templates/doc";
+import { DocDemo, DocList, DocNote, DocCodeSection, DocPage, DocSection, DocWhenAvoid } from "../templates/doc";
 import { Layout, type LayoutProps } from "./layout";
 
 function Bone({ className }: { className: string }) {
@@ -163,6 +164,7 @@ export const Standard: Story = {
     args: { children: "Content" },
     render: () => (
         <DocPage title="Frames" intro="A frame decides where the shell's areas sit. Pick it from how people move. A product uses one variation. The same product can still use another frame for a public page. The areas that fill the frame are in Modules / Shell.">
+            <DocCodeSection note={libraryExportNote} code={layoutSnippet} />
             <DocSection title="How to choose">
                 <DocList
                     items={[

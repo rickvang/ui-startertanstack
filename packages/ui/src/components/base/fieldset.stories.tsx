@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { fieldsetSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
+import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 import { Button } from "./button";
 import { Fieldset } from "./fieldset";
 import { TextField } from "./text-field";
@@ -22,6 +23,7 @@ export const FieldsetStory: Story = {
     name: "Fieldset",
     render: () => (
         <DocPage title="Fieldset" intro="A fieldset names one group of fields that belong together. The title is a noun, such as Project or Profile.">
+            <DocCodeSection note={libraryExportNote} code={fieldsetSnippet} />
             <DocSection title="Common practice">
                 <DocList
                     items={[

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { libraryExportNote, shellSnippet } from "../../../.storybook/story-snippets";
 import { Avatar } from "../base/avatar";
 import { Button } from "../base/button";
 import { Menu } from "../navigation/menu";
-import { DocBullets, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
 import { ShellBar, shellDomainHelp } from "./shell-actions";
 import { Shell as ShellModule } from "./shell";
 
@@ -209,6 +210,7 @@ export const Shell: Story = {
     name: "Shell",
     render: () => (
         <DocPage title="Shell" intro="The shell stays while the person moves. The frame decides where the navigation, settings, help, and the account sit.">
+            <DocCodeSection note={libraryExportNote} code={shellSnippet} />
             <DocSection title="Areas">
                 <DocBullets
                     items={[

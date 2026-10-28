@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, textFieldSnippet } from "../../../.storybook/story-snippets";
 import { TextField } from "./text-field";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Components/Text field",
     component: TextField,
     args: {
@@ -16,6 +20,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Stacked: Story = {
+    ...docsFromSnippet(textFieldSnippet),
     name: "Stacked",
 };
 

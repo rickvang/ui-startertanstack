@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
+import { docsFromSnippet, badgeSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "./badge";
 
 const meta = {
+    tags: ["autodocs"],
+    parameters: autodocsComponentParameters,
     title: "Components/Badge",
     component: Badge,
     args: {
@@ -14,7 +18,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Success: Story = {};
+export const Success: Story = {
+    ...docsFromSnippet(badgeSnippet),
+};
 
 export const Warning: Story = {
     args: { children: "Review", variant: "warning" },

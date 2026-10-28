@@ -1,11 +1,12 @@
 import { useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, navigatingDomainsSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
 const domains = [
     { value: "projects", label: "Projects" },
@@ -66,43 +67,43 @@ export const NavigatingDomains: Story = {
         const help = shellDomainHelp(domain);
 
         return (
-            <DocPage title="Navigating domains" intro="Choosing a domain changes the page. The shell stays: navigation, settings, help, and the account are still there.">
-                <DocSection title="When to use">
-                    <DocList
-                        items={[
-                            { title: "Another part of the product", body: "Pick it in the navigation. The page inside changes." },
-                            { title: "The shell stays", body: "Settings, help, and the account do not change with the domain." },
-                        ]}
-                    />
-                </DocSection>
-                <DocSection title="Domains">
+            <DocPage title="Navigating domains" intro="Choosing a domain changes the page. The shell stays.">
+                <DocSection title="Example">
+                    <DocParagraph>Pick Projects, Members, or Billing. Settings, help, and the account do not move.</DocParagraph>
                     <DocDemo bleed>
-                    <Shell
-                        product={<span className="px-spacing-04 font-semibold text-ink">North</span>}
-                        navigation={
-                            <Menu
-                                items={domains}
-                                value={domain}
-                                onValueChange={(value) => {
-                                    if (isDomain(value)) {
-                                        setDomain(value);
-                                    }
-                                }}
-                            />
-                        }
-                        settings={
-                            <Button variant="ghost" className="justify-start">
-                                Settings
-                            </Button>
-                        }
-                        header={<ShellBar title={current} helpTitle={help.title} helpBody={help.body} name="Alex Kim" />}
-                        help={null}
-                        user={null}
-                    >
-                        {domainPage(domain)}
-                    </Shell>
+                        <Shell
+                            product={<span className="px-spacing-04 font-semibold text-ink">North</span>}
+                            navigation={
+                                <Menu
+                                    items={domains}
+                                    value={domain}
+                                    onValueChange={(value) => {
+                                        if (isDomain(value)) {
+                                            setDomain(value);
+                                        }
+                                    }}
+                                />
+                            }
+                            settings={
+                                <Button variant="ghost" className="justify-start">
+                                    Settings
+                                </Button>
+                            }
+                            header={<ShellBar title={current} helpTitle={help.title} helpBody={help.body} name="Alex Kim" />}
+                            help={null}
+                            user={null}
+                        >
+                            {domainPage(domain)}
+                        </Shell>
                     </DocDemo>
                 </DocSection>
+                <DocSection title="When to use">
+                    <DocBullets items={["The person is moving to another part of the same product."]} />
+                </DocSection>
+                <DocSection title="When not to use">
+                    <DocBullets items={["The person is changing organization. Use switching organizations."]} />
+                </DocSection>
+                <DocCodeSection note={compositionNote} code={navigatingDomainsSnippet} />
             </DocPage>
         );
     },

@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { globalRulesEmptySnippet, globalRulesMessageSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
 import { cx } from "../../utils/cx";
-import { DocDemo, DocList, DocPage, DocSection } from "./doc";
+import { DocCodeSection, DocDemo, DocList, DocPage, DocSection } from "./doc";
 
 function Bone({ className }: { className: string }) {
     return <span className={cx("block rounded-sm bg-line", className)} />;
@@ -24,6 +25,7 @@ export const MessageAndFeedback: Story = {
     name: "Message and feedback",
     render: () => (
         <DocPage title="Message and feedback" intro="Feedback sits next to the thing that caused it. The page stays usable.">
+            <DocCodeSection note={libraryExportNote} code={globalRulesMessageSnippet} />
             <DocSection title="Rules">
                 <DocList
                     items={[
@@ -58,6 +60,7 @@ export const EmptyStatus: Story = {
     name: "Empty status",
     render: () => (
         <DocPage title="Empty status" intro="An empty area is a real state. It says what is missing and offers the action that adds the first item.">
+            <DocCodeSection note={libraryExportNote} code={globalRulesEmptySnippet} />
             <DocSection title="Rules">
                 <DocList
                     items={[

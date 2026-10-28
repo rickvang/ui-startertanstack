@@ -1,9 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { buttonSnippet, copyableDocs, libraryExportNote } from "../../../.storybook/copyable-snippets";
 import { Button } from "./button";
 
 const meta = {
     title: "Components/Button",
     component: Button,
+    tags: ["autodocs"],
+    parameters: {
+        docs: {
+            description: {
+                component: `${libraryExportNote} Import \`theme.css\` once in the app or Storybook preview.`,
+            },
+        },
+    },
     args: {
         children: "Save",
         variant: "primary",
@@ -15,7 +24,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+    parameters: {
+        docs: copyableDocs(buttonSnippet, libraryExportNote),
+    },
+};
 
 export const Secondary: Story = {
     args: { children: "Cancel", variant: "secondary" },

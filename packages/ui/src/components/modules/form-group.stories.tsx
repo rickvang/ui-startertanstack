@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { formGroupModuleSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
 import { Button } from "../base/button";
 import { Checkbox } from "../base/checkbox";
 import { Fieldset } from "../base/fieldset";
@@ -10,7 +11,7 @@ import { Switch } from "../base/switch";
 import { TextArea } from "../base/text-area";
 import { TextField } from "../base/text-field";
 import { Flex } from "../layout/flex";
-import { DocBullets, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
 
 const meta = {
     title: "Modules/Forms",
@@ -192,6 +193,7 @@ export const Forms: Story = {
     name: "Forms",
     render: () => (
         <DocPage title="Forms" intro="A form collects the fields for one record.">
+            <DocCodeSection note={libraryExportNote} code={formGroupModuleSnippet} />
             <DocSection title="Example">
                 <DocParagraph>Related fields sit in a group. The label sits beside the value when the name is short.</DocParagraph>
                 <DocDemo className="max-w-3xl">

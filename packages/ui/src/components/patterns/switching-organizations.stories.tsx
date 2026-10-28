@@ -1,11 +1,12 @@
 import { useId, useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { compositionNote, switchingOrganizationsSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Shell } from "../modules/shell";
 import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocList, DocPage, DocSection } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { cx } from "../../utils/cx";
 
 const organizations = [
@@ -127,44 +128,43 @@ export const SwitchingOrganizations: Story = {
         const help = shellDomainHelp(domain);
 
         return (
-            <DocPage title="Switching organizations" intro="Choosing an organization changes which organization the domains belong to. The shell stays: the domain menu, settings, help, and the account are still there.">
-                <DocSection title="When to use">
-                    <DocList
-                        items={[
-                            { title: "Another organization", body: "Pick it in the product slot. The page shows that organization." },
-                            { title: "The domains stay", body: "Projects, Members, and Billing are still the way through the organization." },
-                            { title: "The person stays", body: "Help and the account do not change with the organization." },
-                        ]}
-                    />
-                </DocSection>
-                <DocSection title="Organizations">
+            <DocPage title="Switching organizations" intro="Choosing an organization changes which organization the domains belong to. The shell stays.">
+                <DocSection title="Example">
+                    <DocParagraph>Pick North, Harbor, or Field in the product slot. Projects, Members, and Billing still move through that organization.</DocParagraph>
                     <DocDemo bleed>
-                    <Shell
-                        product={<OrganizationSwitcher value={organization} onValueChange={setOrganization} />}
-                        navigation={
-                            <Menu
-                                items={domains}
-                                value={domain}
-                                onValueChange={(value) => {
-                                    if (isDomain(value)) {
-                                        setDomain(value);
-                                    }
-                                }}
-                            />
-                        }
-                        settings={
-                            <Button variant="ghost" className="justify-start">
-                                Settings
-                            </Button>
-                        }
-                        header={<ShellBar title={current} helpTitle={help.title} helpBody={help.body} name="Alex Kim" />}
-                        help={null}
-                        user={null}
-                    >
-                        {organizationPage(organization, domain)}
-                    </Shell>
+                        <Shell
+                            product={<OrganizationSwitcher value={organization} onValueChange={setOrganization} />}
+                            navigation={
+                                <Menu
+                                    items={domains}
+                                    value={domain}
+                                    onValueChange={(value) => {
+                                        if (isDomain(value)) {
+                                            setDomain(value);
+                                        }
+                                    }}
+                                />
+                            }
+                            settings={
+                                <Button variant="ghost" className="justify-start">
+                                    Settings
+                                </Button>
+                            }
+                            header={<ShellBar title={current} helpTitle={help.title} helpBody={help.body} name="Alex Kim" />}
+                            help={null}
+                            user={null}
+                        >
+                            {organizationPage(organization, domain)}
+                        </Shell>
                     </DocDemo>
                 </DocSection>
+                <DocSection title="When to use">
+                    <DocBullets items={["The person belongs to more than one organization and needs to work in another one."]} />
+                </DocSection>
+                <DocSection title="When not to use">
+                    <DocBullets items={["The person is staying in this organization and changing page. Use navigating domains."]} />
+                </DocSection>
+                <DocCodeSection note={compositionNote} code={switchingOrganizationsSnippet} />
             </DocPage>
         );
     },

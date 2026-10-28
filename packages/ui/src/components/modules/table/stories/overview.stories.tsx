@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DocBullets, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../../../templates/doc";
+import { libraryExportNote, membersTableSnippet } from "../../../../../.storybook/story-snippets";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../../../templates/doc";
 import { Table } from "../table";
 import { columns, members } from "./fixtures";
 import { tableStoryMeta } from "./meta";
@@ -14,6 +15,7 @@ export const Overview: Story = {
     name: "Overview",
     render: () => (
         <DocPage title="Table" intro="A table shows many records of the same kind, one row each.">
+            <DocCodeSection note={libraryExportNote} code={membersTableSnippet} />
             <DocSection title="Example">
                 <DocParagraph>The name identifies the record. The other columns are its fields. Status is its state. A click selects the row.</DocParagraph>
                 <DocDemo>

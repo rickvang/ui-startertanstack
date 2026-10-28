@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { libraryExportNote, tableExpandSnippet } from "../../../../../.storybook/story-snippets";
 import { Badge } from "../../../base/badge";
-import { DocDemo, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
+import { DocDemo, DocCodeSection, DocPage, DocSection, DocWhenAvoid } from "../../../templates/doc";
 import { Table } from "../table";
 import { columns, directory } from "./fixtures";
 
@@ -17,6 +18,7 @@ export const Expand: Story = {
     name: "Expand",
     render: () => (
         <DocPage title="Expand" intro="Open extra fields under a row without adding columns. Use renderDetail and renderCell for custom kinds.">
+            <DocCodeSection note={libraryExportNote} code={tableExpandSnippet} />
             <DocSection title="Example">
                 <DocWhenAvoid
                     when="expandable opens a panel under the row with renderDetail. Use it for extra fields, not new columns. expansion controls how many panels stay open. renderCell handles custom column kinds."

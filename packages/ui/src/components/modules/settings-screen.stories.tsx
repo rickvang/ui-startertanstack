@@ -1,8 +1,9 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { libraryExportNote, settingsScreenSnippet } from "../../../.storybook/story-snippets";
 import { Avatar } from "../base/avatar";
 import { Menu } from "../navigation/menu";
-import { DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
+import { DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { SettingsScreen, settingsSections, type SettingsFacts, type SettingsSection } from "./settings-screen";
 import { Shell } from "./shell";
 
@@ -91,6 +92,7 @@ export const Settings: Story = {
 
         return (
             <DocPage title="Settings" intro="Settings is the product. The top bar keeps the product and the account. The side is Product, Access, and Remove.">
+            <DocCodeSection note={libraryExportNote} code={settingsScreenSnippet} />
                 <DocSection title="In the frame">
                     <DocParagraph>Choose a section in the side. Remove opens a dialog over the page and asks for the product name.</DocParagraph>
                     <DocDemo bleed>
