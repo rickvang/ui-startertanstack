@@ -8,6 +8,7 @@ on:
         required: false
         default: '0'
 permissions:
+  actions: read
   contents: read
   pull-requests: read
   checks: read
@@ -140,7 +141,7 @@ jobs:
 
                   ("graphql", { query, variables: { owner, name, number } });
                 if (data.errors || !data.data?.repository.pullRequest)
-                  throw Error("GitHub PR query failed");
+                  throw Error(`GitHub PR query failed: ${data.errors?.map((error) => error.message).join("; ") || "missing PR"}`);
                 pr = data.data.repository.pullRequest;
                 if (pr.mergeStateStatus !== "UNKNOWN") break;
                 await new Promise((resolve) => setTimeout(resolve, 3000));

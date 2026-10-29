@@ -7,6 +7,8 @@ on:
   workflow_run:
     workflows: ['Repository checks']
     types: [requested, completed]
+  check_run:
+    types: [completed]
   status:
   deployment_status:
   push:
@@ -17,6 +19,7 @@ on:
         description: 'PR number to reconcile (0 scans open PRs)'
         default: '0'
 permissions:
+  actions: read
   contents: read
   pull-requests: read
   checks: read
@@ -28,3 +31,4 @@ jobs:
     uses: rickvang/ui-startertanstack/.github/workflows/taskosaur-sdlc-sync.yml@master
     with:
       pull_request: ${{ github.event.inputs.pull_request || '0' }}
+# Temporary patch-integrity failure for the authorized SDLC end-to-end test.  
