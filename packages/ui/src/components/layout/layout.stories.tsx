@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { layoutSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
 import { cx } from "../../utils/cx";
-import { DocDemo, DocList, DocNote, DocCodeSection, DocPage, DocSection, DocWhenAvoid } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocList, DocNote, DocPage, DocParagraph, DocSection, DocWhenAvoid } from "../templates/doc";
 import { Layout, type LayoutProps } from "./layout";
 
 function Bone({ className }: { className: string }) {
@@ -164,14 +164,28 @@ export const Standard: Story = {
     args: { children: "Content" },
     render: () => (
         <DocPage title="Frames" intro="A frame decides where the shell's areas sit. Pick it from how people move. A product uses one variation. The same product can still use another frame for a public page. The areas that fill the frame are in Modules / Shell.">
-            <DocCodeSection note={libraryExportNote} code={layoutSnippet} />
-            <DocSection title="How to choose">
+            <DocSection title="Example">
+                <DocParagraph>Use this for an application people return to. The side is stable. The header changes with the area.</DocParagraph>
+                <Frame name="Side, then header" when="The side is the product menu and stays on screen. The header names the current area and holds that area's actions, such as a breadcrumb or Invite. Content is the work." avoid="Do not repeat the product menu in the header. Do not use a full-height side for a public page with a handful of links. That page wants a top bar." header={<AppHeader />} sider={<AppSider />} siderPlacement="full-height">
+                    <AppContent />
+                </Frame>
+            </DocSection>
+            <DocSection title="When to use">
                 <DocList
                     items={[
                         { title: "Few destinations", body: "Header, content, footer. People read down the page. The top bar has room for a short set of links." },
                         { title: "A global bar and a section menu", body: "Header, then side. The top bar is the product. The side belongs to the section they are in." },
                         { title: "Many areas, used often", body: "Side, then header. The side is how people switch areas. The header belongs only to the current area." },
                         { title: "One tool", body: "Side and content. There is no product bar and no footer. The side is the structure of the work." },
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "Two product menus. The side or the top bar is the product navigation. They are not two equal menus.",
+                        "A header that only repeats the page title.",
+                        "A full-height side on a public page with a handful of links. That page wants a top bar.",
                     ]}
                 />
             </DocSection>
@@ -199,18 +213,13 @@ export const Standard: Story = {
                     <Article />
                 </Frame>
             </DocSection>
-            <DocSection title="Side, then header">
-                <DocNote>Use this for an application people return to. The side is stable. The header changes with the area.</DocNote>
-                <Frame name="Side, then header" when="The side is the product menu and stays on screen. The header names the current area and holds that area's actions, such as a breadcrumb or Invite. Content is the work." avoid="Do not repeat the product menu in the header. Do not use a full-height side for a public page with a handful of links. That page wants a top bar." header={<AppHeader />} sider={<AppSider />} siderPlacement="full-height">
-                    <AppContent />
-                </Frame>
-            </DocSection>
             <DocSection title="Side and content">
                 <DocNote>Use this for a focused tool: a canvas, an editor, or a list that is the whole job.</DocNote>
                 <Frame name="Side and content" when="The side is the structure of the work, such as files, layers, or sections of the tool. There is no second navigation and no footer." avoid="Do not add a header only to repeat the page title. Do not use this frame for a public site that needs a brand bar and legal links." sider={<ToolSider />}>
                     <ToolCanvas />
                 </Frame>
             </DocSection>
+            <DocCodeSection note={libraryExportNote} code={layoutSnippet} />
         </DocPage>
     ),
 };
