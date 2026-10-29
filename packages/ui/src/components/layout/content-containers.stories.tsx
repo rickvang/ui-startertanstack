@@ -1,25 +1,31 @@
 import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { compositionNote, contentContainerSnippet } from "../../../.storybook/story-snippets";
+import {
+    articleGridSnippet,
+    articleRowSnippet,
+    cardSnippet,
+    compositionNote,
+    emptyContainerSnippet,
+    keyValueSnippet,
+    libraryExportNote,
+    metricsSnippet,
+    panelSnippet,
+} from "../../../.storybook/story-snippets";
 import { cx } from "../../utils/cx";
 import { Button } from "../base/button";
 import { EmptyState } from "../base/empty-state";
-import { DocCodeSection, DocDemo, DocList, DocNote, DocPage, DocSection, DocWhenAvoid } from "../templates/doc";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Card } from "./card";
 
 function Bone({ className }: { className: string }) {
     return <span className={cx("block rounded-sm bg-line", className)} />;
 }
 
-function ContainerFrame({ name, when, avoid, children }: { name: string; when: string; avoid: string; children: ReactNode }) {
+function Canvas({ children }: { children: ReactNode }) {
     return (
-        <div className="flex flex-col gap-spacing-05">
-            <DocWhenAvoid when={when} avoid={avoid} />
-            <DocDemo bleed className="bg-canvas p-spacing-05">
-                {children}
-            </DocDemo>
-            <h3 className="text-sm font-medium text-ink">{name}</h3>
-        </div>
+        <DocDemo bleed className="bg-canvas p-spacing-05">
+            {children}
+        </DocDemo>
     );
 }
 
@@ -68,40 +74,34 @@ function ArticleCard() {
     );
 }
 
+function NestedCard() {
+    return (
+        <Card variant="quiet" className="gap-spacing-02">
+            <Bone className="h-spacing-04 w-spacing-10" />
+            <Bone className="h-spacing-03 w-4/5" />
+        </Card>
+    );
+}
+
 const rising = ["h-spacing-02", "h-spacing-03", "h-spacing-02", "h-spacing-04", "h-spacing-03", "h-spacing-05", "h-spacing-04"] as const;
 const falling = ["h-spacing-05", "h-spacing-04", "h-spacing-04", "h-spacing-03", "h-spacing-03", "h-spacing-02", "h-spacing-02"] as const;
 
 const meta = {
     title: "Layout/Content containers",
-    component: Card,
     parameters: { layout: "fullscreen" },
-} satisfies Meta<typeof Card>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Standard: Story = {
-    args: { children: "Content" },
+export const Panel: Story = {
+    name: "Panel",
     render: () => (
-        <DocPage title="Content containers" intro="A content container holds a group. It can be a panel that houses cards, or a card that is the group. Pick it from how the content is scanned. The surface, and its outlined, raised, and quiet treatments, are in Components / Card. An empty group is a real state. Use Empty state inside the container.">
-            <DocCodeSection note={compositionNote} code={contentContainerSnippet} />
-            <DocSection title="How to choose">
-                <DocList
-                    items={[
-                        { title: "Several related items, read as one group", body: "Panel. The surface holds the group. Cards, metrics, or pairs sit inside it." },
-                        { title: "One item that stands on its own", body: "Card. The surface is the item. Kinds that fill a card are in Components / Card." },
-                        { title: "Nothing in the group yet", body: "Empty. Say what is missing. Offer the same action the full page uses." },
-                        { title: "A few numbers", body: "Metrics. One panel holds the measures so they can be scanned together." },
-                        { title: "Facts about one object", body: "Key-value. Labels and values in one panel. Not a table." },
-                        { title: "A few pieces of writing", body: "Article row. Cards sit in a line inside the panel." },
-                        { title: "Many pieces of writing", body: "Article grid. Cards sit in columns inside the panel." },
-                    ]}
-                />
-            </DocSection>
-            <DocSection title="Panel">
-                <DocNote>Use this when the group is the unit. The panel holds the content. It can house cards, or it can hold the content directly.</DocNote>
-                <ContainerFrame name="Panel" when="A title and a set of related items that belong together. The surface is the group, not one of the items." avoid="Do not use a panel for a single number or a single person. One item that stands on its own is a card. A long list with columns is a table.">
+        <DocPage title="Panel" intro="A panel holds a group. The surface is the group, not one of the items. It can house cards, or it can hold the content directly.">
+            <DocSection title="Example">
+                <DocParagraph>A title and a set of facts that belong together. The panel is the unit.</DocParagraph>
+                <Canvas>
                     <Card>
                         <Bone className="h-spacing-04 w-spacing-11" />
                         <div className="flex flex-col gap-spacing-03">
@@ -110,30 +110,92 @@ export const Standard: Story = {
                             <Pair labelWidth="w-spacing-06" valueWidth="w-spacing-08" />
                         </div>
                     </Card>
-                </ContainerFrame>
+                </Canvas>
+                <DocParagraph>The cards sit inside the group. Each card is still an item.</DocParagraph>
+                <Canvas>
+                    <Card>
+                        <Bone className="h-spacing-04 w-spacing-10" />
+                        <div className="flex flex-col gap-spacing-04">
+                            <NestedCard />
+                            <NestedCard />
+                            <NestedCard />
+                        </div>
+                    </Card>
+                </Canvas>
             </DocSection>
-            <DocSection title="Card">
-                <DocNote>Use this when the item is the unit. The surface is the card. A panel can still hold several of them.</DocNote>
-                <ContainerFrame name="Card" when="One measure, one piece of writing, one person, or one next step. The card is the thing." avoid="Do not stretch one card across a whole group of unrelated items. That group is a panel. Many people of the same kind, with columns to compare, belong in a table.">
+            <DocSection title="When to use">
+                <DocBullets items={["The group is the unit. Scan the panel as one set.", "Cards, metrics, or pairs sit inside it."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets items={["A single number, person, or next step. Use a card.", "A long list with columns to compare. Use a table."]} />
+            </DocSection>
+            <DocCodeSection note={compositionNote} code={panelSnippet} />
+        </DocPage>
+    ),
+};
+
+export const CardStory: Story = {
+    name: "Card",
+    render: () => (
+        <DocPage title="Card" intro="A card is one item that stands on its own. The surface is the item. Outlined, raised, and quiet treatments are in Components / Card.">
+            <DocSection title="Example">
+                <DocParagraph>One measure, one piece of writing, one person, or one next step. The card is the thing.</DocParagraph>
+                <Canvas>
                     <Card className="max-w-64 gap-spacing-03">
                         <MetricBones valueWidth="w-spacing-08" trend={rising} />
                     </Card>
-                </ContainerFrame>
+                </Canvas>
             </DocSection>
-            <DocSection title="Empty">
-                <DocNote>Use this when the group loaded and there is nothing in it yet. Empty state is the control. It sits inside the container.</DocNote>
-                <ContainerFrame name="Empty" when="The page loaded and the group has no items. Say what is missing. Offer the same action the full page uses." avoid="Do not use Message for an empty container. Do not show an empty table with no sentence. Empty is not an exception. A table empty is copy in the table, in Modules / Table.">
+            <DocSection title="When to use">
+                <DocBullets items={["The item is the unit. A panel can still hold several cards.", "The cards stay items. The panel is the group."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets items={["A group of unrelated items. Use a panel.", "Many people of the same kind, with columns to compare. Use a table."]} />
+            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={cardSnippet} />
+        </DocPage>
+    ),
+};
+
+export const Empty: Story = {
+    name: "Empty",
+    render: () => (
+        <DocPage title="Empty" intro="An empty group is a real state. The page loaded and there is nothing in it yet. Empty state sits inside the container.">
+            <DocSection title="Example">
+                <DocParagraph>Say what is missing. Offer the same action the full page uses.</DocParagraph>
+                <Canvas>
                     <Card>
                         <Bone className="h-spacing-04 w-spacing-11" />
                         <EmptyState title="No members yet" action={<Button>Invite</Button>}>
                             Invite someone to get started.
                         </EmptyState>
                     </Card>
-                </ContainerFrame>
+                </Canvas>
             </DocSection>
-            <DocSection title="Metrics">
-                <DocNote>Use this when the page opens with a few numbers. The panel holds the measures. Each measure can be a quiet card inside it.</DocNote>
-                <ContainerFrame name="Metrics" when="A few numbers that belong together. Each tile is a label, a number, and a short trend. The panel is the group." avoid="Do not put a chart, a list, and a number in the same tile. A record with a name and a status is a detail, not a metric.">
+            <DocSection title="When to use">
+                <DocBullets items={["The page loaded and the group has no items.", "If the full list invites a member, the empty list invites a member."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "A note about something that just happened. Use Message.",
+                        "A table with no rows. Use Table empty copy.",
+                        "The page cannot do the task. That is an exception, not empty.",
+                    ]}
+                />
+            </DocSection>
+            <DocCodeSection note={compositionNote} code={emptyContainerSnippet} />
+        </DocPage>
+    ),
+};
+
+export const Metrics: Story = {
+    name: "Metrics",
+    render: () => (
+        <DocPage title="Metrics" intro="A few numbers that belong together. One panel holds the measures so they can be scanned as a group. Each measure can be a quiet card inside it.">
+            <DocSection title="Example">
+                <DocParagraph>Each tile is a label, a number, and a short trend. The panel is the group.</DocParagraph>
+                <Canvas>
                     <Card>
                         <Bone className="h-spacing-04 w-spacing-10" />
                         <div className="grid gap-spacing-04 md:grid-cols-3">
@@ -148,11 +210,26 @@ export const Standard: Story = {
                             </Card>
                         </div>
                     </Card>
-                </ContainerFrame>
+                </Canvas>
             </DocSection>
-            <DocSection title="Key-value">
-                <DocNote>Use this for facts about one object. The panel holds the pairs. Description list is the control that fills it.</DocNote>
-                <ContainerFrame name="Key-value" when="A short set of labels and values for one object. Scan down the panel." avoid="Do not use this for many objects of the same kind. That is a table. Do not put a long paragraph in the value.">
+            <DocSection title="When to use">
+                <DocBullets items={["A few numbers that belong together.", "Keep the measures in one panel so they can be scanned together."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets items={["A chart, a list, and a number in the same tile.", "A record with a name and a status. That is a detail."]} />
+            </DocSection>
+            <DocCodeSection note={compositionNote} code={metricsSnippet} />
+        </DocPage>
+    ),
+};
+
+export const KeyValue: Story = {
+    name: "Key-value",
+    render: () => (
+        <DocPage title="Key-value" intro="Facts about one object. Labels and values sit in one panel. Description list is the control that fills it.">
+            <DocSection title="Example">
+                <DocParagraph>A short set of labels and values. Scan down the panel.</DocParagraph>
+                <Canvas>
                     <Card>
                         <Bone className="h-spacing-04 w-spacing-09" />
                         <div className="flex flex-col gap-spacing-04">
@@ -162,11 +239,26 @@ export const Standard: Story = {
                             <Pair labelWidth="w-spacing-09" valueWidth="w-spacing-08" />
                         </div>
                     </Card>
-                </ContainerFrame>
+                </Canvas>
             </DocSection>
-            <DocSection title="Article row">
-                <DocNote>Use this for a few pieces of writing. The panel holds the cards in a line.</DocNote>
-                <ContainerFrame name="Article row" when="Two or three notes, updates, or posts that sit beside each other. Each card has a picture band and a title." avoid="Do not put a long document in a card. A long document is a page. Many posts belong in a grid.">
+            <DocSection title="When to use">
+                <DocBullets items={["Facts about one object.", "The values are short enough to scan down the panel."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets items={["Many objects of the same kind. Use a table.", "A long paragraph in the value.", "The person is editing the facts. Use a record pattern."]} />
+            </DocSection>
+            <DocCodeSection note={compositionNote} code={keyValueSnippet} />
+        </DocPage>
+    ),
+};
+
+export const ArticleRow: Story = {
+    name: "Article row",
+    render: () => (
+        <DocPage title="Article row" intro="A few pieces of writing. The panel holds the cards in a line.">
+            <DocSection title="Example">
+                <DocParagraph>Two or three notes, updates, or posts. Each card has a picture band and a title.</DocParagraph>
+                <Canvas>
                     <Card>
                         <Bone className="h-spacing-04 w-spacing-10" />
                         <div className="flex gap-spacing-04 overflow-x-auto">
@@ -175,11 +267,26 @@ export const Standard: Story = {
                             <ArticleCard />
                         </div>
                     </Card>
-                </ContainerFrame>
+                </Canvas>
             </DocSection>
-            <DocSection title="Article grid">
-                <DocNote>Use this for many pieces of writing. The panel holds the cards in columns.</DocNote>
-                <ContainerFrame name="Article grid" when="A set of notes, updates, or posts that wrap. Each card is one piece of writing." avoid="Do not use a grid for two items. That is a row. People of the same kind, with columns to compare, belong in a table.">
+            <DocSection title="When to use">
+                <DocBullets items={["A few pieces of writing sit beside each other.", "The panel holds the row. The cards are the pieces of writing."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets items={["Many posts. Use a grid.", "A long document. That is a page."]} />
+            </DocSection>
+            <DocCodeSection note={compositionNote} code={articleRowSnippet} />
+        </DocPage>
+    ),
+};
+
+export const ArticleGrid: Story = {
+    name: "Article grid",
+    render: () => (
+        <DocPage title="Article grid" intro="Many pieces of writing. The panel holds the cards in columns.">
+            <DocSection title="Example">
+                <DocParagraph>Notes, updates, or posts that wrap. Each card is one piece of writing.</DocParagraph>
+                <Canvas>
                     <Card>
                         <Bone className="h-spacing-04 w-spacing-10" />
                         <div className="grid gap-spacing-04 sm:grid-cols-2">
@@ -189,8 +296,15 @@ export const Standard: Story = {
                             <ArticleCard />
                         </div>
                     </Card>
-                </ContainerFrame>
+                </Canvas>
             </DocSection>
+            <DocSection title="When to use">
+                <DocBullets items={["Many pieces of writing that wrap.", "The panel holds the grid. The cards are the pieces of writing."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets items={["Two items. Use a row.", "People of the same kind, with columns to compare. Use a table."]} />
+            </DocSection>
+            <DocCodeSection note={compositionNote} code={articleGridSnippet} />
         </DocPage>
     ),
 };

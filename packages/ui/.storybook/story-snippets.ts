@@ -333,7 +333,29 @@ export const cardSnippet = librarySnippet(
     "TeamCard",
 );
 
-export const contentContainerSnippet = patternSnippet(
+export const panelSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <h2 className="text-sm font-semibold">North</h2>
+    <Card variant="quiet">
+        <p className="text-sm font-medium">Alex Kim</p>
+        <p className="text-sm text-muted">Owner</p>
+    </Card>
+</Card>`,
+    "NorthPanel",
+);
+
+export const emptyContainerSnippet = patternSnippet(
+    "Card, EmptyState, Button",
+    `<Card>
+    <EmptyState title="No members yet" action={<Button>Invite</Button>}>
+        Invite someone to get started.
+    </EmptyState>
+</Card>`,
+    "EmptyMembersPanel",
+);
+
+export const metricsSnippet = patternSnippet(
     "Card",
     `<Card>
     <Card variant="quiet">
@@ -346,6 +368,44 @@ export const contentContainerSnippet = patternSnippet(
     </Card>
 </Card>`,
     "VisitsPanel",
+);
+
+export const keyValueSnippet = patternSnippet(
+    "Card, DescriptionList",
+    `<Card>
+    <DescriptionList
+        items={[
+            { label: "Owner", value: "Alex Kim" },
+            { label: "Region", value: "North America" },
+        ]}
+    />
+</Card>`,
+    "NorthFacts",
+);
+
+export const articleRowSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <div className="flex gap-spacing-04">
+        <Card>Note</Card>
+        <Card>Update</Card>
+        <Card>Post</Card>
+    </div>
+</Card>`,
+    "NotesRow",
+);
+
+export const articleGridSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <div className="grid gap-spacing-04 sm:grid-cols-2">
+        <Card>Note</Card>
+        <Card>Update</Card>
+        <Card>Post</Card>
+        <Card>Brief</Card>
+    </div>
+</Card>`,
+    "NotesGrid",
 );
 
 export const stackSnippet = librarySnippet(
