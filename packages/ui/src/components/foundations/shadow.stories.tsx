@@ -8,7 +8,7 @@ const shadows = [
     ["SM", "shadow-sm", "Web card on the page."],
     ["MD", "shadow-md", "Raised card."],
     ["LG", "shadow-lg", "Menu above the page."],
-    ["XL", "shadow-xl", "Modal, or a graphic object on a page."],
+    ["XL", "shadow-xl", "Dialog, or a graphic object on a page."],
 ] as const;
 
 const meta = {

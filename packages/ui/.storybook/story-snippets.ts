@@ -3,7 +3,6 @@
 import {
     catalogSetupSnippet,
     copyableDocs,
-    drawerCompositionSnippet,
     libraryExportNote,
     librarySnippet,
     membersTableSnippet,
@@ -91,6 +90,31 @@ export const messageSnippet = librarySnippet(
 </Message>`,
     "SaveMessage",
 );
+
+export const bannerSnippet = librarySnippet(
+    "Banner",
+    `<Banner title="Scheduled maintenance">
+    The catalog will pause on Saturday from 2 to 4.
+</Banner>`,
+    "MaintenanceBanner",
+);
+
+export const toastSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Toast } from "@ui-starter/ui";
+
+export function SavedToast() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Save</Button>
+      <Toast open={open} title="Product saved" tone="success" onDismiss={() => setOpen(false)}>
+        The name and description are kept.
+      </Toast>
+    </>
+  );
+}`;
 
 export const radioSnippet = librarySnippet(
     "RadioGroup",
@@ -440,11 +464,6 @@ export const formPendingSnippet = librarySnippet(
     </Fieldset>
 </Form>`,
     "SavingProjectForm",
-);
-
-export const modalCompositionSnippet = drawerCompositionSnippet.replace("drawer task", "modal content").replace(
-    "ListWithDrawer",
-    "ConfirmInModal",
 );
 
 export const slideInSnippet = `${catalogSetupSnippet}

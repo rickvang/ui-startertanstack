@@ -35,7 +35,6 @@ DOC_PAGES = [
     ("components/layout/content-containers.stories.tsx", "KeyValue", "keyValueSnippet", "compositionNote"),
     ("components/layout/content-containers.stories.tsx", "ArticleRow", "articleRowSnippet", "compositionNote"),
     ("components/layout/content-containers.stories.tsx", "ArticleGrid", "articleGridSnippet", "compositionNote"),
-    ("components/templates/overlay.stories.tsx", "Modal", "modalCompositionSnippet", "compositionNote"),
     ("components/layout/layout.stories.tsx", "Standard", "layoutSnippet", "libraryExportNote"),
     ("components/templates/overview.stories.tsx", "Overview", "templatesOverviewSnippet", "libraryExportNote"),
     ("components/patterns/account-information.stories.tsx", "AccountInformation", "accountInformationSnippet", "compositionNote"),
@@ -52,6 +51,8 @@ DOC_PAGES = [
 
 INLINE_CODE = [
     ("components/base/message.stories.tsx", "MessageStory", "messageSnippet", "libraryExportNote"),
+    ("components/base/banner.stories.tsx", "BannerStory", "bannerSnippet", "libraryExportNote"),
+    ("components/base/toast.stories.tsx", "ToastStory", "toastSnippet", "libraryExportNote"),
     ("components/layout/dialog.stories.tsx", "DialogStory", "dialogSnippet", "libraryExportNote"),
     ("components/layout/drawer.stories.tsx", "DrawerStory", "drawerSnippet", "libraryExportNote"),
     ("components/layout/slide-in.stories.tsx", "SlideInStory", "slideInSnippet", "libraryExportNote"),

@@ -2,12 +2,15 @@ import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "../base/button";
 
+export type DialogConfirmVariant = "primary" | "danger";
+
 export type DialogProps = {
     open: boolean;
     title: string;
     children: ReactNode;
     confirmLabel: string;
     confirmDisabled?: boolean;
+    confirmVariant?: DialogConfirmVariant;
     onConfirm: () => void;
     onCancel: () => void;
     /** Forces the reduced-motion treatment. The OS setting still applies without this. */
@@ -24,7 +27,17 @@ function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function Dialog({ open, title, children, confirmLabel, confirmDisabled = false, onConfirm, onCancel, reduceMotion = false }: DialogProps) {
+export function Dialog({
+    open,
+    title,
+    children,
+    confirmLabel,
+    confirmDisabled = false,
+    confirmVariant = "danger",
+    onConfirm,
+    onCancel,
+    reduceMotion = false,
+}: DialogProps) {
     const [present, setPresent] = useState(open);
     const [shown, setShown] = useState(false);
     const reduce = reduceMotion || (typeof window !== "undefined" && prefersReducedMotion());
@@ -57,7 +70,16 @@ export function Dialog({ open, title, children, confirmLabel, confirmDisabled = 
     }
 
     return (
-        <DialogFrame title={title} shown={shown} reduce={reduce} confirmLabel={confirmLabel} confirmDisabled={confirmDisabled} onConfirm={onConfirm} onCancel={onCancel}>
+        <DialogFrame
+            title={title}
+            shown={shown}
+            reduce={reduce}
+            confirmLabel={confirmLabel}
+            confirmDisabled={confirmDisabled}
+            confirmVariant={confirmVariant}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+        >
             {children}
         </DialogFrame>
     );
@@ -70,6 +92,7 @@ function DialogFrame({
     reduce,
     confirmLabel,
     confirmDisabled,
+    confirmVariant,
     onConfirm,
     onCancel,
 }: {
@@ -79,6 +102,7 @@ function DialogFrame({
     reduce: boolean;
     confirmLabel: string;
     confirmDisabled: boolean;
+    confirmVariant: DialogConfirmVariant;
     onConfirm: () => void;
     onCancel: () => void;
 }) {
@@ -120,7 +144,7 @@ function DialogFrame({
                     <Button ref={cancelRef} variant="secondary" onClick={onCancel}>
                         Cancel
                     </Button>
-                    <Button variant="danger" disabled={confirmDisabled} onClick={onConfirm}>
+                    <Button variant={confirmVariant} disabled={confirmDisabled} onClick={onConfirm}>
                         {confirmLabel}
                     </Button>
                 </div>

@@ -37,25 +37,28 @@ export const MessageStory: Story = {
                     ]}
                 />
             </DocSection>
-            <DocSection title="When not to use">
-                <DocBullets
-                    items={[
-                        "An empty container. Use Empty state inside the panel.",
-                        "A field that failed. Use Field. The error sits with the field.",
-                        "A row status. Use Badge.",
-                        "A table that failed to load. Use Table error. The header stays.",
-                    ]}
-                />
-            </DocSection>
-            <DocSection title="Rules">
-                <DocBullets
-                    items={[
-                        "A message that can live in the page does not cover the page.",
-                        "A finished action uses the result. A page that cannot continue uses the exception, not a toast over the work.",
-                        "A note that is not an action uses the tinted fill, not the accent button.",
-                    ]}
-                />
-            </DocSection>
+                <DocSection title="When not to use">
+                    <DocBullets
+                        items={[
+                            "An empty container. Use Empty state inside the panel.",
+                            "A field that failed. Use Field. The error sits with the field.",
+                            "A row status. Use Badge.",
+                            "A table that failed to load. Use Table error. The header stays.",
+                            "A note about the whole page. Use Banner.",
+                            "A brief notice after leaving the work. Use Toast.",
+                        ]}
+                    />
+                </DocSection>
+                <DocSection title="Rules">
+                    <DocBullets
+                        items={[
+                            "A message that can live in the page does not cover the page.",
+                            "A finished action uses the result next to the work. After leaving that work, use Toast.",
+                            "A page that cannot continue uses the exception, not a toast over the work.",
+                            "A note that is not an action uses the tinted fill, not the accent button.",
+                        ]}
+                    />
+                </DocSection>
             <DocCodeSection note={libraryExportNote} code={messageSnippet} />
         </DocPage>
     ),
