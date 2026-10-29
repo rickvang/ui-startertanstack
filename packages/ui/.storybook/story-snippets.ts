@@ -447,16 +447,21 @@ export const modalCompositionSnippet = drawerCompositionSnippet.replace("drawer 
     "ConfirmInModal",
 );
 
-export const slideInCompositionSnippet = `${catalogSetupSnippet}
-// Story composition — not exported from @ui-starter/ui.
-export function ListWithSlideIn() {
+export const slideInSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, SlideIn, TextField } from "@ui-starter/ui";
+
+export function InviteSlideIn() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="relative flex h-80 max-w-xl overflow-hidden rounded-md border border-line bg-canvas">
-      <div className="min-w-0 flex-1 p-spacing-04">{/* list */}</div>
-      <aside className="absolute top-spacing-04 right-spacing-04 w-spacing-12 rounded-md border border-line bg-surface p-spacing-04 shadow-lg">
-        {/* slide-in task */}
-      </aside>
-    </div>
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Invite</Button>
+      <SlideIn open={open} title="Invite" onClose={() => setOpen(false)}>
+        <TextField label="Email" type="email" />
+        <Button>Send</Button>
+      </SlideIn>
+    </>
   );
 }`;
 

@@ -40,6 +40,8 @@ export { Dialog } from "./components/layout/dialog";
 export type { DialogProps } from "./components/layout/dialog";
 export { Drawer } from "./components/layout/drawer";
 export type { DrawerProps } from "./components/layout/drawer";
+export { SlideIn } from "./components/layout/slide-in";
+export type { SlideInProps } from "./components/layout/slide-in";
 export { Expandable } from "./components/layout/expandable";
 export type { ExpandableProps } from "./components/layout/expandable";
 export { Divider } from "./components/layout/divider";
