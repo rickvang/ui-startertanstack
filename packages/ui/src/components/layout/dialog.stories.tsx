@@ -78,6 +78,9 @@ export const DialogStory: Story = {
                     <DocBullets
                         items={[
                             "The person needs the page behind the dialog to answer. Use Drawer or Slide-in.",
+                            "A small screen, from the foot. Use Bottom sheet.",
+                            "A small panel attached to a control. Use Popover.",
+                            "A short hint. Use Tooltip.",
                             "A nested overlay. Do not open a dialog from a dialog, a drawer, or a slide-in.",
                             "A multi-section form. That belongs on a pattern.",
                             "A field that belongs on the page. Leave it on the page.",

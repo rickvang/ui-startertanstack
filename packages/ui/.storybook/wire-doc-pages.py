@@ -56,6 +56,9 @@ INLINE_CODE = [
     ("components/layout/dialog.stories.tsx", "DialogStory", "dialogSnippet", "libraryExportNote"),
     ("components/layout/drawer.stories.tsx", "DrawerStory", "drawerSnippet", "libraryExportNote"),
     ("components/layout/slide-in.stories.tsx", "SlideInStory", "slideInSnippet", "libraryExportNote"),
+    ("components/layout/bottom-sheet.stories.tsx", "BottomSheetStory", "bottomSheetSnippet", "libraryExportNote"),
+    ("components/layout/popover.stories.tsx", "PopoverStory", "popoverSnippet", "libraryExportNote"),
+    ("components/layout/tooltip.stories.tsx", "TooltipStory", "tooltipSnippet", "libraryExportNote"),
 ]
 
 

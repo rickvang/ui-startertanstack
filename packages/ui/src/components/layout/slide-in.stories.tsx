@@ -45,6 +45,8 @@ export const SlideInStory: Story = {
                         items={[
                             "The task needs the full height, or the person will compare it with the list for a while. Use Drawer.",
                             "A yes or no. Use Dialog.",
+                            "A small screen, from the foot. Use Bottom sheet.",
+                            "A small panel attached to a control. Use Popover.",
                             "A nested overlay. Do not stack a modal on a slide-in.",
                             "A route change. A slide-in closes back to the page that opened it.",
                         ]}

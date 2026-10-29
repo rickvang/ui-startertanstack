@@ -19,7 +19,7 @@ export const Recipes: Story = {
                 <DocRows
                     headers={["Job", "Open"]}
                     rows={[
-                        { label: "A panel from the edge", detail: "Layout/Overlays, Drawer or Slide-in." },
+                        { label: "A panel from the edge", detail: "Layout/Overlays, Drawer, Slide-in, or Bottom sheet." },
                         { label: "A yes or no", detail: "Layout/Overlays, Dialog." },
                         { label: "Another tab", detail: "Components/Tabs, Motion." },
                         { label: "More on the same card", detail: "Modules/Detail, Expandable." },

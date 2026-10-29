@@ -48,7 +48,7 @@ const preview: Preview = {
                         "Content containers",
                         ["Panel", "Card", "Empty", "Metrics", "Key-value", "Article row", "Article grid"],
                         "Overlays",
-                        ["Drawer", "Slide-in", "Dialog"],
+                        ["Overview", "Dialog", "Drawer", "Slide-in", "Bottom sheet", "Popover", "Tooltip"],
                         "Arrange",
                         ["Flow", ["Flex", "Space", "Stack"], "Split", ["Grid", "Splitter", "Masonry"], "Divider"],
                     ],

@@ -241,6 +241,50 @@ export function MemberDrawer() {
   );
 }`;
 
+export const bottomSheetSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, BottomSheet } from "@ui-starter/ui";
+
+export function StatusSheet() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Filters</Button>
+      <BottomSheet open={open} title="Status" onClose={() => setOpen(false)}>
+        <p className="text-sm text-ink">Active and invited stay in the list.</p>
+      </BottomSheet>
+    </>
+  );
+}`;
+
+export const popoverSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Popover } from "@ui-starter/ui";
+
+export function StatusPopover() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover
+      open={open}
+      title="Status"
+      trigger={<Button variant="secondary" onClick={() => setOpen((current) => !current)}>Filter</Button>}
+      onClose={() => setOpen(false)}
+    >
+      <p className="text-sm text-ink">Active and invited stay in the list.</p>
+    </Popover>
+  );
+}`;
+
+export const tooltipSnippet = librarySnippet(
+    "Button, Tooltip",
+    `<Tooltip label="Shown on the project home.">
+    <Button variant="ghost">Why we ask</Button>
+</Tooltip>`,
+    "FieldHint",
+);
+
 export const expandableSnippet = `${catalogSetupSnippet}
 import { useState } from "react";
 import { Button, DetailCard, Expandable } from "@ui-starter/ui";

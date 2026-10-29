@@ -40,7 +40,13 @@ export const DrawerStory: Story = {
                 </DocSection>
                 <DocSection title="When not to use">
                     <DocBullets
-                        items={["A yes or no. Use Dialog.", "A quick task that should not take the full height. Use Slide-in.", "The product menu. That is the layout side, and it stays put."]}
+                        items={[
+                            "A yes or no. Use Dialog.",
+                            "A quick task that should not take the full height. Use Slide-in.",
+                            "A small screen, from the foot. Use Bottom sheet.",
+                            "A small panel attached to a control. Use Popover.",
+                            "The product menu. That is the layout side, and it stays put.",
+                        ]}
                     />
                 </DocSection>
                 <DocSection title="Motion">
