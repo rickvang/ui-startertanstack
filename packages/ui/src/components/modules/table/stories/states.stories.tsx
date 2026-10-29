@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const States: Story = {
     name: "States",
     render: () => (
-        <DocPage title="States" intro="Loading, error, empty, and density are explicit states. Match empty copy to meaning.">
+        <DocPage title="States" intro="Loading, error, empty, and density are explicit states. Match empty copy to meaning. A table empty is copy in the table. A panel with no items uses Empty state.">
             <DocCodeSection note={libraryExportNote} code={tableStatesSnippet} />
             <DocSection title="Example">
                 <DocWhenAvoid

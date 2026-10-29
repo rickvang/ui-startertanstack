@@ -3,7 +3,6 @@
 import {
     catalogSetupSnippet,
     copyableDocs,
-    drawerCompositionSnippet,
     libraryExportNote,
     librarySnippet,
     membersTableSnippet,
@@ -76,11 +75,46 @@ export const fieldsetSnippet = librarySnippet(
 
 export const loaderSnippet = librarySnippet('Loader', '<Loader label="Loading members" />', "MembersLoader");
 
+export const emptyStateSnippet = librarySnippet(
+    "EmptyState, Button",
+    `<EmptyState title="No members yet" action={<Button>Invite</Button>}>
+    Invite someone to get started.
+</EmptyState>`,
+    "EmptyMembers",
+);
+
 export const messageSnippet = librarySnippet(
     "Message",
-    '<Message tone="success">North saved your changes.</Message>',
+    `<Message tone="success" title="Product saved">
+    The name and description are kept.
+</Message>`,
     "SaveMessage",
 );
+
+export const bannerSnippet = librarySnippet(
+    "Banner",
+    `<Banner title="Scheduled maintenance">
+    The catalog will pause on Saturday from 2 to 4.
+</Banner>`,
+    "MaintenanceBanner",
+);
+
+export const toastSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Toast } from "@ui-starter/ui";
+
+export function SavedToast() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Save</Button>
+      <Toast open={open} title="Product saved" tone="success" onDismiss={() => setOpen(false)}>
+        The name and description are kept.
+      </Toast>
+    </>
+  );
+}`;
 
 export const radioSnippet = librarySnippet(
     "RadioGroup",
@@ -207,6 +241,50 @@ export function MemberDrawer() {
   );
 }`;
 
+export const bottomSheetSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, BottomSheet } from "@ui-starter/ui";
+
+export function StatusSheet() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Filters</Button>
+      <BottomSheet open={open} title="Status" onClose={() => setOpen(false)}>
+        <p className="text-sm text-ink">Active and invited stay in the list.</p>
+      </BottomSheet>
+    </>
+  );
+}`;
+
+export const popoverSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, Popover } from "@ui-starter/ui";
+
+export function StatusPopover() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover
+      open={open}
+      title="Status"
+      trigger={<Button variant="secondary" onClick={() => setOpen((current) => !current)}>Filter</Button>}
+      onClose={() => setOpen(false)}
+    >
+      <p className="text-sm text-ink">Active and invited stay in the list.</p>
+    </Popover>
+  );
+}`;
+
+export const tooltipSnippet = librarySnippet(
+    "Button, Tooltip",
+    `<Tooltip label="Shown on the project home.">
+    <Button variant="ghost">Why we ask</Button>
+</Tooltip>`,
+    "FieldHint",
+);
+
 export const expandableSnippet = `${catalogSetupSnippet}
 import { useState } from "react";
 import { Button, DetailCard, Expandable } from "@ui-starter/ui";
@@ -323,6 +401,81 @@ export const cardSnippet = librarySnippet(
     "TeamCard",
 );
 
+export const panelSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <h2 className="text-sm font-semibold">North</h2>
+    <Card variant="quiet">
+        <p className="text-sm font-medium">Alex Kim</p>
+        <p className="text-sm text-muted">Owner</p>
+    </Card>
+</Card>`,
+    "NorthPanel",
+);
+
+export const emptyContainerSnippet = patternSnippet(
+    "Card, EmptyState, Button",
+    `<Card>
+    <EmptyState title="No members yet" action={<Button>Invite</Button>}>
+        Invite someone to get started.
+    </EmptyState>
+</Card>`,
+    "EmptyMembersPanel",
+);
+
+export const metricsSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <Card variant="quiet">
+        <p className="text-xs text-muted">Active</p>
+        <p className="text-lg font-semibold">24</p>
+    </Card>
+    <Card variant="quiet">
+        <p className="text-xs text-muted">Overdue</p>
+        <p className="text-lg font-semibold">4</p>
+    </Card>
+</Card>`,
+    "VisitsPanel",
+);
+
+export const keyValueSnippet = patternSnippet(
+    "Card, DescriptionList",
+    `<Card>
+    <DescriptionList
+        items={[
+            { label: "Owner", value: "Alex Kim" },
+            { label: "Region", value: "North America" },
+        ]}
+    />
+</Card>`,
+    "NorthFacts",
+);
+
+export const articleRowSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <div className="flex gap-spacing-04">
+        <Card>Note</Card>
+        <Card>Update</Card>
+        <Card>Post</Card>
+    </div>
+</Card>`,
+    "NotesRow",
+);
+
+export const articleGridSnippet = patternSnippet(
+    "Card",
+    `<Card>
+    <div className="grid gap-spacing-04 sm:grid-cols-2">
+        <Card>Note</Card>
+        <Card>Update</Card>
+        <Card>Post</Card>
+        <Card>Brief</Card>
+    </div>
+</Card>`,
+    "NotesGrid",
+);
+
 export const stackSnippet = librarySnippet(
     "Stack, TextField",
     `<Stack gap="md">
@@ -357,21 +510,21 @@ export const formPendingSnippet = librarySnippet(
     "SavingProjectForm",
 );
 
-export const modalCompositionSnippet = drawerCompositionSnippet.replace("drawer task", "modal content").replace(
-    "ListWithDrawer",
-    "ConfirmInModal",
-);
+export const slideInSnippet = `${catalogSetupSnippet}
+import { useState } from "react";
+import { Button, SlideIn, TextField } from "@ui-starter/ui";
 
-export const slideInCompositionSnippet = `${catalogSetupSnippet}
-// Story composition — not exported from @ui-starter/ui.
-export function ListWithSlideIn() {
+export function InviteSlideIn() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="relative flex h-80 max-w-xl overflow-hidden rounded-md border border-line bg-canvas">
-      <div className="min-w-0 flex-1 p-spacing-04">{/* list */}</div>
-      <aside className="absolute top-spacing-04 right-spacing-04 w-spacing-12 rounded-md border border-line bg-surface p-spacing-04 shadow-lg">
-        {/* slide-in task */}
-      </aside>
-    </div>
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Invite</Button>
+      <SlideIn open={open} title="Invite" onClose={() => setOpen(false)}>
+        <TextField label="Email" type="email" />
+        <Button>Send</Button>
+      </SlideIn>
+    </>
   );
 }`;
 
@@ -541,14 +694,6 @@ export const switchingOrganizationsSnippet = shellSnippet;
 export const productSettingsSnippet = settingsScreenSnippet;
 
 export const accountInformationSnippet = accountScreenSnippet;
-
-export const globalRulesMessageSnippet = messageSnippet;
-
-export const globalRulesEmptySnippet = librarySnippet(
-    "Message",
-    '<Message tone="neutral">No members yet. Invite someone to get started.</Message>',
-    "EmptyMembersMessage",
-);
 
 export const templatesOverviewSnippet = `${catalogSetupSnippet}
 import { Button, TextField } from "@ui-starter/ui";

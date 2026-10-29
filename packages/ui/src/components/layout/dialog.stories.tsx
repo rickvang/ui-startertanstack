@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { dialogSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
 import { Button } from "../base/button";
+import { TextField } from "../base/text-field";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
 import { Dialog } from "./dialog";
 
@@ -17,36 +18,74 @@ type Story = StoryObj<typeof meta>;
 export const DialogStory: Story = {
     name: "Dialog",
     render: () => {
-        const [open, setOpen] = useState(false);
+        const [removeOpen, setRemoveOpen] = useState(false);
+        const [renameOpen, setRenameOpen] = useState(false);
         const [result, setResult] = useState("The product is still here.");
+        const [name, setName] = useState("North");
+        const [draft, setDraft] = useState("North");
 
         return (
-            <DocPage title="Dialog" intro="A yes or no in place. The overlay and the panel fade. They do not travel, scale, or spring.">
+            <DocPage title="Dialog" intro="A dialog stops the page. Confirm, or a short form with one or two fields. The overlay and the panel fade. They do not travel, scale, or spring.">
                 <DocSection title="Example">
                     <DocDemo className="flex flex-col items-start gap-spacing-04">
-                        <Button variant="danger" onClick={() => setOpen(true)}>
+                        <Button variant="danger" onClick={() => setRemoveOpen(true)}>
                             Remove
                         </Button>
                         <p className="text-sm text-ink">{result}</p>
                     </DocDemo>
                     <Dialog
-                        open={open}
+                        open={removeOpen}
                         title="Remove North"
                         confirmLabel="Remove"
-                        onCancel={() => setOpen(false)}
+                        onCancel={() => setRemoveOpen(false)}
                         onConfirm={() => {
                             setResult("North was removed.");
-                            setOpen(false);
+                            setRemoveOpen(false);
                         }}
                     >
                         Removing the product deletes its projects. This cannot be undone.
                     </Dialog>
+                    <DocDemo className="flex flex-col items-start gap-spacing-04">
+                        <Button
+                            variant="secondary"
+                            onClick={() => {
+                                setDraft(name);
+                                setRenameOpen(true);
+                            }}
+                        >
+                            Rename
+                        </Button>
+                        <p className="text-sm text-ink">{name}</p>
+                    </DocDemo>
+                    <Dialog
+                        open={renameOpen}
+                        title="Rename product"
+                        confirmLabel="Rename"
+                        confirmVariant="primary"
+                        onCancel={() => setRenameOpen(false)}
+                        onConfirm={() => {
+                            setName(draft);
+                            setRenameOpen(false);
+                        }}
+                    >
+                        <TextField label="Name" value={draft} onChange={(event) => setDraft(event.target.value)} />
+                    </Dialog>
                 </DocSection>
                 <DocSection title="When to use">
-                    <DocBullets items={["The person must confirm before something is destroyed.", "The choice is yes or no, and the page can wait."]} />
+                    <DocBullets items={["A short decision the person must answer before they continue.", "A confirm, or a form with one or two fields."]} />
                 </DocSection>
                 <DocSection title="When not to use">
-                    <DocBullets items={["More than a yes or no. Use Drawer.", "A field that belongs on the page. Leave it on the page."]} />
+                    <DocBullets
+                        items={[
+                            "The person needs the page behind the dialog to answer. Use Drawer or Slide-in.",
+                            "A small screen, from the foot. Use Bottom sheet.",
+                            "A small panel attached to a control. Use Popover.",
+                            "A short hint. Use Tooltip.",
+                            "A nested overlay. Do not open a dialog from a dialog, a drawer, or a slide-in.",
+                            "A multi-section form. That belongs on a pattern.",
+                            "A field that belongs on the page. Leave it on the page.",
+                        ]}
+                    />
                 </DocSection>
                 <DocSection title="Motion">
                     <DocRows

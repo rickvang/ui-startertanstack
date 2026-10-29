@@ -56,7 +56,7 @@ export const PlaceholderStory: Story = {
                     <DocBullets items={["The shape of the result is known before the data arrives.", "The person should see the result arrive, not the bones turn into type."]} />
                 </DocSection>
                 <DocSection title="When not to use">
-                    <DocBullets items={["A button that is saving. Use the pending form.", "A meter of real time. That can be linear. This cross-fade is not."]} />
+                    <DocBullets items={["A button that is saving. Use the pending form.", "An empty container. Use Empty state.", "A meter of real time. That can be linear. This cross-fade is not."]} />
                 </DocSection>
                 <DocSection title="Motion">
                     <DocRows
