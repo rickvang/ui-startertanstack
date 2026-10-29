@@ -1,0 +1,30 @@
+name: Taskosaur SDLC
+on:
+  pull_request_target:
+    types: [opened, edited, reopened, synchronize, ready_for_review, converted_to_draft, closed]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+  workflow_run:
+    workflows: ['Repository checks']
+    types: [requested, completed]
+  status:
+  deployment_status:
+  push:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: 'PR number to reconcile (0 scans open PRs)'
+        default: '0'
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+  statuses: read
+  deployments: read
+  id-token: write
+jobs:
+  sync:
+    uses: rickvang/ui-startertanstack/.github/workflows/taskosaur-sdlc-sync.yml@master
+    with:
+      pull_request: ${{ github.event.inputs.pull_request || '0' }}
