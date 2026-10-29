@@ -31,4 +31,3 @@ jobs:
     uses: rickvang/ui-startertanstack/.github/workflows/taskosaur-sdlc-sync.yml@master
     with:
       pull_request: ${{ github.event.inputs.pull_request || '0' }}
-# Temporary patch-integrity failure for the authorized SDLC end-to-end test.  
