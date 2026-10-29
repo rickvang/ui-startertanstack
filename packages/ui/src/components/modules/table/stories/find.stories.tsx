@@ -15,7 +15,12 @@ export const Find: Story = {
     name: "Find",
     render: () => (
         <DocPage title="Find" intro="Search, status filters, and column sort narrow a directory. Columns chooses the fields in view. Each control stays off until the workflow needs it.">
-            <DocCodeSection note={libraryExportNote} code={tableFindSnippet} />
+            <DocSection title="Example">
+                <DocNote>The count reads 2 of 4 records while a search or filter is on. No records match when nothing is left. The table does not fetch. Replace items when the server responds.</DocNote>
+                <DocDemo>
+                    <Table label="Directory" items={directory} columns={directoryColumns} searchable filterable sortable columnSettings defaultValue="alex" />
+                </DocDemo>
+            </DocSection>
             <DocSection title="Search">
                 <DocList
                     items={[
@@ -29,7 +34,7 @@ export const Find: Story = {
                 <DocList
                     items={[
                         { title: "An icon in the header", body: "The Status header keeps the column name. A filter icon opens the choices. The column stays the width of the status." },
-                        { title: "The menu", body: "Check the statuses to keep. Several checks match any of them. OK applies them. Reset clears the checks. Search still has to match." },
+                        { title: "The menu", body: "A Popover. Check the statuses to keep. Several checks match any of them. OK applies them. Reset clears the checks. Search still has to match." },
                         { title: "The icon", body: "The icon fills when a filter is on. Closing the menu without OK leaves the table as it was. The filter stays on the Status column when the grid scrolls sideways." },
                     ]}
                 />
@@ -47,17 +52,12 @@ export const Find: Story = {
                 <DocList
                     items={[
                         { title: "A toolbar control", body: "Columns sits with the count. It is the table setting for which fields are in view." },
-                        { title: "The menu", body: "Check a column to show it. OK applies the view. Reset shows every column. Closing the menu without OK leaves the view as it was." },
+                        { title: "The menu", body: "A Popover. Check a column to show it. OK applies the view. Reset shows every column. Closing the menu without OK leaves the view as it was." },
                         { title: "Name stays", body: "Name stays checked. Actions stays when the table has row actions. Hiding a sorted column clears that sort. Hiding Status clears a status filter." },
                     ]}
                 />
             </DocSection>
-            <DocSection title="Directory">
-                <DocNote>The count reads 2 of 4 records while a search or filter is on. No records match when nothing is left. The table does not fetch. Replace items when the server responds.</DocNote>
-                <DocDemo>
-                    <Table label="Directory" items={directory} columns={directoryColumns} searchable filterable sortable columnSettings defaultValue="alex" />
-                </DocDemo>
-            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={tableFindSnippet} />
         </DocPage>
     ),
 };

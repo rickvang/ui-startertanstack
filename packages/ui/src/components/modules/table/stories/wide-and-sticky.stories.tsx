@@ -15,7 +15,6 @@ export const WideAndSticky: Story = {
     name: "Wide and sticky",
     render: () => (
         <DocPage title="Wide and sticky" intro="Many columns scroll sideways while the header and name column stay visible.">
-            <DocCodeSection note={libraryExportNote} code={tableWideStickySnippet} />
             <DocSection title="Example">
                 <DocWhenAvoid
                     when="stickyHeader keeps the header in the scroll frame. stickyColumn pins the name column when many columns scroll sideways. Use both together on wide grids."
@@ -25,6 +24,7 @@ export const WideAndSticky: Story = {
                     <Table label="Wide directory" items={directory} columns={directoryColumns} stickyHeader stickyColumn sortable defaultValue="alex" />
                 </DocDemo>
             </DocSection>
+            <DocCodeSection note={libraryExportNote} code={tableWideStickySnippet} />
         </DocPage>
     ),
 };
