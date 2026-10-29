@@ -98,10 +98,11 @@ jobs:
             numbers.add(pr.number);
           // Every relevant event also reconciles open PRs, including checks with no PR in the payload.
           for (let page = 1; page <= 20; page++) {
-            const prs = await github                      (
+            const prs = await github                                           (
               `repos/${repository}/pulls?state=open&per_page=100&page=${page}`,
             );
-            for (const pr of prs) numbers.add(pr.number);
+            for (const pr of prs)
+              if (/^Taskosaur:/im.test(pr.body || "")) numbers.add(pr.number);
             if (prs.length < 100) break;
             if (page === 20)
               throw Error("Open PR scan exceeded the explicit safety bound");
@@ -110,11 +111,17 @@ jobs:
           // so a later push/check event repairs a dropped merge/close notification.
           const closedCutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
           for (let page = 1; page <= 20; page++) {
-            const prs = await github                                          (
+            const prs = await github
+
+             (
               `repos/${repository}/pulls?state=closed&sort=updated&direction=desc&per_page=100&page=${page}`,
             );
             for (const pr of prs)
-              if (Date.parse(pr.updated_at) >= closedCutoff) numbers.add(pr.number);
+              if (
+                Date.parse(pr.updated_at) >= closedCutoff &&
+                /^Taskosaur:/im.test(pr.body || "")
+              )
+                numbers.add(pr.number);
             if (prs.length < 100 || Date.parse(prs.at(-1) .updated_at) < closedCutoff)
               break;
             if (page === 20)
@@ -141,9 +148,16 @@ jobs:
 
                   ("graphql", { query, variables: { owner, name, number } });
                 if (data.errors || !data.data?.repository.pullRequest)
-                  throw Error(`GitHub PR query failed: ${data.errors?.map((error) => error.message).join("; ") || "missing PR"}`);
+                  throw Error(
+                    `GitHub PR query failed: ${data.errors?.map((error) => error.message).join("; ") || "missing PR"}`,
+                  );
                 pr = data.data.repository.pullRequest;
-                if (pr.mergeStateStatus !== "UNKNOWN") break;
+                if (
+                  pr.state !== "OPEN" ||
+                  pr.mergeStateStatus !== "UNKNOWN" ||
+                  !/^Taskosaur:/im.test(pr.body || "")
+                )
+                  break;
                 await new Promise((resolve) => setTimeout(resolve, 3000));
               }
               if (!pr) throw Error("Missing PR");
