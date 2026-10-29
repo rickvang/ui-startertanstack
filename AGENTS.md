@@ -34,6 +34,7 @@ The catalog is where a screen is tried. The app holds workspaces, clients, and p
 ## How to change
 
 - Coding task stages and PR links follow the canonical Taskosaur organization document `collaboration/procedures/continuity.md` → Coding SDLC (owner `3bae1986-e1c3-44ba-888c-9fea9b34245c`). Load it through your platform's collaboration contract. This repository integrates through `rickvang/ui-startertanstack` / `master`; keep each editing task in its own owned branch/worktree.
+- The owning Taskosaur project is UI Starter (TanStack) (`50696b36-fcfa-481c-b350-3c0a95402bda`). Search that project before creating a task. Keep the workstream current at each catalog slice.
 - Follow Use the space before adding an area or a page.
 - Import reusable components from `@ui-starter/ui`. The public list is `packages/ui/src/index.ts`.
 - A pattern story shows a composition. Check that list before importing the pattern as a component.
