@@ -15,7 +15,6 @@ export const Overview: Story = {
     name: "Overview",
     render: () => (
         <DocPage title="Table" intro="A table shows many records of the same kind, one row each.">
-            <DocCodeSection note={libraryExportNote} code={membersTableSnippet} />
             <DocSection title="Example">
                 <DocParagraph>The name identifies the record. The other columns are its fields. Status is its state. A click selects the row.</DocParagraph>
                 <DocDemo>
@@ -65,11 +64,13 @@ export const Overview: Story = {
                         "The column kind sets the width. Name, text, date, link, and custom start at the left. Number, status, and actions sit at the end.",
                         "The name header, a group label, and a record share one left edge. A nested row is the only indent. A pinned name column keeps that edge.",
                         "Checkboxes and expand sit before the columns. A group row includes that room, so the label stays in the name column.",
-                        "Status, Columns, and row actions open beside the control. The grid scrolls sideways, so the menu stays outside the cell.",
+                        "Status, Columns, and row actions open a Popover beside the control. The grid scrolls sideways, so the menu stays outside the cell.",
+                        "A confirm that must stop the page uses Dialog. A full-height task on one row uses Drawer. Do not nest overlays.",
                         "Space, type, and color use the catalog tokens.",
                     ]}
                 />
             </DocSection>
+            <DocCodeSection note={libraryExportNote} code={membersTableSnippet} />
         </DocPage>
     ),
 };
