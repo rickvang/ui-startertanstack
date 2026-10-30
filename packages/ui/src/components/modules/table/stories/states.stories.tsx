@@ -15,7 +15,6 @@ export const States: Story = {
     name: "States",
     render: () => (
         <DocPage title="States" intro="Loading, error, empty, and density are explicit states. Match empty copy to meaning. A table empty is copy in the table. A panel with no items uses Empty state.">
-            <DocCodeSection note={libraryExportNote} code={tableStatesSnippet} />
             <DocSection title="Example">
                 <DocWhenAvoid
                     when="loading shows Loader rows. error keeps the header and shows a message. empty is copy when there are no items. A search or filter with no hits uses built-in no matches copy. density changes row padding."
@@ -31,6 +30,7 @@ export const States: Story = {
                     </div>
                 </DocDemo>
             </DocSection>
+            <DocCodeSection note={libraryExportNote} code={tableStatesSnippet} />
         </DocPage>
     ),
 };
