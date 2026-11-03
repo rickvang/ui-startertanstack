@@ -5,11 +5,11 @@
     rel="stylesheet"
 />
 <style>
-    /* Editorial library chrome: quiet paper sidebar, wordmark, soft selection rail */
+    /* Editorial library chrome — strip stock Storybook chrome noise */
 
     .sidebar-header {
-        padding: 1.2rem 1rem 0.95rem !important;
-        border-bottom: none !important;
+        padding: 1.35rem 1rem 1rem !important;
+        border-bottom: 1px solid #e5ded2 !important;
     }
 
     .sidebar-header a {
@@ -18,7 +18,7 @@
         align-items: flex-start !important;
         gap: 0.15rem !important;
         font-family: "Fraunces", Georgia, serif !important;
-        font-size: 1.15rem !important;
+        font-size: 1.2rem !important;
         font-weight: 550 !important;
         letter-spacing: -0.03em !important;
         color: #2a2620 !important;
@@ -35,8 +35,27 @@
         color: #6b655c;
     }
 
-    /* Hide default Storybook logo image if any theme still injects one */
     .sidebar-header img {
+        display: none !important;
+    }
+
+    /* Hide Storybook checklist / onboarding widget (feature flag + CSS backup) */
+    #storybook-checklist-widget {
+        display: none !important;
+    }
+
+    /* Hide node-type icons (component/story marks). Keep expand chevrons. */
+    #storybook-explorer-menu svg[type="component"],
+    #storybook-explorer-menu svg[type="story"],
+    #storybook-explorer-menu svg[type="group"],
+    #storybook-explorer-menu svg[type="document"],
+    #storybook-explorer-menu use[href^="#icon--"],
+    #storybook-explorer-menu use[xlink\:href^="#icon--"] {
+        display: none !important;
+    }
+
+    /* Hide per-row context menus — catalog index, not Storybook power-user chrome */
+    #storybook-explorer-menu [data-testid="context-menu"] {
         display: none !important;
     }
 
@@ -47,6 +66,7 @@
         border-radius: 0 !important;
         background: transparent !important;
         box-shadow: none !important;
+        margin: 0.85rem 1rem 0.35rem !important;
     }
 
     #storybook-explorer-menu [data-nodetype="root"] {
@@ -56,10 +76,10 @@
         font-weight: 600 !important;
         color: #6b655c !important;
         opacity: 0.9;
-        margin-top: 0.75rem !important;
+        margin-top: 0.85rem !important;
     }
 
-    /* Soft selected: teal ink + inset rail (Storybook 10 uses .sidebar-item) */
+    /* Soft selected: teal ink + inset rail */
     #storybook-explorer-menu .sidebar-item[data-selected="true"],
     #storybook-explorer-menu [data-selected="true"] {
         background: transparent !important;
