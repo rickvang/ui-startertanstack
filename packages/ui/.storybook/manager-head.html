@@ -1,0 +1,55 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+/>
+<style>
+    /* Soften default Storybook chrome toward a catalog library feel */
+    .sidebar-header {
+        padding: 1.1rem 0.85rem 0.9rem !important;
+        border-bottom: 1px solid #ddd8cf;
+    }
+
+    .sidebar-header img {
+        max-height: 28px !important;
+        width: auto !important;
+    }
+
+    .sidebar-header a {
+        letter-spacing: -0.02em;
+        font-weight: 600 !important;
+        gap: 0.55rem;
+    }
+
+    /* Section roots read as library categories */
+    #storybook-explorer-menu [data-nodetype="root"] {
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-size: 0.68rem !important;
+        font-weight: 600 !important;
+        opacity: 0.7;
+        margin-top: 0.55rem !important;
+    }
+
+    #storybook-explorer-menu button[data-selected="true"],
+    #storybook-explorer-menu a[data-selected="true"] {
+        font-weight: 550 !important;
+    }
+
+    /* Search field: quieter border, softer radius */
+    .search-field {
+        border-radius: 8px !important;
+    }
+
+    /* Bottom panel tabs */
+    [role="tablist"] button[role="tab"] {
+        letter-spacing: 0.01em;
+        font-weight: 500 !important;
+    }
+
+    /* Trim the default Storybook pink glow on focus rings where theme doesn't reach */
+    :focus-visible {
+        outline-color: #0f766e !important;
+    }
+</style>

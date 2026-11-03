@@ -1,9 +1,11 @@
 import type { Preview } from "@storybook/react-vite";
 import "../src/styles/storybook.css";
+import { catalogTheme } from "./theme";
 
 const preview: Preview = {
     initialGlobals: {
         theme: "light",
+        backgrounds: { value: "canvas" },
     },
     globalTypes: {
         theme: {
@@ -29,10 +31,25 @@ const preview: Preview = {
     ],
     parameters: {
         layout: "centered",
+        backgrounds: {
+            options: {
+                canvas: { name: "Canvas", value: "var(--canvas)" },
+                surface: { name: "Surface", value: "var(--surface)" },
+                ink: { name: "Ink", value: "var(--ink)" },
+            },
+        },
         docs: {
+            theme: catalogTheme,
             source: {
                 state: "open",
             },
+        },
+        controls: {
+            matchers: {
+                color: /(background|color)$/i,
+                date: /Date$/i,
+            },
+            expanded: true,
         },
         options: {
             storySort: {

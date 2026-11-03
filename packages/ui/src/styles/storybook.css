@@ -5,11 +5,89 @@
 
 body {
     margin: 0;
-    background: var(--canvas);
+    min-height: 100%;
+    background:
+        radial-gradient(1200px 480px at 12% -10%, color-mix(in oklab, var(--accent-subtle) 55%, transparent), transparent 70%),
+        radial-gradient(900px 420px at 100% 0%, color-mix(in oklab, var(--selected) 80%, transparent), transparent 65%),
+        var(--canvas);
     color: var(--ink);
     font-family: var(--font-sans);
 }
 
 .sb-show-main {
-    padding: 1.5rem;
+    padding: 1.75rem;
+}
+
+/* Docs pages: quieter, library-like reading surface */
+.sbdocs.sbdocs-wrapper {
+    background: transparent;
+    padding: 2.75rem 1.5rem 4.5rem;
+}
+
+.sbdocs.sbdocs-content {
+    max-width: 920px;
+}
+
+.sbdocs .sbdocs-title,
+.sbdocs h1 {
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.sbdocs h2 {
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.45rem;
+}
+
+.sbdocs h3 {
+    letter-spacing: -0.015em;
+    font-weight: 600;
+}
+
+.sbdocs p,
+.sbdocs li {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.sbdocs a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+.sbdocs .docblock-source {
+    border-radius: 0.75rem;
+    border: 1px solid var(--line);
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.sbdocs .sbdocs-preview {
+    border-radius: 0.75rem;
+    border: 1px solid var(--line);
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.sbdocs table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.sbdocs table th {
+    background: var(--selected);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.sbdocs table td,
+.sbdocs table th {
+    border-bottom: 1px solid var(--line);
 }
