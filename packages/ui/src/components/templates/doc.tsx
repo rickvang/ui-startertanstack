@@ -12,6 +12,49 @@ export function DocPage({ title, intro, children }: { title: string; intro: stri
 
 export const DocSection = FoundationSection;
 
+/** Designed Getting started face — brand, one headline, paths into the library. */
+export function DocLibraryHome({
+    eyebrow,
+    title,
+    lede,
+    primary,
+    secondary,
+    sections,
+}: {
+    eyebrow: string;
+    title: string;
+    lede: string;
+    primary: { label: string; href: string };
+    secondary: { label: string; href: string };
+    sections: readonly { title: string; body: string }[];
+}) {
+    return (
+        <div className="catalog-library-home">
+            <header className="catalog-library-hero">
+                <p className="catalog-library-hero__eyebrow">{eyebrow}</p>
+                <h1 className="catalog-library-hero__title">{title}</h1>
+                <p className="catalog-library-hero__lede">{lede}</p>
+                <div className="catalog-library-hero__actions">
+                    <a className="primary" href={primary.href}>
+                        {primary.label}
+                    </a>
+                    <a className="ghost" href={secondary.href}>
+                        {secondary.label}
+                    </a>
+                </div>
+            </header>
+            <div className="catalog-library-sections">
+                {sections.map((section) => (
+                    <section key={section.title} className="catalog-library-section">
+                        <h2>{section.title}</h2>
+                        <p>{section.body}</p>
+                    </section>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 export function DocList({
     items,
     columns = 2,

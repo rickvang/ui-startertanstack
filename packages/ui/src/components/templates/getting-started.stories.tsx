@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { buttonSnippet, libraryExportNote } from "../../../.storybook/copyable-snippets";
-import { DocBullets, DocCodeSection, DocPage, DocParagraph, DocRows, DocSection } from "./doc";
+import { DocBullets, DocCodeSection, DocLibraryHome, DocPage, DocParagraph, DocRows, DocSection } from "./doc";
 
 const meta = {
     title: "Getting started",
@@ -14,33 +14,27 @@ type Story = StoryObj<typeof meta>;
 export const ThisCatalog: Story = {
     name: "This catalog",
     render: () => (
-        <DocPage title="This catalog" intro="The catalog is where a screen is tried. The app holds workspaces, clients, and projects.">
-            <DocSection title="The groups">
-                <DocParagraph>Open the group that matches the job. Patterns are workflows. Components and modules are the controls those workflows use.</DocParagraph>
-                <DocRows
-                    headers={["Open", "For"]}
-                    rows={[
-                        { label: "Foundations", detail: "Color, type, space, radius, shadow, and motion. Motion is primitives, then semantic roles. The component plays the role." },
-                        { label: "Layout", detail: "Frames, content containers, overlays, and arrangement." },
-                        { label: "Components", detail: "One control. Navigation sits here." },
-                        { label: "Modules", detail: "Shell, settings, account, forms, detail, and table." },
-                        { label: "Patterns", detail: "A workflow. Copy the closest story. Keep Shell as the frame." },
-                    ]}
-                />
-            </DocSection>
-            <DocSection title="In this space">
-                <DocBullets
-                    items={[
-                        "Mock a screen as a story. Put it in the app only when asked.",
-                        "The toolbar switches light and dark. Review at desktop (1440px) and mobile (375px).",
-                        "Pick a workflow from Patterns/Overview. Do not import a pattern as a component.",
-                    ]}
-                />
-            </DocSection>
-            <DocSection title="If you are building">
-                <DocParagraph>Reusable controls come from the package. Product copy stays in the app. Commands, imports, and where a file goes are on This starter.</DocParagraph>
-            </DocSection>
-        </DocPage>
+        <DocLibraryHome
+            eyebrow="UI Starter design system"
+            title="A catalog for building product UI"
+            lede="Try screens here. Ship them in the app. Foundations, components, modules, and patterns — one library."
+            primary={{ label: "Browse foundations", href: "?path=/story/foundations-color--primitives" }}
+            secondary={{ label: "Open components", href: "?path=/story/components-button--primary" }}
+            sections={[
+                {
+                    title: "Foundations",
+                    body: "Color, type, space, motion — the tokens everything else uses.",
+                },
+                {
+                    title: "Components",
+                    body: "Buttons, fields, overlays, and the rest of the control set.",
+                },
+                {
+                    title: "Patterns",
+                    body: "Workflows composed from modules: settings, tables, tasks.",
+                },
+            ]}
+        />
     ),
 };
 
@@ -68,6 +62,28 @@ export const ThisStarter: Story = {
                         { label: "Color, type, space, or motion", detail: "Semantic tokens in packages/ui/src/styles/theme.css. Primitive ramps stay fixed. A component owns its motion." },
                         { label: "A page", detail: "apps/web/src/routes with createFileRoute. Keep Shell as the frame. The document shell stays __root.tsx." },
                         { label: "A workspace, client, or project", detail: "One entry in apps/web/src/areas.ts. Add its page only when asked." },
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="The groups">
+                <DocParagraph>Open the group that matches the job. Patterns are workflows. Components and modules are the controls those workflows use.</DocParagraph>
+                <DocRows
+                    headers={["Open", "For"]}
+                    rows={[
+                        { label: "Foundations", detail: "Color, type, space, radius, shadow, and motion." },
+                        { label: "Layout", detail: "Frames, content containers, overlays, and arrangement." },
+                        { label: "Components", detail: "One control. Navigation sits here." },
+                        { label: "Modules", detail: "Shell, settings, account, forms, detail, and table." },
+                        { label: "Patterns", detail: "A workflow. Copy the closest story. Keep Shell as the frame." },
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="In this space">
+                <DocBullets
+                    items={[
+                        "Mock a screen as a story. Put it in the app only when asked.",
+                        "The toolbar switches light and dark. Review at desktop (1440px) and mobile (375px).",
+                        "Pick a workflow from Patterns/Overview. Do not import a pattern as a component.",
                     ]}
                 />
             </DocSection>

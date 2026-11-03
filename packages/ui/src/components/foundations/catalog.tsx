@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 
 export function FoundationPage({ title, intro, children }: { title: string; intro?: string; children: ReactNode }) {
     return (
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-spacing-08 px-spacing-06 py-spacing-07 text-ink">
+        <div className="catalog-doc-page mx-auto flex w-full max-w-5xl flex-col gap-spacing-08 px-spacing-06 py-spacing-07 text-ink">
             <header className="flex max-w-2xl flex-col gap-spacing-03">
-                <h1 className="text-display-sm font-semibold">{title}</h1>
+                <h1 className="catalog-doc-title text-display-sm font-semibold">{title}</h1>
                 {intro ? <p className="text-md text-muted">{intro}</p> : null}
             </header>
             {children}
