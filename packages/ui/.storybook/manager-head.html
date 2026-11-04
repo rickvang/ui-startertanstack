@@ -69,37 +69,57 @@
         margin: 0.85rem 1rem 0.35rem !important;
     }
 
-    #storybook-explorer-menu [data-nodetype="root"],
-    #storybook-explorer-menu .sidebar-subheading {
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        font-size: 0.66rem !important;
-        font-weight: 600 !important;
-        color: #6b655c !important;
-        opacity: 0.9;
-        margin-top: 0.85rem !important;
-        padding-left: 0.75rem !important;
-    }
-
     /*
-     * Hierarchy indent — hiding type icons collapsed Storybook's built-in depth cue.
-     * Level 1: items under section headers (Button, Color, Arrange)
-     * Level 2: stories/docs under a component (Primary, Docs)
-     * Nested groups: children of a group (Arrange → Flow)
+     * Section roots (Foundations, Layout, Components, Modules, Patterns)
+     * should read as collapsible headers — not the same row style as Button/Color.
+     * Child indent stays Storybook's default (already correct).
      */
-    #storybook-explorer-menu .sidebar-item[data-parent-id]:is([data-nodetype="component"], [data-nodetype="group"]) > button,
-    #storybook-explorer-menu .sidebar-item[data-parent-id]:is([data-nodetype="component"], [data-nodetype="group"]) > a {
-        padding-left: 1.15rem !important;
+    #storybook-explorer-menu .sidebar-subheading,
+    #storybook-explorer-menu [data-nodetype="root"] {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.25rem !important;
+        margin: 1rem 0.4rem 0.35rem !important;
+        padding: 0.45rem 0.4rem !important;
+        border-radius: 6px !important;
+        background: #efeae2 !important;
+        color: #2a2620 !important;
+        opacity: 1 !important;
     }
 
-    #storybook-explorer-menu .sidebar-item[data-parent-id*="-"]:is([data-nodetype="component"], [data-nodetype="group"]) > button,
-    #storybook-explorer-menu .sidebar-item[data-parent-id*="-"]:is([data-nodetype="component"], [data-nodetype="group"]) > a {
-        padding-left: 1.75rem !important;
+    #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"],
+    #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"] {
+        flex: 1 1 auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+        padding: 0.15rem 0.2rem !important;
+        border: 0 !important;
+        background: transparent !important;
+        color: #2a2620 !important;
+        font-family: "Instrument Sans", "Segoe UI", sans-serif !important;
+        font-size: 0.78rem !important;
+        font-weight: 650 !important;
+        letter-spacing: 0.04em !important;
+        text-transform: uppercase !important;
+        cursor: pointer !important;
+        text-align: left !important;
     }
 
-    #storybook-explorer-menu .sidebar-item[data-nodetype="story"] > a,
-    #storybook-explorer-menu .sidebar-item[data-nodetype="document"] > a {
-        padding-left: 2.35rem !important;
+    #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"] svg,
+    #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"] svg {
+        width: 10px !important;
+        height: 10px !important;
+        flex-shrink: 0 !important;
+        opacity: 0.75 !important;
+    }
+
+    #storybook-explorer-menu .sidebar-subheading-action {
+        opacity: 0.55 !important;
+    }
+
+    #storybook-explorer-menu .sidebar-subheading-action:hover {
+        opacity: 1 !important;
     }
 
     /* Soft selected: teal ink + inset rail */
