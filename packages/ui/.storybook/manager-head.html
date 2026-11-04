@@ -70,21 +70,26 @@
     }
 
     /*
-     * Section roots (Foundations, Layout, Components, Modules, Patterns)
-     * should read as collapsible headers — not the same row style as Button/Color.
-     * Child indent stays Storybook's default (already correct).
+     * Section roots — research-aligned (Carbon Storybook + Denali sidebar guidance):
+     * de-emphasized labels, not chrome. Small uppercase muted type, space above,
+     * no fill / no hairline bars. Rows below stay the primary interactive content.
      */
     #storybook-explorer-menu .sidebar-subheading,
     #storybook-explorer-menu [data-nodetype="root"] {
         display: flex !important;
         align-items: center !important;
-        gap: 0.25rem !important;
-        margin: 1rem 0.4rem 0.35rem !important;
-        padding: 0.45rem 0.4rem !important;
-        border-radius: 6px !important;
-        background: #efeae2 !important;
-        color: #2a2620 !important;
+        gap: 0 !important;
+        margin: 1rem 0 0.15rem !important;
+        padding: 0.15rem 0.5rem 0.1rem !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
         opacity: 1 !important;
+    }
+
+    #storybook-explorer-menu .sidebar-subheading:first-of-type,
+    #storybook-explorer-menu [data-nodetype="root"]:first-of-type {
+        margin-top: 0.35rem !important;
     }
 
     #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"],
@@ -93,33 +98,47 @@
         display: inline-flex !important;
         align-items: center !important;
         gap: 0.4rem !important;
-        padding: 0.15rem 0.2rem !important;
+        min-height: 1.35rem !important;
+        padding: 0.2rem 0.15rem !important;
         border: 0 !important;
         background: transparent !important;
-        color: #2a2620 !important;
+        color: #6b655c !important;
         font-family: "Instrument Sans", "Segoe UI", sans-serif !important;
-        font-size: 0.78rem !important;
-        font-weight: 650 !important;
-        letter-spacing: 0.04em !important;
+        font-size: 0.6875rem !important; /* ~11px — Carbon root scale */
+        font-weight: 700 !important;
+        letter-spacing: 0.11em !important;
         text-transform: uppercase !important;
         cursor: pointer !important;
         text-align: left !important;
     }
 
+    #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"]:hover,
+    #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"]:hover {
+        color: #2a2620 !important;
+    }
+
     #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"] svg,
     #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"] svg {
-        width: 10px !important;
-        height: 10px !important;
+        width: 8px !important;
+        height: 8px !important;
         flex-shrink: 0 !important;
-        opacity: 0.75 !important;
+        opacity: 0.65 !important;
+        color: inherit !important;
     }
 
+    /* Expand-all is noise in a library index */
     #storybook-explorer-menu .sidebar-subheading-action {
-        opacity: 0.55 !important;
+        display: none !important;
     }
 
-    #storybook-explorer-menu .sidebar-subheading-action:hover {
-        opacity: 1 !important;
+    /* Body rows read stronger than section labels (Denali: headers deemphasized vs links) */
+    #storybook-explorer-menu .sidebar-item > button,
+    #storybook-explorer-menu .sidebar-item > a {
+        font-size: 0.875rem !important;
+        font-weight: 400 !important;
+        color: #2a2620 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
     }
 
     /* Soft selected: teal ink + inset rail */
