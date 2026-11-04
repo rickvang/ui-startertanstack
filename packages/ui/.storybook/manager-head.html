@@ -69,7 +69,8 @@
         margin: 0.85rem 1rem 0.35rem !important;
     }
 
-    #storybook-explorer-menu [data-nodetype="root"] {
+    #storybook-explorer-menu [data-nodetype="root"],
+    #storybook-explorer-menu .sidebar-subheading {
         letter-spacing: 0.1em;
         text-transform: uppercase;
         font-size: 0.66rem !important;
@@ -77,6 +78,28 @@
         color: #6b655c !important;
         opacity: 0.9;
         margin-top: 0.85rem !important;
+        padding-left: 0.75rem !important;
+    }
+
+    /*
+     * Hierarchy indent — hiding type icons collapsed Storybook's built-in depth cue.
+     * Level 1: items under section headers (Button, Color, Arrange)
+     * Level 2: stories/docs under a component (Primary, Docs)
+     * Nested groups: children of a group (Arrange → Flow)
+     */
+    #storybook-explorer-menu .sidebar-item[data-parent-id]:is([data-nodetype="component"], [data-nodetype="group"]) > button,
+    #storybook-explorer-menu .sidebar-item[data-parent-id]:is([data-nodetype="component"], [data-nodetype="group"]) > a {
+        padding-left: 1.15rem !important;
+    }
+
+    #storybook-explorer-menu .sidebar-item[data-parent-id*="-"]:is([data-nodetype="component"], [data-nodetype="group"]) > button,
+    #storybook-explorer-menu .sidebar-item[data-parent-id*="-"]:is([data-nodetype="component"], [data-nodetype="group"]) > a {
+        padding-left: 1.75rem !important;
+    }
+
+    #storybook-explorer-menu .sidebar-item[data-nodetype="story"] > a,
+    #storybook-explorer-menu .sidebar-item[data-nodetype="document"] > a {
+        padding-left: 2.35rem !important;
     }
 
     /* Soft selected: teal ink + inset rail */
