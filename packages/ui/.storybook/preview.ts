@@ -30,18 +30,21 @@ const preview: Preview = {
         },
     ],
     parameters: {
-        layout: "centered",
+        // Padded stage — less “lonely floating demo” than centered-on-void
+        layout: "padded",
         backgrounds: {
             options: {
                 canvas: { name: "Canvas", value: "var(--canvas)" },
                 surface: { name: "Surface", value: "var(--surface)" },
                 ink: { name: "Ink", value: "var(--ink)" },
             },
+            // Never start with Storybook’s wireframe grid on
+            grid: false,
         },
         docs: {
             theme: catalogTheme,
             source: {
-                state: "open",
+                state: "closed",
             },
         },
         controls: {
@@ -49,8 +52,11 @@ const preview: Preview = {
                 color: /(background|color)$/i,
                 date: /Date$/i,
             },
-            expanded: true,
+            expanded: false,
         },
+        // Disable measure/outline at the parameter level when available
+        measure: { disable: true },
+        outline: { disable: true },
         options: {
             storySort: {
                 includeNames: true,

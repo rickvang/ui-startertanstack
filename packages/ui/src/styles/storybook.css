@@ -20,7 +20,13 @@ body {
 }
 
 .sb-show-main {
-    padding: 1.75rem;
+    padding: 2rem 1.75rem;
+}
+
+/* Prefer a calm product surface over Storybook’s empty void */
+.sb-main-padded,
+.sb-main-centered {
+    background: var(--canvas);
 }
 
 /* Docs / library pages: paper reading surface */

@@ -21,12 +21,12 @@ export const catalogTheme = create({
     // Keep secondary teal for tabs/focus; sidebar selection overridden in manager-head
     colorSecondary: "#0F766E",
 
-    // Paper sidebar, flat preview
+    // Paper sidebar vs cooler white stage — slight plane separation
     appBg: "#F7F3EB",
     appContentBg: "#FFFEFB",
-    appPreviewBg: "#F3F1EC",
+    appPreviewBg: "#F4F2ED",
     appBorderColor: "#E5DED2",
-    appBorderRadius: 10,
+    appBorderRadius: 8,
 
     textColor: "#2A2620",
     textMutedColor: "#6B655C",
