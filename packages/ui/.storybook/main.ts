@@ -5,6 +5,14 @@ const config: StorybookConfig = {
     stories: ["../src/**/*.stories.tsx"],
     addons: ["@storybook/addon-docs"],
     framework: "@storybook/react-vite",
+    features: {
+        // Stock Storybook onboarding — not part of the design-system catalog face
+        sidebarOnboardingChecklist: false,
+        menuOnboardingChecklist: false,
+    },
+    core: {
+        disableWhatsNewNotifications: true,
+    },
     async viteFinal(config) {
         config.plugins = [...(config.plugins ?? []), tailwindcss()];
         return config;

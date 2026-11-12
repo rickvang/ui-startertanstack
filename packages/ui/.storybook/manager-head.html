@@ -1,0 +1,253 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+/>
+<style>
+    /*
+     * Catalog library chrome — one coherent face:
+     * brand → quiet search → section labels → component rows → stories.
+     * Stock Storybook power-user chrome is suppressed.
+     */
+
+    :root {
+        --catalog-ink: #2a2620;
+        --catalog-muted: #6b655c;
+        --catalog-line: #e5ded2;
+        --catalog-paper: #f7f3eb;
+        --catalog-wash: #efeae2;
+        --catalog-teal: #0f766e;
+        --catalog-teal-ink: #115e59;
+        --catalog-teal-soft: rgba(15, 118, 110, 0.08);
+    }
+
+    /* ——— Brand ——— */
+    .sidebar-header {
+        padding: 1.25rem 1rem 0.95rem !important;
+        border-bottom: 1px solid var(--catalog-line) !important;
+    }
+
+    .sidebar-header a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.12rem !important;
+        font-family: "Fraunces", Georgia, serif !important;
+        font-size: 1.2rem !important;
+        font-weight: 550 !important;
+        letter-spacing: -0.03em !important;
+        color: var(--catalog-ink) !important;
+        line-height: 1.15 !important;
+    }
+
+    .sidebar-header a::after {
+        content: "Design system";
+        font-family: "Instrument Sans", "Segoe UI", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--catalog-muted);
+    }
+
+    .sidebar-header img {
+        display: none !important;
+    }
+
+    /* ——— Search: keep find, drop Storybook badges ——— */
+    [role="search"] {
+        display: flex !important;
+        align-items: stretch !important;
+        gap: 0 !important;
+        padding: 0.65rem 0.85rem 0.45rem !important;
+    }
+
+    [role="search"] > .search-field {
+        flex: 1 1 auto !important;
+        margin: 0 !important;
+        border: 0 !important;
+        border-bottom: 1px solid var(--catalog-line) !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        min-height: 2.25rem !important;
+    }
+
+    [role="search"] > .search-field:focus-within {
+        border-bottom-color: var(--catalog-teal) !important;
+    }
+
+    /* ⌃K shortcut badge */
+    [role="search"] .search-field code {
+        display: none !important;
+    }
+
+    /* Tag filters */
+    [role="search"] button[aria-label="Tag filters"],
+    [role="search"] button[aria-label="Tag filters"] + span {
+        display: none !important;
+    }
+
+    /* Create-a-story (+) — catalog, not Storybook authoring */
+    [role="search"] > button[aria-label="Create a new story"] {
+        display: none !important;
+    }
+
+    /* ——— Onboarding / type icons / row menus ——— */
+    #storybook-checklist-widget {
+        display: none !important;
+    }
+
+    #storybook-explorer-menu svg[type="component"],
+    #storybook-explorer-menu svg[type="story"],
+    #storybook-explorer-menu svg[type="group"],
+    #storybook-explorer-menu svg[type="document"],
+    #storybook-explorer-menu use[href^="#icon--"],
+    #storybook-explorer-menu use[xlink\:href^="#icon--"] {
+        display: none !important;
+    }
+
+    /* Collapse empty wrappers that only held type icons */
+    #storybook-explorer-menu .sidebar-item a > div:first-child:has(svg[type]),
+    #storybook-explorer-menu .sidebar-item button > div:first-child:has(svg[type]) {
+        display: none !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #storybook-explorer-menu [data-testid="context-menu"] {
+        display: none !important;
+    }
+
+    /* ——— Section roots: structure, not chips ———
+       Align label text with component rows (same left edge).
+       Hide root chevrons — they made headers look like nested items. */
+    #storybook-explorer-menu .sidebar-subheading,
+    #storybook-explorer-menu [data-nodetype="root"] {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0 !important;
+        margin: 1.05rem 0.35rem 0.1rem !important;
+        padding: 0.5rem 0.5rem 0.15rem !important;
+        border: 0 !important;
+        border-top: 1px solid var(--catalog-line) !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        opacity: 1 !important;
+    }
+
+    #storybook-explorer-menu .sidebar-subheading:first-of-type,
+    #storybook-explorer-menu [data-nodetype="root"]:first-of-type {
+        margin-top: 0.45rem !important;
+    }
+
+    #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"],
+    #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"] {
+        flex: 1 1 auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
+        min-height: 1.35rem !important;
+        padding: 0.15rem 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        color: var(--catalog-muted) !important;
+        font-family: "Instrument Sans", "Segoe UI", sans-serif !important;
+        font-size: 0.6875rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        cursor: pointer !important;
+        text-align: left !important;
+    }
+
+    #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"]:hover,
+    #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"]:hover {
+        color: var(--catalog-ink) !important;
+    }
+
+    /* Root chevron + expand-all — noise; label itself toggles */
+    #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"] > div:first-child,
+    #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"] > div:first-child,
+    #storybook-explorer-menu .sidebar-subheading > button[data-action="collapse-root"] svg,
+    #storybook-explorer-menu [data-nodetype="root"] > button[data-action="collapse-root"] svg,
+    #storybook-explorer-menu .sidebar-subheading-action {
+        display: none !important;
+    }
+
+    /* ——— Body rows: stronger than section labels ——— */
+    #storybook-explorer-menu .sidebar-item {
+        margin: 0 0.35rem !important;
+        border-radius: 4px !important;
+    }
+
+    #storybook-explorer-menu .sidebar-item > button,
+    #storybook-explorer-menu .sidebar-item > a {
+        font-family: "Instrument Sans", "Segoe UI", sans-serif !important;
+        font-size: 0.875rem !important;
+        font-weight: 500 !important;
+        color: var(--catalog-ink) !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        border-radius: 4px !important;
+    }
+
+    /* Stories / docs under a component — slightly quieter */
+    #storybook-explorer-menu .sidebar-item[data-nodetype="story"] > a,
+    #storybook-explorer-menu .sidebar-item[data-nodetype="document"] > a {
+        font-weight: 400 !important;
+        color: #3f3a33 !important;
+    }
+
+    #storybook-explorer-menu .sidebar-item:hover {
+        background: var(--catalog-wash) !important;
+    }
+
+    /* Soft selected: wash + teal rail (not a floating bar) */
+    #storybook-explorer-menu .sidebar-item[data-selected="true"],
+    #storybook-explorer-menu [data-selected="true"] {
+        background: var(--catalog-teal-soft) !important;
+        background-color: var(--catalog-teal-soft) !important;
+        color: var(--catalog-teal-ink) !important;
+        font-weight: 600 !important;
+        box-shadow: inset 2px 0 0 var(--catalog-teal) !important;
+        border-radius: 4px !important;
+    }
+
+    #storybook-explorer-menu .sidebar-item[data-selected="true"] a,
+    #storybook-explorer-menu .sidebar-item[data-selected="true"] button,
+    #storybook-explorer-menu .sidebar-item[data-selected="true"] span {
+        color: var(--catalog-teal-ink) !important;
+    }
+
+    #storybook-explorer-menu .sidebar-item[data-selected="true"]:hover,
+    #storybook-explorer-menu [data-selected="true"]:hover {
+        background: var(--catalog-teal-soft) !important;
+        background-color: var(--catalog-teal-soft) !important;
+        color: var(--catalog-teal-ink) !important;
+    }
+
+    /* ——— Canvas toolbar: keep useful, hide wireframe toys ——— */
+    button[aria-label="Grid visibility"],
+    button[aria-label="Measure tool"],
+    button[aria-label="Outline tool"],
+    button[aria-label="Change zoom level"],
+    button[aria-label="Enter full screen"],
+    button[aria-label="Exit full screen"],
+    button[title="Copy canvas link"],
+    button[aria-label="Open canvas in new tab"] {
+        display: none !important;
+    }
+
+    [role="tablist"] button[role="tab"] {
+        letter-spacing: 0.01em;
+        font-weight: 500 !important;
+    }
+
+    :focus-visible {
+        outline-color: var(--catalog-teal) !important;
+    }
+</style>
