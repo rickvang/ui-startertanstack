@@ -71,13 +71,13 @@ body {
     font-weight: 600;
 }
 
-.sbdocs p,
-.sbdocs li {
+/* Docs prose only — do not restyle components inside inline story canvases */
+.sbdocs .sbdocs-content :where(p, li):not(:where(.sbdocs-preview, .docs-story, .sb-story, .docblock-argstable) *) {
     color: var(--muted);
     line-height: 1.65;
 }
 
-.sbdocs a {
+.sbdocs .sbdocs-content :where(a):not(:where(.sbdocs-preview, .docs-story, .sb-story, .docblock-argstable) *) {
     color: var(--accent);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.18em;
