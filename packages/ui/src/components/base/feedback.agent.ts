@@ -56,18 +56,25 @@ export const toastAgentGuidance = {
 } as const satisfies AgentGuidance;
 
 export const emptyStateAgentGuidance = {
-    goal: "Fill an empty content container with a title, explanation, and optional action.",
-    when: ["The container has no items yet.", "Invite or create is the next useful step."],
+    goal: "Say the container is empty after a successful load. Put it inside the region that is empty.",
+    when: ["The region loaded successfully and has nothing to show.", "There is one clear next step, or a short explanation when no action fits."],
     avoid: [
+        "Still waiting on data — use Loader.",
         "An empty table with no sentence — set Table empty copy.",
         "A failed load — use Message or Table error, not Empty state.",
         "A field error — use Field.",
+        "Feedback about a finished action — use Message or Toast.",
     ],
     decisions: [
         {
             title: "Action or not",
             choose: "Include an action when the person can create or invite from here.",
             insteadOf: "A decorative empty block with no path forward when one exists.",
+        },
+        {
+            title: "Empty vs loading",
+            choose: "Empty state only after a successful load with no items.",
+            insteadOf: "Empty copy while the request is still in flight.",
         },
     ],
 } as const satisfies AgentGuidance;

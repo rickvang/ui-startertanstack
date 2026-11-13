@@ -6,7 +6,7 @@ import { Select } from "../base/select";
 import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
-
+import { PatternDemoFrame } from "./pattern-demo-frame";
 import { wizardAgentGuidance } from "./patterns.agent";
 const steps = ["Name", "Access", "Review"] as const;
 
@@ -47,19 +47,21 @@ export const Wizard: Story = {
             <DocPage title="Wizard" intro="A create flow where a later answer depends on an earlier one.">
                 <DocSection title="Example">
                     <DocParagraph>Each step stays short. Review is the last step before save.</DocParagraph>
-                    <DocDemo className="max-w-md">
-                        <div className="flex flex-col gap-spacing-05">
-                            <Steps items={steps} current={step} />
-                            {stepBody(step)}
-                            <div className="flex gap-spacing-03">
-                                <Button variant="secondary" disabled={step === 0} onClick={() => setStep((current) => (current === 0 ? 0 : ((current - 1) as StepIndex)))}>
-                                    Back
-                                </Button>
-                                <Button disabled={step === 2} onClick={() => setStep((current) => (current === 2 ? 2 : ((current + 1) as StepIndex)))}>
-                                    Next
-                                </Button>
+                    <DocDemo bleed>
+                        <PatternDemoFrame title="New project" helpTitle="Wizard" helpBody="A later answer depends on an earlier one. Keep each step short.">
+                            <div className="flex max-w-md flex-col gap-spacing-05">
+                                <Steps items={steps} current={step} />
+                                {stepBody(step)}
+                                <div className="flex gap-spacing-03">
+                                    <Button variant="secondary" disabled={step === 0} onClick={() => setStep((current) => (current === 0 ? 0 : ((current - 1) as StepIndex)))}>
+                                        Back
+                                    </Button>
+                                    <Button disabled={step === 2} onClick={() => setStep((current) => (current === 2 ? 2 : ((current + 1) as StepIndex)))}>
+                                        Next
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
+                        </PatternDemoFrame>
                     </DocDemo>
                 </DocSection>
                 <DocSection title="When to use">

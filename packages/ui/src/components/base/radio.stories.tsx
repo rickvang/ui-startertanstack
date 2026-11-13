@@ -1,38 +1,52 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
-import { docsFromSnippet, radioSnippet } from "../../../.storybook/story-snippets";
-import { RadioGroup } from "./radio";
+import { libraryExportNote, radioSnippet } from "../../../.storybook/story-snippets";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { radioAgentGuidance } from "./inputs.agent";
+import { RadioGroup } from "./radio";
 
 const meta = {
-    tags: ["autodocs"],
+    title: "Components/Radio",
     parameters: {
-        ...autodocsComponentParameters,
+        layout: "fullscreen",
         agent: radioAgentGuidance,
     },
-    title: "Components/Radio",
-    component: RadioGroup,
-    args: {
-        label: "Role",
-        defaultValue: "editor",
-        options: [
-            { value: "owner", label: "Owner" },
-            { value: "editor", label: "Editor" },
-            { value: "viewer", label: "Viewer" },
-        ],
-    },
-} satisfies Meta<typeof RadioGroup>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Stacked: Story = {
-    ...docsFromSnippet(radioSnippet),
-    name: "Stacked",
-};
-
-export const Horizontal: Story = {
-    name: "Horizontal",
-    args: { layout: "horizontal", className: "w-full max-w-md" },
+export const RadioStory: Story = {
+    name: "Radio",
+    render: () => (
+        <DocPage title="Radio" intro="Choose exactly one option from a small set that stays visible on the page.">
+            <DocSection title="Example">
+                <DocDemo className="max-w-md">
+                    <RadioGroup
+                        label="Visibility"
+                        defaultValue="members"
+                        options={[
+                            { value: "private", label: "Private" },
+                            { value: "members", label: "Members" },
+                            { value: "public", label: "Public" },
+                        ]}
+                        hint="Who can open this project."
+                    />
+                </DocDemo>
+            </DocSection>
+            <DocSection title="When to use">
+                <DocBullets items={["Few options that should stay on screen.", "Exactly one must be selected."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "A long list of options. Use Select.",
+                        "Independent toggles. Use Checkbox.",
+                        "An immediate on/off setting. Use Switch.",
+                    ]}
+                />
+            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={radioSnippet} />
+        </DocPage>
+    ),
 };

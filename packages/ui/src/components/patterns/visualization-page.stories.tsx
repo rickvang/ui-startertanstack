@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { compositionNote, visualizationPageSnippet } from "../../../.storybook/story-snippets";
 import { Select } from "../base/select";
-import { Layout } from "../layout/layout";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
-
+import { PatternDemoFrame } from "./pattern-demo-frame";
 import { visualizationPageAgentGuidance } from "./patterns.agent";
 const week = [
     { label: "Mon", height: "h-spacing-07" },
@@ -32,7 +31,7 @@ export const VisualizationPage: Story = {
             <DocSection title="Example">
                 <DocParagraph>Key numbers sit at the top. Filters come next. The chart follows. This stays its own page until there is a chart module.</DocParagraph>
                 <DocDemo bleed>
-                    <Layout header={<span className="font-semibold text-ink">Members</span>}>
+                    <PatternDemoFrame title="Members" domain="members" helpTitle="Overview" helpBody="Summary first. Detail only when asked. The shell stays.">
                         <div className="flex flex-col gap-spacing-04">
                             <div className="grid grid-cols-3 gap-spacing-03">
                                 <div className="rounded-lg border border-line bg-surface p-spacing-04">
@@ -60,7 +59,7 @@ export const VisualizationPage: Story = {
                                 </div>
                             </div>
                         </div>
-                    </Layout>
+                    </PatternDemoFrame>
                 </DocDemo>
             </DocSection>
             <DocSection title="When to use">

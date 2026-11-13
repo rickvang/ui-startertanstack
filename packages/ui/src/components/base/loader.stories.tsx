@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
-import { docsFromSnippet, loaderSnippet } from "../../../.storybook/story-snippets";
-import { FoundationPage } from "../foundations/catalog";
+import { libraryExportNote, loaderSnippet } from "../../../.storybook/story-snippets";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { Loader, type LoaderVariant } from "./loader";
 import { loaderAgentGuidance } from "./inputs.agent";
 
@@ -13,40 +12,55 @@ const variations = [
 ] as const satisfies ReadonlyArray<readonly [string, LoaderVariant, string]>;
 
 const meta = {
-    tags: ["autodocs"],
-    parameters: {
-        agent: loaderAgentGuidance, ...autodocsComponentParameters, layout: "fullscreen" },
     title: "Components/Loader",
-    component: Loader,
-    args: {
-        label: "Loading",
-        children: null,
+    parameters: {
+        layout: "fullscreen",
+        agent: loaderAgentGuidance,
     },
-} satisfies Meta<typeof Loader>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Loading: Story = {
-    ...docsFromSnippet(loaderSnippet),
+export const LoaderStory: Story = {
+    name: "Loader",
     render: () => (
-        <FoundationPage title="Loader" intro="A skeleton stands in for content that has not arrived. Use the shape of what is coming, and let the whole shape breathe brighter, then quieter. The circle sends a dot around a figure 8, easing through the crossing.">
-            <div className="grid gap-spacing-04 sm:grid-cols-2">
-                {variations.map(([name, variant, role]) => (
-                    <article key={variant} className="flex flex-col gap-spacing-04 rounded-lg border border-line bg-surface p-spacing-04">
-                        <div className="flex min-h-spacing-13 items-center rounded-md bg-canvas p-spacing-05">
-                            <Loader variant={variant} />
-                        </div>
-                        <div className="flex flex-col gap-spacing-01">
-                            <span className="text-sm font-medium">{name}</span>
-                            <span className="font-mono text-xs text-muted">{variant}</span>
-                            <span className="text-sm text-muted">{role}</span>
-                        </div>
-                    </article>
-                ))}
-            </div>
-        </FoundationPage>
+        <DocPage
+            title="Loader"
+            intro="A skeleton stands in for content that has not arrived. Use the shape of what is coming. Do not imply the region is empty."
+        >
+            <DocSection title="Example">
+                <DocDemo>
+                    <div className="grid gap-spacing-04 sm:grid-cols-2">
+                        {variations.map(([name, variant, role]) => (
+                            <article key={variant} className="flex flex-col gap-spacing-04 rounded-lg border border-line bg-surface p-spacing-04">
+                                <div className="flex min-h-spacing-13 items-center rounded-md bg-canvas p-spacing-05">
+                                    <Loader variant={variant} label={`Loading ${name.toLowerCase()}`} />
+                                </div>
+                                <div className="flex flex-col gap-spacing-01">
+                                    <span className="text-sm font-medium text-ink">{name}</span>
+                                    <span className="font-mono text-xs text-muted">{variant}</span>
+                                    <span className="text-sm text-muted">{role}</span>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </DocDemo>
+            </DocSection>
+            <DocSection title="When to use">
+                <DocBullets items={["Waiting on a response for a region or table rows.", "The shape of the result is known enough to reserve space."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "No items after a successful load. Use Empty state.",
+                        "A finished error. Use Message or Table error.",
+                        "A brief notice after leaving the work. Use Toast.",
+                    ]}
+                />
+            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={loaderSnippet} />
+        </DocPage>
     ),
 };
-

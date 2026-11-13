@@ -18,27 +18,34 @@ export const patternsOverviewAgentGuidance = {
 } as const satisfies AgentGuidance;
 
 export const createRecordAgentGuidance = {
-    goal: "Create one object. Use a wizard only when a later answer depends on an earlier one.",
-    when: ["Make one object.", "Fields belong to the new record."],
-    avoid: ["Editing an existing record — use Modifying a record.", "A single fact where it sits — use Inline edit."],
+    goal: "Create one object inside Shell. Use a wizard only when a later answer depends on an earlier one.",
+    when: ["Make one object.", "Fields belong to the new record.", "Save and Cancel sit at the end of one form."],
+    avoid: ["Editing an existing record — use Modifying a record.", "A single fact where it sits — use Inline edit.", "A later answer depends on an earlier one — use Wizard."],
+    decisions: [
+        {
+            title: "Flat form vs wizard",
+            choose: "Create a record when every field can sit on one page.",
+            insteadOf: "Wizard when answers are independent.",
+        },
+    ],
 } as const satisfies AgentGuidance;
 
 export const modifyingRecordAgentGuidance = {
-    goal: "Change one existing object in a focused form or detail flow.",
-    when: ["Change one object."],
+    goal: "Change one existing object in a focused form or detail flow inside Shell.",
+    when: ["Change one object.", "Edit opens the form from the detail; Save returns to the detail."],
     avoid: ["One fact edited where it sits — use Inline edit.", "Creating a new object — use Create a record."],
 } as const satisfies AgentGuidance;
 
 export const inlineEditAgentGuidance = {
-    goal: "Edit one fact where it already sits without opening a full form.",
-    when: ["One fact changes in place."],
+    goal: "Edit one fact where it already sits without opening a full form. Keep Shell as the frame.",
+    when: ["One fact changes in place.", "The change commits from the field."],
     avoid: ["Several related fields at once — use Modifying a record."],
 } as const satisfies AgentGuidance;
 
 export const wizardAgentGuidance = {
-    goal: "Step through creation when later answers depend on earlier ones.",
-    when: ["A later answer depends on an earlier one."],
-    avoid: ["A flat form with independent fields — use Create a record without a wizard."],
+    goal: "Step through creation inside Shell when later answers depend on earlier ones.",
+    when: ["A later answer depends on an earlier one.", "The person should not see the whole form at once."],
+    avoid: ["A flat form with independent fields — use Create a record.", "First run of the product — use Onboarding."],
 } as const satisfies AgentGuidance;
 
 export const onboardingAgentGuidance = {
@@ -48,9 +55,9 @@ export const onboardingAgentGuidance = {
 } as const satisfies AgentGuidance;
 
 export const taskManagementAgentGuidance = {
-    goal: "Present a queue with status first, then the record or why it cannot continue.",
-    when: ["A queue of work items."],
-    avoid: ["A plain member directory with no workflow status — use Table Members."],
+    goal: "Present a queue inside Shell with status first, then the record or why it cannot continue.",
+    when: ["A queue of work items.", "A blocked item must explain why, not look like an empty detail."],
+    avoid: ["A plain member directory with no workflow status — use Table Members.", "One record with no list beside it — use a detail."],
 } as const satisfies AgentGuidance;
 
 export const navigatingDomainsAgentGuidance = {
@@ -78,9 +85,9 @@ export const accountInformationAgentGuidance = {
 } as const satisfies AgentGuidance;
 
 export const visualizationPageAgentGuidance = {
-    goal: "Show a set of numbers with summary first on its own page.",
-    when: ["A set of numbers. Summary first."],
-    avoid: ["Waiting for a chart module before shipping a summary page — keep it its own page until then."],
+    goal: "Show a set of numbers with summary first on its own page inside Shell.",
+    when: ["A set of numbers. Summary first.", "Decision makers need the whole picture, and a way to open one number for more."],
+    avoid: ["A list of records — use a table.", "One object's facts — use a detail.", "Waiting for a chart module before shipping a summary page — keep it its own page until then."],
 } as const satisfies AgentGuidance;
 
 export const planningAgentGuidance = {

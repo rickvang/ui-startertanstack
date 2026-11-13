@@ -6,7 +6,7 @@ import { Button } from "../base/button";
 import { TextField } from "../base/text-field";
 import { FormGroup } from "../modules/form-group";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
-
+import { PatternDemoFrame } from "./pattern-demo-frame";
 import { createRecordAgentGuidance } from "./patterns.agent";
 const meta = {
     title: "Patterns/Create a record",
@@ -29,23 +29,27 @@ export const CreateRecord: Story = {
             <DocPage title="Create a record" intro="Fill one form, then report the result.">
                 <DocSection title="Example">
                     <DocParagraph>Save closes the task. After save, say what happened and offer one next step.</DocParagraph>
-                    <DocDemo className="max-w-xl">
-                        {saved ? (
-                            <div className="flex max-w-sm flex-col items-start gap-spacing-04">
-                                <Badge variant="success">Saved</Badge>
-                                <p className="text-sm text-ink">The project name is stored.</p>
-                                <Button onClick={() => setSaved(false)}>Back to the form</Button>
+                    <DocDemo bleed>
+                        <PatternDemoFrame title="New project" helpTitle="Create" helpBody="Fill one form, then report the result. The shell stays.">
+                            <div className="max-w-xl">
+                                {saved ? (
+                                    <div className="flex max-w-sm flex-col items-start gap-spacing-04">
+                                        <Badge variant="success">Saved</Badge>
+                                        <p className="text-sm text-ink">The project name is stored.</p>
+                                        <Button onClick={() => setSaved(false)}>Back to the form</Button>
+                                    </div>
+                                ) : (
+                                    <FormGroup title="Project">
+                                        <TextField label="Project name" defaultValue="Studio" hint="Shown on the project home." />
+                                        <TextField label="Description" defaultValue="The design system for North." />
+                                        <div className="flex gap-spacing-03">
+                                            <Button onClick={() => setSaved(true)}>Save</Button>
+                                            <Button variant="secondary">Cancel</Button>
+                                        </div>
+                                    </FormGroup>
+                                )}
                             </div>
-                        ) : (
-                            <FormGroup title="Project">
-                                <TextField label="Project name" defaultValue="Studio" hint="Shown on the project home." />
-                                <TextField label="Description" defaultValue="The design system for North." />
-                                <div className="flex gap-spacing-03">
-                                    <Button onClick={() => setSaved(true)}>Save</Button>
-                                    <Button variant="secondary">Cancel</Button>
-                                </div>
-                            </FormGroup>
-                        )}
+                        </PatternDemoFrame>
                     </DocDemo>
                 </DocSection>
                 <DocSection title="When to use">

@@ -15,12 +15,19 @@ export const buttonAgentGuidance = {
 
 export const fieldAgentGuidance = {
     goal: "Bind a control to a label, help, and error that stay with the field.",
-    when: ["A form control needs label, description, or validation next to it."],
-    avoid: ["Page-level results — use Message or Banner.", "Table cell editing — use a record pattern."],
+    when: ["A custom control needs the same label, hint, and error chrome as Text field.", "You are composing layout around a control the catalog does not wrap yet."],
+    avoid: ["A single-line text value — use Text field.", "A known list of options — use Select or Radio.", "Page-level results — use Message or Banner."],
+    decisions: [
+        {
+            title: "Wrapped control vs Field shell",
+            choose: "Prefer Text field, Select, and siblings that already wrap Field.",
+            insteadOf: "Rebuilding Field chrome around those controls by hand.",
+        },
+    ],
 } as const satisfies AgentGuidance;
 
 export const badgeAgentGuidance = {
     goal: "Show a compact status or category on a row or header.",
-    when: ["A row or entity status that must stay scannable."],
-    avoid: ["A paragraph of feedback — use Message.", "A page-wide notice — use Banner."],
+    when: ["A row or entity status that must stay scannable.", "A short category next to a title."],
+    avoid: ["A paragraph of feedback — use Message.", "A page-wide notice — use Banner.", "A button label — use Button."],
 } as const satisfies AgentGuidance;

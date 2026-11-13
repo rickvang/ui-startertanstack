@@ -1,45 +1,30 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
-import { docsFromSnippet, libraryExportNote, tabsSnippet } from "../../../.storybook/story-snippets";
+import { libraryExportNote, tabsSnippet } from "../../../.storybook/story-snippets";
 import { Switch } from "../base/switch";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
+import { tabsAgentGuidance } from "./navigation.agent";
 import { Tabs } from "./tabs";
 
-import { tabsAgentGuidance } from "./navigation.agent";
 const meta = {
-    tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
     title: "Components/Tabs",
-    component: Tabs,
-    args: {
-        defaultValue: "members",
-        items: [
-            { value: "members", label: "Members", content: "Alex Kim, Jordan Lee, Sam Patel" },
-            { value: "settings", label: "Settings", content: "Project name and access." },
-        ],
+    parameters: {
+        layout: "fullscreen",
+        agent: tabsAgentGuidance,
     },
-} satisfies Meta<typeof Tabs>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    ...docsFromSnippet(tabsSnippet),
-};
-
-export const Motion: Story = {
-    name: "Motion",
-    parameters: {
-        layout: "fullscreen",
-        agent: tabsAgentGuidance,
-    },
+export const TabsStory: Story = {
+    name: "Tabs",
     render: () => {
         const [reduce, setReduce] = useState(false);
 
         return (
-            <DocPage title="Tabs" intro="The underline measures the active tab and travels. The label uses feedback. The panel fades. The first paint snaps, so the mark does not slide in from zero.">
+            <DocPage title="Tabs" intro="Switch weakly related parts of one record without leaving the page. The underline measures the active tab and travels.">
                 <DocSection title="Example">
                     <DocDemo>
                         <Switch label="Reduced motion" checked={reduce} onCheckedChange={setReduce} />
@@ -58,7 +43,13 @@ export const Motion: Story = {
                     <DocBullets items={["The sections are peers on one surface.", "The person should see which tab is current while the mark moves."]} />
                 </DocSection>
                 <DocSection title="When not to use">
-                    <DocBullets items={["A route change. Use the shell.", "A pill bar from another system. These tabs stay an underline."]} />
+                    <DocBullets
+                        items={[
+                            "A route change. Use the shell.",
+                            "A linear process. Use Steps.",
+                            "A pill bar from another system. These tabs stay an underline.",
+                        ]}
+                    />
                 </DocSection>
                 <DocSection title="Motion">
                     <DocRows

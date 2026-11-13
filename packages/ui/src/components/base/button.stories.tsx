@@ -1,64 +1,56 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { buttonSnippet, copyableDocs, libraryExportNote } from "../../../.storybook/copyable-snippets";
+import { buttonSnippet, libraryExportNote } from "../../../.storybook/copyable-snippets";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { Button } from "./button";
-
 import { buttonAgentGuidance } from "./controls.agent";
+
 const meta = {
     title: "Components/Button",
-    component: Button,
-    tags: ["autodocs"],
     parameters: {
+        layout: "fullscreen",
         agent: buttonAgentGuidance,
-        docs: {
-            description: {
-                component: `${libraryExportNote} Import \`theme.css\` once in the app or Storybook preview.`,
-            },
-        },
     },
-    args: {
-        children: "Save",
-        variant: "primary",
-        size: "standard",
-    },
-} satisfies Meta<typeof Button>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-    parameters: {
-        docs: copyableDocs(buttonSnippet, libraryExportNote),
-    },
-};
-
-export const Secondary: Story = {
-    args: { children: "Cancel", variant: "secondary" },
-};
-
-export const Ghost: Story = {
-    args: { children: "Theme", variant: "ghost" },
-};
-
-export const Disabled: Story = {
-    args: { children: "Save", disabled: true },
-};
-
-export const Wide: Story = {
-    args: { size: "wide" },
-};
-
-export const Dense: Story = {
-    args: { size: "dense" },
-};
-
-export const Variants: Story = {
+export const ButtonStory: Story = {
+    name: "Button",
     render: () => (
-        <div className="flex items-center gap-spacing-04">
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="danger">Remove</Button>
-        </div>
+        <DocPage title="Button" intro="Pick the variant from how primary the action is, not from color taste. One primary action per region.">
+            <DocSection title="Example">
+                <DocDemo className="flex flex-wrap items-center gap-spacing-04">
+                    <Button variant="primary">Save</Button>
+                    <Button variant="secondary">Cancel</Button>
+                    <Button variant="ghost">Theme</Button>
+                    <Button disabled>Save</Button>
+                    <Button size="dense">Dense</Button>
+                    <Button size="wide" className="max-w-xs">
+                        Wide
+                    </Button>
+                </DocDemo>
+            </DocSection>
+            <DocSection title="When to use">
+                <DocBullets
+                    items={[
+                        "Primary for the one main action in the region.",
+                        "Secondary for a supporting action beside the primary.",
+                        "Ghost for a quiet action in dense tool chrome.",
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "Multiple primary buttons in one region.",
+                        "A status label. Use Badge.",
+                        "A navigation destination that should look like a link in a menu. Use Menu or Anchor.",
+                    ]}
+                />
+            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={buttonSnippet} />
+        </DocPage>
     ),
 };
