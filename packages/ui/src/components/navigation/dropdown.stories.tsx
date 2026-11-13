@@ -21,7 +21,7 @@ export const DropdownStory: Story = {
     render: () => (
         <DocPage title="Dropdown" intro="Offer a short list of actions from one control. Keep the list action-only.">
             <DocSection title="Example">
-                <DocDemo>
+                <DocDemo className="min-h-spacing-13 overflow-visible">
                     <Dropdown label="Actions" items={["Edit", "Duplicate", "Delete"]} />
                 </DocDemo>
             </DocSection>
