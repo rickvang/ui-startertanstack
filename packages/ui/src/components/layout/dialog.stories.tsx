@@ -6,9 +6,13 @@ import { TextField } from "../base/text-field";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
 import { Dialog } from "./dialog";
 
+import { dialogAgentGuidance } from "./overlays.agent";
 const meta = {
     title: "Layout/Overlays",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: dialogAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

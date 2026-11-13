@@ -3,9 +3,13 @@ import { libraryExportNote, spaceSnippet } from "../../../.storybook/story-snipp
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Space } from "./space";
 
+import { spaceAgentGuidance } from "./arrange.agent";
 const meta = {
     title: "Layout/Arrange/Flow/Space",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: spaceAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

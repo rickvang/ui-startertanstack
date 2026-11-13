@@ -4,9 +4,13 @@ import { Button } from "../base/button";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { Tooltip } from "./tooltip";
 
+import { tooltipAgentGuidance } from "./overlays.agent";
 const meta = {
     title: "Layout/Overlays",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: tooltipAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

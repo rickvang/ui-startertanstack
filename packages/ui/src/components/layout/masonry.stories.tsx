@@ -3,9 +3,13 @@ import { libraryExportNote, masonrySnippet } from "../../../.storybook/story-sni
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Masonry } from "./masonry";
 
+import { masonryAgentGuidance } from "./arrange.agent";
 const meta = {
     title: "Layout/Arrange/Split/Masonry",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: masonryAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, radioSnippet } from "../../../.storybook/story-snippets";
 import { RadioGroup } from "./radio";
+import { radioAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: radioAgentGuidance,
+    },
     title: "Components/Radio",
     component: RadioGroup,
     args: {

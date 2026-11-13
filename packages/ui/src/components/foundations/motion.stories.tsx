@@ -4,6 +4,7 @@ import { cx } from "../../utils/cx";
 import { Button } from "../base/button";
 import { Switch } from "../base/switch";
 import { FoundationPage, FoundationSection } from "./catalog";
+import { motionAgentGuidance } from "./foundations.agent";
 
 type MotionRole = "motion-feedback" | "motion-enter" | "motion-leave" | "motion-travel" | "motion-reveal" | "motion-fade";
 
@@ -102,7 +103,10 @@ function Notice({ shown }: { shown: boolean }) {
 
 const meta = {
     title: "Foundations/Motion",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: motionAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

@@ -8,6 +8,7 @@ import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { navigatingDomainsAgentGuidance } from "./patterns.agent";
 const domains = [
     { value: "projects", label: "Projects" },
     { value: "members", label: "Members" },
@@ -52,7 +53,10 @@ function domainPage(domain: Domain): ReactNode {
 
 const meta = {
     title: "Patterns/Navigating domains",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: navigatingDomainsAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

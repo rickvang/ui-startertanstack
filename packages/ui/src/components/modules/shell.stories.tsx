@@ -8,6 +8,7 @@ import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocRows, Do
 import { ShellBar, shellDomainHelp } from "./shell-actions";
 import { Shell as ShellModule } from "./shell";
 
+import { shellAgentGuidance } from "./modules.agent";
 const domains = [
     { value: "projects", label: "Projects" },
     { value: "members", label: "Members" },
@@ -199,7 +200,10 @@ function ToolShell() {
 
 const meta = {
     title: "Modules/Shell",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: shellAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

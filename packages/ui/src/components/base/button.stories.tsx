@@ -2,11 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { buttonSnippet, copyableDocs, libraryExportNote } from "../../../.storybook/copyable-snippets";
 import { Button } from "./button";
 
+import { buttonAgentGuidance } from "./controls.agent";
 const meta = {
     title: "Components/Button",
     component: Button,
     tags: ["autodocs"],
     parameters: {
+        agent: buttonAgentGuidance,
         docs: {
             description: {
                 component: `${libraryExportNote} Import \`theme.css\` once in the app or Storybook preview.`,

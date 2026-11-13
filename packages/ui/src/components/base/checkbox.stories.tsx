@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, checkboxSnippet } from "../../../.storybook/story-snippets";
 import { Checkbox } from "./checkbox";
+import { checkboxAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: checkboxAgentGuidance,
+    },
     title: "Components/Checkbox",
     component: Checkbox,
     args: {

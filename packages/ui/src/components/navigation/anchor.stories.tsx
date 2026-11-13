@@ -3,9 +3,13 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, anchorSnippet } from "../../../.storybook/story-snippets";
 import { Anchor } from "./anchor";
 
+import { anchorAgentGuidance } from "./navigation.agent";
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: anchorAgentGuidance,
+    },
     title: "Components/Anchor",
     component: Anchor,
     args: {

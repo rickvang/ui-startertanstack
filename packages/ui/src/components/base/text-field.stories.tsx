@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, textFieldSnippet } from "../../../.storybook/story-snippets";
 import { TextField } from "./text-field";
+import { textFieldAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: textFieldAgentGuidance,
+    },
     title: "Components/Text field",
     component: TextField,
     args: {

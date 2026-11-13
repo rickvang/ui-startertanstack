@@ -4,6 +4,7 @@ import { Select } from "../base/select";
 import { Layout } from "../layout/layout";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { visualizationPageAgentGuidance } from "./patterns.agent";
 const week = [
     { label: "Mon", height: "h-spacing-07" },
     { label: "Tue", height: "h-spacing-09" },
@@ -14,7 +15,10 @@ const week = [
 
 const meta = {
     title: "Patterns/Visualization page",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: visualizationPageAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

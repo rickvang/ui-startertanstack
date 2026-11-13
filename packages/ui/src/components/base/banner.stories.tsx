@@ -4,9 +4,13 @@ import { bannerSnippet, libraryExportNote } from "../../../.storybook/story-snip
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { Banner } from "./banner";
 
+import { bannerAgentGuidance } from "./feedback.agent";
 const meta = {
     title: "Components/Banner",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: bannerAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

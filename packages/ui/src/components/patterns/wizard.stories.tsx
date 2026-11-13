@@ -7,6 +7,7 @@ import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { wizardAgentGuidance } from "./patterns.agent";
 const steps = ["Name", "Access", "Review"] as const;
 
 type StepIndex = 0 | 1 | 2;
@@ -28,7 +29,10 @@ function stepBody(step: StepIndex) {
 
 const meta = {
     title: "Patterns/Wizard",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: wizardAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

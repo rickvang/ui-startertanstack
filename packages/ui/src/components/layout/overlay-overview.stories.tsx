@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
 
+import { overlaysOverviewAgentGuidance } from "./overlays.agent";
 const meta = {
     title: "Layout/Overlays",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: overlaysOverviewAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

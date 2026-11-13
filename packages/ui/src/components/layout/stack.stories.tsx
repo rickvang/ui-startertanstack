@@ -3,9 +3,13 @@ import { libraryExportNote, stackSnippet } from "../../../.storybook/story-snipp
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Stack } from "./stack";
 
+import { stackAgentGuidance } from "./arrange.agent";
 const meta = {
     title: "Layout/Arrange/Flow/Stack",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: stackAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

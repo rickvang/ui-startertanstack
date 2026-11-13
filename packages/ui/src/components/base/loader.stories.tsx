@@ -3,6 +3,7 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, loaderSnippet } from "../../../.storybook/story-snippets";
 import { FoundationPage } from "../foundations/catalog";
 import { Loader, type LoaderVariant } from "./loader";
+import { loaderAgentGuidance } from "./inputs.agent";
 
 const variations = [
     ["Record", "record", "A person or a row. A picture beside a few lines."],
@@ -13,7 +14,8 @@ const variations = [
 
 const meta = {
     tags: ["autodocs"],
-    parameters: { ...autodocsComponentParameters, layout: "fullscreen" },
+    parameters: {
+        agent: loaderAgentGuidance, ...autodocsComponentParameters, layout: "fullscreen" },
     title: "Components/Loader",
     component: Loader,
     args: {

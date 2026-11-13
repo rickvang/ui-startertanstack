@@ -3,11 +3,15 @@ import { detailGroupSnippet, libraryExportNote } from "../../../.storybook/story
 import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 import { DescriptionList } from "./description-list";
 import { DetailGroup } from "./detail-group";
+import { detailGroupAgentGuidance } from "./inputs.agent";
 
 const meta = {
     title: "Modules/Detail",
     component: DetailGroup,
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: detailGroupAgentGuidance,
+    },
     args: {
         title: "Profile",
         children: null,

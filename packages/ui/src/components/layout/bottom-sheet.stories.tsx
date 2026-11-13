@@ -6,9 +6,13 @@ import { Switch } from "../base/switch";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
 import { BottomSheet } from "./bottom-sheet";
 
+import { bottomSheetAgentGuidance } from "./overlays.agent";
 const meta = {
     title: "Layout/Overlays",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: bottomSheetAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

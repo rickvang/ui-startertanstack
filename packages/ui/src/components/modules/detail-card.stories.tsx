@@ -11,10 +11,14 @@ import { Tabs } from "../navigation/tabs";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { DetailCard as DetailCardModule } from "./detail-card";
 
+import { detailCardAgentGuidance } from "./modules.agent";
 const meta = {
     title: "Modules/Detail",
     component: DetailCardModule,
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: detailCardAgentGuidance,
+    },
 } satisfies Meta<typeof DetailCardModule>;
 
 export default meta;

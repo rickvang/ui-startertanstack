@@ -10,9 +10,13 @@ import { TextField } from "../base/text-field";
 import { DetailCard } from "../modules/detail-card";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { modifyingRecordAgentGuidance } from "./patterns.agent";
 const meta = {
     title: "Patterns/Modifying a record",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: modifyingRecordAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

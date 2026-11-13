@@ -3,9 +3,13 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, breadcrumbSnippet } from "../../../.storybook/story-snippets";
 import { Breadcrumb } from "./breadcrumb";
 
+import { breadcrumbAgentGuidance } from "./navigation.agent";
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: breadcrumbAgentGuidance,
+    },
     title: "Components/Breadcrumb",
     component: Breadcrumb,
     args: {

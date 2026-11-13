@@ -6,6 +6,7 @@ import { Switch } from "../base/switch";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
 import { Tabs } from "./tabs";
 
+import { tabsAgentGuidance } from "./navigation.agent";
 const meta = {
     tags: ["autodocs"],
     parameters: autodocsComponentParameters,
@@ -30,7 +31,10 @@ export const Default: Story = {
 
 export const Motion: Story = {
     name: "Motion",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: tabsAgentGuidance,
+    },
     render: () => {
         const [reduce, setReduce] = useState(false);
 

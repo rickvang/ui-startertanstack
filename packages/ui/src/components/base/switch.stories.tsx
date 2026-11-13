@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, switchSnippet } from "../../../.storybook/story-snippets";
 import { Switch } from "./switch";
+import { switchAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: switchAgentGuidance,
+    },
     title: "Components/Switch",
     component: Switch,
     args: {

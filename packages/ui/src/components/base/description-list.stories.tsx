@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, descriptionListSnippet } from "../../../.storybook/story-snippets";
 import { DescriptionList } from "./description-list";
+import { descriptionListAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: descriptionListAgentGuidance,
+    },
     title: "Components/Description list",
     component: DescriptionList,
     args: {

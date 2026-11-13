@@ -7,9 +7,13 @@ import { TextField } from "../base/text-field";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
 import { SlideIn } from "./slide-in";
 
+import { slideInAgentGuidance } from "./overlays.agent";
 const meta = {
     title: "Layout/Overlays",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: slideInAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

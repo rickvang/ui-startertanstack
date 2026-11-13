@@ -9,9 +9,13 @@ import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection 
 import { Journey, Mapping, StoryMap } from "./planning-artifacts";
 import { journeyText, mappingText, northVisitSource, parsePlanningSource, planningSourceText, storyMapText } from "./planning-source";
 
+import { planningAgentGuidance } from "./patterns.agent";
 const meta = {
     title: "Patterns/Planning",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: planningAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

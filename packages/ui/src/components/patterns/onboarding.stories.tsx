@@ -6,6 +6,7 @@ import { TextField } from "../base/text-field";
 import { Steps } from "../navigation/steps";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { onboardingAgentGuidance } from "./patterns.agent";
 const steps = ["Workspace", "Invite", "Done"] as const;
 
 type StepIndex = 0 | 1 | 2;
@@ -27,7 +28,10 @@ function stepBody(step: StepIndex) {
 
 const meta = {
     title: "Patterns/Onboarding",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: onboardingAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

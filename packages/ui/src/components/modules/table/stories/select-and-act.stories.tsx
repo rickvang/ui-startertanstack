@@ -4,8 +4,16 @@ import { DocDemo, DocList, DocCodeSection, DocPage, DocRows, DocSection, DocWhen
 import { Table } from "../table";
 import { directory, directoryColumns } from "./fixtures";
 import { tableStoryMeta } from "./meta";
+import { tableSelectAndActAgentGuidance } from "./table.agent";
 
-const meta = { ...tableStoryMeta, title: "Modules/Table" } satisfies Meta;
+const meta = {
+    ...tableStoryMeta,
+    title: "Modules/Table",
+    parameters: {
+        ...tableStoryMeta.parameters,
+        agent: tableSelectAndActAgentGuidance,
+    },
+} satisfies Meta;
 
 export default meta;
 

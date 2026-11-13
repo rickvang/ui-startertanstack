@@ -3,9 +3,13 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, paginationSnippet } from "../../../.storybook/story-snippets";
 import { Pagination } from "./pagination";
 
+import { paginationAgentGuidance } from "./navigation.agent";
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: paginationAgentGuidance,
+    },
     title: "Components/Pagination",
     component: Pagination,
     args: {

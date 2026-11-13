@@ -3,9 +3,13 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, menuSnippet } from "../../../.storybook/story-snippets";
 import { Menu } from "./menu";
 
+import { menuAgentGuidance } from "./navigation.agent";
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: menuAgentGuidance,
+    },
     title: "Components/Menu",
     component: Menu,
     args: {

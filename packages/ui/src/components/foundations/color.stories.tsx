@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ColorExamples } from "./color-examples";
 import { FoundationPage, FoundationSection } from "./catalog";
+import { colorAgentGuidance } from "./foundations.agent";
 
 const steps = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"] as const;
 
@@ -35,7 +36,10 @@ const semantic = [
 
 const meta = {
     title: "Foundations/Color",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: colorAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

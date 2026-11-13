@@ -9,6 +9,7 @@ import { Table, type TableItem } from "../modules/table";
 import { Menu } from "../navigation/menu";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { taskManagementAgentGuidance } from "./patterns.agent";
 const tasks: readonly TableItem[] = [
     { id: "alex", name: "Alex Kim needs a review", status: "Review", statusVariant: "warning" },
     { id: "jordan", name: "Jordan Lee accepted the invite", status: "Active", statusVariant: "success" },
@@ -17,7 +18,10 @@ const tasks: readonly TableItem[] = [
 
 const meta = {
     title: "Patterns/Task management",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: taskManagementAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;
