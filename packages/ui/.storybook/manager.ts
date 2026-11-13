@@ -1,5 +1,8 @@
 import { addons } from "storybook/manager-api";
+import { registerAgentPanel } from "./addons/agent/register";
 import { catalogTheme } from "./theme";
+
+registerAgentPanel();
 
 addons.setConfig({
     theme: catalogTheme,
