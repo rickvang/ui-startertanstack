@@ -1,47 +1,72 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
-import { docsFromSnippet, fieldSnippet } from "../../../.storybook/story-snippets";
+import { fieldSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
+import { fieldAgentGuidance } from "./controls.agent";
 import { Field } from "./field";
 
-import { fieldAgentGuidance } from "./controls.agent";
 const meta = {
-    tags: ["autodocs"],
+    title: "Components/Field",
     parameters: {
-        ...autodocsComponentParameters,
+        layout: "fullscreen",
         agent: fieldAgentGuidance,
     },
-    title: "Components/Field",
-    component: Field,
-    args: {
-        label: "Project name",
-        hint: "Shown on the project home.",
-        children: null,
-    },
-} satisfies Meta<typeof Field>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 function Control({ id }: { id: string }) {
-    return <input id={id} defaultValue="Studio" className="h-spacing-07 w-full rounded-md border border-line bg-surface px-spacing-03 text-sm text-ink" />;
+    return (
+        <input
+            id={id}
+            defaultValue="Studio"
+            className="h-spacing-07 w-full rounded-md border border-line bg-surface px-spacing-03 text-sm text-ink"
+        />
+    );
 }
 
-export const Hint: Story = {
-    ...docsFromSnippet(fieldSnippet),
-    name: "Hint",
+export const FieldStory: Story = {
+    name: "Field",
     render: () => (
-        <Field label="Project name" hint="Shown on the project home." htmlFor="project-name">
-            <Control id="project-name" />
-        </Field>
-    ),
-};
-
-export const Error: Story = {
-    name: "Error",
-    render: () => (
-        <Field label="Project name" hint="Shown on the project home." error="Enter a project name." required htmlFor="project-name-error">
-            <Control id="project-name-error" />
-        </Field>
+        <DocPage title="Field" intro="Own the label, hint, and error around any control. Prefer Text field and Select when they already wrap Field.">
+            <DocSection title="Example">
+                <DocDemo className="flex max-w-md flex-col gap-spacing-05">
+                    <Field label="Project name" hint="Shown on the project home." htmlFor="project-name">
+                        <Control id="project-name" />
+                    </Field>
+                    <Field
+                        label="Project name"
+                        hint="Shown on the project home."
+                        error="Enter a project name."
+                        required
+                        htmlFor="project-name-error"
+                    >
+                        <Control id="project-name-error" />
+                    </Field>
+                    <Field label="Owner" layout="horizontal" htmlFor="project-owner" className="w-full">
+                        <Control id="project-owner" />
+                    </Field>
+                </DocDemo>
+            </DocSection>
+            <DocSection title="When to use">
+                <DocBullets
+                    items={[
+                        "A custom control needs the same label, hint, and error chrome as Text field.",
+                        "You are composing layout around a control the catalog does not wrap yet.",
+                    ]}
+                />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "A single-line text value. Use Text field.",
+                        "A known list of options. Use Select or Radio.",
+                        "A page-level note. Use Message or Banner.",
+                    ]}
+                />
+            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={fieldSnippet} />
+        </DocPage>
     ),
 };

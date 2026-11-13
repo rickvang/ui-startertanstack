@@ -3,12 +3,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { compositionNote, taskManagementSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
-import { Layout } from "../layout/layout";
 import { DetailCard } from "../modules/detail-card";
 import { Table, type TableItem } from "../modules/table";
-import { Menu } from "../navigation/menu";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
-
+import { PatternDemoFrame } from "./pattern-demo-frame";
 import { taskManagementAgentGuidance } from "./patterns.agent";
 const tasks: readonly TableItem[] = [
     { id: "alex", name: "Alex Kim needs a review", status: "Review", statusVariant: "warning" },
@@ -38,11 +36,7 @@ export const TaskManagement: Story = {
                 <DocSection title="Example">
                     <DocParagraph>Pick a row. Billing shows why the work cannot continue. The others open the record.</DocParagraph>
                     <DocDemo bleed>
-                        <Layout
-                            header={<span className="font-semibold text-ink">Studio</span>}
-                            sider={<Menu className="w-full" items={[{ value: "projects", label: "Projects" }, { value: "members", label: "Members" }, { value: "settings", label: "Settings" }]} defaultValue="projects" />}
-                            siderPlacement="full-height"
-                        >
+                        <PatternDemoFrame title="Studio" helpTitle="Queue" helpBody="Status comes first. Opening an item shows the record, or why the task cannot continue.">
                             <div className="flex flex-col gap-spacing-04">
                                 <div className="flex gap-spacing-03">
                                     <Badge variant="success">3 active</Badge>
@@ -63,7 +57,7 @@ export const TaskManagement: Story = {
                                     </DetailCard>
                                 )}
                             </div>
-                        </Layout>
+                        </PatternDemoFrame>
                     </DocDemo>
                 </DocSection>
                 <DocSection title="When to use">

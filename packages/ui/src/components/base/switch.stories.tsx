@@ -1,37 +1,44 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
-import { docsFromSnippet, switchSnippet } from "../../../.storybook/story-snippets";
-import { Switch } from "./switch";
+import { libraryExportNote, switchSnippet } from "../../../.storybook/story-snippets";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { switchAgentGuidance } from "./inputs.agent";
+import { Switch } from "./switch";
 
 const meta = {
-    tags: ["autodocs"],
+    title: "Components/Switch",
     parameters: {
-        ...autodocsComponentParameters,
+        layout: "fullscreen",
         agent: switchAgentGuidance,
     },
-    title: "Components/Switch",
-    component: Switch,
-    args: {
-        label: "Active",
-        defaultChecked: true,
-    },
-} satisfies Meta<typeof Switch>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    ...docsFromSnippet(switchSnippet),
-};
-
-export const Stacked: Story = {
-    name: "Stacked",
-    args: { layout: "stacked" },
-};
-
-export const Horizontal: Story = {
-    name: "Horizontal",
-    args: { layout: "horizontal", className: "w-full max-w-md" },
+export const SwitchStory: Story = {
+    name: "Switch",
+    render: () => (
+        <DocPage title="Switch" intro="Toggle a setting that takes effect now. The page stays usable.">
+            <DocSection title="Example">
+                <DocDemo className="flex max-w-md flex-col gap-spacing-04">
+                    <Switch label="Reduced motion" defaultChecked />
+                    <Switch label="Email digests" />
+                </DocDemo>
+            </DocSection>
+            <DocSection title="When to use">
+                <DocBullets items={["A setting that takes effect immediately.", "The person should see on versus off without opening a menu."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "A form fact submitted later. Use Checkbox.",
+                        "Choosing among more than two values. Use Radio or Select.",
+                        "A destructive confirm. Use Dialog.",
+                    ]}
+                />
+            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={switchSnippet} />
+        </DocPage>
+    ),
 };

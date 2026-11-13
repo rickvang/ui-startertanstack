@@ -9,7 +9,7 @@ import { Form, FormSubmit } from "../base/form";
 import { TextField } from "../base/text-field";
 import { DetailCard } from "../modules/detail-card";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
-
+import { PatternDemoFrame } from "./pattern-demo-frame";
 import { modifyingRecordAgentGuidance } from "./patterns.agent";
 const meta = {
     title: "Patterns/Modifying a record",
@@ -34,48 +34,52 @@ export const ModifyingRecord: Story = {
             <DocPage title="Modifying a record" intro="Edit opens the form from the detail. Save returns to the detail. Cancel leaves the facts as they were.">
                 <DocSection title="Example">
                     <DocParagraph>The detail shows Edit. Save and Cancel belong to the form.</DocParagraph>
-                    <DocDemo className="max-w-xl">
-                        {editing ? (
-                            <Form
-                                label="Member"
-                                className="max-w-xl"
-                                onSubmit={() => {
-                                    setRole(draft.trim() === "" ? role : draft);
-                                    setEditing(false);
-                                }}
-                            >
-                                <Fieldset title="Profile">
-                                    <TextField label="Role" layout="horizontal" value={draft} onChange={(event) => setDraft(event.target.value)} />
-                                </Fieldset>
-                                <div className="flex gap-spacing-03">
-                                    <FormSubmit>Save</FormSubmit>
-                                    <Button variant="secondary" type="button" onClick={() => setEditing(false)}>
-                                        Cancel
-                                    </Button>
-                                </div>
-                            </Form>
-                        ) : (
-                            <DetailCard
-                                title="Alex Kim"
-                                status="Active"
-                                statusVariant="success"
-                                action={
-                                    <Button
-                                        variant="secondary"
-                                        onClick={() => {
-                                            setDraft(role);
-                                            setEditing(true);
+                    <DocDemo bleed>
+                        <PatternDemoFrame title="Members" domain="members" helpTitle="Edit" helpBody="Edit opens the form from the detail. Save returns to the detail.">
+                            <div className="max-w-xl">
+                                {editing ? (
+                                    <Form
+                                        label="Member"
+                                        className="max-w-xl"
+                                        onSubmit={() => {
+                                            setRole(draft.trim() === "" ? role : draft);
+                                            setEditing(false);
                                         }}
                                     >
-                                        Edit
-                                    </Button>
-                                }
-                            >
-                                <DetailGroup title="Profile">
-                                    <DescriptionList items={[{ label: "Role", value: role }]} layout="horizontal" align="start" />
-                                </DetailGroup>
-                            </DetailCard>
-                        )}
+                                        <Fieldset title="Profile">
+                                            <TextField label="Role" layout="horizontal" value={draft} onChange={(event) => setDraft(event.target.value)} />
+                                        </Fieldset>
+                                        <div className="flex gap-spacing-03">
+                                            <FormSubmit>Save</FormSubmit>
+                                            <Button variant="secondary" type="button" onClick={() => setEditing(false)}>
+                                                Cancel
+                                            </Button>
+                                        </div>
+                                    </Form>
+                                ) : (
+                                    <DetailCard
+                                        title="Alex Kim"
+                                        status="Active"
+                                        statusVariant="success"
+                                        action={
+                                            <Button
+                                                variant="secondary"
+                                                onClick={() => {
+                                                    setDraft(role);
+                                                    setEditing(true);
+                                                }}
+                                            >
+                                                Edit
+                                            </Button>
+                                        }
+                                    >
+                                        <DetailGroup title="Profile">
+                                            <DescriptionList items={[{ label: "Role", value: role }]} layout="horizontal" align="start" />
+                                        </DetailGroup>
+                                    </DetailCard>
+                                )}
+                            </div>
+                        </PatternDemoFrame>
                     </DocDemo>
                 </DocSection>
                 <DocSection title="When to use">

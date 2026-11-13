@@ -1,36 +1,45 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
-import { docsFromSnippet, checkboxSnippet } from "../../../.storybook/story-snippets";
+import { libraryExportNote, checkboxSnippet } from "../../../.storybook/story-snippets";
+import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { Checkbox } from "./checkbox";
 import { checkboxAgentGuidance } from "./inputs.agent";
 
 const meta = {
-    tags: ["autodocs"],
+    title: "Components/Checkbox",
     parameters: {
-        ...autodocsComponentParameters,
+        layout: "fullscreen",
         agent: checkboxAgentGuidance,
     },
-    title: "Components/Checkbox",
-    component: Checkbox,
-    args: {
-        label: "Email members",
-    },
-} satisfies Meta<typeof Checkbox>;
+} satisfies Meta;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    ...docsFromSnippet(checkboxSnippet),
-};
-
-export const Stacked: Story = {
-    name: "Stacked",
-    args: { layout: "stacked" },
-};
-
-export const Horizontal: Story = {
-    name: "Horizontal",
-    args: { layout: "horizontal", className: "w-full max-w-md" },
+export const CheckboxStory: Story = {
+    name: "Checkbox",
+    render: () => (
+        <DocPage title="Checkbox" intro="Toggle one independent fact, or select several options that can be true at once.">
+            <DocSection title="Example">
+                <DocDemo className="flex max-w-md flex-col gap-spacing-04">
+                    <Checkbox label="Email me when someone comments" defaultChecked />
+                    <Checkbox label="Include me on weekly summaries" />
+                    <Checkbox label="Required acceptance" error="Accept before continuing." />
+                </DocDemo>
+            </DocSection>
+            <DocSection title="When to use">
+                <DocBullets items={["An independent on/off fact.", "Several options may be true at once."]} />
+            </DocSection>
+            <DocSection title="When not to use">
+                <DocBullets
+                    items={[
+                        "Exactly one of a small set. Use Radio.",
+                        "A settings switch with immediate effect. Use Switch.",
+                        "A closed list that should collapse. Use Select.",
+                    ]}
+                />
+            </DocSection>
+            <DocCodeSection note={libraryExportNote} code={checkboxSnippet} />
+        </DocPage>
+    ),
 };

@@ -23,7 +23,7 @@ export const ThisCatalog: Story = {
             title="A catalog for building product UI"
             lede="Try screens here. Ship them in the app. Foundations, components, modules, and patterns — one library."
             primary={{ label: "Browse foundations", href: "?path=/story/foundations-color--primitives" }}
-            secondary={{ label: "Open components", href: "?path=/story/components-button--primary" }}
+            secondary={{ label: "Open components", href: "?path=/story/components-button--button-story" }}
             sections={[
                 {
                     title: "Foundations",
