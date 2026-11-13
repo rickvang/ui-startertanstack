@@ -7,9 +7,13 @@ import { TextField } from "../base/text-field";
 import { FormGroup } from "../modules/form-group";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { createRecordAgentGuidance } from "./patterns.agent";
 const meta = {
     title: "Patterns/Create a record",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: createRecordAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

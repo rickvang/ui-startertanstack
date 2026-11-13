@@ -3,9 +3,13 @@ import { gridSnippet, libraryExportNote } from "../../../.storybook/story-snippe
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Grid } from "./grid";
 
+import { gridAgentGuidance } from "./arrange.agent";
 const meta = {
     title: "Layout/Arrange/Split/Grid",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: gridAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

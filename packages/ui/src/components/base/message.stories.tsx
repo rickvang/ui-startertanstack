@@ -3,9 +3,13 @@ import { libraryExportNote, messageSnippet } from "../../../.storybook/story-sni
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { Message } from "./message";
 
+import { messageAgentGuidance } from "./feedback.agent";
 const meta = {
     title: "Components/Message",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: messageAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

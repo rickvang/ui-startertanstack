@@ -15,6 +15,7 @@ import { cx } from "../../utils/cx";
 import { Button } from "../base/button";
 import { EmptyState } from "../base/empty-state";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
+import { contentContainersAgentGuidance } from "./content-containers.agent";
 import { Card } from "./card";
 
 function Bone({ className }: { className: string }) {
@@ -88,7 +89,10 @@ const falling = ["h-spacing-05", "h-spacing-04", "h-spacing-04", "h-spacing-03",
 
 const meta = {
     title: "Layout/Content containers",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: contentContainersAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

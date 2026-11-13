@@ -7,8 +7,16 @@ import { columns, directory } from "./fixtures";
 
 const detailColumns = [...columns, { id: "note", header: "Note", kind: "custom" as const }];
 import { tableStoryMeta } from "./meta";
+import { tableExpandAgentGuidance } from "./table.agent";
 
-const meta = { ...tableStoryMeta, title: "Modules/Table" } satisfies Meta;
+const meta = {
+    ...tableStoryMeta,
+    title: "Modules/Table",
+    parameters: {
+        ...tableStoryMeta.parameters,
+        agent: tableExpandAgentGuidance,
+    },
+} satisfies Meta;
 
 export default meta;
 

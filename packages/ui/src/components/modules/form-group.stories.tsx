@@ -13,9 +13,13 @@ import { TextField } from "../base/text-field";
 import { Flex } from "../layout/flex";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
 
+import { formGroupAgentGuidance } from "./modules.agent";
 const meta = {
     title: "Modules/Forms",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: formGroupAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

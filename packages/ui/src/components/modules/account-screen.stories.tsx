@@ -4,6 +4,7 @@ import { accountScreenSnippet, libraryExportNote } from "../../../.storybook/sto
 import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templates/doc";
 import { AccountScreen, type AccountFacts } from "./account-screen";
 
+import { accountAgentGuidance } from "./modules.agent";
 const initialFacts: AccountFacts = {
     name: "Alex Kim",
     email: "alex@north.example",
@@ -13,7 +14,10 @@ const initialFacts: AccountFacts = {
 
 const meta = {
     title: "Modules/Account",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: accountAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

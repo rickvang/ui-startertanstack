@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, selectSnippet } from "../../../.storybook/story-snippets";
 import { Select } from "./select";
+import { selectAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: selectAgentGuidance,
+    },
     title: "Components/Select",
     component: Select,
     args: {

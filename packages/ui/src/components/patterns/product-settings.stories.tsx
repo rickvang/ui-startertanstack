@@ -10,6 +10,7 @@ import { ShellBar, shellDomainHelp } from "../modules/shell-actions";
 import { Menu } from "../navigation/menu";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { productSettingsAgentGuidance } from "./patterns.agent";
 const domains = [
     { value: "projects", label: "Projects" },
     { value: "members", label: "Members" },
@@ -138,7 +139,10 @@ function SectionSettings() {
 
 const meta = {
     title: "Patterns/Product settings",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: productSettingsAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

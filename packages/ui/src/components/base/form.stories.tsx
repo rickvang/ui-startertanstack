@@ -7,11 +7,15 @@ import { Fieldset } from "./fieldset";
 import { Form, FormSubmit } from "./form";
 import { TextField } from "./text-field";
 import { Flex } from "../layout/flex";
+import { formAgentGuidance } from "./inputs.agent";
 
 const meta = {
     title: "Modules/Forms",
     component: Form,
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: formAgentGuidance,
+    },
     args: {
         children: null,
     },

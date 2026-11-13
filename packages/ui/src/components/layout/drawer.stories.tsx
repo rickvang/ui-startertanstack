@@ -6,9 +6,13 @@ import { Switch } from "../base/switch";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
 import { Drawer } from "./drawer";
 
+import { drawerAgentGuidance } from "./overlays.agent";
 const meta = {
     title: "Layout/Overlays",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: drawerAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

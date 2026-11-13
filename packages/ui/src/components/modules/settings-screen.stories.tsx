@@ -7,6 +7,7 @@ import { DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../t
 import { SettingsScreen, settingsSections, type SettingsFacts, type SettingsSection } from "./settings-screen";
 import { Shell } from "./shell";
 
+import { settingsAgentGuidance } from "./modules.agent";
 const initialFacts: SettingsFacts = {
     name: "North",
     description: "The open work for this product.",
@@ -77,7 +78,10 @@ function SectionFrame() {
 
 const meta = {
     title: "Modules/Settings",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: settingsAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

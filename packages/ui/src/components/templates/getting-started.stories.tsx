@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { buttonSnippet, libraryExportNote } from "../../../.storybook/copyable-snippets";
 import { DocBullets, DocCodeSection, DocLibraryHome, DocPage, DocParagraph, DocRows, DocSection } from "./doc";
+import { gettingStartedAgentGuidance } from "../base/inputs.agent";
 
 const meta = {
     title: "Getting started",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: gettingStartedAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FoundationPage, FoundationSection } from "./catalog";
 import { TypeExamples } from "./type-examples";
+import { typeAgentGuidance } from "./foundations.agent";
 
 const scale = [
     ["Poster", "text-display-2xl font-bold", "4.5rem / 5rem", "Graphic title"],
@@ -25,7 +26,10 @@ const weights = [
 
 const meta = {
     title: "Foundations/Type",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: typeAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

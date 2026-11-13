@@ -5,6 +5,7 @@ import { Avatar } from "../base/avatar";
 import { Badge } from "../base/badge";
 import { Button } from "../base/button";
 import { Card } from "./card";
+import { cardAgentGuidance } from "../base/inputs.agent";
 
 const activeTrend = ["h-spacing-02", "h-spacing-03", "h-spacing-02", "h-spacing-04", "h-spacing-03", "h-spacing-05", "h-spacing-04"] as const;
 const overdueTrend = ["h-spacing-02", "h-spacing-02", "h-spacing-03", "h-spacing-03", "h-spacing-04", "h-spacing-04", "h-spacing-05"] as const;
@@ -14,6 +15,7 @@ const meta = {
     component: Card,
     tags: ["autodocs"],
     parameters: {
+        agent: cardAgentGuidance,
         docs: {
             description: {
                 component: `${libraryExportNote} Import \`theme.css\` once in the app or Storybook preview.`,

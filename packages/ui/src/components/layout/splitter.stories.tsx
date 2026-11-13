@@ -3,9 +3,13 @@ import { libraryExportNote, splitterSnippet } from "../../../.storybook/story-sn
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Splitter } from "./splitter";
 
+import { splitterAgentGuidance } from "./arrange.agent";
 const meta = {
     title: "Layout/Arrange/Split/Splitter",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: splitterAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

@@ -3,9 +3,13 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, dropdownSnippet } from "../../../.storybook/story-snippets";
 import { Dropdown } from "./dropdown";
 
+import { dropdownAgentGuidance } from "./navigation.agent";
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: dropdownAgentGuidance,
+    },
     title: "Components/Dropdown",
     component: Dropdown,
     args: {

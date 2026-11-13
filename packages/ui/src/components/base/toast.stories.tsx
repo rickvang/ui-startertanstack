@@ -6,9 +6,13 @@ import { Button } from "./button";
 import { Switch } from "./switch";
 import { Toast, type ToastPlacement } from "./toast";
 
+import { toastAgentGuidance } from "./feedback.agent";
 const meta = {
     title: "Components/Toast",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: toastAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

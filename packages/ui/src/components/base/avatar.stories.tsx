@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, avatarSnippet } from "../../../.storybook/story-snippets";
 import { Avatar } from "./avatar";
+import { avatarAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: avatarAgentGuidance,
+    },
     title: "Components/Avatar",
     component: Avatar,
     args: {

@@ -3,9 +3,13 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, fieldSnippet } from "../../../.storybook/story-snippets";
 import { Field } from "./field";
 
+import { fieldAgentGuidance } from "./controls.agent";
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: fieldAgentGuidance,
+    },
     title: "Components/Field",
     component: Field,
     args: {

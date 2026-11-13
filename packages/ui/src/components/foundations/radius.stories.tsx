@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FoundationPage } from "./catalog";
 import { RadiusExamples } from "./radius-examples";
+import { radiusAgentGuidance } from "./foundations.agent";
 
 const radii = [
     ["Sharp", "rounded-none", "0", "Graphic field"],
@@ -15,7 +16,10 @@ const radii = [
 
 const meta = {
     title: "Foundations/Radius",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: radiusAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

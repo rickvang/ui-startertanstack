@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FoundationPage } from "./catalog";
 import { SpacingExamples, SpacingUsage } from "./spacing-guidelines";
 import { spacingScale } from "./spacing-scale";
+import { spacingAgentGuidance } from "./foundations.agent";
 
 const meta = {
     title: "Foundations/Spacing",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: spacingAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

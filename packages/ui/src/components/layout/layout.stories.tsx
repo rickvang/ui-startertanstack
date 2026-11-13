@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { layoutSnippet, libraryExportNote } from "../../../.storybook/story-snippets";
 import { cx } from "../../utils/cx";
 import { DocBullets, DocCodeSection, DocDemo, DocList, DocNote, DocPage, DocParagraph, DocSection, DocWhenAvoid } from "../templates/doc";
+import { framesAgentGuidance } from "./layout.agent";
 import { Layout, type LayoutProps } from "./layout";
 
 function Bone({ className }: { className: string }) {
@@ -141,7 +142,10 @@ function ToolCanvas() {
 const meta = {
     title: "Layout/Frames",
     component: Layout,
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: framesAgentGuidance,
+    },
 } satisfies Meta<typeof Layout>;
 
 export default meta;

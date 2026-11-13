@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DocPage, DocParagraph, DocRows, DocSection } from "./doc";
 
+import { patternsOverviewAgentGuidance } from "../patterns/patterns.agent";
 const meta = {
     title: "Patterns/Overview",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: patternsOverviewAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

@@ -3,9 +3,13 @@ import { flexSnippet, libraryExportNote } from "../../../.storybook/story-snippe
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Flex } from "./flex";
 
+import { flexAgentGuidance } from "./arrange.agent";
 const meta = {
     title: "Layout/Arrange/Flow/Flex",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: flexAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

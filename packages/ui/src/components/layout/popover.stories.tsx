@@ -5,9 +5,13 @@ import { Button } from "../base/button";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocSection } from "../templates/doc";
 import { Popover } from "./popover";
 
+import { popoverAgentGuidance } from "./overlays.agent";
 const meta = {
     title: "Layout/Overlays",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: popoverAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

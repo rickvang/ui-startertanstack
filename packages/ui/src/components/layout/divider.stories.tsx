@@ -3,9 +3,13 @@ import { dividerSnippet, libraryExportNote } from "../../../.storybook/story-sni
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { Divider } from "./divider";
 
+import { dividerAgentGuidance } from "./arrange.agent";
 const meta = {
     title: "Layout/Arrange/Divider",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: dividerAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

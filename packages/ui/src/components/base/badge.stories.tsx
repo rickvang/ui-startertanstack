@@ -3,9 +3,13 @@ import { autodocsComponentParameters } from "../../../.storybook/copyable-snippe
 import { docsFromSnippet, badgeSnippet } from "../../../.storybook/story-snippets";
 import { Badge } from "./badge";
 
+import { badgeAgentGuidance } from "./controls.agent";
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: badgeAgentGuidance,
+    },
     title: "Components/Badge",
     component: Badge,
     args: {

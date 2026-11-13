@@ -2,10 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { autodocsComponentParameters } from "../../../.storybook/copyable-snippets";
 import { docsFromSnippet, textAreaSnippet } from "../../../.storybook/story-snippets";
 import { TextArea } from "./text-area";
+import { textAreaAgentGuidance } from "./inputs.agent";
 
 const meta = {
     tags: ["autodocs"],
-    parameters: autodocsComponentParameters,
+    parameters: {
+        ...autodocsComponentParameters,
+        agent: textAreaAgentGuidance,
+    },
     title: "Components/Text area",
     component: TextArea,
     args: {

@@ -4,9 +4,13 @@ import { DescriptionList } from "../base/description-list";
 import { TextField } from "../base/text-field";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 
+import { inlineEditAgentGuidance } from "./patterns.agent";
 const meta = {
     title: "Patterns/Inline edit",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: inlineEditAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

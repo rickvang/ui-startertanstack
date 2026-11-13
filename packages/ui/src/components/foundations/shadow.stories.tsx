@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FoundationPage } from "./catalog";
 import { ShadowExamples } from "./shadow-examples";
+import { shadowAgentGuidance } from "./foundations.agent";
 
 const shadows = [
     ["None", "", "Dense panel. A border does the separation."],
@@ -13,7 +14,10 @@ const shadows = [
 
 const meta = {
     title: "Foundations/Shadow",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: shadowAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DocPage, DocParagraph, DocRows, DocSection } from "../templates/doc";
+import { motionRecipesAgentGuidance } from "./foundations.agent";
 
 const meta = {
     title: "Foundations/Motion",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: motionRecipesAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

@@ -4,11 +4,15 @@ import { DocDemo, DocList, DocCodeSection, DocPage, DocSection } from "../templa
 import { Button } from "./button";
 import { Fieldset } from "./fieldset";
 import { TextField } from "./text-field";
+import { fieldsetAgentGuidance } from "./inputs.agent";
 
 const meta = {
     title: "Modules/Forms",
     component: Fieldset,
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: fieldsetAgentGuidance,
+    },
     args: {
         title: "Project",
         children: null,

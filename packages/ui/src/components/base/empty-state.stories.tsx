@@ -4,11 +4,13 @@ import { emptyStateSnippet } from "../../../.storybook/story-snippets";
 import { Button } from "./button";
 import { EmptyState } from "./empty-state";
 
+import { emptyStateAgentGuidance } from "./feedback.agent";
 const meta = {
     title: "Components/Empty state",
     component: EmptyState,
     tags: ["autodocs"],
     parameters: {
+        agent: emptyStateAgentGuidance,
         docs: {
             description: {
                 component: `${libraryExportNote} Import \`theme.css\` once in the app or Storybook preview. Put it inside the content container that is empty.`,

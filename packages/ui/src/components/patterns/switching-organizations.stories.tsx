@@ -9,6 +9,7 @@ import { Menu } from "../navigation/menu";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocParagraph, DocSection } from "../templates/doc";
 import { cx } from "../../utils/cx";
 
+import { switchingOrganizationsAgentGuidance } from "./patterns.agent";
 const organizations = [
     { value: "north", label: "North" },
     { value: "harbor", label: "Harbor" },
@@ -112,7 +113,10 @@ function OrganizationSwitcher({
 
 const meta = {
     title: "Patterns/Switching organizations",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: switchingOrganizationsAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

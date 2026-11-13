@@ -7,9 +7,13 @@ import { Expandable } from "../layout/expandable";
 import { DocBullets, DocCodeSection, DocDemo, DocPage, DocRows, DocSection } from "../templates/doc";
 import { DetailCard } from "./detail-card";
 
+import { expandableAgentGuidance } from "./modules.agent";
 const meta = {
     title: "Modules/Detail",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: expandableAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;

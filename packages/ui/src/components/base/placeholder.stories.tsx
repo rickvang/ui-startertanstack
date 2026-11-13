@@ -7,9 +7,13 @@ import { Loader } from "./loader";
 import { Placeholder } from "./placeholder";
 import { Switch } from "./switch";
 
+import { placeholderAgentGuidance } from "./feedback.agent";
 const meta = {
     title: "Components/Placeholder",
-    parameters: { layout: "fullscreen" },
+    parameters: {
+        layout: "fullscreen",
+        agent: placeholderAgentGuidance,
+    },
 } satisfies Meta;
 
 export default meta;
