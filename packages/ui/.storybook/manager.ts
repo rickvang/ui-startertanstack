@@ -1,4 +1,4 @@
-import { addons } from "storybook/manager-api";
+import { addons, type State } from "storybook/manager-api";
 import { registerAgentPanel } from "./addons/agent/register";
 import { catalogTheme } from "./theme";
 
@@ -26,4 +26,15 @@ addons.setConfig({
     },
     panelPosition: "bottom",
     enableShortcuts: true,
+    layoutCustomisations: {
+        // Getting started pages are reading/landing faces — hide Controls/Agent by default.
+        // Other stories keep the user's panel preference (`defaultValue`).
+        showPanel(state: State, defaultValue: boolean) {
+            const tags = state.index?.[state.storyId]?.tags ?? [];
+            if (tags.includes("hide-addon-panel")) {
+                return false;
+            }
+            return defaultValue;
+        },
+    },
 });
