@@ -294,10 +294,9 @@
     (function () {
         try {
             var params = new URLSearchParams(window.location.search);
+            // Opt-in only — plain iframes (Portfolio /library) keep catalog nav.
             var embedded =
-                params.has("embed") ||
-                params.get("nav") === "false" ||
-                window.self !== window.top;
+                params.has("embed") || params.get("nav") === "false";
             if (embedded) document.documentElement.classList.add("catalog-embed");
         } catch (e) {
             /* ignore */
