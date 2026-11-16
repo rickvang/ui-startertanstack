@@ -250,4 +250,36 @@
     :focus-visible {
         outline-color: var(--catalog-teal) !important;
     }
+
+    /* Portfolio /library and ?embed=1 — content only, no Storybook chrome */
+    html.catalog-embed [class*="sidebar"],
+    html.catalog-embed nav[aria-label="Stories"],
+    html.catalog-embed button[aria-label="Open navigation menu"],
+    html.catalog-embed button[aria-label="Open addon panel"],
+    html.catalog-embed heading[aria-label="Navigation controls"],
+    html.catalog-embed [class*="mobile-navigation"],
+    html.catalog-embed footer,
+    html.catalog-embed [data-testid="mobile-menu-button"] {
+        display: none !important;
+    }
+
+    html.catalog-embed #storybook-preview-wrapper,
+    html.catalog-embed [role="main"] {
+        left: 0 !important;
+        width: 100% !important;
+    }
 </style>
+<script>
+    (function () {
+        try {
+            var params = new URLSearchParams(window.location.search);
+            var embedded =
+                params.has("embed") ||
+                params.get("nav") === "false" ||
+                window.self !== window.top;
+            if (embedded) document.documentElement.classList.add("catalog-embed");
+        } catch (e) {
+            /* ignore */
+        }
+    })();
+</script>
