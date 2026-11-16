@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ui-starter-catalog": {
+      "command": "bun",
+      "args": ["run", "packages/ui/src/catalog/mcp-server.ts"]
+    }
+  }
+}

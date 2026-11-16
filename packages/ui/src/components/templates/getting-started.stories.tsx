@@ -22,20 +22,20 @@ export const ThisCatalog: Story = {
             eyebrow="UI Starter design system"
             title="A catalog for building product UI"
             lede="Try screens here. Ship them in the app. Foundations, components, modules, and patterns — one library."
-            primary={{ label: "Browse foundations", href: "?path=/story/foundations-color--primitives" }}
-            secondary={{ label: "Open components", href: "?path=/story/components-button--button-story" }}
+            primary={{ label: "Start with patterns", href: "?path=/story/patterns-overview--overview" }}
+            secondary={{ label: "Theme sheet", href: "?path=/story/foundations-theme-sheet--theme-sheet" }}
             sections={[
                 {
-                    title: "Foundations",
-                    body: "Color, type, space, motion — the tokens everything else uses.",
+                    title: "Pattern-first",
+                    body: "Open Patterns/Overview, keep Shell as the frame, then copy the closest workflow.",
                 },
                 {
-                    title: "Components",
-                    body: "Buttons, fields, overlays, and the rest of the control set.",
+                    title: "Catalog CLI",
+                    body: "bun run catalog search <query> --dense · bun run catalog get <id> --dense · rebuild with bun run catalog:build.",
                 },
                 {
-                    title: "Patterns",
-                    body: "Workflows composed from modules: settings, tables, tasks.",
+                    title: "Tokens-only",
+                    body: "Foundations/Theme sheet is the semantic map. Product UI uses theme tokens — no hard-coded hex.",
                 },
             ]}
         />
@@ -52,7 +52,9 @@ export const ThisStarter: Story = {
                     headers={["Command", "Opens"]}
                     rows={[
                         { label: "bun install", detail: "Installs the workspace." },
-                        { label: "bun run storybook", detail: "http://localhost:6006" },
+                        { label: "bun run storybook", detail: "http://localhost:6006 — also serves /llms.txt" },
+                        { label: "bun run catalog search …", detail: "Agent index search; add --dense for compact guidance." },
+                        { label: "bun run catalog:check", detail: "Freshness + vibe prompt fitness." },
                         { label: "bun run dev", detail: "http://localhost:3000" },
                         { label: "bun run typecheck", detail: "Typecheck for packages/ui and apps/web." },
                     ]}

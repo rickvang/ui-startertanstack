@@ -12,14 +12,15 @@ export const tableOverviewAgentGuidance = {
         "The person is changing the record — use modifying a record; cells stay read-only.",
         "Column resize, reorder, extra pinned columns, and spreadsheet editing wait until a workflow needs them.",
     ],
+    keywords: ["table", "grid", "records", "members", "rows", "columns", "datagrid"],
     cases: [
-        { name: "Members", when: "You need the records only: name, fields, status, and selecting a row.", use: "Members story." },
-        { name: "Find", when: "You need search, a status filter, sort, or a choice of which columns stay in view.", use: "Find story." },
-        { name: "Select and act", when: "You need to choose several records and run an action.", use: "Select and act story." },
-        { name: "Expand", when: "You need more about one record, under its row.", use: "Expand story." },
-        { name: "States", when: "You need loading, a failed load, an empty list, or a change in row density.", use: "States story." },
-        { name: "Wide and sticky", when: "You have many columns, and the header and the name should stay put.", use: "Wide and sticky story." },
-        { name: "Long list", when: "You have too many rows to show at once.", use: "Long list story." },
+        { name: "Members", when: "You need the records only: name, fields, status, and selecting a row.", use: "Members story.", next: "table-members" },
+        { name: "Find", when: "You need search, a status filter, sort, or a choice of which columns stay in view.", use: "Find story.", next: "table-find" },
+        { name: "Select and act", when: "You need to choose several records and run an action.", use: "Select and act story.", next: "table-select-and-act" },
+        { name: "Expand", when: "You need more about one record, under its row.", use: "Expand story.", next: "table-expand" },
+        { name: "States", when: "You need loading, a failed load, an empty list, or a change in row density.", use: "States story.", next: "table-states" },
+        { name: "Wide and sticky", when: "You have many columns, and the header and the name should stay put.", use: "Wide and sticky story.", next: "table-wide-sticky" },
+        { name: "Long list", when: "You have too many rows to show at once.", use: "Long list story.", next: "table-long-list" },
     ],
 } as const satisfies AgentGuidance;
 

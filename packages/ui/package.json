@@ -15,7 +15,10 @@
         "build-storybook": "storybook build -o storybook-static",
         "typecheck": "tsc --noEmit",
         "catalog:build": "bun run src/catalog/build-index.ts",
-        "catalog": "bun run src/catalog/cli.ts"
+        "catalog": "bun run src/catalog/cli.ts",
+        "catalog:check": "bun run src/catalog/check.ts",
+        "catalog:verify-ids": "bun run src/catalog/verify-storybook-ids.ts",
+        "catalog:mcp": "bun run src/catalog/mcp-server.ts"
     },
     "peerDependencies": {
         "react": "^19.2.0",

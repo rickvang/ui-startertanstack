@@ -2,17 +2,18 @@ import type { AgentGuidance } from "../../../.storybook/addons/agent/types";
 
 export const patternsOverviewAgentGuidance = {
     goal: "Pick a workflow pattern by job, then copy that story. Keep Shell as the frame.",
+    keywords: ["pattern", "workflow", "shell", "compose", "screen", "page"],
     cases: [
-        { name: "Navigating domains", when: "Another part of the product.", use: "Shell stays; the page inside changes." },
-        { name: "Switching organizations", when: "Another organization.", use: "Pick it in the product slot. The domain menu stays." },
-        { name: "Product settings", when: "The product's settings.", use: "Name, who can invite, and removing the product. The domain menu stays." },
-        { name: "Account information", when: "The person's account.", use: "Profile, password, notices, and removing the account." },
-        { name: "Create a record", when: "Make one object.", use: "Create a record. Use a wizard when a later answer depends on an earlier one." },
-        { name: "Modifying a record", when: "Change one object.", use: "Modifying a record. Inline edit is for one fact where it sits." },
-        { name: "Onboarding", when: "First run.", use: "Name the workspace and offer one invite." },
-        { name: "Task management", when: "A queue.", use: "Status first, then the record or why it cannot continue." },
-        { name: "Visualization page", when: "A set of numbers.", use: "Summary first. It stays its own page until there is a chart module." },
-        { name: "Planning", when: "A path and the work it implies.", use: "A journey names friction. A story map slices the first release." },
+        { name: "Navigating domains", when: "Another part of the product.", use: "Shell stays; the page inside changes.", next: "navigating-domains" },
+        { name: "Switching organizations", when: "Another organization.", use: "Pick it in the product slot. The domain menu stays.", next: "switching-organizations" },
+        { name: "Product settings", when: "The product's settings.", use: "Name, who can invite, and removing the product. The domain menu stays.", next: "product-settings" },
+        { name: "Account information", when: "The person's account.", use: "Profile, password, notices, and removing the account.", next: "account-information" },
+        { name: "Create a record", when: "Make one object.", use: "Create a record. Use a wizard when a later answer depends on an earlier one.", next: "create-record" },
+        { name: "Modifying a record", when: "Change one object.", use: "Modifying a record. Inline edit is for one fact where it sits.", next: "modifying-record" },
+        { name: "Onboarding", when: "First run.", use: "Name the workspace and offer one invite.", next: "onboarding" },
+        { name: "Task management", when: "A queue.", use: "Status first, then the record or why it cannot continue.", next: "task-management" },
+        { name: "Visualization page", when: "A set of numbers.", use: "Summary first. It stays its own page until there is a chart module.", next: "visualization-page" },
+        { name: "Planning", when: "A path and the work it implies.", use: "A journey names friction. A story map slices the first release.", next: "planning" },
     ],
     avoid: ["Treating patterns as package exports — they are compositions to copy.", "Dropping Shell when copying a pattern into the app."],
 } as const satisfies AgentGuidance;

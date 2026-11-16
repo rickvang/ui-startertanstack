@@ -36,6 +36,9 @@ export function denseEntry(entry: CatalogEntry): string {
             if (item.avoid) {
                 lines.push(`  avoid: ${item.avoid}`);
             }
+            if (item.next) {
+                lines.push(`  next: ${item.next}`);
+            }
         }
     }
 

@@ -8,6 +8,8 @@ export type AgentCase = {
     use: string;
     /** What to skip for this case. */
     avoid?: string;
+    /** Catalog id of the next story to open for this case (e.g. `table-members`). */
+    next?: string;
 };
 
 export type AgentDecision = {

@@ -14,9 +14,11 @@ Before inventing a screen or control:
 3. For visual values, open **Foundations/Theme sheet**. Product UI is **tokens-only** (semantic utilities from `theme.css`); do not hard-code theme hex/rem/px.
 4. Prop naming and events: [docs/api-conventions.md](docs/api-conventions.md).
 5. Machine-readable map for crawlers/agents: Storybook static `/llms.txt` (source `packages/ui/public/llms.txt`).
-6. After adding or renaming `*AgentGuidance` / stories, run `bun run catalog:build`.
+6. After adding or renaming `*AgentGuidance` / stories, run `bun run catalog:build` then `bun run catalog:check`.
 
-Optional fitness checks: [fixtures/vibe-prompts.json](fixtures/vibe-prompts.json).
+Optional fitness checks: [fixtures/vibe-prompts.json](fixtures/vibe-prompts.json) (also run by `catalog:check` in CI).
+
+MCP (Cursor): `.cursor/mcp.json` → `catalog_search` / `catalog_get` / `catalog_list`, or `bun run catalog:mcp`.
 
 ## Where to go
 
@@ -64,9 +66,11 @@ bun install
 bun run dev           # http://localhost:3000
 bun run storybook     # http://localhost:6006
 bun run typecheck
-bun run catalog:build # regenerate packages/ui/src/catalog/catalog-index.json
+bun run catalog:build      # regenerate packages/ui/src/catalog/catalog-index.json
+bun run catalog:check      # freshness + vibe prompts
 bun run catalog search table --dense
 bun run catalog get button --dense
+bun run catalog:mcp        # stdio MCP for search/get/list
 ```
 
 ## Catalog folders

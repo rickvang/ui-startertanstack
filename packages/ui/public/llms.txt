@@ -15,6 +15,9 @@
 - `bun run catalog get <id> [--dense]`
 - `bun run catalog list [--kind ...] [--dense]`
 - `bun run catalog:build` — regenerate `packages/ui/src/catalog/catalog-index.json` after story/agent changes
+- `bun run catalog:check` — freshness + vibe prompt fitness (CI)
+- `bun run catalog:mcp` — stdio MCP (`catalog_search`, `catalog_get`, `catalog_list`)
+- Embed without Storybook chrome: add `?embed=1` (Portfolio `/library` uses this)
 
 ## Where things live
 
