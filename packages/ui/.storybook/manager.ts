@@ -1,4 +1,4 @@
-import { addons } from "storybook/manager-api";
+import { addons, type State } from "storybook/manager-api";
 import { registerAgentPanel } from "./addons/agent/register";
 import { catalogTheme } from "./theme";
 
@@ -11,6 +11,16 @@ const embedded = params.has("embed") || params.get("nav") === "false";
 
 if (embedded) {
     document.documentElement.classList.add("catalog-embed");
+}
+
+function showPanelForStory(state: State, defaultValue: boolean) {
+    // Getting started pages are reading/landing faces — hide Controls/Agent by default.
+    // Other stories keep the user's panel preference (`defaultValue`).
+    const tags = state.index?.[state.storyId]?.tags ?? [];
+    if (tags.includes("hide-addon-panel")) {
+        return false;
+    }
+    return defaultValue;
 }
 
 addons.setConfig({
@@ -43,7 +53,9 @@ addons.setConfig({
               showToolbar: () => false,
               showPanel: () => false,
           }
-        : undefined,
+        : {
+              showPanel: showPanelForStory,
+          },
     toolbar: {
         // Keep Canvas/Docs tabs, theme, backgrounds, viewport, reload when not embedded.
         // Hide Storybook authoring / wireframe tools — catalog face, not SB demo.

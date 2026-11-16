@@ -5,6 +5,8 @@ import { gettingStartedAgentGuidance } from "../base/inputs.agent";
 
 const meta = {
     title: "Getting started",
+    // Catalog landing pages — keep the canvas clean; Agent/Controls stay elsewhere.
+    tags: ["hide-addon-panel"],
     parameters: {
         layout: "fullscreen",
         agent: gettingStartedAgentGuidance,
