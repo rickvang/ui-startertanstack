@@ -259,14 +259,35 @@
     html.catalog-embed heading[aria-label="Navigation controls"],
     html.catalog-embed [class*="mobile-navigation"],
     html.catalog-embed footer,
-    html.catalog-embed [data-testid="mobile-menu-button"] {
+    html.catalog-embed [data-testid="mobile-menu-button"],
+    html.catalog-embed #storybook-preview-toolbar,
+    html.catalog-embed [data-testid="sb-preview-toolbar"],
+    html.catalog-embed [aria-label="Toolbar"],
+    html.catalog-embed [aria-label="Canvas toolbar"],
+    html.catalog-embed button[title="Canvas"],
+    html.catalog-embed button[title="Docs"],
+    html.catalog-embed button[title="Reload story"],
+    html.catalog-embed button[title="Change the background of the preview"],
+    html.catalog-embed button[title="Change the size of the preview"],
+    html.catalog-embed button[aria-label="Grid visibility"],
+    html.catalog-embed button[aria-label="Measure tool"],
+    html.catalog-embed button[aria-label="Outline tool"],
+    html.catalog-embed button[aria-label="Change zoom level"],
+    html.catalog-embed button[aria-label="Enter full screen"],
+    html.catalog-embed button[aria-label="Exit full screen"],
+    html.catalog-embed button[title="Copy canvas link"],
+    html.catalog-embed button[aria-label="Open canvas in new tab"] {
         display: none !important;
     }
 
     html.catalog-embed #storybook-preview-wrapper,
-    html.catalog-embed [role="main"] {
+    html.catalog-embed [role="main"],
+    html.catalog-embed #storybook-preview-wrapper > div,
+    html.catalog-embed [role="main"] > div {
         left: 0 !important;
+        top: 0 !important;
         width: 100% !important;
+        height: 100% !important;
     }
 </style>
 <script>
