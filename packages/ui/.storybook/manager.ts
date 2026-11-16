@@ -10,22 +10,43 @@ const embedded =
     params.get("nav") === "false" ||
     (typeof window !== "undefined" && window.self !== window.top);
 
+if (embedded) {
+    document.documentElement.classList.add("catalog-embed");
+}
+
 addons.setConfig({
     theme: catalogTheme,
     sidebar: {
         showRoots: true,
         collapsedRoots: [],
     },
-    // Portfolio /library iframe and ?embed=1: hide nav chrome so the catalog is the page.
-    ...(embedded
+    // Nested layout/ui — Storybook 10 deprecates top-level navSize / panelPosition.
+    // Portfolio /library iframe and ?embed=1: content only, no Storybook chrome.
+    layout: embedded
         ? {
+              showNav: false,
+              showPanel: false,
+              showToolbar: false,
               navSize: 0,
               bottomPanelHeight: 0,
               rightPanelWidth: 0,
+              panelPosition: "bottom",
           }
-        : {}),
+        : {
+              panelPosition: "bottom",
+          },
+    ui: {
+        enableShortcuts: !embedded,
+    },
+    layoutCustomisations: embedded
+        ? {
+              showSidebar: () => false,
+              showToolbar: () => false,
+              showPanel: () => false,
+          }
+        : undefined,
     toolbar: {
-        // Keep Canvas/Docs tabs, theme, backgrounds, viewport, reload.
+        // Keep Canvas/Docs tabs, theme, backgrounds, viewport, reload when not embedded.
         // Hide Storybook authoring / wireframe tools — catalog face, not SB demo.
         title: { hidden: false },
         zoom: { hidden: true },
@@ -38,6 +59,4 @@ addons.setConfig({
         "storybook/background.apply": { hidden: false },
         "storybook/viewport": { hidden: false },
     },
-    panelPosition: "bottom",
-    enableShortcuts: !embedded,
 });
