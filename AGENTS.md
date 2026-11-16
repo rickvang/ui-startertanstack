@@ -2,6 +2,22 @@
 
 `packages/ui` is the catalog. `apps/web` is a TanStack Start demo. Use this page to decide where a change goes, then change that place.
 
+## Agent bootstrap (pattern-first)
+
+Before inventing a screen or control:
+
+1. Start at **Patterns/Overview** (or `bun run catalog search <workflow> --kind pattern`). Keep **Shell** as the product frame.
+2. Narrow with the catalog CLI — prefer dense guidance in context windows:
+   - `bun run catalog search <query> [--kind pattern|component|module|…] [--dense]`
+   - `bun run catalog get <id> --dense`
+   - `bun run catalog list [--kind …]`
+3. For visual values, open **Foundations/Theme sheet**. Product UI is **tokens-only** (semantic utilities from `theme.css`); do not hard-code theme hex/rem/px.
+4. Prop naming and events: [docs/api-conventions.md](docs/api-conventions.md).
+5. Machine-readable map for crawlers/agents: Storybook static `/llms.txt` (source `packages/ui/public/llms.txt`).
+6. After adding or renaming `*AgentGuidance` / stories, run `bun run catalog:build`.
+
+Optional fitness checks: [fixtures/vibe-prompts.json](fixtures/vibe-prompts.json).
+
 ## Where to go
 
 | Job | Open first | Change |
@@ -45,9 +61,12 @@ The catalog is where a screen is tried. The app holds workspaces, clients, and p
 
 ```bash
 bun install
-bun run dev         # http://localhost:3000
-bun run storybook   # http://localhost:6006
+bun run dev           # http://localhost:3000
+bun run storybook     # http://localhost:6006
 bun run typecheck
+bun run catalog:build # regenerate packages/ui/src/catalog/catalog-index.json
+bun run catalog search table --dense
+bun run catalog get button --dense
 ```
 
 ## Catalog folders

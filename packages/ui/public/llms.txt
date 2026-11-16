@@ -1,0 +1,32 @@
+# ui-starter catalog
+
+> Design-system catalog for product UI (Storybook + agent index). Prefer patterns, then components. Shell is the product frame.
+
+## Start here
+
+1. Open Patterns/Overview — pick the closest workflow. Keep Shell as the frame.
+2. Search the agent index: `bun run catalog search <query>`
+3. Pull dense guidance: `bun run catalog get <id> --dense`
+4. For visual values, open Foundations/Theme sheet — tokens only, no hard-coded hex.
+
+## Commands
+
+- `bun run catalog search <query> [--kind pattern|component|module|layout|foundation|docs] [--limit n] [--dense]`
+- `bun run catalog get <id> [--dense]`
+- `bun run catalog list [--kind ...] [--dense]`
+- `bun run catalog:build` — regenerate `packages/ui/src/catalog/catalog-index.json` after story/agent changes
+
+## Where things live
+
+- Patterns — workflows (create record, table-backed task flows, settings, wizard, …)
+- Modules/Table — record grids; start at Overview, then Members / Find / …
+- Components — controls (Button, Field, Select, …)
+- Layout — frames, arrange, overlays
+- Foundations — tokens; Theme sheet is the one-page semantic map
+- docs/api-conventions.md — prop naming, events, tokens-only rule
+- AGENTS.md — where to change code in this monorepo
+
+## Optional
+
+- fixtures/vibe-prompts.json — short prompts to score catalog fitness
+- Storybook Agent panel — same guidance as dense export, inside the docs UI
