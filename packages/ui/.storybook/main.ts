@@ -5,6 +5,7 @@ const config: StorybookConfig = {
     stories: ["../src/**/*.stories.tsx"],
     addons: ["@storybook/addon-docs"],
     framework: "@storybook/react-vite",
+    staticDirs: ["../public"],
     features: {
         // Stock Storybook onboarding — not part of the design-system catalog face
         sidebarOnboardingChecklist: false,

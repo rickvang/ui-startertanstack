@@ -50,3 +50,16 @@ export const motionRecipesAgentGuidance = {
     when: ["An overlay, toast, or expandable needs enter/leave motion."],
     avoid: ["Per-component bespoke easing when a recipe already fits."],
 } as const satisfies AgentGuidance;
+
+export const themeSheetAgentGuidance = {
+    goal: "Read the full semantic theme (color, type, space, radius) before inventing visual values.",
+    when: [
+        "Starting a visual change and you need the live token sheet.",
+        "Checking light/dark semantic swaps without opening every foundation story.",
+    ],
+    avoid: [
+        "Hard-coded hex, rem, or px for theme values in product UI.",
+        "Editing primitive ramps for a one-off product tint — retarget semantic tokens instead.",
+    ],
+    keywords: ["theme", "tokens", "semantic", "tokens-only", "css variables"],
+} as const satisfies AgentGuidance;

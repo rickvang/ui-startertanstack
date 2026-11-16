@@ -30,6 +30,8 @@ export type AgentGuidance = {
     avoid?: readonly string[];
     /** Named decision forks. */
     decisions?: readonly AgentDecision[];
+    /** Extra search terms for the catalog index (name/title are indexed separately). */
+    keywords?: readonly string[];
 };
 
 export const AGENT_PARAM_KEY = "agent" as const;
