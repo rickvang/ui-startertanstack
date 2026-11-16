@@ -8,7 +8,6 @@ import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildCatalogIndex } from "./build-index";
-import { searchCatalog } from "./search";
 import type { CatalogEntry } from "./types";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -26,38 +25,18 @@ type VibeFixture = {
     }[];
 };
 
-function normalizeExpect(token: string): string[] {
-    return token
-        .toLowerCase()
-        .split(/\s+or\s+|\/|,/)
-        .map((part) => part.trim())
-        .filter(Boolean)
-        .map((part) =>
-            part
-                .replace(/\bpatterns?\b/g, "")
-                .replace(/\bstory\b/g, "")
-                .replace(/\s+/g, " ")
-                .trim(),
-        )
-        .filter(Boolean);
-}
-
-function expectHits(
+/** Expect tokens are catalog ids (exact). Alternatives use ` or `. */
+function expectIdsPresent(
     entries: readonly CatalogEntry[],
     expectToken: string,
 ): boolean {
-    const needles = normalizeExpect(expectToken);
-    if (needles.length === 0) return true;
-    return needles.some((needle) => {
-        const byId = entries.some(
-            (entry) =>
-                entry.id === needle ||
-                entry.id.includes(needle.replace(/\s+/g, "-")),
-        );
-        if (byId) return true;
-        const hits = searchCatalog(entries, needle, { limit: 5 });
-        return hits.length > 0;
-    });
+    const ids = new Set(entries.map((entry) => entry.id));
+    const alternatives = expectToken
+        .split(/\s+or\s+/i)
+        .map((part) => part.trim().toLowerCase())
+        .filter(Boolean);
+    if (alternatives.length === 0) return true;
+    return alternatives.some((id) => ids.has(id));
 }
 
 async function checkFreshness(entries: CatalogEntry[]) {
@@ -88,7 +67,9 @@ async function checkVibes(entries: CatalogEntry[]) {
     const fixture = JSON.parse(await readFile(vibePath, "utf8")) as VibeFixture;
     let failed = 0;
     for (const prompt of fixture.prompts) {
-        const misses = prompt.expect.filter((token) => !expectHits(entries, token));
+        const misses = prompt.expect.filter(
+            (token) => !expectIdsPresent(entries, token),
+        );
         if (misses.length > 0) {
             failed += 1;
             console.error(`vibe ${prompt.id}: missing ${misses.join(" | ")}`);
