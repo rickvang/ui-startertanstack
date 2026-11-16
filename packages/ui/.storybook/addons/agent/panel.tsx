@@ -1,6 +1,7 @@
-import { createElement, type CSSProperties, type ReactNode } from "react";
+import { createElement, useState, type CSSProperties, type ReactNode } from "react";
 import { AddonPanel } from "storybook/internal/components";
 import { useParameter } from "storybook/manager-api";
+import { denseGuidance } from "./dense-text";
 import type { AgentCase, AgentDecision, AgentGuidance } from "./types";
 import { AGENT_PARAM_KEY } from "./types";
 
@@ -111,6 +112,7 @@ function CaseBlock({ item }: { item: AgentCase }) {
         row("When", item.when),
         row("Use", item.use),
         item.avoid ? row("Avoid", item.avoid) : null,
+        item.next ? row("Next", `catalog get ${item.next}`) : null,
     );
 }
 
@@ -124,10 +126,39 @@ function DecisionBlock({ item }: { item: AgentDecision }) {
     );
 }
 
+const copyButtonStyle: CSSProperties = {
+    margin: "0 0 1rem",
+    padding: "0.4rem 0.7rem",
+    border: `1px solid ${line}`,
+    borderRadius: 4,
+    background: wash,
+    color: ink,
+    fontSize: "0.75rem",
+    fontWeight: 600,
+    letterSpacing: "0.04em",
+    textTransform: "uppercase",
+    cursor: "pointer",
+};
+
 function AgentGuidanceView({ guidance }: { guidance: AgentGuidance }) {
+    const [copied, setCopied] = useState(false);
+
+    const onCopy = () => {
+        const text = denseGuidance(guidance);
+        void navigator.clipboard.writeText(text).then(() => {
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 1600);
+        });
+    };
+
     return createElement(
         "div",
         { style: rootStyle },
+        createElement(
+            "button",
+            { type: "button", style: copyButtonStyle, onClick: onCopy },
+            copied ? "Copied dense" : "Copy dense",
+        ),
         createElement("p", { style: labelStyle }, "Goal"),
         createElement("p", { style: goalStyle }, guidance.goal),
         guidance.cases && guidance.cases.length > 0

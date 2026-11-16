@@ -118,6 +118,7 @@ export const cardAgentGuidance = {
 } as const satisfies AgentGuidance;
 
 export const gettingStartedAgentGuidance = {
+    keywords: ["getting-started", "bootstrap", "catalog", "llms", "cli", "theme-sheet", "patterns"],
     goal: "Orient a human or agent to how this catalog is organized before building screens.",
     when: ["Starting work in the catalog or choosing where a screen belongs."],
     avoid: ["Skipping Patterns/Overview when the job is a workflow.", "Building product chrome outside Shell."],

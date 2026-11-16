@@ -1,0 +1,22 @@
+---
+description: Pattern-first catalog retrieval for ui-starter UI work
+globs:
+  - packages/ui/**/*
+  - apps/web/**/*
+  - AGENTS.md
+alwaysApply: false
+---
+
+# Catalog agent path
+
+Before inventing a screen or control:
+
+1. Start at **Patterns/Overview** (or `bun run catalog search <workflow> --kind pattern --dense`). Keep **Shell** as the product frame.
+2. Narrow with the catalog CLI:
+   - `bun run catalog search <query> [--kind …] [--dense]`
+   - `bun run catalog get <id> --dense`
+3. For visual values, open **Foundations/Theme sheet**. Tokens-only — no hard-coded theme hex/rem/px.
+4. Prop naming: `docs/api-conventions.md`.
+5. After story/agent changes: `bun run catalog:build` then `bun run catalog:check`.
+
+Optional MCP: `bun run packages/ui/src/catalog/mcp-server.ts` (tools: `catalog_search`, `catalog_get`, `catalog_list`).

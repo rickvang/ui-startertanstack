@@ -210,7 +210,9 @@ export async function buildCatalogIndex(): Promise<CatalogIndex> {
                 goal: agent.goal,
                 when: agent.when ? [...agent.when] : undefined,
                 avoid: agent.avoid ? [...agent.avoid] : undefined,
-                cases: agent.cases ? agent.cases.map((item) => ({ ...item })) : undefined,
+                cases: agent.cases
+                    ? agent.cases.map((item) => ({ ...item }))
+                    : undefined,
                 decisions: agent.decisions
                     ? agent.decisions.map((item) => ({ ...item }))
                     : undefined,

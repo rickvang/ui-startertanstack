@@ -7,6 +7,9 @@
         "storybook": "bun --cwd packages/ui storybook",
         "typecheck": "bun --cwd packages/ui typecheck && bun --cwd apps/web typecheck",
         "catalog": "bun --cwd packages/ui catalog",
-        "catalog:build": "bun --cwd packages/ui catalog:build"
+        "catalog:build": "bun --cwd packages/ui catalog:build",
+        "catalog:check": "bun --cwd packages/ui catalog:check",
+        "catalog:verify-ids": "bun --cwd packages/ui catalog:verify-ids",
+        "catalog:mcp": "bun --cwd packages/ui catalog:mcp"
     }
 }

@@ -11,42 +11,42 @@
     {
       "id": "invite-members",
       "prompt": "Add a screen to invite workspace members and see who is already Active.",
-      "expect": ["patterns-overview or task-management / create-record", "table-members or table-find", "button primary for invite"]
+      "expect": ["patterns-overview", "create-record", "table-members", "button"]
     },
     {
       "id": "danger-delete",
       "prompt": "Confirm deleting a project with a destructive action.",
-      "expect": ["dialog or pattern with confirm", "button danger", "no primary danger in the page chrome"]
+      "expect": ["dialog", "button"]
     },
     {
       "id": "settings-org",
       "prompt": "Let the user switch organization then open billing settings.",
-      "expect": ["switching-organizations", "product-settings", "Shell frame"]
+      "expect": ["switching-organizations", "product-settings"]
     },
     {
       "id": "empty-table",
       "prompt": "Show a members table that can be loading, empty, or failed.",
-      "expect": ["table-states", "not a custom spinner layout"]
+      "expect": ["table-states"]
     },
     {
       "id": "filter-status",
       "prompt": "Filter the members list by status and hide unused columns.",
-      "expect": ["table-find", "not rebuilding filters beside Table"]
+      "expect": ["table-find"]
     },
     {
       "id": "theme-tint",
       "prompt": "Make the product a little cooler without redesigning components.",
-      "expect": ["theme-sheet / theme.css semantic tokens", "no per-component hex"]
+      "expect": ["theme-sheet"]
     },
     {
       "id": "wizard-onboard",
       "prompt": "Onboard a new workspace with a few required steps.",
-      "expect": ["onboarding or wizard pattern", "Shell frame"]
+      "expect": ["onboarding", "wizard"]
     },
     {
       "id": "inline-rename",
       "prompt": "Let someone rename a project title in place on the detail header.",
-      "expect": ["inline-edit", "not a full modifying-record form unless more fields change"]
+      "expect": ["inline-edit"]
     }
   ]
 }

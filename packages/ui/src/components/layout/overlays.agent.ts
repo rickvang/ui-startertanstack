@@ -2,16 +2,17 @@ import type { AgentGuidance } from "../../../.storybook/addons/agent/types";
 
 export const overlaysOverviewAgentGuidance = {
     goal: "Pick one overlay job. Do not nest overlays. Message, Toast, and Banner are not overlays.",
+    keywords: ["overlay", "modal", "dialog", "drawer", "sheet", "popover", "tooltip"],
     cases: [
-        { name: "Dialog", when: "The page must wait. Confirm, or one or two fields.", use: "Dialog." },
-        { name: "Drawer", when: "Keep the page. The task needs the full height.", use: "Drawer." },
-        { name: "Slide-in", when: "Keep the page. A quick task that should not take the full height.", use: "Slide-in." },
-        { name: "Bottom sheet", when: "The same job as Dialog or Drawer, on a small screen, from the foot.", use: "Bottom sheet." },
-        { name: "Popover", when: "A small panel attached to a control. The page stays live.", use: "Popover." },
-        { name: "Tooltip", when: "A short hint. No actions.", use: "Tooltip." },
-        { name: "Message", when: "A result next to the work.", use: "Message. Not an overlay.", avoid: "Do not treat Message as an overlay." },
-        { name: "Toast", when: "A brief notice after leaving the work.", use: "Toast. Not an overlay." },
-        { name: "Banner", when: "A note about the whole page that should stay.", use: "Banner. Not an overlay." },
+        { name: "Dialog", when: "The page must wait. Confirm, or one or two fields.", use: "Dialog.", next: "dialog" },
+        { name: "Drawer", when: "Keep the page. The task needs the full height.", use: "Drawer.", next: "drawer" },
+        { name: "Slide-in", when: "Keep the page. A quick task that should not take the full height.", use: "Slide-in.", next: "slide-in" },
+        { name: "Bottom sheet", when: "The same job as Dialog or Drawer, on a small screen, from the foot.", use: "Bottom sheet.", next: "bottom-sheet" },
+        { name: "Popover", when: "A small panel attached to a control. The page stays live.", use: "Popover.", next: "popover" },
+        { name: "Tooltip", when: "A short hint. No actions.", use: "Tooltip.", next: "tooltip" },
+        { name: "Message", when: "A result next to the work.", use: "Message. Not an overlay.", avoid: "Do not treat Message as an overlay.", next: "message" },
+        { name: "Toast", when: "A brief notice after leaving the work.", use: "Toast. Not an overlay.", next: "toast" },
+        { name: "Banner", when: "A note about the whole page that should stay.", use: "Banner. Not an overlay.", next: "banner" },
     ],
     avoid: [
         "Opening a dialog, drawer, slide-in, bottom sheet, or popover from another overlay — close the first one.",

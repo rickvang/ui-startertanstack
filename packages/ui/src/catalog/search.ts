@@ -21,6 +21,7 @@ function haystack(entry: CatalogEntry): string {
             item.when,
             item.use,
             item.avoid ?? "",
+            item.next ?? "",
         ]) ?? []),
         ...(entry.agent.decisions?.flatMap((item) => [
             item.title,

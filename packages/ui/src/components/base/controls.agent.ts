@@ -2,6 +2,7 @@ import type { AgentGuidance } from "../../../.storybook/addons/agent/types";
 
 export const buttonAgentGuidance = {
     goal: "Pick a button variant from how primary the action is, not from color taste.",
+    keywords: ["button", "cta", "action", "primary", "danger", "submit"],
     cases: [
         { name: "Primary", when: "The one main action in the region.", use: "variant primary (default)." },
         { name: "Secondary", when: "A supporting action beside the primary.", use: "variant secondary." },

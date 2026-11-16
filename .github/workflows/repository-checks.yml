@@ -24,3 +24,10 @@ jobs:
           bun-version: '1.3.6'
       - run: bun install --frozen-lockfile
       - run: bun run typecheck
+      - name: Catalog index freshness and vibe checks
+        run: bun run catalog:check
+      - name: Build Storybook and verify catalog storyIds
+        working-directory: packages/ui
+        run: |
+          bun run build-storybook
+          bun run catalog:verify-ids
