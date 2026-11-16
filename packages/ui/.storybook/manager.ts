@@ -5,10 +5,9 @@ import { catalogTheme } from "./theme";
 registerAgentPanel();
 
 const params = new URLSearchParams(window.location.search);
-const embedded =
-    params.has("embed") ||
-    params.get("nav") === "false" ||
-    (typeof window !== "undefined" && window.self !== window.top);
+// Opt-in only. Do not treat plain iframe hosts (Portfolio /library) as embed —
+// that hid the catalog sidebar. Use ?embed=1 or ?nav=false for content-only.
+const embedded = params.has("embed") || params.get("nav") === "false";
 
 if (embedded) {
     document.documentElement.classList.add("catalog-embed");
@@ -21,7 +20,7 @@ addons.setConfig({
         collapsedRoots: [],
     },
     // Nested layout/ui — Storybook 10 deprecates top-level navSize / panelPosition.
-    // Portfolio /library iframe and ?embed=1: content only, no Storybook chrome.
+    // ?embed=1 / ?nav=false: content only, no Storybook chrome.
     layout: embedded
         ? {
               showNav: false,
