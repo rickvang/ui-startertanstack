@@ -202,7 +202,8 @@ export async function buildCatalogIndex(): Promise<CatalogIndex> {
             title: displayTitle,
             storyTitle: hit.title,
             storyName: hit.storyName,
-            storyId: storybookStoryId(hit.title, hit.storyName),
+            // Storybook CSF ids use the export identifier, not the display `name`.
+            storyId: storybookStoryId(hit.title, hit.storyExport),
             source: relative(packageRoot, file).replaceAll("\\", "/"),
             keywords: deriveKeywords(id, displayTitle, hit.title, hit.storyName, agent),
             agent: {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-16T17:33:12.035Z",
+  "generatedAt": "2026-11-16T18:00:20.391Z",
   "entries": [
     {
       "id": "account",
@@ -64,7 +64,7 @@
       "title": "Anchor",
       "storyTitle": "Components/Anchor",
       "storyName": "Anchor",
-      "storyId": "components-anchor--anchor",
+      "storyId": "components-anchor--anchor-story",
       "source": "src/components/navigation/anchor.stories.tsx",
       "keywords": [
         "anchor",
@@ -94,7 +94,7 @@
       "title": "Avatar",
       "storyTitle": "Components/Avatar",
       "storyName": "Avatar",
-      "storyId": "components-avatar--avatar",
+      "storyId": "components-avatar--avatar-story",
       "source": "src/components/base/avatar.stories.tsx",
       "keywords": [
         "avatar",
@@ -123,7 +123,7 @@
       "title": "Badge",
       "storyTitle": "Components/Badge",
       "storyName": "Badge",
-      "storyId": "components-badge--badge",
+      "storyId": "components-badge--badge-story",
       "source": "src/components/base/badge.stories.tsx",
       "keywords": [
         "badge",
@@ -153,7 +153,7 @@
       "title": "Banner",
       "storyTitle": "Components/Banner",
       "storyName": "Banner",
-      "storyId": "components-banner--banner",
+      "storyId": "components-banner--banner-story",
       "source": "src/components/base/banner.stories.tsx",
       "keywords": [
         "banner",
@@ -190,7 +190,7 @@
       "title": "Bottom sheet",
       "storyTitle": "Layout/Overlays",
       "storyName": "Bottom sheet",
-      "storyId": "layout-overlays--bottom-sheet",
+      "storyId": "layout-overlays--bottom-sheet-story",
       "source": "src/components/layout/bottom-sheet.stories.tsx",
       "keywords": [
         "bottom-sheet",
@@ -221,7 +221,7 @@
       "title": "Breadcrumb",
       "storyTitle": "Components/Breadcrumb",
       "storyName": "Breadcrumb",
-      "storyId": "components-breadcrumb--breadcrumb",
+      "storyId": "components-breadcrumb--breadcrumb-story",
       "source": "src/components/navigation/breadcrumb.stories.tsx",
       "keywords": [
         "breadcrumb",
@@ -254,7 +254,7 @@
       "title": "Button",
       "storyTitle": "Components/Button",
       "storyName": "Button",
-      "storyId": "components-button--button",
+      "storyId": "components-button--button-story",
       "source": "src/components/base/button.stories.tsx",
       "keywords": [
         "button",
@@ -313,7 +313,7 @@
       "title": "Card",
       "storyTitle": "Components/Card",
       "storyName": "Card",
-      "storyId": "components-card--card",
+      "storyId": "components-card--card-story",
       "source": "src/components/layout/card.stories.tsx",
       "keywords": [
         "card",
@@ -352,7 +352,7 @@
       "title": "Checkbox",
       "storyTitle": "Components/Checkbox",
       "storyName": "Checkbox",
-      "storyId": "components-checkbox--checkbox",
+      "storyId": "components-checkbox--checkbox-story",
       "source": "src/components/base/checkbox.stories.tsx",
       "keywords": [
         "checkbox",
@@ -475,7 +475,7 @@
       "title": "Create a record",
       "storyTitle": "Patterns/Create a record",
       "storyName": "Create a record",
-      "storyId": "patterns-create-a-record--create-a-record",
+      "storyId": "patterns-create-a-record--create-record",
       "source": "src/components/patterns/create-record.stories.tsx",
       "keywords": [
         "create-record",
@@ -522,7 +522,7 @@
       "title": "Description list",
       "storyTitle": "Components/Description list",
       "storyName": "Description list",
-      "storyId": "components-description-list--description-list",
+      "storyId": "components-description-list--description-list-story",
       "source": "src/components/base/description-list.stories.tsx",
       "keywords": [
         "description-list",
@@ -591,7 +591,7 @@
       "title": "Detail",
       "storyTitle": "Modules/Detail",
       "storyName": "Detail group",
-      "storyId": "modules-detail--detail-group",
+      "storyId": "modules-detail--detail-group-story",
       "source": "src/components/base/detail-group.stories.tsx",
       "keywords": [
         "detail-group",
@@ -623,7 +623,7 @@
       "title": "Dialog",
       "storyTitle": "Layout/Overlays",
       "storyName": "Dialog",
-      "storyId": "layout-overlays--dialog",
+      "storyId": "layout-overlays--dialog-story",
       "source": "src/components/layout/dialog.stories.tsx",
       "keywords": [
         "dialog",
@@ -656,7 +656,7 @@
       "title": "Divider",
       "storyTitle": "Layout/Arrange/Divider",
       "storyName": "Divider",
-      "storyId": "layout-arrange-divider--divider",
+      "storyId": "layout-arrange-divider--default",
       "source": "src/components/layout/divider.stories.tsx",
       "keywords": [
         "divider",
@@ -686,7 +686,7 @@
       "title": "Drawer",
       "storyTitle": "Layout/Overlays",
       "storyName": "Drawer",
-      "storyId": "layout-overlays--drawer",
+      "storyId": "layout-overlays--drawer-story",
       "source": "src/components/layout/drawer.stories.tsx",
       "keywords": [
         "drawer",
@@ -719,7 +719,7 @@
       "title": "Dropdown",
       "storyTitle": "Components/Dropdown",
       "storyName": "Dropdown",
-      "storyId": "components-dropdown--dropdown",
+      "storyId": "components-dropdown--dropdown-story",
       "source": "src/components/navigation/dropdown.stories.tsx",
       "keywords": [
         "dropdown",
@@ -749,7 +749,7 @@
       "title": "Empty state",
       "storyTitle": "Components/Empty state",
       "storyName": "Empty state",
-      "storyId": "components-empty-state--empty-state",
+      "storyId": "components-empty-state--empty-state-story",
       "source": "src/components/base/empty-state.stories.tsx",
       "keywords": [
         "empty-state",
@@ -797,7 +797,7 @@
       "title": "Detail",
       "storyTitle": "Modules/Detail",
       "storyName": "Expandable",
-      "storyId": "modules-detail--expandable",
+      "storyId": "modules-detail--expandable-story",
       "source": "src/components/modules/expandable.stories.tsx",
       "keywords": [
         "expandable",
@@ -830,7 +830,7 @@
       "title": "Field",
       "storyTitle": "Components/Field",
       "storyName": "Field",
-      "storyId": "components-field--field",
+      "storyId": "components-field--field-story",
       "source": "src/components/base/field.stories.tsx",
       "keywords": [
         "field",
@@ -870,7 +870,7 @@
       "title": "Forms",
       "storyTitle": "Modules/Forms",
       "storyName": "Fieldset",
-      "storyId": "modules-forms--fieldset",
+      "storyId": "modules-forms--fieldset-story",
       "source": "src/components/base/fieldset.stories.tsx",
       "keywords": [
         "fieldset",
@@ -901,7 +901,7 @@
       "title": "Flex",
       "storyTitle": "Layout/Arrange/Flow/Flex",
       "storyName": "Flex",
-      "storyId": "layout-arrange-flow-flex--flex",
+      "storyId": "layout-arrange-flow-flex--row",
       "source": "src/components/layout/flex.stories.tsx",
       "keywords": [
         "flex",
@@ -1113,7 +1113,7 @@
       "title": "Grid",
       "storyTitle": "Layout/Arrange/Split/Grid",
       "storyName": "Grid",
-      "storyId": "layout-arrange-split-grid--grid",
+      "storyId": "layout-arrange-split-grid--three-columns",
       "source": "src/components/layout/grid.stories.tsx",
       "keywords": [
         "grid",
@@ -1180,7 +1180,7 @@
       "title": "Loader",
       "storyTitle": "Components/Loader",
       "storyName": "Loader",
-      "storyId": "components-loader--loader",
+      "storyId": "components-loader--loader-story",
       "source": "src/components/base/loader.stories.tsx",
       "keywords": [
         "loader",
@@ -1235,7 +1235,7 @@
       "title": "Masonry",
       "storyTitle": "Layout/Arrange/Split/Masonry",
       "storyName": "Masonry",
-      "storyId": "layout-arrange-split-masonry--masonry",
+      "storyId": "layout-arrange-split-masonry--two-columns",
       "source": "src/components/layout/masonry.stories.tsx",
       "keywords": [
         "masonry",
@@ -1268,7 +1268,7 @@
       "title": "Menu",
       "storyTitle": "Components/Menu",
       "storyName": "Menu",
-      "storyId": "components-menu--menu",
+      "storyId": "components-menu--menu-story",
       "source": "src/components/navigation/menu.stories.tsx",
       "keywords": [
         "menu",
@@ -1305,7 +1305,7 @@
       "title": "Message",
       "storyTitle": "Components/Message",
       "storyName": "Message",
-      "storyId": "components-message--message",
+      "storyId": "components-message--message-story",
       "source": "src/components/base/message.stories.tsx",
       "keywords": [
         "message",
@@ -1354,7 +1354,7 @@
       "title": "Modifying a record",
       "storyTitle": "Patterns/Modifying a record",
       "storyName": "Modifying a record",
-      "storyId": "patterns-modifying-a-record--modifying-a-record",
+      "storyId": "patterns-modifying-a-record--modifying-record",
       "source": "src/components/patterns/modifying-record.stories.tsx",
       "keywords": [
         "modifying-record",
@@ -1590,7 +1590,7 @@
       "title": "Pagination",
       "storyTitle": "Components/Pagination",
       "storyName": "Pagination",
-      "storyId": "components-pagination--pagination",
+      "storyId": "components-pagination--pagination-story",
       "source": "src/components/navigation/pagination.stories.tsx",
       "keywords": [
         "pagination",
@@ -1705,7 +1705,7 @@
       "title": "Placeholder",
       "storyTitle": "Components/Placeholder",
       "storyName": "Placeholder",
-      "storyId": "components-placeholder--placeholder",
+      "storyId": "components-placeholder--placeholder-story",
       "source": "src/components/base/placeholder.stories.tsx",
       "keywords": [
         "placeholder",
@@ -1766,7 +1766,7 @@
       "title": "Popover",
       "storyTitle": "Layout/Overlays",
       "storyName": "Popover",
-      "storyId": "layout-overlays--popover",
+      "storyId": "layout-overlays--popover-story",
       "source": "src/components/layout/popover.stories.tsx",
       "keywords": [
         "popover",
@@ -1830,7 +1830,7 @@
       "title": "Radio",
       "storyTitle": "Components/Radio",
       "storyName": "Radio",
-      "storyId": "components-radio--radio",
+      "storyId": "components-radio--radio-story",
       "source": "src/components/base/radio.stories.tsx",
       "keywords": [
         "radio",
@@ -1892,7 +1892,7 @@
       "title": "Select",
       "storyTitle": "Components/Select",
       "storyName": "Select",
-      "storyId": "components-select--select",
+      "storyId": "components-select--select-story",
       "source": "src/components/base/select.stories.tsx",
       "keywords": [
         "select",
@@ -2070,7 +2070,7 @@
       "title": "Slide-in",
       "storyTitle": "Layout/Overlays",
       "storyName": "Slide-in",
-      "storyId": "layout-overlays--slide-in",
+      "storyId": "layout-overlays--slide-in-story",
       "source": "src/components/layout/slide-in.stories.tsx",
       "keywords": [
         "slide-in",
@@ -2108,7 +2108,7 @@
       "title": "Space",
       "storyTitle": "Layout/Arrange/Flow/Space",
       "storyName": "Space",
-      "storyId": "layout-arrange-flow-space--space",
+      "storyId": "layout-arrange-flow-space--inline",
       "source": "src/components/layout/space.stories.tsx",
       "keywords": [
         "space",
@@ -2172,7 +2172,7 @@
       "title": "Splitter",
       "storyTitle": "Layout/Arrange/Split/Splitter",
       "storyName": "Splitter",
-      "storyId": "layout-arrange-split-splitter--splitter",
+      "storyId": "layout-arrange-split-splitter--two-panes",
       "source": "src/components/layout/splitter.stories.tsx",
       "keywords": [
         "splitter",
@@ -2202,7 +2202,7 @@
       "title": "Stack",
       "storyTitle": "Layout/Arrange/Flow/Stack",
       "storyName": "Stack",
-      "storyId": "layout-arrange-flow-stack--stack",
+      "storyId": "layout-arrange-flow-stack--vertical",
       "source": "src/components/layout/stack.stories.tsx",
       "keywords": [
         "stack",
@@ -2233,7 +2233,7 @@
       "title": "Steps",
       "storyTitle": "Components/Steps",
       "storyName": "Steps",
-      "storyId": "components-steps--steps",
+      "storyId": "components-steps--steps-story",
       "source": "src/components/navigation/steps.stories.tsx",
       "keywords": [
         "steps",
@@ -2266,7 +2266,7 @@
       "title": "Switch",
       "storyTitle": "Components/Switch",
       "storyName": "Switch",
-      "storyId": "components-switch--switch",
+      "storyId": "components-switch--switch-story",
       "source": "src/components/base/switch.stories.tsx",
       "keywords": [
         "switch",
@@ -2632,7 +2632,7 @@
       "title": "Tabs",
       "storyTitle": "Components/Tabs",
       "storyName": "Tabs",
-      "storyId": "components-tabs--tabs",
+      "storyId": "components-tabs--tabs-story",
       "source": "src/components/navigation/tabs.stories.tsx",
       "keywords": [
         "tabs",
@@ -2710,7 +2710,7 @@
       "title": "Text area",
       "storyTitle": "Components/Text area",
       "storyName": "Text area",
-      "storyId": "components-text-area--text-area",
+      "storyId": "components-text-area--text-area-story",
       "source": "src/components/base/text-area.stories.tsx",
       "keywords": [
         "text-area",
@@ -2745,7 +2745,7 @@
       "title": "Text field",
       "storyTitle": "Components/Text field",
       "storyName": "Text field",
-      "storyId": "components-text-field--text-field",
+      "storyId": "components-text-field--text-field-story",
       "source": "src/components/base/text-field.stories.tsx",
       "keywords": [
         "text-field",
@@ -2834,7 +2834,7 @@
       "title": "Toast",
       "storyTitle": "Components/Toast",
       "storyName": "Toast",
-      "storyId": "components-toast--toast",
+      "storyId": "components-toast--toast-story",
       "source": "src/components/base/toast.stories.tsx",
       "keywords": [
         "toast",
@@ -2876,7 +2876,7 @@
       "title": "Tooltip",
       "storyTitle": "Layout/Overlays",
       "storyName": "Tooltip",
-      "storyId": "layout-overlays--tooltip",
+      "storyId": "layout-overlays--tooltip-story",
       "source": "src/components/layout/tooltip.stories.tsx",
       "keywords": [
         "tooltip",
